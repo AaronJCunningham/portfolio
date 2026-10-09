@@ -1,5 +1,4 @@
 import Cookie from '@/components/cookie/Cookie'
-import PortalMenu from '@/components/layout/PortalMenu'
 import MatterReel from '@/components/matter-reel/MatterReel'
 import MetaDataHeader from '@/components/metadata/MetaDataHeader'
 import {MATTER_REEL_SLUGS} from '@/components/matter-reel/matterReel.config'
@@ -37,7 +36,6 @@ export default function Home({projects}: HomeProps) {
         structuredData={profileStructuredData}
       />
       <Cookie />
-      <PortalMenu />
       <MatterReel projects={projects} />
     </>
   )

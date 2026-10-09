@@ -2,7 +2,6 @@ import Link from 'next/link'
 import MetaDataHeader from '@/components/metadata/MetaDataHeader'
 import {Footer} from '@/components/layout/Footer'
 import {Grid} from '@/components/layout/Grid'
-import PortalMenu from '@/components/layout/PortalMenu'
 import {getProjects} from '@/sanity/lib/projects'
 import type {ProjectListItem} from '@/sanity/types'
 
@@ -14,7 +13,6 @@ export default function Work({projects}: {projects: ProjectListItem[]}) {
         content="Selected products and systems by Aaron J. Cunningham, a lead full-stack developer and creative technologist based in Berlin."
       />
       <div className="work-experience">
-        <PortalMenu />
 
         <main className="work-page">
           <header className="work-masthead">

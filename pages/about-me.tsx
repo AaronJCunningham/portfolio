@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import MetaDataHeader from '@/components/metadata/MetaDataHeader'
 import {Footer} from '@/components/layout/Footer'
-import PortalMenu from '@/components/layout/PortalMenu'
 
 const capabilities = [
   ['01', 'Architecture to interface', 'FULL-STACK SYSTEMS'],
@@ -53,7 +52,6 @@ export default function AboutMe() {
         content="Aaron J. Cunningham is a lead full-stack developer and creative technologist building complete products, real-time systems, and immersive 3D experiences."
       />
       <div className="about-experience">
-        <PortalMenu />
 
         <main className="about-me-page">
           <header className="about-masthead">
@@ -83,12 +81,12 @@ export default function AboutMe() {
                 development, design judgment, and disciplined agentic workflows.
               </p>
               <nav className="about-hero__links" aria-label="Profile links">
-                <a
-                  href="mailto:hello@aaronjcunningham.com"
+                <Link
+                  href="/contact"
                   className="about-pill about-pill--primary"
                 >
                   Start a conversation <span aria-hidden="true">↗</span>
-                </a>
+                </Link>
                 <a
                   href="https://github.com/AaronJCunningham"
                   target="_blank"

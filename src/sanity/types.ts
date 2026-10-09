@@ -39,6 +39,7 @@ export type ProjectListItem = {
   excerpt?: string
   publishedAt?: string
   sortOrder?: number
+  isResource?: boolean
   mainImage?: SanityImage
   seo?: ProjectSeo
   imageUrl?: string

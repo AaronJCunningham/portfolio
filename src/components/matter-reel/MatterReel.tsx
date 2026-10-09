@@ -170,13 +170,13 @@ export default function MatterReel({projects}: MatterReelProps) {
                     </button>
                   )}
                   {chapter.id === 'finale' ? (
-                    <a
+                    <Link
                       className="matter-reel__all-work"
-                      href="mailto:hello@aaronjcunningham.com"
+                      href="/contact"
                       tabIndex={isActive ? 0 : -1}
                     >
                       Get in touch
-                    </a>
+                    </Link>
                   ) : index === chapters.length - 1 ? (
                     <Link
                       className="matter-reel__all-work"

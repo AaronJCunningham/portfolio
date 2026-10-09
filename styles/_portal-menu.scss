@@ -225,6 +225,10 @@
   }
 
   &:nth-child(4) {
+    --portal-row-accent: 237, 53, 65;
+  }
+
+  &:nth-child(5) {
     --portal-row-accent: 216, 243, 74;
   }
 
@@ -313,10 +317,18 @@
   &:nth-child(4) {
     transition-delay: 0.26s;
   }
+
+  &:nth-child(5) {
+    transition-delay: 0.32s;
+  }
 }
 
 .portal-menu--open.portal-menu--closing .portal-menu__links {
   pointer-events: none;
+}
+
+.portal-menu--open.portal-menu--closing .portal-menu__overlay {
+  background-color: $base-color;
 }
 
 .portal-menu--open.portal-menu--closing .portal-menu__link {
@@ -339,6 +351,10 @@
   }
 
   &:nth-child(4) {
+    transition-delay: 0s;
+  }
+
+  &:nth-child(5) {
     transition-delay: 0s;
   }
 }
@@ -403,6 +419,10 @@
   .portal-menu__name {
     font-size: clamp(2.65rem, 13.5vw, 4.5rem);
     letter-spacing: -0.052em;
+  }
+
+  .portal-menu__link[href="/community"] .portal-menu__name {
+    font-size: clamp(1.6rem, 9vw, 3.2rem);
   }
 
   .portal-menu__index,

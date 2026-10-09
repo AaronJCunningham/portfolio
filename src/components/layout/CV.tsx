@@ -1,19 +1,11 @@
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import type { ReactNode } from "react";
 
 type CVProps = {
   children?: ReactNode;
 };
 
 export const CV = ({ children }: CVProps) => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText("hello@aaronjcunningham.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <div id="bio" className="bio_content">
       <div className="section-meta">
@@ -25,12 +17,9 @@ export const CV = ({ children }: CVProps) => {
         <span className="bio-links__separator">|</span>
         <a href="https://twitter.com/aaron_1337" target="_blank" rel="noreferrer">TWITTER</a>
         <span className="bio-links__separator">|</span>
-        <a href="#" className="bio-links__contact" onClick={(e) => { e.preventDefault(); handleCopyEmail(); }}>
+        <Link href="/contact" className="bio-links__contact">
           CONTACT
-          <span className={`bio-links__copied ${copied ? "bio-links__copied--visible" : ""}`}>
-            COPIED
-          </span>
-        </a>
+        </Link>
       </div>
       {children}
       <p>

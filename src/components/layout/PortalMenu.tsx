@@ -7,20 +7,24 @@ const menuItems = [
   { label: "HOME", href: "/" },
   { label: "WORK", href: "/work" },
   { label: "ABOUT", href: "/about-me" },
-  { label: "CONNECT", href: "mailto:hello@aaronjcunningham.com" },
+  { label: "COMMUNITY", href: "/community" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 type MenuPhase = "closed" | "open" | "closing" | "fading";
 
 const ITEM_EXIT_DURATION = 180;
-const CLOSE_DURATION = 560;
+const OVERLAY_FADE_DURATION = 380;
 
 export default function PortalMenu() {
   const router = useRouter();
   const [phase, setPhase] = useState<MenuPhase>("closed");
+  const [navigationError, setNavigationError] = useState("");
   const phaseRef = useRef<MenuPhase>("closed");
+  const mountedRef = useRef(true);
   const itemExitTimerRef = useRef<number>();
   const closeTimerRef = useRef<number>();
+  const revealFrameRef = useRef<number>();
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
@@ -34,29 +38,49 @@ export default function PortalMenu() {
 
   const openMenu = useCallback(() => {
     if (phaseRef.current !== "closed") return;
+    setNavigationError("");
     setMenuPhase("open");
   }, [setMenuPhase]);
 
   const closeMenu = useCallback(
-    (afterClose?: () => void) => {
+    async (navigate?: () => Promise<boolean>) => {
       if (phaseRef.current !== "open") return;
-
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        setMenuPhase("closed");
-        afterClose?.();
-        return;
-      }
-
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      setNavigationError("");
       setMenuPhase("closing");
 
-      itemExitTimerRef.current = window.setTimeout(() => {
-        setMenuPhase("fading");
-      }, ITEM_EXIT_DURATION);
+      // Navigate beneath the persistent overlay. A slow route must not reveal
+      // the previous page after the menu links finish animating out.
+      const itemsExited = new Promise<void>((resolve) => {
+        itemExitTimerRef.current = window.setTimeout(resolve, reducedMotion ? 0 : ITEM_EXIT_DURATION);
+      });
 
-      closeTimerRef.current = window.setTimeout(() => {
-        setMenuPhase("closed");
-        afterClose?.();
-      }, CLOSE_DURATION);
+      try {
+        const [completed] = await Promise.all([navigate?.() ?? true, itemsExited]);
+        if (!mountedRef.current) return;
+        if (!completed) {
+          setMenuPhase("open");
+          firstLinkRef.current?.focus();
+          return;
+        }
+
+        // Next's navigation promise resolves after the new page has committed.
+        revealFrameRef.current = window.requestAnimationFrame(() => {
+          if (reducedMotion) {
+            setMenuPhase("closed");
+            return;
+          }
+          setMenuPhase("fading");
+          closeTimerRef.current = window.setTimeout(() => {
+            setMenuPhase("closed");
+          }, OVERLAY_FADE_DURATION);
+        });
+      } catch {
+        if (!mountedRef.current) return;
+        setNavigationError("That page could not be loaded. Please try again.");
+        setMenuPhase("open");
+        firstLinkRef.current?.focus();
+      }
     },
     [setMenuPhase],
   );
@@ -77,16 +101,7 @@ export default function PortalMenu() {
 
     event.preventDefault();
 
-    closeMenu(() => {
-      if (href.startsWith("mailto:")) {
-        window.location.href = href;
-        return;
-      }
-
-      if (router.asPath !== href) {
-        void router.push(href);
-      }
-    });
+    void closeMenu(router.asPath !== href ? () => router.push(href) : undefined);
   };
 
   useEffect(() => {
@@ -136,13 +151,15 @@ export default function PortalMenu() {
     };
   }, [closeMenu, isVisible]);
 
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
       window.clearTimeout(itemExitTimerRef.current);
       window.clearTimeout(closeTimerRef.current);
-    },
-    [],
-  );
+      window.cancelAnimationFrame(revealFrameRef.current ?? 0);
+    };
+  }, []);
 
   return (
     <div
@@ -161,7 +178,7 @@ export default function PortalMenu() {
         className="portal-menu__trigger"
         type="button"
         aria-label={isVisible ? "Close menu" : "Open menu"}
-        aria-expanded={isInteractive}
+        aria-expanded={isVisible}
         aria-controls="portal-menu-overlay"
         onClick={() => {
           if (phaseRef.current === "closed") {
@@ -180,6 +197,7 @@ export default function PortalMenu() {
         role="dialog"
         aria-modal={isVisible ? "true" : undefined}
         aria-hidden={!isVisible}
+        aria-busy={phase === "closing"}
         aria-label="Site navigation"
       >
         <nav className="portal-menu__panel" aria-label="Primary navigation">
@@ -212,11 +230,7 @@ export default function PortalMenu() {
                   <span className="portal-menu__name">{item.label}</span>
                   <span className="portal-menu__action">
                     <span>
-                      {isActive
-                        ? "CURRENT"
-                        : item.href.startsWith("mailto:")
-                          ? "EMAIL"
-                          : "OPEN"}
+                      {isActive ? "CURRENT" : "OPEN"}
                     </span>
                     <i aria-hidden="true">↗</i>
                   </span>
@@ -224,6 +238,8 @@ export default function PortalMenu() {
               );
             })}
           </div>
+
+          {navigationError && <p role="alert">{navigationError}</p>}
 
           <div className="portal-menu__footer" aria-hidden="true">
             <span>LEAD FULL-STACK DEVELOPER / CREATIVE TECHNOLOGIST</span>

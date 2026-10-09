@@ -1,5 +1,6 @@
 import MetaDataHeader from "@/components/metadata/MetaDataHeader";
 import { Footer } from "@/components/layout/Footer";
+import {CONTACT_EMAIL, CONTACT_EMAIL_HREF} from "@/config/contact";
 
 export default function Impressum() {
   return (
@@ -36,10 +37,7 @@ export default function Impressum() {
 
           <h2>Kontakt</h2>
           <p>
-            E-Mail:{" "}
-            <a href="mailto:hello@aaronjcunningham.com">
-              hello@aaronjcunningham.com
-            </a>
+            <a href={CONTACT_EMAIL_HREF}>{CONTACT_EMAIL}</a>
           </p>
 
           <h2>Verantwortlich für den Inhalt</h2>

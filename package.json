@@ -7,7 +7,11 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:shop": "node --test tests/shop.test.cjs tests/shop-setup.test.cjs",
+    "shop:prepare": "node scripts/shop.cjs prepare",
+    "shop:check": "node scripts/shop.cjs check",
+    "shop:variants": "node scripts/shop.cjs variants"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",
@@ -31,6 +35,7 @@
     "react-dom": "^18",
     "react-icons": "^4.12.0",
     "react-spring": "^9.7.3",
+    "stripe": "22.6.2",
     "three": "^0.185.1",
     "zustand": "^4.4.7"
   },

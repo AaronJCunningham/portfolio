@@ -5,6 +5,8 @@ import {
   projectNavQuery,
   projectSlugsQuery,
   projectsQuery,
+  resourcesQuery,
+  resourceSlugsQuery,
 } from './queries'
 import type {Project, ProjectListItem, ProjectNavItem} from '../types'
 
@@ -26,4 +28,12 @@ export function getProjectSlugs() {
 
 export function getProjectNavigation() {
   return client.fetch<ProjectNavItem[]>(projectNavQuery)
+}
+
+export function getResources() {
+  return client.fetch<ProjectListItem[]>(resourcesQuery)
+}
+
+export function getResourceSlugs() {
+  return client.fetch<{slug: string}[]>(resourceSlugsQuery)
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import {CONTACT_EMAIL, CONTACT_EMAIL_HREF} from "@/config/contact";
 
 import { FaGithub, FaTwitter } from "react-icons/fa";
 
@@ -12,14 +13,14 @@ export function Footer({}) {
           <span className="section-meta__label">CONNECT</span>
         </div>
         <p className="site-footer__intro">
-          For projects, roles, and ambitious ideas.
+          For freelance projects and creative collaborations.
         </p>
         <span className="site-footer__location">BERLIN / REMOTE</span>
       </div>
 
-      <a className="footer_cta-link" href="mailto:hello@aaronjcunningham.com">
+      <a className="footer_cta-link footer_cta-link--email" href={CONTACT_EMAIL_HREF}>
         <span className="footer_cta-label">START A CONVERSATION</span>
-        <strong className="footer_cta-address">hello@aaronjcunningham.com</strong>
+        <strong className="footer_cta-address">{CONTACT_EMAIL}</strong>
         <span className="footer_cta-arrow" aria-hidden="true">↗</span>
       </a>
 

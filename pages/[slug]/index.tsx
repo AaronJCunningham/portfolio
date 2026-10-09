@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import {Footer} from '@/components/layout/Footer'
-import PortalMenu from '@/components/layout/PortalMenu'
 import MetaDataHeader from '@/components/metadata/MetaDataHeader'
 import {ProjectBody} from '@/components/sanity/ProjectBody'
 import {urlFor} from '@/sanity/lib/image'
@@ -73,7 +72,6 @@ export default function DynamicProject({project, previousProject, nextProject}: 
       />
 
       <div className="project-experience">
-        <PortalMenu />
 
         <main className="project-case">
           <header className="project-masthead">
@@ -215,6 +213,10 @@ export async function getStaticProps({params}: StaticPropsContext) {
 
     if (!project) {
       return {notFound: true, revalidate: 60}
+    }
+
+    if (project.isResource) {
+      return {redirect: {destination: `/community/resources/${project.slug}`, permanent: false}, revalidate: 60}
     }
 
     const currentIndex = navigation.findIndex((item) => item.slug === params.slug)

@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {source: '/shop/:path*', destination: '/community/shop/:path*', permanent: true},
+      {source: '/community/shop/demo', destination: '/community/shop/payment', permanent: false},
+    ]
+  },
   images: {
     remotePatterns: [
       {protocol: 'https', hostname: 'xeleven.space'},

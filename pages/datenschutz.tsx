@@ -1,5 +1,6 @@
 import MetaDataHeader from "@/components/metadata/MetaDataHeader";
 import { Footer } from "@/components/layout/Footer";
+import {CONTACT_EMAIL, CONTACT_EMAIL_HREF} from "@/config/contact";
 
 export default function Datenschutz() {
   return (
@@ -26,10 +27,7 @@ export default function Datenschutz() {
             <br />
             Deutschland
             <br />
-            E-Mail:{" "}
-            <a href="mailto:hello@aaronjcunningham.com">
-              hello@aaronjcunningham.com
-            </a>
+            Kontakt: <a href={CONTACT_EMAIL_HREF}>{CONTACT_EMAIL}</a>
           </p>
 
           <h2>Hosting</h2>
@@ -44,9 +42,10 @@ export default function Datenschutz() {
 
           <h2>Kontaktaufnahme</h2>
           <p>
-            Wenn Sie per E-Mail Kontakt aufnehmen, werden die von Ihnen
-            übermittelten Daten verarbeitet, um Ihre Anfrage zu beantworten. Die
-            Daten werden nicht ohne Ihre Einwilligung weitergegeben.
+            Wenn Sie uns per E-Mail kontaktieren, werden Ihre E-Mail-Adresse
+            und die von Ihnen übermittelten Angaben verarbeitet, um Ihre Anfrage
+            zu beantworten. Hierfür wird der eingesetzte E-Mail-Dienstleister
+            genutzt.
           </p>
 
           <h2>Cookies und Google Analytics</h2>

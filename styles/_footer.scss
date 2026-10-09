@@ -296,6 +296,10 @@
       letter-spacing: -0.015em;
     }
 
+    .footer_cta-link--email .footer_cta-address {
+      font-size: clamp(0.9rem, 4vw, 1.7rem);
+    }
+
     .footer_cta-arrow {
       width: 42px;
       height: 42px;
