@@ -14,6 +14,8 @@ The landing page uses the existing Three.js WebGPU/TSL stack, with WebGL2 fallba
 
 Edit copy in `pages/community/index.tsx`, navigation in `CommunityHeader.tsx`, and the visual theme in `styles/_community.scss`. `CommunityCloud.tsx` owns the particle simulation and pointer response. Portfolio rendering is unchanged.
 
+The tools directory uses a two-column card grid, switching to one column at 800px. Each card contains a static page preview, title, description and link; add future tools to `.community-tools__grid` in `pages/community/tools/index.tsx`. `public/tools/preview.jpg` is a screenshot of the directory used for its Open Graph and Twitter sharing image. Refresh this screenshot when the directory changes.
+
 This is a public landing area. Member accounts, private content, and discussion features are not implemented. The shop remains a preview; see `shop.md`.
 
 The Tree of Life page started as a complete copy of `proof-scene.tsx` and `proof-of-belief.tsx` from `~/programming/null-site/src/components/art/` into `src/components/community/tools/reference/`. It retains the reference's layout, sound, lighting, weathered material, particles, grain and scanlines. The tree now stays opaque and stationary in its assembled pose, and the film shader always uses the dark palette. Only the particle field and film grain animate. The text no longer cycles automatically; the movement timeline, restart control and pointer/keyboard deformation have been removed. Pause/resume and reduced-motion preferences stop the particles and grain.
