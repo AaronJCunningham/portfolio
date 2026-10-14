@@ -134,3 +134,30 @@ test('every selectable model part has its book colour or a documented related at
   assert.equal(content.parts.find(part => part.id === 'malkuth').palette.colors.length, 4);
   assert.equal(content.parts.find(part => part.id === 'path-19').palette.name, 'Purple');
 });
+
+test('Aeon overlay swaps the two correspondence sets without changing letters, paths or artwork', () => {
+  const ts = require('typescript');
+  const filename = path.join(__dirname, '../src/components/community/tools/tree-aeon.ts');
+  const js = ts.transpileModule(fs.readFileSync(filename, 'utf8'), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true },
+  }).outputText;
+  const mod = { exports: {} };
+  new Function('require', 'exports', js)(require('node:module').createRequire(filename), mod.exports);
+  const before = JSON.stringify(content);
+  const oldParts = mod.exports.partsForAeon('old');
+  const newParts = mod.exports.partsForAeon('new');
+  for (const part of oldParts) {
+    const actual = newParts.find(entry => entry.id === part.id);
+    const donorId = part.id === 'path-15' ? 'path-28' : part.id === 'path-28' ? 'path-15' : null;
+    if (!donorId) { assert.strictEqual(actual, part); continue; }
+    const donor = oldParts.find(entry => entry.id === donorId);
+    for (const key of ['id', 'title', 'number', 'hebrew', 'modelKey', 'subtitle']) assert.equal(actual[key], part[key]);
+    assert.deepEqual(actual.tarotCardIds, donor.tarotCardIds);
+    assert.deepEqual(actual.palette, donor.palette);
+    const field = (entry, label) => entry.correspondences.find(item => item.label === label)?.value;
+    for (const label of ['Tarot', 'Zodiac', 'Jewel']) assert.equal(field(actual, label), field(donor, label));
+    for (const label of ['Letter / value', 'Letter meaning', 'Final letter / value', 'Intelligence']) assert.equal(field(actual, label), field(part, label));
+  }
+  assert.strictEqual(mod.exports.partsForAeon('old'), oldParts);
+  assert.equal(JSON.stringify(content), before);
+});

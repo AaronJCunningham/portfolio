@@ -474,4 +474,15 @@
   .tree-tarot img { height:180px; }
 }
 @media(max-width:600px) { .tree-info__correspondences>div { grid-template-columns:90px minmax(0,1fr);gap:12px; } }
+.tree-aeon { position:absolute;z-index:4;top:90px;left:6.2vw;display:flex;gap:24px;font:10px/1.6 var(--font-mono),monospace; }
+.tree-aeon button { padding:10px 0;border:0;background:none;color:var(--muted);font:inherit;cursor:pointer;opacity:.6;transition:opacity .25s ease; }
+.tree-aeon button:hover,.tree-aeon button[aria-pressed="true"] { opacity:1;color:var(--ink); }
+.tree-aeon button[aria-pressed="true"] { text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px; }
+.tree-aeon button:focus-visible { outline:1px solid var(--ink);outline-offset:4px; }
+@media(max-width:900px) {
+  .tree-aeon { top:max(4px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);gap:28px;white-space:nowrap; }
+  .tree-aeon button { min-height:44px;padding:10px 4px; }
+  .tree-veils { top:calc(max(4px,env(safe-area-inset-top)) + 44px); }
+}
+
 }

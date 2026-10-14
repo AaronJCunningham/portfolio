@@ -4,10 +4,11 @@ import * as THREE from 'three'
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js'
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js'
-import content from '../tree-content.json'
+import type { TreePart } from '../TreeInfoPanel'
 import type { PerformanceState } from './proof-of-belief'
 
 type Props = {
+  parts: TreePart[]
   performance: MutableRefObject<PerformanceState>
   paused: boolean
   hoveredId: string | null
@@ -17,7 +18,7 @@ type Props = {
 
 // Keep the original monochrome film intact; a separate mask limits a hover tint
 // to the actual visible geometry, including correct occlusion at crossings.
-export default function StudyFilm({ performance, paused, hoveredId, selectedId, reducedMotion }: Props) {
+export default function StudyFilm({ parts, performance, paused, hoveredId, selectedId, reducedMotion }: Props) {
   const { gl, scene, camera, size } = useThree()
   const pipeline = useMemo(() => {
     const mask = new THREE.WebGLRenderTarget(1, 1, { minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter })
@@ -88,7 +89,7 @@ export default function StudyFilm({ performance, paused, hoveredId, selectedId, 
 
   useEffect(() => {
     for (const [id, prefix] of [[hoveredId, 'uHover'], [selectedId, 'uSelected']] as const) {
-      const palette = content.parts.find(part => part.id === id)?.palette
+      const palette = parts.find(part => part.id === id)?.palette
       const target = pipeline.targets[prefix]
       target.amount = palette ? 1 : 0
       // Retain the last palette while fading out; repeat single colours in all
@@ -106,7 +107,7 @@ export default function StudyFilm({ performance, paused, hoveredId, selectedId, 
         target.colors.forEach((color, index) => pipeline.pass.uniforms[`${prefix}Colors`].value[index].copy(color))
       }
     }
-  }, [pipeline, hoveredId, selectedId])
+  }, [pipeline, parts, hoveredId, selectedId])
 
   useEffect(() => {
     const pixel = gl.getPixelRatio()

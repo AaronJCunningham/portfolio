@@ -1,9 +1,10 @@
+import type { Aeon } from './tree-aeon'
 import ThinFrame from './ThinFrame'
 import content from './tree-content.json'
 import TreeTarot from './TreeTarot'
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 
-type TreePart = {
+export type TreePart = {
   id: string; modelKey?: string; kind: string; number: number; title: string; subtitle: string; paragraphs: string[];
   hebrew?: string;
   correspondences?: { label: string; value: string }[];
@@ -22,14 +23,18 @@ export function treePartId(metadata: Record<string, unknown>) {
   return treeParts.find(part => part.modelKey === key)?.id ?? null
 }
 
-export default function TreeInfoPanel({ activeId, pinned, reducedMotion = false, onReset, mobileControls }: { activeId: string | null; pinned: boolean; reducedMotion?: boolean; onReset: () => void; mobileControls?: ReactNode }) {
+export default function TreeInfoPanel({ parts = treeParts, aeon = 'old', activeId, pinned, reducedMotion = false, onReset, mobileControls }: { parts?: TreePart[]; aeon?: Aeon; activeId: string | null; pinned: boolean; reducedMotion?: boolean; onReset: () => void; mobileControls?: ReactNode }) {
   const [expanded, setExpanded] = useState(false)
-  const [displayedId, setDisplayedId] = useState(activeId)
+  const targetKey = `${aeon}:${activeId ?? "overview"}`
+  const [displayedKey, setDisplayedKey] = useState(targetKey)
+  const [displayedParts, setDisplayedParts] = useState(parts)
+  const displayedId = displayedKey.slice(displayedKey.indexOf(':') + 1)
   const [changing, setChanging] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    if (reducedMotion || activeId === displayedId) {
-      setDisplayedId(activeId)
+    if (reducedMotion || targetKey === displayedKey) {
+      setDisplayedKey(targetKey)
+      setDisplayedParts(parts)
       setChanging(false)
       return
     }
@@ -39,17 +44,18 @@ export default function TreeInfoPanel({ activeId, pinned, reducedMotion = false,
     const dwell = setTimeout(() => {
       setChanging(true)
       swap = setTimeout(() => {
-        setDisplayedId(activeId)
+        setDisplayedKey(targetKey)
+        setDisplayedParts(parts)
         setChanging(false)
       }, 140)
     }, pinned ? 0 : 100)
     return () => { clearTimeout(dwell); clearTimeout(swap) }
-  }, [activeId, displayedId, pinned, reducedMotion])
-  useEffect(() => { if (contentRef.current) contentRef.current.scrollTop = 0 }, [displayedId])
+  }, [targetKey, displayedKey, parts, pinned, reducedMotion])
+  useEffect(() => { if (contentRef.current) contentRef.current.scrollTop = 0 }, [displayedKey])
   const contentId = useId()
   const gesture = useRef<{ y: number; id: number } | null>(null)
   const suppressClick = useRef(false)
-  const part = treeEntries.find(item => item.id === displayedId)
+  const part = [...treeVeils, ...displayedParts].find(item => item.id === displayedId)
   const detail = part ?? content.overview
   const singleCard = part?.tarotCardIds?.length === 1
   const correspondences = !!part?.correspondences?.length && <dl className="tree-info__correspondences">{part.correspondences.map(item => <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl>

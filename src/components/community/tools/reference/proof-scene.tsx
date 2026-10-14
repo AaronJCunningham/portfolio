@@ -4,9 +4,9 @@ import { Suspense, useEffect, useMemo, type MutableRefObject as RefObject } from
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import type { PerformanceState } from "./proof-of-belief";
-import { treePartId } from "../TreeInfoPanel";
+import { treePartId, type TreePart } from "../TreeInfoPanel";
 import StudyFilm from "./study-film";
-type Props = {performance: RefObject<PerformanceState>; paused: boolean; reducedMotion: boolean; hoveredId: string | null; selectedId: string | null; onReady: () => void; onInspect: (id: string | null) => void; onSelect: (id: string | null) => void};
+type Props = {parts: TreePart[]; performance: RefObject<PerformanceState>; paused: boolean; reducedMotion: boolean; hoveredId: string | null; selectedId: string | null; onReady: () => void; onInspect: (id: string | null) => void; onSelect: (id: string | null) => void};
 function weatheredMaterial() {
  const mat = new THREE.MeshStandardMaterial({color: "#c4b59c", roughness: .82, metalness: .12, side: THREE.DoubleSide});
  mat.onBeforeCompile = shader => {
@@ -72,7 +72,7 @@ void main(){vSeed=aSeed;vec3 p=position;float a=aSeed*62.83+uTime*(.12+uDrift*.2
   const wide=size.width>900;
   if(!wide){
    // The canvas fills the screen; frame the tree above the peeking drawer.
-   const top=82;
+   const top=114;
    const bottom=Math.max(112,Math.min(size.height*.22,142))+36;
    const available=Math.max(100,size.height-top-bottom);
    const bounds=sculpture.bounds.getSize(new THREE.Vector3());
@@ -105,6 +105,6 @@ void main(){vSeed=aSeed;vec3 p=position;float a=aSeed*62.83+uTime*(.12+uDrift*.2
 export default function ProofScene(props: Props) {
  return <Canvas onPointerMissed={()=>{props.onInspect(null);props.onSelect(null);}} camera={{position:[0,0,13],fov:40,near:.1,far:80}} dpr={[1,1.5]} gl={{antialias:false,alpha:false,powerPreference:"high-performance"}} onCreated={({gl})=>{gl.setClearColor("#000000");gl.toneMapping=THREE.ACESFilmicToneMapping;gl.toneMappingExposure=1.35;}}>
   <ambientLight intensity={.22} color="#b7ad98"/><directionalLight position={[-4,5,6]} intensity={3.6} color="#ffe6c5"/><directionalLight position={[4,2,-3]} intensity={5} color="#c8b899"/><directionalLight position={[2,-2,5]} intensity={.35} color="#b2b9c5"/>
-  <Suspense fallback={null}><Sculpture {...props}/></Suspense><StudyFilm performance={props.performance} paused={props.paused} reducedMotion={props.reducedMotion} hoveredId={props.hoveredId} selectedId={props.selectedId}/>
+  <Suspense fallback={null}><Sculpture {...props}/></Suspense><StudyFilm parts={props.parts} performance={props.performance} paused={props.paused} reducedMotion={props.reducedMotion} hoveredId={props.hoveredId} selectedId={props.selectedId}/>
  </Canvas>;
 }
