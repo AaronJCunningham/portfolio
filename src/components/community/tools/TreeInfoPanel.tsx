@@ -1,7 +1,7 @@
 import ThinFrame from './ThinFrame'
 import content from './tree-content.json'
 import TreeTarot from './TreeTarot'
-import { useId, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 
 type TreePart = {
   id: string; modelKey?: string; kind: string; number: number; title: string; subtitle: string; paragraphs: string[];
@@ -22,18 +22,40 @@ export function treePartId(metadata: Record<string, unknown>) {
   return treeParts.find(part => part.modelKey === key)?.id ?? null
 }
 
-export default function TreeInfoPanel({ activeId, pinned, onReset, mobileControls }: { activeId: string | null; pinned: boolean; onReset: () => void; mobileControls?: ReactNode }) {
+export default function TreeInfoPanel({ activeId, pinned, reducedMotion = false, onReset, mobileControls }: { activeId: string | null; pinned: boolean; reducedMotion?: boolean; onReset: () => void; mobileControls?: ReactNode }) {
   const [expanded, setExpanded] = useState(false)
+  const [displayedId, setDisplayedId] = useState(activeId)
+  const [changing, setChanging] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (reducedMotion || activeId === displayedId) {
+      setDisplayedId(activeId)
+      setChanging(false)
+      return
+    }
+    let swap: ReturnType<typeof setTimeout> | undefined
+    // Ignore fleeting hovers. Every new target cancels the previous swap, so
+    // quick sweeps never build a queue of stale cards. Clicks skip the dwell.
+    const dwell = setTimeout(() => {
+      setChanging(true)
+      swap = setTimeout(() => {
+        setDisplayedId(activeId)
+        setChanging(false)
+      }, 140)
+    }, pinned ? 0 : 100)
+    return () => { clearTimeout(dwell); clearTimeout(swap) }
+  }, [activeId, displayedId, pinned, reducedMotion])
+  useEffect(() => { if (contentRef.current) contentRef.current.scrollTop = 0 }, [displayedId])
   const contentId = useId()
   const gesture = useRef<{ y: number; id: number } | null>(null)
   const suppressClick = useRef(false)
-  const part = treeEntries.find(item => item.id === activeId)
+  const part = treeEntries.find(item => item.id === displayedId)
   const detail = part ?? content.overview
   const singleCard = part?.tarotCardIds?.length === 1
   const correspondences = !!part?.correspondences?.length && <dl className="tree-info__correspondences">{part.correspondences.map(item => <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl>
   const index = part?.kind === 'veil' ? `Veil ${String(part.number).padStart(2, '0')} / 03 · Above Kether` : part ? `${part.kind === 'sephirah' ? 'Sephirah' : 'Path'} ${String(part.number).padStart(2, '0')} / ${part.kind === 'sephirah' ? '10' : '32'}` : '10 sephiroth / 22 paths'
 
-  return <ThinFrame className="tree-info" aria-label="Tree of Life information" data-expanded={expanded} onKeyDown={event => { if (event.key === 'Escape' && expanded) { event.stopPropagation(); setExpanded(false) } }}>
+  return <ThinFrame className="tree-info" aria-label="Tree of Life information" data-expanded={expanded} data-changing={changing} onKeyDown={event => { if (event.key === 'Escape' && expanded) { event.stopPropagation(); setExpanded(false) } }}>
     <button className="tree-info__drawer-toggle" aria-expanded={expanded} aria-controls={contentId} aria-label={expanded ? 'Back to tree' : `Read about ${detail.title}`} onClick={event => {
       const dragged = suppressClick.current && event.detail > 0
       suppressClick.current = false
@@ -57,7 +79,7 @@ export default function TreeInfoPanel({ activeId, pinned, onReset, mobileControl
         <span className="tree-info__peek-subtitle">{part ? detail.subtitle : 'Tap a sephirah, path or veil to begin.'}</span>
       </span>
     </button>
-    <div id={contentId} className="tree-info__content" key={activeId ?? 'overview'} aria-live="polite" aria-atomic="true" tabIndex={0} aria-label={part ? `${part.title} details` : 'Introduction'}>
+    <div ref={contentRef} id={contentId} className="tree-info__content" aria-live="polite" aria-atomic="true" tabIndex={0} aria-label={part ? `${part.title} details` : 'Introduction'}>
       <p className="tree-info__index">{index}</p>
       <h2>{part?.hebrew && <span className="tree-info__letter" lang="he">{part.hebrew}</span>}{detail.title}</h2>
       <p className="tree-info__subtitle">{detail.subtitle}</p>

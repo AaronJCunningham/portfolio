@@ -370,6 +370,9 @@
   color:var(--ink);background:rgba(8,8,7,.45);
 }
 .tree-info__content { position:relative;min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--line) transparent; }
+.tree-info__content,.tree-info__peek { opacity:1;transition:opacity 280ms ease; }
+.tree-info[data-changing="true"] .tree-info__content,.tree-info[data-changing="true"] .tree-info__peek { opacity:0;transition-duration:140ms; }
+@media(prefers-reduced-motion:reduce) { .tree-info__content,.tree-info__peek { transition:none !important; } }
 .tree-info .tree-info__index {
   margin:0 0 30px;font-family:var(--font-mono),monospace;font-size:10px;
   line-height:1.6;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
