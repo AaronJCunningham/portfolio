@@ -28,6 +28,7 @@ export default function TreeInfoPanel({ parts = treeParts, aeon = 'old', activeI
   const targetKey = `${aeon}:${activeId ?? "overview"}`
   const [displayedKey, setDisplayedKey] = useState(targetKey)
   const [displayedParts, setDisplayedParts] = useState(parts)
+  const displayedAeon: Aeon = displayedKey.startsWith('new:') ? 'new' : 'old'
   const displayedId = displayedKey.slice(displayedKey.indexOf(':') + 1)
   const [changing, setChanging] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -92,9 +93,9 @@ export default function TreeInfoPanel({ parts = treeParts, aeon = 'old', activeI
       {part?.palette && <div className="tree-info__palette" aria-label={`Associated colour: ${part.palette.name}`}><span aria-hidden="true" className="tree-info__swatches">{part.palette.colors.map(color => <i key={color} style={{ backgroundColor: color }} />)}</span>{part.palette.name}</div>}
       <div className={`tree-info__lead${singleCard ? ' tree-info__lead--card' : ''}`}>
         <div><div className="tree-info__body">{detail.paragraphs.map((text, i) => <p key={i}>{text}</p>)}</div>{singleCard && correspondences}</div>
-        {singleCard && part?.tarotCardIds && <TreeTarot cardIds={part.tarotCardIds} />}
+        {singleCard && part?.tarotCardIds && <TreeTarot aeon={displayedAeon} cardIds={part.tarotCardIds} />}
       </div>
-      {!!part?.tarotCardIds && part.tarotCardIds.length > 1 && <TreeTarot cardIds={part.tarotCardIds} note={part.tarotNote} />}
+      {!!part?.tarotCardIds && part.tarotCardIds.length > 1 && <TreeTarot aeon={displayedAeon} cardIds={part.tarotCardIds} note={part.tarotNote} />}
       {!singleCard && correspondences}
       {detail.sections?.map(section => <div className="tree-info__section" key={section.title}><h3>{section.title}</h3>{section.paragraphs.map((text, i) => <p key={i}>{text}</p>)}</div>)}
       {part?.palette?.note && <div className="tree-info__section"><h3>Colour in this study</h3><p>{part.palette.note}</p></div>}

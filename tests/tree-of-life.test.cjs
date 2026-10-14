@@ -135,7 +135,7 @@ test('every selectable model part has its book colour or a documented related at
   assert.equal(content.parts.find(part => part.id === 'path-19').palette.name, 'Purple');
 });
 
-test('Aeon overlay swaps the two correspondence sets without changing letters, paths or artwork', () => {
+test('Aeon overlay swaps the two correspondence sets and retains path identities', () => {
   const ts = require('typescript');
   const filename = path.join(__dirname, '../src/components/community/tools/tree-aeon.ts');
   const js = ts.transpileModule(fs.readFileSync(filename, 'utf8'), {
@@ -149,7 +149,11 @@ test('Aeon overlay swaps the two correspondence sets without changing letters, p
   for (const part of oldParts) {
     const actual = newParts.find(entry => entry.id === part.id);
     const donorId = part.id === 'path-15' ? 'path-28' : part.id === 'path-28' ? 'path-15' : null;
-    if (!donorId) { assert.strictEqual(actual, part); continue; }
+    if (!donorId) {
+      for (const key of ['id', 'title', 'number', 'hebrew', 'modelKey', 'subtitle', 'paragraphs', 'sections', 'palette', 'tarotCardIds']) assert.deepEqual(actual[key], part[key]);
+      assert.deepEqual(actual.correspondences.filter(row => row.label !== 'Tarot'), part.correspondences.filter(row => row.label !== 'Tarot'));
+      continue;
+    }
     const donor = oldParts.find(entry => entry.id === donorId);
     for (const key of ['id', 'title', 'number', 'hebrew', 'modelKey', 'subtitle']) assert.equal(actual[key], part[key]);
     assert.deepEqual(actual.tarotCardIds, donor.tarotCardIds);
@@ -160,4 +164,35 @@ test('Aeon overlay swaps the two correspondence sets without changing letters, p
   }
   assert.strictEqual(mod.exports.partsForAeon('old'), oldParts);
   assert.equal(JSON.stringify(content), before);
+});
+
+
+test('Thoth deck has 78 complete local images with correct semantic and court mappings', () => {
+  const deck = require('../src/components/community/tools/thoth-cards.json');
+  const rws = require('../src/components/community/tools/tarot-cards.json');
+  const crypto = require('node:crypto');
+  assert.equal(deck.cards.length, 78);
+  assert.deepEqual(deck.cards.map(card => card.id).sort(), rws.cards.map(card => card.id).sort());
+  assert.equal(new Set(deck.cards.map(card => card.sha256)).size, 78);
+  for (const card of deck.cards) {
+    const bytes = fs.readFileSync(path.join(__dirname, '../public', card.src));
+    assert.equal(bytes.subarray(0,4).toString(), 'RIFF', card.id);
+    assert.equal(bytes.subarray(8,12).toString(), 'WEBP', card.id);
+    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), card.sha256, card.id);
+    assert.ok(card.width > 0 && card.height > card.width, card.id);
+    assert.match(card.originalUrl, /^https:\/\/tarotfans\.com\//);
+  }
+  const name = id => deck.cards.find(card => card.id === id).name;
+  assert.equal(name('major-08'), 'XI — Lust');
+  assert.equal(name('major-11'), 'VIII — Adjustment');
+  assert.equal(name('major-14'), 'XIV — Art');
+  assert.equal(name('major-20'), 'XX — The Aeon');
+  assert.equal(name('major-21'), 'XXI — The Universe');
+  for (const suit of ['wands','cups','swords','pentacles']) {
+    assert.match(name(`${suit}-11`), /^Princess of /);
+    assert.match(name(`${suit}-12`), /^Prince of /);
+    assert.match(name(`${suit}-13`), /^Queen of /);
+    assert.match(name(`${suit}-14`), /^Knight of /);
+  }
+  assert.equal(name('pentacles-01'), 'Ace of Disks');
 });

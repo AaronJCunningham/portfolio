@@ -1,0 +1,789 @@
+{
+  "deck": "Thoth Tarot",
+  "artist": "Lady Frieda Harris",
+  "designer": "Aleister Crowley",
+  "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+  "rights": "Artwork rights remain with their respective holders.",
+  "cards": [
+    {
+      "id": "cups-01",
+      "name": "Ace of Cups",
+      "src": "/tools/tree-of-life/thoth/cups-01.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/37-thoth-tarot-ace-of-cups.webp?v=rbazot-v121",
+      "sha256": "955a463019c69a2890957ff5d4af6bd002f832681fb70b569ec4f84227269356"
+    },
+    {
+      "id": "cups-02",
+      "name": "Two of Cups — Love",
+      "src": "/tools/tree-of-life/thoth/cups-02.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/38-thoth-tarot-two-of-cups-love.webp?v=rbazot-v121",
+      "sha256": "ecb988c2bea0fa239b71a209f9d45f21e20084ef0050b9088c146511289e1e06"
+    },
+    {
+      "id": "cups-03",
+      "name": "Three of Cups — Abundance",
+      "src": "/tools/tree-of-life/thoth/cups-03.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/39-thoth-tarot-three-of-cups-abundance.webp?v=rbazot-v121",
+      "sha256": "1e84be41774c4ccd5e5969d8b21afa92034eec2fa7a065e12336d9592f7c1efe"
+    },
+    {
+      "id": "cups-04",
+      "name": "Four of Cups — Luxury",
+      "src": "/tools/tree-of-life/thoth/cups-04.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/40-thoth-tarot-four-of-cups-luxury.webp?v=rbazot-v121",
+      "sha256": "4474ea82710bd2f0575f281a32e5f8598379202624b04d6d32c54c77673c75d7"
+    },
+    {
+      "id": "cups-05",
+      "name": "Five of Cups — Disappointment",
+      "src": "/tools/tree-of-life/thoth/cups-05.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/41-thoth-tarot-five-of-cups-disappointment.webp?v=rbazot-v121",
+      "sha256": "77db9469d59bc7711a278e184278354a63c1ebbe220a4c40049859857b866f96"
+    },
+    {
+      "id": "cups-06",
+      "name": "Six of Cups — Pleasure",
+      "src": "/tools/tree-of-life/thoth/cups-06.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/42-thoth-tarot-six-of-cups-pleasure.webp?v=rbazot-v121",
+      "sha256": "1b85d8c775b43b37edae661a3ee9e4d26023d90edd59088361a6a879cee00b32"
+    },
+    {
+      "id": "cups-07",
+      "name": "Seven of Cups — Debauch",
+      "src": "/tools/tree-of-life/thoth/cups-07.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/43-thoth-tarot-seven-of-cups-debauch.webp?v=rbazot-v121",
+      "sha256": "a54fdc75b2dae1f05d883d77a1324e814d2eef60be133c597407a8567ba956e8"
+    },
+    {
+      "id": "cups-08",
+      "name": "Eight of Cups — Indolence",
+      "src": "/tools/tree-of-life/thoth/cups-08.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/44-thoth-tarot-eight-of-cups-indolence.webp?v=rbazot-v121",
+      "sha256": "3f196fe29c594aae13b49c0268088f324e8dc78f3d4f1176bf9145419bcde2cc"
+    },
+    {
+      "id": "cups-09",
+      "name": "Nine of Cups — Happiness",
+      "src": "/tools/tree-of-life/thoth/cups-09.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/45-thoth-tarot-nine-of-cups-happiness.webp?v=rbazot-v121",
+      "sha256": "336585eb4b4d6aaf41e3a617421c90fad092597d09dac093c3fb1e96a1588641"
+    },
+    {
+      "id": "cups-10",
+      "name": "Ten of Cups — Satiety",
+      "src": "/tools/tree-of-life/thoth/cups-10.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/46-thoth-tarot-ten-of-cups-satiety.webp?v=rbazot-v121",
+      "sha256": "3d4734faa6d331de5140fbadef1330f046348338ffe35c8b9d166b9fe4ba10e1"
+    },
+    {
+      "id": "cups-11",
+      "name": "Princess of Cups",
+      "src": "/tools/tree-of-life/thoth/cups-11.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/50-thoth-tarot-princess-of-cups.webp?v=rbazot-v121",
+      "sha256": "001f751c4d660e3f6e74f9cf6d6cbf3fca5f9969fc6cb665bc644a02200a7af8"
+    },
+    {
+      "id": "cups-12",
+      "name": "Prince of Cups",
+      "src": "/tools/tree-of-life/thoth/cups-12.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/49-thoth-tarot-prince-of-cups.webp?v=rbazot-v121",
+      "sha256": "3baf3c66299dcb724fb9cae654ea7a13b8d8c0ff2ccab6dd79781791c4a8d80b"
+    },
+    {
+      "id": "cups-13",
+      "name": "Queen of Cups",
+      "src": "/tools/tree-of-life/thoth/cups-13.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/48-thoth-tarot-queen-of-cups.webp?v=rbazot-v121",
+      "sha256": "cdc846b4ccd7da1968b3a11e282c2e57cd97fafbb3fd4b053b3362351151c14b"
+    },
+    {
+      "id": "cups-14",
+      "name": "Knight of Cups",
+      "src": "/tools/tree-of-life/thoth/cups-14.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/47-thoth-tarot-knight-of-cups.webp?v=rbazot-v121",
+      "sha256": "a0cbd3782b3cc0300baa8c3faf82302f081e4f744c5874571e49c3787c8723c5"
+    },
+    {
+      "id": "major-00",
+      "name": "0 — The Fool",
+      "src": "/tools/tree-of-life/thoth/major-00.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/01-thoth-tarot-the-fool.webp?v=rbazot-v121",
+      "sha256": "c476b04a6c0dbee1df3ff94f8fc7fac8becc40a9d322d4c67cb5485108fdac12"
+    },
+    {
+      "id": "major-01",
+      "name": "I — The Magus",
+      "src": "/tools/tree-of-life/thoth/major-01.webp",
+      "width": 1034,
+      "height": 1636,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/02-thoth-tarot-the-magus.webp?v=rbazot-v121",
+      "sha256": "e3879ac4a9b4c56a5c70f74048e7db387592b04244519eaed0992cad73bd7ae0"
+    },
+    {
+      "id": "major-02",
+      "name": "II — The Priestess",
+      "src": "/tools/tree-of-life/thoth/major-02.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/03-thoth-tarot-the-priestess.webp?v=rbazot-v121",
+      "sha256": "750051602c0a39959b161af72805f106c907c2b67c999c8264063f8ebcf2f08d"
+    },
+    {
+      "id": "major-03",
+      "name": "III — The Empress",
+      "src": "/tools/tree-of-life/thoth/major-03.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/04-thoth-tarot-the-empress.webp?v=rbazot-v121",
+      "sha256": "8a23781757ec23ff96d2730d6951685cdda1a4960208391a765771fedfd0969b"
+    },
+    {
+      "id": "major-04",
+      "name": "IV — The Emperor",
+      "src": "/tools/tree-of-life/thoth/major-04.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/05-thoth-tarot-the-emperor.webp?v=rbazot-v121",
+      "sha256": "43a9ed83d00d5218bd7f69500455349633859632325696d28d77325ee027b975"
+    },
+    {
+      "id": "major-05",
+      "name": "V — The Hierophant",
+      "src": "/tools/tree-of-life/thoth/major-05.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/06-thoth-tarot-the-hierophant.webp?v=rbazot-v121",
+      "sha256": "6c599c12249a5a7f8cc96bc3aca7a9589788a544361833bd4c7e0d17b90b1d6c"
+    },
+    {
+      "id": "major-06",
+      "name": "VI — The Lovers",
+      "src": "/tools/tree-of-life/thoth/major-06.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/07-thoth-tarot-the-lovers.webp?v=rbazot-v121",
+      "sha256": "00914a5429ab7f697e6bd4954890a0ef06bd7db514177a167cc1b7c3618629f5"
+    },
+    {
+      "id": "major-07",
+      "name": "VII — The Chariot",
+      "src": "/tools/tree-of-life/thoth/major-07.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/08-thoth-tarot-the-chariot.webp?v=rbazot-v121",
+      "sha256": "113cd5857d6878739c87799ecde1ab68765d8ea01b305bab9a0fd06202934c5e"
+    },
+    {
+      "id": "major-08",
+      "name": "XI — Lust",
+      "src": "/tools/tree-of-life/thoth/major-08.webp",
+      "width": 3224,
+      "height": 5103,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/12-thoth-tarot-lust.webp?v=rbazot-v121",
+      "sha256": "2760ef56c95e9b3827a3329284cbd1896e553a8859ca8c7408bdf6fa6d8f4c6b"
+    },
+    {
+      "id": "major-09",
+      "name": "IX — The Hermit",
+      "src": "/tools/tree-of-life/thoth/major-09.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/10-thoth-tarot-the-hermit.webp?v=rbazot-v121",
+      "sha256": "3ad8457e334904671bbf8419c22a755d9071c24feef16f0742263b8ef74d2a2b"
+    },
+    {
+      "id": "major-10",
+      "name": "X — Fortune",
+      "src": "/tools/tree-of-life/thoth/major-10.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/11-thoth-tarot-fortune.webp?v=rbazot-v121",
+      "sha256": "11cab1777f18378f1157ec9f1fbdc11df332763245eb871a7b170bbb3fdba093"
+    },
+    {
+      "id": "major-11",
+      "name": "VIII — Adjustment",
+      "src": "/tools/tree-of-life/thoth/major-11.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/09-thoth-tarot-adjustment.webp?v=rbazot-v121",
+      "sha256": "873a445d5c00d631fab06520c95aa287d8a9446da16b4f5500f142d65b3419b1"
+    },
+    {
+      "id": "major-12",
+      "name": "XII — The Hanged Man",
+      "src": "/tools/tree-of-life/thoth/major-12.webp",
+      "width": 467,
+      "height": 740,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/13-thoth-tarot-the-hanged-man.webp?v=rbazot-v121",
+      "sha256": "9a9681e1346413d82a7a8fe1a50e95b109a1ddfd673f881561cef0d529f3cb20"
+    },
+    {
+      "id": "major-13",
+      "name": "XIII — Death",
+      "src": "/tools/tree-of-life/thoth/major-13.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/14-thoth-tarot-death.webp?v=rbazot-v121",
+      "sha256": "b8821330935f1036f49a163658b8549258bed558e1ebf3dacc9e10072f7b97e3"
+    },
+    {
+      "id": "major-14",
+      "name": "XIV — Art",
+      "src": "/tools/tree-of-life/thoth/major-14.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/15-thoth-tarot-art.webp?v=rbazot-v121",
+      "sha256": "57acd08aa2e27d9e7b035453e74d4112fb6c05be52f88d25f20196ae87aa58ff"
+    },
+    {
+      "id": "major-15",
+      "name": "XV — The Devil",
+      "src": "/tools/tree-of-life/thoth/major-15.webp",
+      "width": 777,
+      "height": 1230,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/16-thoth-tarot-the-devil.webp?v=rbazot-v121",
+      "sha256": "c69fb3822b1f3d190081d95f2b4631d81450f36a75579bf85b3c5ee94a274f11"
+    },
+    {
+      "id": "major-16",
+      "name": "XVI — The Tower",
+      "src": "/tools/tree-of-life/thoth/major-16.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/17-thoth-tarot-the-tower.webp?v=rbazot-v121",
+      "sha256": "53d038391a150906c71588ad7c5cf00614a3ebef86f2f4b12066ec7c72223439"
+    },
+    {
+      "id": "major-17",
+      "name": "XVII — The Star",
+      "src": "/tools/tree-of-life/thoth/major-17.webp",
+      "width": 777,
+      "height": 1230,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/18-thoth-tarot-the-star.webp?v=rbazot-v121",
+      "sha256": "e3e9950a6adfecf8e563700e2fa63c092da9001cc27a0e44c080717189c63f1a"
+    },
+    {
+      "id": "major-18",
+      "name": "XVIII — The Moon",
+      "src": "/tools/tree-of-life/thoth/major-18.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/19-thoth-tarot-the-moon.webp?v=rbazot-v121",
+      "sha256": "0fa10429ac22cf16a3ebb983ed324f18c1a7ac75346c0664384840cf184078cd"
+    },
+    {
+      "id": "major-19",
+      "name": "XIX — The Sun",
+      "src": "/tools/tree-of-life/thoth/major-19.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/20-thoth-tarot-the-sun.webp?v=rbazot-v121",
+      "sha256": "3c0414a58d218c39471b43fb4f226781d88e4b01047d048ad940d4f07b4928f9"
+    },
+    {
+      "id": "major-20",
+      "name": "XX — The Aeon",
+      "src": "/tools/tree-of-life/thoth/major-20.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/21-thoth-tarot-the-aeon.webp?v=rbazot-v121",
+      "sha256": "8d3779161b6b39f667f3adbcea719facfb1d9f76f69998f98411e291819fa4cd"
+    },
+    {
+      "id": "major-21",
+      "name": "XXI — The Universe",
+      "src": "/tools/tree-of-life/thoth/major-21.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/22-thoth-tarot-the-universe.webp?v=rbazot-v121",
+      "sha256": "30a2e65b7e92bc10e2dd94faa34a7a353bd74612fef8dd73b08678054f09d048"
+    },
+    {
+      "id": "pentacles-01",
+      "name": "Ace of Disks",
+      "src": "/tools/tree-of-life/thoth/pentacles-01.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/65-thoth-tarot-ace-of-disks.webp?v=rbazot-v121",
+      "sha256": "b03bf7803239d2e85254b956616868b829e61511cfb64cf63db4c4de27f3c91f"
+    },
+    {
+      "id": "pentacles-02",
+      "name": "Two of Disks — Change",
+      "src": "/tools/tree-of-life/thoth/pentacles-02.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/66-thoth-tarot-two-of-disks-change.webp?v=rbazot-v121",
+      "sha256": "7a0cae1a412c9e66c003b4ca84baafaeef1fc433408b8f06306e43684c3a81ed"
+    },
+    {
+      "id": "pentacles-03",
+      "name": "Three of Disks — Works",
+      "src": "/tools/tree-of-life/thoth/pentacles-03.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/67-thoth-tarot-three-of-disks-works.webp?v=rbazot-v121",
+      "sha256": "3e6e625644614e05af8982fa58ab637123bdf10c695b5c46e3196d0c3cb75b87"
+    },
+    {
+      "id": "pentacles-04",
+      "name": "Four of Disks — Power",
+      "src": "/tools/tree-of-life/thoth/pentacles-04.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/68-thoth-tarot-four-of-disks-power.webp?v=rbazot-v121",
+      "sha256": "b4663dc479234043b09f5ec065aea3c09c1026f7896be4946cb77846a4b25a70"
+    },
+    {
+      "id": "pentacles-05",
+      "name": "Five of Disks — Worry",
+      "src": "/tools/tree-of-life/thoth/pentacles-05.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/69-thoth-tarot-five-of-disks-worry.webp?v=rbazot-v121",
+      "sha256": "aeccfd0bd4727173c62adeba85b1fb6333fdbe9fe923c6559fdfdf24ed28783d"
+    },
+    {
+      "id": "pentacles-06",
+      "name": "Six of Disks — Success",
+      "src": "/tools/tree-of-life/thoth/pentacles-06.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/70-thoth-tarot-six-of-disks-success.webp?v=rbazot-v121",
+      "sha256": "163f45a383735470ecba27f1bbb98ba5555dc49c00ede8d266631328bb049879"
+    },
+    {
+      "id": "pentacles-07",
+      "name": "Seven of Disks — Failure",
+      "src": "/tools/tree-of-life/thoth/pentacles-07.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/71-thoth-tarot-seven-of-disks-failure.webp?v=rbazot-v121",
+      "sha256": "dcc16cfbc4722f6a94e67ee3e24355ac383bd4cba62f82ab509815f609295b20"
+    },
+    {
+      "id": "pentacles-08",
+      "name": "Eight of Disks — Prudence",
+      "src": "/tools/tree-of-life/thoth/pentacles-08.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/72-thoth-tarot-eight-of-disks-prudence.webp?v=rbazot-v121",
+      "sha256": "665d760051c6a6726f3e7179036219fca290e66e72e3ddcf590515741943005a"
+    },
+    {
+      "id": "pentacles-09",
+      "name": "Nine of Disks — Gain",
+      "src": "/tools/tree-of-life/thoth/pentacles-09.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/73-thoth-tarot-nine-of-disks-gain.webp?v=rbazot-v121",
+      "sha256": "03f7bb0cce2f203b0e3283647c240fbf89e059efc7cbd42e691af838edfbae3b"
+    },
+    {
+      "id": "pentacles-10",
+      "name": "Ten of Disks — Wealth",
+      "src": "/tools/tree-of-life/thoth/pentacles-10.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/74-thoth-tarot-ten-of-disks-wealth.webp?v=rbazot-v121",
+      "sha256": "26b6c16bf1379caa896028381bfb509bc878a3fd8d7443771b2899900e309542"
+    },
+    {
+      "id": "pentacles-11",
+      "name": "Princess of Disks",
+      "src": "/tools/tree-of-life/thoth/pentacles-11.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/78-thoth-tarot-princess-of-disks.webp?v=rbazot-v121",
+      "sha256": "294dd61b5b6520bbe2ee4f274e3f45ea1f08aeacff38ec37662c34479ef61645"
+    },
+    {
+      "id": "pentacles-12",
+      "name": "Prince of Disks",
+      "src": "/tools/tree-of-life/thoth/pentacles-12.webp",
+      "width": 1004,
+      "height": 1590,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/77-thoth-tarot-prince-of-disks.webp?v=rbazot-v121",
+      "sha256": "ec828fd593f38b4e915a6f45fe426ff2d661344b3b0e55b9643e761e110c225b"
+    },
+    {
+      "id": "pentacles-13",
+      "name": "Queen of Disks",
+      "src": "/tools/tree-of-life/thoth/pentacles-13.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/76-thoth-tarot-queen-of-disks.webp?v=rbazot-v121",
+      "sha256": "1152f33ada155c6c6f300237ba9bc0f29381658984de0b54f46c275fef1bbaf7"
+    },
+    {
+      "id": "pentacles-14",
+      "name": "Knight of Disks",
+      "src": "/tools/tree-of-life/thoth/pentacles-14.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/75-thoth-tarot-knight-of-disks.webp?v=rbazot-v121",
+      "sha256": "ea6c14831ff39a40be19cfc2311a2e6e31e934e057f56505dd84b54b41843c1a"
+    },
+    {
+      "id": "swords-01",
+      "name": "Ace of Swords",
+      "src": "/tools/tree-of-life/thoth/swords-01.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/51-thoth-tarot-ace-of-swords.webp?v=rbazot-v121",
+      "sha256": "90efea03a18f290be7c67565347cad500ce2365754eeb5d895333836976ddb2d"
+    },
+    {
+      "id": "swords-02",
+      "name": "Two of Swords — Peace",
+      "src": "/tools/tree-of-life/thoth/swords-02.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/52-thoth-tarot-two-of-swords-peace.webp?v=rbazot-v121",
+      "sha256": "112a8ea2128994579eb5c4936c2585c60d6be1ab038a537a2e08c43b96c1af05"
+    },
+    {
+      "id": "swords-03",
+      "name": "Three of Swords — Sorrow",
+      "src": "/tools/tree-of-life/thoth/swords-03.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/53-thoth-tarot-three-of-swords-sorrow.webp?v=rbazot-v121",
+      "sha256": "0ad6154789c89e02f7c0425071dcc191a4330ad04f8bba1ed59e6aeffa7d8ec0"
+    },
+    {
+      "id": "swords-04",
+      "name": "Four of Swords — Truce",
+      "src": "/tools/tree-of-life/thoth/swords-04.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/54-thoth-tarot-four-of-swords-truce.webp?v=rbazot-v121",
+      "sha256": "1fb58c9ba4efa3e8344fb24f89cdf58279a273beeb79dff426e2464f9f8fa12a"
+    },
+    {
+      "id": "swords-05",
+      "name": "Five of Swords — Defeat",
+      "src": "/tools/tree-of-life/thoth/swords-05.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/55-thoth-tarot-five-of-swords-defeat.webp?v=rbazot-v121",
+      "sha256": "2c8b40800f4a2749b729a45e75ebd9a3b82b9e7762c57eec56744d472f797b60"
+    },
+    {
+      "id": "swords-06",
+      "name": "Six of Swords — Science",
+      "src": "/tools/tree-of-life/thoth/swords-06.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/56-thoth-tarot-six-of-swords-science.webp?v=rbazot-v121",
+      "sha256": "7b38a2d3091cd7a987978d9ea1ea754e70b84e8891150acb824f5eb009f0a40a"
+    },
+    {
+      "id": "swords-07",
+      "name": "Seven of Swords — Futility",
+      "src": "/tools/tree-of-life/thoth/swords-07.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/57-thoth-tarot-seven-of-swords-futility.webp?v=rbazot-v121",
+      "sha256": "3b97f9a653594cc7df07711c6a0c1930731890badf4464133d7daf2d950aa061"
+    },
+    {
+      "id": "swords-08",
+      "name": "Eight of Swords — Interference",
+      "src": "/tools/tree-of-life/thoth/swords-08.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/58-thoth-tarot-eight-of-swords-interference.webp?v=rbazot-v121",
+      "sha256": "de6c5be6f19692bf37221896b9e6457c6b2540f853fa3f46851d71e470742690"
+    },
+    {
+      "id": "swords-09",
+      "name": "Nine of Swords — Cruelty",
+      "src": "/tools/tree-of-life/thoth/swords-09.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/59-thoth-tarot-nine-of-swords-cruelty.webp?v=rbazot-v121",
+      "sha256": "804ef78746610e77c8609486eba1f3d56d57c5f55df622525f799c7a3df9aac8"
+    },
+    {
+      "id": "swords-10",
+      "name": "Ten of Swords — Ruin",
+      "src": "/tools/tree-of-life/thoth/swords-10.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/60-thoth-tarot-ten-of-swords-ruin.webp?v=rbazot-v121",
+      "sha256": "fc07af20852203578be228a8e5ee98c4777bd20746470eaeaf1cd833dc92d8a8"
+    },
+    {
+      "id": "swords-11",
+      "name": "Princess of Swords",
+      "src": "/tools/tree-of-life/thoth/swords-11.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/64-thoth-tarot-princess-of-swords.webp?v=rbazot-v121",
+      "sha256": "7f8a3607db51951c05531e625c1fa695ea45ea3af33b8957a77c5a2349ea1bee"
+    },
+    {
+      "id": "swords-12",
+      "name": "Prince of Swords",
+      "src": "/tools/tree-of-life/thoth/swords-12.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/63-thoth-tarot-prince-of-swords.webp?v=rbazot-v121",
+      "sha256": "8be9710d1c03e3959bc5313126c7d47d981c8ec38e9e9f46f54dfff711507b93"
+    },
+    {
+      "id": "swords-13",
+      "name": "Queen of Swords",
+      "src": "/tools/tree-of-life/thoth/swords-13.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/62-thoth-tarot-queen-of-swords.webp?v=rbazot-v121",
+      "sha256": "6d81170f7c6ed1f83d1d087008e094a16db8b3a52136d1b665054be6088f2078"
+    },
+    {
+      "id": "swords-14",
+      "name": "Knight of Swords",
+      "src": "/tools/tree-of-life/thoth/swords-14.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/61-thoth-tarot-knight-of-swords.webp?v=rbazot-v121",
+      "sha256": "386dfcad67d63b2dad9c5ee5b77ecea35a2cad3bca3b8da5dbfeb555bd75dde3"
+    },
+    {
+      "id": "wands-01",
+      "name": "Ace of Wands",
+      "src": "/tools/tree-of-life/thoth/wands-01.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/23-thoth-tarot-ace-of-wands.webp?v=rbazot-v121",
+      "sha256": "019851b8114cd5804bbdcf7cfe7adac5db9274473d4cbd80ebbcee93ac164f17"
+    },
+    {
+      "id": "wands-02",
+      "name": "Two of Wands — Dominion",
+      "src": "/tools/tree-of-life/thoth/wands-02.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/24-thoth-tarot-two-of-wands-dominion.webp?v=rbazot-v121",
+      "sha256": "9c35648fbf5f46164e416c2b89c98b08849be5e9a2a14241902559bdb849445a"
+    },
+    {
+      "id": "wands-03",
+      "name": "Three of Wands — Virtue",
+      "src": "/tools/tree-of-life/thoth/wands-03.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/25-thoth-tarot-three-of-wands-virtue.webp?v=rbazot-v121",
+      "sha256": "bf57b00c0050f07c67891f7d149ab763c1cf8f1b9896f1ca5ab237df3282f993"
+    },
+    {
+      "id": "wands-04",
+      "name": "Four of Wands — Completion",
+      "src": "/tools/tree-of-life/thoth/wands-04.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/26-thoth-tarot-four-of-wands-completion.webp?v=rbazot-v121",
+      "sha256": "ca53b2f7db113afdb9b2cd230444eac5e4706729df117ebaff0cf5827c22ba92"
+    },
+    {
+      "id": "wands-05",
+      "name": "Five of Wands — Strife",
+      "src": "/tools/tree-of-life/thoth/wands-05.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/27-thoth-tarot-five-of-wands-strife.webp?v=rbazot-v121",
+      "sha256": "37bab3bde08c207056c12e32bc465f570d423d5c0c9fadf0c568e957af2b8192"
+    },
+    {
+      "id": "wands-06",
+      "name": "Six of Wands — Victory",
+      "src": "/tools/tree-of-life/thoth/wands-06.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/28-thoth-tarot-six-of-wands-victory.webp?v=rbazot-v121",
+      "sha256": "754d1acdd077a410283a185a47c56efe521082b3ebff890ab43d233a178dcf84"
+    },
+    {
+      "id": "wands-07",
+      "name": "Seven of Wands — Valour",
+      "src": "/tools/tree-of-life/thoth/wands-07.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/29-thoth-tarot-seven-of-wands-valour.webp?v=rbazot-v121",
+      "sha256": "fd85b490b6b76cfd05f4072f67a0848fe28c6d2b61778d6ba6454c9d83c9babc"
+    },
+    {
+      "id": "wands-08",
+      "name": "Eight of Wands — Swiftness",
+      "src": "/tools/tree-of-life/thoth/wands-08.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/30-thoth-tarot-eight-of-wands-swiftness.webp?v=rbazot-v121",
+      "sha256": "a04924e8e2d05c1ed82267a98f366bf2ddfd260b34b7395b7cc8b466ce3817b6"
+    },
+    {
+      "id": "wands-09",
+      "name": "Nine of Wands — Strength",
+      "src": "/tools/tree-of-life/thoth/wands-09.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/31-thoth-tarot-nine-of-wands-strength.webp?v=rbazot-v121",
+      "sha256": "8dc613b9f33c6fac6de6a26a0e6883a85bf363eee3a5d6d24b2e41b18367a5aa"
+    },
+    {
+      "id": "wands-10",
+      "name": "Ten of Wands — Oppression",
+      "src": "/tools/tree-of-life/thoth/wands-10.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/32-thoth-tarot-ten-of-wands-oppression.webp?v=rbazot-v121",
+      "sha256": "6d38baad0b39d6331f75c90e2eba0e0515506e599e8cab7795edd38edcebd6cb"
+    },
+    {
+      "id": "wands-11",
+      "name": "Princess of Wands",
+      "src": "/tools/tree-of-life/thoth/wands-11.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/36-thoth-tarot-princess-of-wands.webp?v=rbazot-v121",
+      "sha256": "dcdd3f1815ef6f6aebb484ff02269a0136b38b24748a7940dd0f7ece2ac5ebf0"
+    },
+    {
+      "id": "wands-12",
+      "name": "Prince of Wands",
+      "src": "/tools/tree-of-life/thoth/wands-12.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/35-thoth-tarot-prince-of-wands.webp?v=rbazot-v121",
+      "sha256": "3f7fd38fbf167de7e1d6442b4a465dcaa6ef51bc33e8b40bf97cc6038cd476db"
+    },
+    {
+      "id": "wands-13",
+      "name": "Queen of Wands",
+      "src": "/tools/tree-of-life/thoth/wands-13.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/34-thoth-tarot-queen-of-wands.webp?v=rbazot-v121",
+      "sha256": "382f3b771fc446ddd47c080d2dd70b151731b6bb6d4f1985a43547fdcd9c4c53"
+    },
+    {
+      "id": "wands-14",
+      "name": "Knight of Wands",
+      "src": "/tools/tree-of-life/thoth/wands-14.webp",
+      "width": 784,
+      "height": 1241,
+      "source": "https://tarotfans.com/thoth-tarot-deck-review-aleister-crowley/",
+      "originalUrl": "https://tarotfans.com/wp-content/themes/tarotfans-orica-child/assets/images/the-thoth-tarot-pinterest-cards/33-thoth-tarot-knight-of-wands.webp?v=rbazot-v121",
+      "sha256": "ce64409a2db579c0a76006a6174640b11427731b3a2c6994cbb5fa31b7522e08"
+    }
+  ]
+}
