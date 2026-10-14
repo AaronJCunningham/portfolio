@@ -5,6 +5,7 @@ import type {ReactNode} from 'react'
 const links = [
   {href: '/community', label: 'Community'},
   {href: '/community/resources', label: 'Resources'},
+  {href: '/community/tools', label: 'Tools'},
   {href: '/community/shop', label: 'Shop'},
 ]
 

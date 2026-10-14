@@ -1,0 +1,3451 @@
+{
+  "overview": {
+    "title": "Tarot on the Tree of Life",
+    "subtitle": "An introduction",
+    "paragraphs": [
+      "Explore the Tree of Life through its ten sephiroth and twenty-two connecting paths. Above Kether are Ain, Ain Soph and Ain Soph Aur: three ways of approaching what precedes manifestation.",
+      "The sephiroth relate to the numbered cards and court cards of tarot; the twenty-two connecting paths relate to the Hebrew letters and Major Arcana. Hover to explore an entry, or select it to keep its correspondences and longer notes open."
+    ],
+    "sections": [
+      {
+        "title": "A map for study",
+        "paragraphs": [
+          "In A Garden of Pomegranates, Israel Regardie presents the Tree as a symbolic alphabet for arranging ideas and experience. Its thirty-two divisions bring together religious, philosophical and other forms of knowledge. The ten sephiroth and twenty-two connecting paths together form the thirty-two Paths of Wisdom.",
+          "His filing-cabinet analogy leaves room for personal study: a label provides a place to begin, while experience gradually gives its contents meaning. Learning the associations is one stage; comparing them, reflecting on them and seeing their relationships is the continuing work."
+        ]
+      },
+      {
+        "title": "How to read correspondences",
+        "paragraphs": [
+          "A correspondence links things through a shared quality. It does not make those things identical. Regardie illustrates this with Geburah: Mars, the sword, tobacco and the basilisk can all express qualities associated with the number five without becoming interchangeable.",
+          "The entries follow the particular attributions in these pages. Their comparisons between deities, philosophies, colours, plants and tarot belong to the author’s Hermetic Qabalistic interpretation. Read each association in the aspect described: the same deity can appear at more than one place on the Tree for a different reason."
+        ]
+      },
+      {
+        "title": "Three triads and the Kingdom",
+        "paragraphs": [
+          "Kether, Chokmah and Binah form the Supernal Triad. The book describes the Abyss beneath them as the metaphysical distinction between ideal principles and their expression in the seven lower sephiroth.",
+          "Chesed, Geburah and Tiphareth form the second triad; Netzach, Hod and Yesod form the third. Malkuth gathers the preceding nine into the world of matter and sense experience. Each sephirah has its own character, receives from above and passes on both what it receives and its particular nature."
+        ]
+      },
+      {
+        "title": "Tarot on the Tree",
+        "paragraphs": [
+          "The numbered cards run from the four Aces at Kether to the four Tens at Malkuth. The court-card attributions in this edition are Kings at Chokmah, Queens at Binah, Princes or Knights (Jacks) at Tiphareth, and Princesses at Malkuth. These source terms are retained because court-card titles vary between decks.",
+          "For the connecting paths, each Hebrew letter has an alphabetic position, a numerical value, a position on the Tree, a tarot attribution and a meaning when its name is spelled out. The chapter treats these letters and numbers as a language of relationships whose significance develops through study.",
+          "The opening pages also recount a legend of wisdom being preserved in the seventy-eight pictures of tarot. Regardie explicitly says he cannot vouch for that story’s accuracy; it is presented here as part of the book’s symbolic account of tarot."
+        ]
+      },
+      {
+        "title": "Working with the map",
+        "paragraphs": [
+          "The chapter proposes three related uses: analysing an idea through the Tree, finding connections between ideas, and translating one symbolic system into another. Its image of a living Tree suggests that understanding grows as the associations become familiar.",
+          "Names on this diagram use familiar spellings. Within each entry, source spellings such as Keser, Tipharas, Netsach and Malkus are recorded where they differ. Select Ain or either of the other veils to read the account of the limitless and the emergence of Kether."
+        ]
+      }
+    ],
+    "source": {
+      "title": "Israel Regardie · A Garden of Pomegranates",
+      "pages": "37–42, 47, 51–52, 63–65",
+      "images": [
+        "IMG_8791.JPG",
+        "IMG_8792.JPG",
+        "IMG_8793.JPG",
+        "IMG_8794.JPG",
+        "IMG_8796.JPG",
+        "IMG_8798.JPG",
+        "IMG_8799.JPG",
+        "IMG_8804.JPG",
+        "IMG_8805.JPG"
+      ],
+      "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=21"
+    }
+  },
+  "parts": [
+    {
+      "id": "kether",
+      "modelKey": "Kether",
+      "kind": "sephirah",
+      "number": 1,
+      "title": "Kether",
+      "subtitle": "The Crown",
+      "paragraphs": [
+        "Kether, the Crown, is the first sephirah and the source of the Tree’s unfolding. The book calls it Keser: the primordial, dimensionless point in which the other nine sephiroth are present in potential.",
+        "Its unity is described as a Monad, a centre of spiritual energy and consciousness. It begins the manifested order while receiving from what lies beyond that order: Ain, Ain Soph and Ain Soph Aur."
+      ],
+      "sourceName": "Keser",
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "1"
+        },
+        {
+          "label": "Source name",
+          "value": "Keser"
+        },
+        {
+          "label": "Titles",
+          "value": "The Crown; the Monad; First Cause or Demiurgos; Macroprosopus, the Great Countenance"
+        },
+        {
+          "label": "Divine name",
+          "value": "Ahieh — “I will be”"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Admirable or Hidden Intelligence"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Aces"
+        },
+        {
+          "label": "Colour",
+          "value": "White"
+        },
+        {
+          "label": "Jewel",
+          "value": "Diamond"
+        },
+        {
+          "label": "Animals",
+          "value": "Swan (Hansa); hawk"
+        },
+        {
+          "label": "Perfume",
+          "value": "Ambergris"
+        },
+        {
+          "label": "Deities",
+          "value": "Ptah; Amon-Ra, with whom the text associates Osiris; Zeus / Jupiter; Brahma"
+        }
+      ],
+      "sections": [
+        {
+          "title": "From the limitless to the point",
+          "paragraphs": [
+            "The account begins with Ain, then Ain Soph as Infinity and Ain Soph Aur as Limitless Light. By the contraction called Tsimtsum, that light is described as concentrating into Kether. Another image presents primordial whirling forces heralding the first point from which manifestation proceeds.",
+            "The point is metaphysical: the author uses it to express an indivisible origin of life, activity and force. His comparison with Leibniz’s Monad gives it both the character of a root of things and a unit of consciousness."
+          ]
+        },
+        {
+          "title": "The source and the ten",
+          "paragraphs": [
+            "In the Zohar’s water analogy, Kether is the source, Chokmah the issuing current and Binah the receiving sea. Seven channels extend from them, completing the ten. Regardie describes the sephiroth as principles or vessels of force through which universal consciousness expresses itself.",
+            "One remains the basis of number; ten completes the series and returns to units. Kether’s titles First Cause and Great Countenance express this originating role. Ahieh, translated here as “I will be,” stresses an active process of becoming rather than a finished, static creation."
+          ]
+        },
+        {
+          "title": "Creators and their emanations",
+          "paragraphs": [
+            "Ptah is associated with the cosmic egg, Amon-Ra with divine kingship, and Zeus or Jupiter with the highest father and ruler. Brahma appears as creator; the seven Prajapati proceeding from him are compared with the seven lower sephiroth.",
+            "The chapter places these divine images within a philosophy of one consciousness differentiated into many powers. Its gods, angels and spirits represent different functions and degrees of that manifestation; names express particular powers and qualities."
+          ]
+        },
+        {
+          "title": "The character of the symbols",
+          "paragraphs": [
+            "The diamond suggests permanence and brilliance. The swan signifies spirit, ecstasy and discriminating wisdom: the Hansa legend tells of separating milk from water. The hawk’s elevated, detached gaze expresses the Monad’s point of view.",
+            "Ambergris is compared with a foundation that draws out the qualities of other perfumes. White and the four Aces likewise give this entry the character of a beginning from which many expressions can develop."
+          ]
+        },
+        {
+          "title": "Receiving and transmitting",
+          "paragraphs": [
+            "The chapter closes the Kether entry with a principle attributed to Rabbi Azariel: every sephirah has its own function, receives from what precedes it, and communicates both its own nature and the influence received to what follows. Kether receives from above the numbered Tree."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "43–48",
+        "images": [
+          "IMG_8794.JPG",
+          "IMG_8795.JPG",
+          "IMG_8796.JPG",
+          "IMG_8797.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=24"
+      },
+      "palette": {
+        "name": "White",
+        "colors": [
+          "#f4f1e7"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-01",
+        "cups-01",
+        "swords-01",
+        "pentacles-01"
+      ]
+    },
+    {
+      "id": "chokmah",
+      "modelKey": "Chokmah",
+      "kind": "sephirah",
+      "number": 2,
+      "title": "Chokmah",
+      "subtitle": "Wisdom",
+      "paragraphs": [
+        "Chokmah is Wisdom, the second sephirah and the active, energizing expression of Kether’s unity. The chapter calls it the Father and pairs it with Binah, the Mother, in the Supernal Triad.",
+        "The book approaches the emergence of two through reflection: one becomes distinguishable from its image. Chokmah expresses the originating current of consciousness, before Binah gives that current a receiving form."
+      ],
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "2"
+        },
+        {
+          "label": "Title",
+          "value": "The Father"
+        },
+        {
+          "label": "Divine name",
+          "value": "Yoh — the book’s spelling"
+        },
+        {
+          "label": "Angels",
+          "value": "Ophanim"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Illuminating Intelligence"
+        },
+        {
+          "label": "Astrology",
+          "value": "Uranus in this text; the Zodiac (Mazlos) as the traditional attribution"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Twos; the four Kings"
+        },
+        {
+          "label": "Tetragrammaton",
+          "value": "Yod — י, the first letter"
+        },
+        {
+          "label": "Colour",
+          "value": "Grey"
+        },
+        {
+          "label": "Jewels",
+          "value": "Star ruby; turquoise"
+        },
+        {
+          "label": "Plant",
+          "value": "Amaranth"
+        },
+        {
+          "label": "Perfume",
+          "value": "Musk"
+        },
+        {
+          "label": "Deities",
+          "value": "Tahuti / Thoth; Pallas Athena / Minerva; Maat; Uranus; Hermes; Kwan Shi Yin; Vishnu; Ishvara"
+        },
+        {
+          "label": "Related ideas",
+          "value": "Yang; Purusha; Mahat or Cosmic Ideation; the Word, Logos and Memrah"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Wisdom as an active principle",
+          "paragraphs": [
+            "The Father and Mother language expresses the chapter’s symbolic polarity of activity and receptivity. Chokmah is the vigorous, initiating aspect. The author also uses a geometrical analogy: the point extends into a line, the line into a plane and the plane into a body.",
+            "Its names Word, Logos and Memrah indicate an ordering or expressing principle. The comparisons with Purusha and Cosmic Ideation concern the underlying spiritual reality of consciousness, rather than knowledge understood only as accumulated facts."
+          ]
+        },
+        {
+          "title": "Divine images of intelligence",
+          "paragraphs": [
+            "Thoth contributes writing, learning and magic; his ibis and attendant baboon belong to that image. Athena or Minerva joins intellectual gifts with power and wisdom, while Maat supplies truth. Hermes represents transmission of the influence from Kether.",
+            "Uranus brings the image of the starry heavens. The book explicitly distinguishes its attribution of Uranus from the traditional Zodiac attribution, so both are retained here."
+          ]
+        },
+        {
+          "title": "Immortality, the star and the Father",
+          "paragraphs": [
+            "Amaranth is interpreted as a flower of immortality. The star ruby expresses the creative star’s active energy, while turquoise recalls the Zodiac. Grey and musk complete the listed sensory correspondences.",
+            "Yod is the first letter of the divine name YHVH in the book’s scheme. Through this Father attribution, the four Kings accompany the four Twos. These court-card names follow this edition."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "48–49",
+        "images": [
+          "IMG_8797.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=27"
+      },
+      "palette": {
+        "name": "Grey",
+        "colors": [
+          "#93969b"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-02",
+        "cups-02",
+        "swords-02",
+        "pentacles-02",
+        "wands-14",
+        "cups-14",
+        "swords-14",
+        "pentacles-14"
+      ]
+    },
+    {
+      "id": "binah",
+      "modelKey": "Binah",
+      "kind": "sephirah",
+      "number": 3,
+      "title": "Binah",
+      "subtitle": "Understanding",
+      "paragraphs": [
+        "Binah is Understanding, the third sephirah and Aimah, the Mother. It completes the Supernal Triad with Kether and Chokmah. Where Chokmah supplies the formative impulse, Binah is the receptive principle through which form becomes possible.",
+        "Its Great Sea image is the basin receiving the current in the chapter’s water analogy. The author extends this idea to the underlying substance of physical and mental phenomena alike."
+      ],
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "3"
+        },
+        {
+          "label": "Titles",
+          "value": "Aimah, the Mother; the Great Sea"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Sanctifying Intelligence"
+        },
+        {
+          "label": "Planet",
+          "value": "Saturn"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Threes; the four Queens"
+        },
+        {
+          "label": "Tetragrammaton",
+          "value": "Heh — ה, the first Heh"
+        },
+        {
+          "label": "Colour",
+          "value": "Black"
+        },
+        {
+          "label": "Jewel",
+          "value": "Pearl"
+        },
+        {
+          "label": "Plants",
+          "value": "Cypress; lily; opium poppy"
+        },
+        {
+          "label": "Symbol",
+          "value": "The brooding dove; Shechinah or Holy Spirit"
+        },
+        {
+          "label": "Deities",
+          "value": "Saturn / Kronos; Frigg; Shakti; Maya; Kwan Yin; Kali; Isis"
+        },
+        {
+          "label": "Related ideas",
+          "value": "Yin; Mulaprakriti, cosmic root substance"
+        }
+      ],
+      "sections": [
+        {
+          "title": "The Mother and the formation of things",
+          "paragraphs": [
+            "Binah is described as receptive, feminine and passive within the book’s symbolic polarity. Its role is substantive: it provides the vehicle in which an idea or force can take shape. Chokmah is compared with the formative essence of consciousness, and Binah with the root substance underlying its expressions.",
+            "The author associates this with Shakti’s power to unite forms, Maya’s world of appearance, Yin and the Theosophical idea of Mulaprakriti. These comparisons belong to his attempt to read different traditions through a common set of qualities."
+          ]
+        },
+        {
+          "title": "Creation, destruction and time",
+          "paragraphs": [
+            "Saturn and Kronos connect Binah with time; Frigg provides a maternal image. Kali expresses Nature’s simultaneous creating and destroying: the chapter describes both her terrible imagery of skulls and sword and her gestures of generosity and fearlessness. Isis supplies a corresponding beneficent aspect.",
+            "Black expresses receptivity in this account. The pearl links the sea with hidden growth in the oyster, while the brooding dove represents the divine presence that the text associates with the Supernal Mother."
+          ]
+        },
+        {
+          "title": "Above the Abyss",
+          "paragraphs": [
+            "Kether, Chokmah and Binah are the three Supernals. The chapter describes them as ideal principles beyond ordinary intellectual conception. The Abyss names the metaphysical gap between these principles and the seven lower sephiroth that express them.",
+            "Regardie acknowledges a difficulty in explaining how an unknowable absolute can produce manifestation. The images of unity, duality and trinity, and of the Great Breath creating and withdrawing worlds, are ways of approaching that question. They do not remove the limits of an intellectual explanation."
+          ]
+        },
+        {
+          "title": "The first Heh and the Queens",
+          "paragraphs": [
+            "Binah receives the first Heh of YHVH and the four Queens, alongside the four Threes. The later Daughter image at Malkuth reflects this Mother: the chapter presents the divine presence in the material world as an expression of Binah’s power."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "49–52, 62",
+        "images": [
+          "IMG_8797.JPG",
+          "IMG_8798.JPG",
+          "IMG_8799.JPG",
+          "IMG_8804.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=27"
+      },
+      "palette": {
+        "name": "Black",
+        "colors": [
+          "#20232a"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-03",
+        "cups-03",
+        "swords-03",
+        "pentacles-03",
+        "wands-13",
+        "cups-13",
+        "swords-13",
+        "pentacles-13"
+      ]
+    },
+    {
+      "id": "chesed",
+      "modelKey": "Chesed",
+      "kind": "sephirah",
+      "number": 4,
+      "title": "Chesed",
+      "subtitle": "Mercy",
+      "paragraphs": [
+        "Chesed means Mercy and also bears the name Gedulah, Majesty or Greatness. As the fourth sephirah it begins the second triad, which reflects the Supernal Triad at a further stage of manifestation.",
+        "Its Jupiter attribution expresses greatness and beneficence. The text also gives it Water and a receptive character, bringing several qualities together within the same sephirah."
+      ],
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "4"
+        },
+        {
+          "label": "Other name",
+          "value": "Gedulah — Majesty or Greatness"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Receptacular Intelligence"
+        },
+        {
+          "label": "Planet",
+          "value": "Jupiter"
+        },
+        {
+          "label": "Element",
+          "value": "Water"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Fours"
+        },
+        {
+          "label": "Colour",
+          "value": "Blue"
+        },
+        {
+          "label": "Metal",
+          "value": "Tin"
+        },
+        {
+          "label": "Jewels",
+          "value": "Amethyst; sapphire"
+        },
+        {
+          "label": "Animals",
+          "value": "Unicorn; horse"
+        },
+        {
+          "label": "Plants",
+          "value": "Pine; olive; shamrock"
+        },
+        {
+          "label": "Perfume",
+          "value": "Cedar"
+        },
+        {
+          "label": "Angels",
+          "value": "The Brilliant Ones"
+        },
+        {
+          "label": "Archangel",
+          "value": "Tsadkiel — Righteousness of God"
+        },
+        {
+          "label": "Deities",
+          "value": "Poseidon; Jupiter / Zeus; Indra; Amoun; Thor; Æger"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Mercy and the second triad",
+          "paragraphs": [
+            "Chesed, Geburah and Tiphareth form the second triad, with blue, red and yellow as their respective colours. Chesed and Geburah supply contrasting powers that are reconciled in Tiphareth.",
+            "The chapter calls the fourth through ninth sephiroth the Potencies of Construction. It relates them to the dimensions and directions through which manifestation is understood, with positive and negative poles belonging to the same structure."
+          ]
+        },
+        {
+          "title": "Water, thunder and greatness",
+          "paragraphs": [
+            "Poseidon contributes dominion over the sea. Jupiter is considered in the early Roman aspect of rain, storms and thunder; Zeus and Indra supply related thunderbolt imagery. The book also attributes Amoun, Thor and the sea god Æger to this group.",
+            "The author includes Æger’s skill in magic in the comparison and associates Jupiter with the working of the Tetragrammaton. These are different facets of the quality represented by Chesed."
+          ]
+        },
+        {
+          "title": "Receptivity and balance",
+          "paragraphs": [
+            "Chesed stands in the right-hand Pillar of Mercy and is described as active or masculine in the arrangement of the Tree. Its water imagery and Receptacular Intelligence title also stress receptivity. The chapter treats such overlapping qualities as part of balance within the system.",
+            "The horse is connected through the story of Poseidon’s creation of it and the teaching of horsemanship. The unicorn accompanies it. Blue, tin, cedar, the amethyst and sapphire, and the pine, olive and shamrock complete the correspondences listed on these pages."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "52–54",
+        "images": [
+          "IMG_8799.JPG",
+          "IMG_8800.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=29"
+      },
+      "palette": {
+        "name": "Blue",
+        "colors": [
+          "#407bde"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-04",
+        "cups-04",
+        "swords-04",
+        "pentacles-04"
+      ]
+    },
+    {
+      "id": "geburah",
+      "modelKey": "Geburah",
+      "kind": "sephirah",
+      "number": 5,
+      "title": "Geburah",
+      "subtitle": "Strength",
+      "paragraphs": [
+        "Geburah is Strength or Power, the fifth sephirah. The chapter presents it as arising from Chesed while reflecting Binah at a lower level. Its martial character gives force and severity a place beside mercy.",
+        "Chesed and Geburah are described together through expansion and contraction. Their opposing powers contribute to the equilibrium expressed by Tiphareth."
+      ],
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "5"
+        },
+        {
+          "label": "Meaning",
+          "value": "Strength; Power"
+        },
+        {
+          "label": "Divine name",
+          "value": "Elohim Gibor — the Mighty Gods"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Radical Intelligence"
+        },
+        {
+          "label": "Planet",
+          "value": "Mars"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Fives"
+        },
+        {
+          "label": "Colour",
+          "value": "Red"
+        },
+        {
+          "label": "Metal",
+          "value": "Iron"
+        },
+        {
+          "label": "Jewel",
+          "value": "Ruby"
+        },
+        {
+          "label": "Creature",
+          "value": "Basilisk"
+        },
+        {
+          "label": "Tree",
+          "value": "Oak"
+        },
+        {
+          "label": "Plants",
+          "value": "Tobacco; nettle"
+        },
+        {
+          "label": "Magical weapons",
+          "value": "Sword; spear; scourge; burin"
+        },
+        {
+          "label": "Deities",
+          "value": "Mars; Ares; Thor; Nephthys as the Lady of Severity"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Strength and severity",
+          "paragraphs": [
+            "Mars and Ares express the character of conflict and power. Thor supplies strength, armour, the fiery gaze and the battle chariot. Nephthys, described here as the shadowy counterpart of Isis and Lady of Severity, connects this entry with Binah.",
+            "The sword, spear, scourge and burin are grouped as instruments that express concentrated force. Iron and oak reinforce strength; the fiery or stinging character of tobacco and nettle provides the author’s reason for their inclusion."
+          ]
+        },
+        {
+          "title": "The Pillar of Severity",
+          "paragraphs": [
+            "Geburah occupies the left-hand Pillar of Severity, assigned a feminine polarity in the chapter’s arrangement. Many of its individual correspondences are nevertheless masculine or martial. The text uses this mixture, and the receptive qualities found in Chesed, to emphasize equilibrium within each side.",
+            "The paired fourth and fifth sephiroth are compared with expansive and contracting, centripetal and centrifugal energies operating under the Logos associated with Chokmah. Their relationship matters as much as either list of symbols considered alone."
+          ]
+        },
+        {
+          "title": "Red, the ruby and the basilisk",
+          "paragraphs": [
+            "The bright scarlet ruby agrees with Geburah’s red colour. The basilisk contributes the legendary power of the fixed or destructive gaze. The four Fives and the title Radical Intelligence complete the entry’s principal correspondences.",
+            "The chapter later uses Geburah to explain the method: Mars, a plant, a creature and a weapon may correspond through a shared quality of force. That relationship does not make one literally equivalent to another."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "54–55, 64",
+        "images": [
+          "IMG_8800.JPG",
+          "IMG_8805.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=30"
+      },
+      "palette": {
+        "name": "Red",
+        "colors": [
+          "#dc473d"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-05",
+        "cups-05",
+        "swords-05",
+        "pentacles-05"
+      ]
+    },
+    {
+      "id": "tiphareth",
+      "modelKey": "Tiphareth",
+      "kind": "sephirah",
+      "number": 6,
+      "title": "Tiphareth",
+      "subtitle": "Beauty and Harmony",
+      "paragraphs": [
+        "Tiphareth is Beauty and Harmony, the sixth sephirah at the centre of the Tree. The chapter describes it as the reconciliation of Chesed and Geburah, completing the second triad.",
+        "Its Sun attribution expresses a central source of life and light. The text develops that image into spiritual consciousness, balance and an ethical ideal in which spirit and matter are brought into equilibrium."
+      ],
+      "sourceName": "Tipharas",
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "6"
+        },
+        {
+          "label": "Source name",
+          "value": "Tipharas"
+        },
+        {
+          "label": "Title",
+          "value": "The Son"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Mediating Intelligence"
+        },
+        {
+          "label": "Luminary",
+          "value": "The Sun"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Sixes; the four Princes or Knights (Jacks), in the book’s terminology"
+        },
+        {
+          "label": "Tetragrammaton",
+          "value": "Vav — ו, the third letter"
+        },
+        {
+          "label": "Colour",
+          "value": "Yellow"
+        },
+        {
+          "label": "Jewels",
+          "value": "Topaz; yellow diamond"
+        },
+        {
+          "label": "Animals",
+          "value": "Lion; phoenix; pelican"
+        },
+        {
+          "label": "Plants",
+          "value": "Acacia; vine"
+        },
+        {
+          "label": "Perfume",
+          "value": "Olibanum"
+        },
+        {
+          "label": "Deities",
+          "value": "Ra; Apollo; Hari / Krishna; Adonis; Iacchus; Rama; Asar; Dionysius / Bacchus; Balder, suggested by the author"
+        },
+        {
+          "label": "Related figure",
+          "value": "Microprosopus, the Lesser Countenance: the grouping of sephiroth around Tiphareth"
+        }
+      ],
+      "sections": [
+        {
+          "title": "The central Sun",
+          "paragraphs": [
+            "The reconciliation of the fourth and fifth sephiroth places Tiphareth at the centre of the diagram, like a Sun around which the other planetary attributions are arranged. Its yellow colour and yellow jewels repeat this solar imagery.",
+            "Ra appears as a hawk-headed deity or winged solar disk. Apollo represents inward or intellectual illumination, fair reason and harmony. Hari, identified with Krishna, supplies the image of a divine incarnation in which spiritual and material life are balanced."
+          ]
+        },
+        {
+          "title": "Beauty, inspiration and renewal",
+          "paragraphs": [
+            "Adonis, Iacchus, Rama and Asar are attributed through beauty or solar symbolism. Dionysius brings youth, beauty, the vine and the image of mystical inspiration. Under the name Bacchus, he represents the possibility of spiritual renewal and union with the divine.",
+            "The chapter suggests Balder as a Norse correspondence because of his beauty and goodness. Its Lesser Countenance title applies to the sephiroth grouped around Tiphareth, expressing an ordered whole centred on this principle of harmony."
+          ]
+        },
+        {
+          "title": "The lion and the life-giving birds",
+          "paragraphs": [
+            "The lion carries kingship, creative solar force and the story of Dionysius taking a lion’s form. The chapter also relates the lion image to Leo and the midsummer Sun.",
+            "The phoenix and pelican are presented through legends of a parent giving its life or blood to nourish its young. The interpretation is redemptive self-giving. The story of Semele, Zeus and the second birth of Dionysius provides a further image of life renewed through sacrifice."
+          ]
+        },
+        {
+          "title": "Resurrection, the Son and tarot",
+          "paragraphs": [
+            "Acacia is associated with resurrection in Masonic symbolism; the vine continues the Dionysian theme. Olibanum is the perfume, and topaz and yellow diamond belong through their colour.",
+            "The four Sixes correspond to this sixth sephirah. The Son attribution joins Vav, the third letter of YHVH, to the four Princes or Knights (Jacks). Keeping the book’s full court-card wording makes the correspondence usable with its particular naming system."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "55–58",
+        "images": [
+          "IMG_8800.JPG",
+          "IMG_8801.JPG",
+          "IMG_8802.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=30"
+      },
+      "palette": {
+        "name": "Yellow",
+        "colors": [
+          "#efd14a"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-06",
+        "cups-06",
+        "swords-06",
+        "pentacles-06",
+        "wands-12",
+        "cups-12",
+        "swords-12",
+        "pentacles-12"
+      ],
+      "tarotNote": "The book’s Princes or Knights (Jacks) are shown here with the Rider–Waite Knights."
+    },
+    {
+      "id": "netzach",
+      "modelKey": "Netzach",
+      "kind": "sephirah",
+      "number": 7,
+      "title": "Netzach",
+      "subtitle": "Victory",
+      "paragraphs": [
+        "Netzach is Victory, also called Eternity and Triumph in these pages. It is the seventh sephirah and the first of the third triad, followed by Hod and Yesod.",
+        "Its Venus attribution brings together love, beauty, attraction and the generative life of Nature. The chapter extends victory from the triumph of light into images of flourishing, fertility and the harvest."
+      ],
+      "sourceName": "Netsach",
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "7"
+        },
+        {
+          "label": "Source name",
+          "value": "Netsach"
+        },
+        {
+          "label": "Other titles",
+          "value": "Eternity; Triumph"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Occult Intelligence"
+        },
+        {
+          "label": "Planet",
+          "value": "Venus"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Sevens"
+        },
+        {
+          "label": "Colour",
+          "value": "Green"
+        },
+        {
+          "label": "Flower",
+          "value": "Rose"
+        },
+        {
+          "label": "Perfumes",
+          "value": "Red sandalwood; benzoin"
+        },
+        {
+          "label": "Deities",
+          "value": "Nike; Aphrodite / Venus; Hathor; Bhavani"
+        },
+        {
+          "label": "Animal image",
+          "value": "The cow, through Hathor"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Victory and the morning",
+          "paragraphs": [
+            "The chapter introduces Nike through Walter Pater’s account of victory as the triumph of morning over darkness. The goddess guiding a hero’s chariot or crowning a victor retains something of this bright, life-giving image.",
+            "Netzach therefore carries more than victory in conflict. Its associations gather the beauty, vitality and attraction through which life succeeds and continues."
+          ]
+        },
+        {
+          "title": "Love and the fruits of the earth",
+          "paragraphs": [
+            "Aphrodite or Venus supplies love and beauty, especially the power of attraction and sexual love. Hathor, described as a lesser aspect of Isis, appears as a cow goddess of generative Nature, agriculture and the earth’s fruits. Bhavani is the Hindu correspondence named here.",
+            "The rose belongs through its affinity with Aphrodite. Red sandalwood and benzoin contribute the sensuous character that the author associates with Venus."
+          ]
+        },
+        {
+          "title": "The third triad",
+          "paragraphs": [
+            "Netzach’s green is explained as a union of Chesed’s blue and Tiphareth’s yellow. Its place in the Tree thus continues the relationships established in the preceding triad.",
+            "Netzach and Hod together lead to Yesod. In the discussion of their pairing, Victory and Splendour are associated with extension, multiplication and force: the continued expression of the powers that unfold through the Tree. The four Sevens give Netzach its numbered tarot correspondence."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "58–60",
+        "images": [
+          "IMG_8802.JPG",
+          "IMG_8803.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=31"
+      },
+      "palette": {
+        "name": "Green",
+        "colors": [
+          "#4d9f64"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-07",
+        "cups-07",
+        "swords-07",
+        "pentacles-07"
+      ]
+    },
+    {
+      "id": "hod",
+      "modelKey": "Hod",
+      "kind": "sephirah",
+      "number": 8,
+      "title": "Hod",
+      "subtitle": "Splendour",
+      "paragraphs": [
+        "Hod is Splendour, the eighth sephirah, standing opposite Netzach in the third triad. Mercury gives its correspondences the character of intelligence, invention, communication and mediation.",
+        "The chapter describes Hod as expressing qualities similar to Chokmah at a lower level of the Tree. Together, Netzach and Hod contribute the forces gathered into Yesod."
+      ],
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "8"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Absolute or Perfect Intelligence"
+        },
+        {
+          "label": "Planet",
+          "value": "Mercury"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Eights"
+        },
+        {
+          "label": "Colour",
+          "value": "Orange"
+        },
+        {
+          "label": "Jewel",
+          "value": "Opal"
+        },
+        {
+          "label": "Plant",
+          "value": "Moly"
+        },
+        {
+          "label": "Other botanical attribution",
+          "value": "Anhalonium Lewinii — the historical name used in the text"
+        },
+        {
+          "label": "Perfume",
+          "value": "Storax"
+        },
+        {
+          "label": "Deities",
+          "value": "Hermes; Anubis; Hanuman"
+        },
+        {
+          "label": "Animal images",
+          "value": "Jackal, through Anubis; ape or monkey, through Hanuman"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Mercury and the arts of intelligence",
+          "paragraphs": [
+            "Hermes supplies prudence, shrewdness, resourcefulness and invention. The chapter associates him with the alphabet, mathematics, astronomy, weights and measures, commerce and good fortune. His role as messenger expresses movement and communication between different orders of experience.",
+            "His guidance of the dead into the lower world is compared with Anubis leading the soul towards the judgment of Osiris. This is one particular connection between their functions within the author’s comparative system."
+          ]
+        },
+        {
+          "title": "Mind and its images",
+          "paragraphs": [
+            "Hanuman provides the Hindu correspondence. The author relates the ape or monkey image to a Theosophical account of the Manasaputras, the mind-born sons of Brahma, to explain an association with mind and intelligence.",
+            "Moly and the botanical name Anhalonium Lewinii appear among the attributions. The latter is discussed in the source in connection with visionary colour and introspection. They are included here as the chapter’s correspondences."
+          ]
+        },
+        {
+          "title": "Splendour in the third triad",
+          "paragraphs": [
+            "Orange combines Geburah’s red with Tiphareth’s yellow, just as Netzach’s green combines blue and yellow. The opal, storax and four Eights complete Hod’s principal sensory and tarot associations.",
+            "The author reads Victory and Splendour together as extension, multiplication and force. Their relationship leads into Yesod’s stable foundation, where the influences expressed above are gathered."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "59–60",
+        "images": [
+          "IMG_8802.JPG",
+          "IMG_8803.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=32"
+      },
+      "palette": {
+        "name": "Orange",
+        "colors": [
+          "#eb9245"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-08",
+        "cups-08",
+        "swords-08",
+        "pentacles-08"
+      ]
+    },
+    {
+      "id": "yesod",
+      "modelKey": "Yesod",
+      "kind": "sephirah",
+      "number": 9,
+      "title": "Yesod",
+      "subtitle": "Foundation",
+      "paragraphs": [
+        "Yesod is Foundation, the ninth sephirah. It results from the relationship of Netzach and Hod and completes the third triad.",
+        "The chapter describes it as the subtle basis upon which the physical world is formed. Its lunar character is receptive and reflective: influences from above are gathered here as the Moon receives the Sun’s light."
+      ],
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "9"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Pure or Clear Intelligence"
+        },
+        {
+          "label": "Luminary",
+          "value": "The Moon"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Nines"
+        },
+        {
+          "label": "Colour",
+          "value": "Purple"
+        },
+        {
+          "label": "Plants",
+          "value": "Mandrake; damiana"
+        },
+        {
+          "label": "Perfume",
+          "value": "Jasmine"
+        },
+        {
+          "label": "Deities",
+          "value": "Shu; Ganesha; Diana"
+        },
+        {
+          "label": "Related ideas",
+          "value": "The Astral Plane; Astral Light; Anima Mundi, the Soul of the World"
+        },
+        {
+          "label": "Animal images",
+          "value": "Elephant and tortoise, through the image of Ganesha"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Change with stability",
+          "paragraphs": [
+            "The source’s central phrase for Yesod is change with stability. It imagines the continuous ebb and flow of forces as the foundation that sustains the world. The Astral Light is described within this occult account as a subtle medium providing the pattern for physical forms.",
+            "Yesod gathers potentialities and reproductive power. The Zohar passage cited by the author places seed, energy and the return of things to their foundation here. This gives Foundation both a supporting and a generative meaning."
+          ]
+        },
+        {
+          "title": "Support, reflection and the Moon",
+          "paragraphs": [
+            "Shu is shown lifting Nuit, the heavens, from the body of Seb, the earth. Ganesha removes obstacles and supports the universe while standing upon a tortoise in the image given by the text. Diana contributes the lunar attribution.",
+            "The book also records an occult image of the Moon as a dead yet living body containing active and destructive powers. That description belongs to its magical symbolism of lunar influence."
+          ]
+        },
+        {
+          "title": "The Soul of the World",
+          "paragraphs": [
+            "Some writers cited in the chapter call the Astral Light Anima Mundi, the Soul of the World. Regardie compares this with Jung’s collective unconscious. The comparison is his interpretation of a shared underlying field of life and consciousness.",
+            "Mandrake, damiana and jasmine are grouped through the source’s reproductive and sensual associations. Purple, the four Nines and Pure or Clear Intelligence complete the entry."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "60–61",
+        "images": [
+          "IMG_8803.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=33"
+      },
+      "palette": {
+        "name": "Purple",
+        "colors": [
+          "#a574c6"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-09",
+        "cups-09",
+        "swords-09",
+        "pentacles-09"
+      ]
+    },
+    {
+      "id": "malkuth",
+      "modelKey": "Malkuth",
+      "kind": "sephirah",
+      "number": 10,
+      "title": "Malkuth",
+      "subtitle": "The Kingdom",
+      "paragraphs": [
+        "Malkuth is the Kingdom, the tenth sephirah. It gathers the preceding nine into the world of the four elements: matter and the forms perceived through the five senses.",
+        "Below the three triads, Malkuth gives their ideas a concrete expression. The chapter also places the divine presence within this material world, connecting the Kingdom with both Binah and Kether."
+      ],
+      "sourceName": "Malkus",
+      "correspondences": [
+        {
+          "label": "Number",
+          "value": "10"
+        },
+        {
+          "label": "Source name",
+          "value": "Malkus"
+        },
+        {
+          "label": "Titles",
+          "value": "The Kingdom; the Virgin; the Bride; the Daughter"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Resplendent Intelligence"
+        },
+        {
+          "label": "Domain",
+          "value": "The physical world; the four elements; the five senses"
+        },
+        {
+          "label": "Tarot",
+          "value": "The four Tens; the four Princesses"
+        },
+        {
+          "label": "Tetragrammaton",
+          "value": "Heh — ה, the final letter"
+        },
+        {
+          "label": "Colours",
+          "value": "Citrine; olive; russet; black"
+        },
+        {
+          "label": "Perfume",
+          "value": "Dittany of Crete"
+        },
+        {
+          "label": "Deities and figures",
+          "value": "Seb, as named in the text; Psyche; the lower Nephthys; the unmarried Isis; Persephone; Ceres; Lakshmi; the Sphinx"
+        },
+        {
+          "label": "Divine presence",
+          "value": "Shechinah, described here as the Daughter or expression of Binah"
+        }
+      ],
+      "sections": [
+        {
+          "title": "The Kingdom and the embodied world",
+          "paragraphs": [
+            "Malkuth synthesizes the whole numerical sequence. The book describes the previous nine ideas as crystallizing into the forms of the sensory world. The four elements and five senses make this the place of embodied experience.",
+            "Its earth and fertility images include Persephone, Ceres, Lakshmi and the Sphinx. Psyche, Nephthys and Isis provide further images of the soul or receptive life. The source names Seb and connects its Egyptian imagery with gross matter."
+          ]
+        },
+        {
+          "title": "The presence within matter",
+          "paragraphs": [
+            "The chapter describes Shechinah as the spiritual presence of Ain Soph abiding in the world where souls are embodied. This is its explanation of the relationship between the highest and lowest: Kether is in Malkuth and Malkuth in Kether, each in a different manner.",
+            "It distinguishes Binah as the Supernal Mother from the presence expressed in Malkuth as her image or Daughter. In the interpretation quoted from Isaac Myer, this is the executive power of the Upper Mother acting within manifestation."
+          ]
+        },
+        {
+          "title": "The final Heh and the Princesses",
+          "paragraphs": [
+            "The final Heh of YHVH and the four Princesses continue the Daughter attribution. Malkuth also receives the four Tens, completing the numbered tarot sequence that begins with Kether’s Aces.",
+            "Its four colours are citrine, olive, russet and black. Dittany of Crete is attributed through the dense clouds produced by its incense, an image of substantial manifestation. Its Yetsiratic title is Resplendent Intelligence."
+          ]
+        }
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "62",
+        "images": [
+          "IMG_8804.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=34"
+      },
+      "palette": {
+        "name": "Citrine; olive; russet; black",
+        "colors": [
+          "#bab853",
+          "#858d43",
+          "#a45d3f",
+          "#20232a"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "wands-10",
+        "cups-10",
+        "swords-10",
+        "pentacles-10",
+        "wands-11",
+        "cups-11",
+        "swords-11",
+        "pentacles-11"
+      ],
+      "tarotNote": "The book’s Princesses are shown here with the Rider–Waite Pages."
+    },
+    {
+      "id": "path-11",
+      "modelKey": "Kether / Chokmah",
+      "kind": "path",
+      "number": 11,
+      "letterOrder": 1,
+      "title": "Aleph",
+      "hebrew": "א",
+      "sourceName": "Aleph",
+      "subtitle": "Kether — Chokmah",
+      "paragraphs": [
+        "Aleph is the first Hebrew letter, associated here with the ox or bull and the generative power of nature. The text relates it to breath, air and the beginning of creative movement."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "0 — The Fool"
+        },
+        {
+          "label": "Element",
+          "value": "Air"
+        },
+        {
+          "label": "Letter / value",
+          "value": "א · A · 1"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Ox or bull"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Scintillating Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Sky blue"
+        },
+        {
+          "label": "Jewels",
+          "value": "Topaz; chalcedony"
+        },
+        {
+          "label": "Perfume",
+          "value": "Galbanum"
+        },
+        {
+          "label": "Magical weapon",
+          "value": "The fan"
+        },
+        {
+          "label": "Animal",
+          "value": "Eagle"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Hoor-paar-Kraat; Zeus and Jupiter; the Maruts (Vayu); the Valkyries"
+        },
+        {
+          "label": "Symbols",
+          "value": "Ox-yoke; Thor’s thunderbolt; the ancient swastika as a symbol of primordial motion in the text"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "69–70",
+        "images": [
+          "IMG_8776.JPG",
+          "IMG_8778.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Fool",
+          "paragraphs": [
+            "The card is described as a jester carrying a bundle on a stick, with a precipice ahead and a small dog behind. A pentagram on the tunic represents Spirit. The imagery is linked to air and unbounded movement."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Sky blue",
+        "colors": [
+          "#7fc3ed"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-00"
+      ]
+    },
+    {
+      "id": "path-12",
+      "modelKey": "Kether / Binah",
+      "kind": "path",
+      "number": 12,
+      "letterOrder": 2,
+      "title": "Beth",
+      "hebrew": "ב",
+      "sourceName": "Bes",
+      "subtitle": "Kether — Binah",
+      "paragraphs": [
+        "Beth, pronounced “Bes” in these pages, is the second Hebrew letter and means house. Its symbolism connects inward activity, wisdom and language with Mercury."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "I — The Magician"
+        },
+        {
+          "label": "Planet",
+          "value": "Mercury"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ב · B · 2"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "House"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Transparent Intelligence"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Hermes; Thoth; Hanuman; Odin"
+        },
+        {
+          "label": "Animals",
+          "value": "Baboon / monkey; ibis"
+        },
+        {
+          "label": "Magical weapon",
+          "value": "The caduceus wand"
+        },
+        {
+          "label": "Perfumes",
+          "value": "Mastic; mace; storax"
+        },
+        {
+          "label": "Jewel",
+          "value": "Agate"
+        },
+        {
+          "label": "Plant",
+          "value": "Vervain"
+        },
+        {
+          "label": "Practices mentioned",
+          "value": "Dharana; Pranayama; balancing on one leg in the Ibis posture"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "70–71",
+        "images": [
+          "IMG_8778.JPG",
+          "IMG_8779.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Magician",
+          "paragraphs": [
+            "The card is described with a sword, cup, pantacle and sceptre on a table. One hand raises a wand while the other points down, linking above and below. The infinity sign above the head reinforces the card’s association with wisdom and magic."
+          ]
+        },
+        {
+          "title": "Further associations",
+          "paragraphs": [
+            "The text connects Mercury with a fluid, changeable alchemical principle. Odin is associated with arranging the world, knowledge, poetry and the Norse runes. The caduceus is related to kundalini in the yoga practices mentioned.",
+            "A pronunciation note explains that the Hebrew dagesh changes certain consonant sounds: in the example given, B becomes V when the dot is omitted."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Orange",
+        "colors": [
+          "#eb9245"
+        ],
+        "basis": "Mercury, using the orange assigned to Hod in the supplied chapter; no separate colour is stated in the Beth entry.",
+        "note": "Orange follows Mercury’s association with Hod; the supplied Beth entry gives no separate colour."
+      },
+      "tarotCardIds": [
+        "major-01"
+      ]
+    },
+    {
+      "id": "path-13",
+      "modelKey": "Kether / Tiphareth",
+      "kind": "path",
+      "number": 13,
+      "letterOrder": 3,
+      "title": "Gimel",
+      "hebrew": "ג",
+      "sourceName": "Gimel",
+      "subtitle": "Kether — Tiphareth",
+      "paragraphs": [
+        "Gimel means camel. This lunar path joins Kether to Tiphareth across the Abyss, linking the Supernal Triad with the centre of the tree. The book compares that passage to a camel crossing a desert."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "II — The High Priestess of the Silver Star"
+        },
+        {
+          "label": "Planet",
+          "value": "Moon"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ג · G · 3"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Camel"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Uniting Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Silver"
+        },
+        {
+          "label": "Jewels",
+          "value": "Moonstone; pearl"
+        },
+        {
+          "label": "Perfumes",
+          "value": "Camphor; aloes"
+        },
+        {
+          "label": "Animal",
+          "value": "Dog"
+        },
+        {
+          "label": "Magical weapon",
+          "value": "Bow and arrow"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Artemis; Hecate; Chomse; Chandra"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "71–72",
+        "images": [
+          "IMG_8779.JPG",
+          "IMG_8780 2.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The High Priestess",
+          "paragraphs": [
+            "The enthroned priestess wears a tiara and bears solar and lunar signs. She sits between a white pillar and a black pillar, compared with the two sides of the tree and the pillars Yachin and Boaz. Her scroll represents the Law. The book associates her with the Shechinah and, in another symbolic system, Babalon."
+          ]
+        },
+        {
+          "title": "The Silver Star",
+          "paragraphs": [
+            "The Supernal Triad is identified with the Inner College of Masters in the Rosicrucian grade system described here. Gimel provides its connection to Tiphareth, making the lunar priestess an image of entry into that inner order.",
+            "The book gives G as the letter’s sound and describes a softer J sound when its dot is omitted."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Silver",
+        "colors": [
+          "#c6d0da"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-02"
+      ]
+    },
+    {
+      "id": "path-14",
+      "modelKey": "Chokmah / Binah",
+      "kind": "path",
+      "number": 14,
+      "letterOrder": 4,
+      "title": "Daleth",
+      "hebrew": "ד",
+      "sourceName": "Dales",
+      "subtitle": "Chokmah — Binah",
+      "paragraphs": [
+        "Daleth means door and is pronounced “Dallas” in these pages. Joining Chokmah and Binah, it connects the Father and Mother within the Supernal Triad. Venus expresses the attraction and union associated with this path."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "III — The Empress"
+        },
+        {
+          "label": "Planet",
+          "value": "Venus"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ד · D · 4"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Door"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Luminous Intelligence"
+        },
+        {
+          "label": "Colours",
+          "value": "Green; emerald green"
+        },
+        {
+          "label": "Jewels",
+          "value": "Emerald; turquoise"
+        },
+        {
+          "label": "Flowers",
+          "value": "Myrtle; rose"
+        },
+        {
+          "label": "Birds",
+          "value": "Sparrow; dove"
+        },
+        {
+          "label": "Magical implement",
+          "value": "Girdle"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Aphrodite; Lalita, an aspect of Shakti; Hathor; Freya"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "72–74",
+        "images": [
+          "IMG_8780 2.JPG",
+          "IMG_8781.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Empress",
+          "paragraphs": [
+            "The Empress holds a sceptre formed from a globe and cross. Venus appears on her robe and heart-shaped shield. Corn before her throne links love with agriculture and fertility; a green garland and pearl necklace complete the description."
+          ]
+        },
+        {
+          "title": "Union and fertility",
+          "paragraphs": [
+            "The door is also interpreted as a symbol of the womb. Aphrodite’s girdle represents attraction and desire. In discussing these deities, the author treats them as expressions of natural forces rather than only as separate personalities.",
+            "The book describes Daleth as a double letter and compares its sound without the dot to the voiced th in “the” or “lather.”"
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Green; emerald green",
+        "colors": [
+          "#65ac68",
+          "#2f9b72"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-03"
+      ]
+    },
+    {
+      "id": "path-15",
+      "modelKey": "Chokmah / Tiphareth",
+      "kind": "path",
+      "number": 15,
+      "letterOrder": 5,
+      "title": "He",
+      "hebrew": "ה",
+      "sourceName": "He",
+      "subtitle": "Chokmah — Tiphareth",
+      "paragraphs": [
+        "He, written “Héh” in the text, means window. Its attribution is Aries, the ram: a sign ruled by Mars and in which the Sun is exalted. The book develops this path through images of courage, energy and will."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "IV — The Emperor"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Aries — the Ram"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ה · H · 5"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Window"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Constituting Intelligence"
+        },
+        {
+          "label": "Jewel",
+          "value": "Ruby"
+        },
+        {
+          "label": "Flower",
+          "value": "Geranium"
+        },
+        {
+          "label": "Magical weapon",
+          "value": "Spear"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Athena; Minerva; Shiva; Mars; Mentu; Tyr"
+        },
+        {
+          "label": "Related symbols",
+          "value": "Alchemical sulphur; Rajas, the quality of energy and volition"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "74",
+        "images": [
+          "IMG_8781.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Emperor",
+          "paragraphs": [
+            "The Emperor wears red and a ruby-set crown, seated on a throne carved with ram heads. His crossed legs and the triangle formed by his head and arms are read as the alchemical sign of sulphur, an image of active energy."
+          ]
+        },
+        {
+          "title": "Courage and protection",
+          "paragraphs": [
+            "The martial figures are associated with protection, prudence, perseverance and honour in conflict. Athena and Minerva appear as protectors and guides; the hawk-headed Mentu and the Norse Tyr reinforce the connection with martial strength."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Red",
+        "colors": [
+          "#dc473d"
+        ],
+        "basis": "The Emperor’s red robe, described in the supplied He entry.",
+        "note": "Red follows the Emperor’s robe described in the supplied He entry."
+      },
+      "tarotCardIds": [
+        "major-04"
+      ]
+    },
+    {
+      "id": "path-16",
+      "modelKey": "Chokmah / Chesed",
+      "kind": "path",
+      "number": 16,
+      "letterOrder": 6,
+      "title": "Vav",
+      "hebrew": "ו",
+      "sourceName": "Vav",
+      "subtitle": "Chokmah — Chesed",
+      "paragraphs": [
+        "Vav means nail and is attributed to Taurus, the bull. The book interprets the bull and the phallic symbolism of the letter as images of universal creative power and magical will."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "V — The Hierophant"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Taurus — the Bull"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ו · V, U or O · 6"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Nail"
+        },
+        {
+          "label": "Colour",
+          "value": "Indigo"
+        },
+        {
+          "label": "Jewel",
+          "value": "Topaz"
+        },
+        {
+          "label": "Perfume",
+          "value": "Storax"
+        },
+        {
+          "label": "Plant",
+          "value": "Mallow"
+        },
+        {
+          "label": "Symbols",
+          "value": "Bull; lingam; the Son of the Tetragrammaton"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Asar Ameshet; Apis; Shiva; Héré (Hera); Hymen; Bacchus / Dionysus-Zagreus; Adonis; Tammuz; Mithras; Attis"
+        },
+        {
+          "label": "Other figure",
+          "value": "Parsival, the King-Priest in Monsalvat"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "75–76",
+        "images": [
+          "IMG_8781.JPG",
+          "IMG_8782.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Hierophant",
+          "paragraphs": [
+            "The Hierophant raises his right hand in blessing over two ministers and carries a staff surmounted by a cross. Two keys at his feet represent the mysteries of life and death."
+          ]
+        },
+        {
+          "title": "Creative power and redemption",
+          "paragraphs": [
+            "The text connects the sacred bull with Shiva and the lingam, and discusses sacrificial bull imagery in the cult of Dionysus. Vav is also understood as the Son in the Tetragrammaton, relating this path to themes of redemption and to the figures associated with Tiphareth.",
+            "A pronunciation note gives V, U or O according to the position of the dot used with the letter."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Indigo",
+        "colors": [
+          "#6961ba"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-05"
+      ]
+    },
+    {
+      "id": "path-17",
+      "modelKey": "Binah / Tiphareth",
+      "kind": "path",
+      "number": 17,
+      "letterOrder": 7,
+      "title": "Zayin",
+      "hebrew": "ז",
+      "sourceName": "Zayin",
+      "subtitle": "Binah — Tiphareth",
+      "paragraphs": [
+        "Zayin means sword; the letter’s shape is compared with a hilt and blade. Gemini, the twins, gives this path its emphasis on paired figures and complementary aspects."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "VI — The Lovers"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Gemini — the Twins"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ז · Z · 7"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Sword"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Disposing Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Mauve"
+        },
+        {
+          "label": "Jewels",
+          "value": "Alexandrite; tourmaline"
+        },
+        {
+          "label": "Plants",
+          "value": "Orchids"
+        },
+        {
+          "label": "Bird",
+          "value": "Magpie"
+        },
+        {
+          "label": "Creatures",
+          "value": "Hybrids"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Rekht and Merti; Castor and Pollux; Apollo as diviner; Janus; Hoo-paar-Kraat"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "76–77",
+        "images": [
+          "IMG_8782.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Lovers",
+          "paragraphs": [
+            "The book contrasts older cards showing a man between two women, interpreted as Vice and Virtue or Lilith and Eve, with later cards showing a nude couple beneath an angel or Cupid with open wings."
+          ]
+        },
+        {
+          "title": "Paired aspects",
+          "paragraphs": [
+            "Janus looks in two directions. Hoo-paar-Kraat is presented as combining Horus, associated with strength, and Harpocrates, associated with silence. Apollo’s connection here is specifically to divination, prophecy, dreams and healing."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Mauve",
+        "colors": [
+          "#b58ba9"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-06"
+      ]
+    },
+    {
+      "id": "path-18",
+      "modelKey": "Binah / Geburah",
+      "kind": "path",
+      "number": 18,
+      "letterOrder": 8,
+      "title": "Cheth",
+      "hebrew": "ח",
+      "sourceName": "Ches",
+      "subtitle": "Binah — Geburah",
+      "paragraphs": [
+        "Cheth, pronounced “Ches” in the book with a guttural ch, means fence. It is assigned Cancer, described in the text as the celestial house of the soul. Its chariot imagery concerns the integration and direction of opposing forces."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "VII — The Chariot"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Cancer — the Crab"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ח · CH · 8"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Fence"
+        },
+        {
+          "label": "Yetsiratic title",
+          "value": "The House of Influence"
+        },
+        {
+          "label": "Colour",
+          "value": "Maroon"
+        },
+        {
+          "label": "Jewel",
+          "value": "Amber"
+        },
+        {
+          "label": "Perfume",
+          "value": "Onycha"
+        },
+        {
+          "label": "Flower",
+          "value": "Lotus"
+        },
+        {
+          "label": "Sacred creature",
+          "value": "Sphinx"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Khephra; Mercury as messenger; Apollo as charioteer; Hermod; Krishna as Arjuna’s charioteer"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "77–78",
+        "images": [
+          "IMG_8782.JPG",
+          "IMG_8783.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Chariot",
+          "paragraphs": [
+            "An armoured figure rides beneath a blue canopy covered with stars. A silver star shines on the forehead, and crescent moons rest on the shoulders. A white sphinx and a black sphinx represent conflicting forces brought under direction. The chariot also bears a lingam and winged globe."
+          ]
+        },
+        {
+          "title": "The Great Work",
+          "paragraphs": [
+            "The author reads the card as an image of the Great Work: integration of the self and attainment of the Knowledge and Conversation of the Holy Guardian Angel. The sphinx combines human and animal qualities as a symbol of that completed work. A related discussion treats libido as a broader energy of life, encompassing physiological and spiritual activity as well as sexuality."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Maroon",
+        "colors": [
+          "#984454"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-07"
+      ]
+    },
+    {
+      "id": "path-19",
+      "modelKey": "Chesed / Geburah",
+      "kind": "path",
+      "number": 19,
+      "letterOrder": 9,
+      "title": "Teth",
+      "hebrew": "ט",
+      "sourceName": "Tes",
+      "subtitle": "Chesed — Geburah",
+      "paragraphs": [
+        "Teth, called “Tes” in the book, means serpent and is assigned Leo. This is the second horizontal or reciprocal path, joining Chesed with Geburah: mercy with might, and love with justice."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "VIII — Strength"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Leo — the Lion"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ט · T · 9"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Serpent"
+        },
+        {
+          "label": "Colour",
+          "value": "Purple"
+        },
+        {
+          "label": "Jewel",
+          "value": "Cat’s eye"
+        },
+        {
+          "label": "Perfume",
+          "value": "Olibanum"
+        },
+        {
+          "label": "Flower",
+          "value": "Sunflower"
+        },
+        {
+          "label": "Animal",
+          "value": "Lion"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Pasht; Sekket; Mau; Ra-Hoor-Khuit; Demeter; Venus as an agricultural goddess"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "79",
+        "images": [
+          "IMG_8783.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "Strength",
+          "paragraphs": [
+            "A woman crowned and girdled with flowers calmly closes a lion’s jaws. The scene presents strength exercised with composure and apparent ease."
+          ]
+        },
+        {
+          "title": "Lion and serpent",
+          "paragraphs": [
+            "The lion ties the path to Leo and its solar ruler. The serpent and lion also carry alchemical and generative associations; the author discusses the serpent as a symbol of wisdom as well as sexuality."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Purple",
+        "colors": [
+          "#a574c6"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-08"
+      ]
+    },
+    {
+      "id": "path-20",
+      "modelKey": "Chesed / Tiphareth",
+      "kind": "path",
+      "number": 20,
+      "letterOrder": 10,
+      "title": "Yod",
+      "hebrew": "י",
+      "sourceName": "Yod",
+      "subtitle": "Chesed — Tiphareth",
+      "paragraphs": [
+        "Yod means hand, more specifically a hand with its index finger extended. The text interprets it as an image of creative will and the movement from potential into activity. Its zodiacal attribution is Virgo."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "IX — The Hermit"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Virgo — the Virgin"
+        },
+        {
+          "label": "Letter / value",
+          "value": "י · Y · 10"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Hand; pointed index finger"
+        },
+        {
+          "label": "Colour",
+          "value": "Grey"
+        },
+        {
+          "label": "Jewel",
+          "value": "Peridot"
+        },
+        {
+          "label": "Flowers",
+          "value": "Snowdrop; narcissus"
+        },
+        {
+          "label": "Magical implements / symbols",
+          "value": "Wand; lamp; Eucharistic Host; the Hand of God"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Isis and Nephthys as unmarried figures; the Gopi; Narcissus; Adonis; Balder"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "79–80",
+        "images": [
+          "IMG_8783.JPG",
+          "IMG_8784.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Hermit",
+          "paragraphs": [
+            "The card shows an aged adept, hooded and dressed in black, carrying a lamp in the right hand and a staff or wand in the left."
+          ]
+        },
+        {
+          "title": "Creative will and innocence",
+          "paragraphs": [
+            "The pointed finger and wand are given phallic meanings, associated with the hidden will and the beginning of a new undertaking. Alongside this, Virgo’s correspondences emphasise innocence and purity through virgin figures, the snowdrop and narcissus, and Balder’s unpolluted dwelling."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Grey",
+        "colors": [
+          "#93969b"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-09"
+      ]
+    },
+    {
+      "id": "path-21",
+      "modelKey": "Chesed / Netzach",
+      "kind": "path",
+      "number": 21,
+      "letterOrder": 11,
+      "title": "Kaph",
+      "hebrew": "כ",
+      "sourceName": "Caph",
+      "subtitle": "Chesed — Netzach",
+      "paragraphs": [
+        "Kaph, pronounced “Caph” here, means spoon or the hollow of the hand. The receptive shape is linked with Jupiter’s generosity and abundance. The path joins Chesed, associated with Jupiter, to Netzach, associated with Venus."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "X — The Wheel of Fortune"
+        },
+        {
+          "label": "Planet",
+          "value": "Jupiter"
+        },
+        {
+          "label": "Letter / value",
+          "value": "כ · K / CH · 20"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Spoon; hollow of the hand"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Conciliatory Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Blue"
+        },
+        {
+          "label": "Jewels",
+          "value": "Lapis lazuli; amethyst"
+        },
+        {
+          "label": "Plants",
+          "value": "Hyssop; oak"
+        },
+        {
+          "label": "Perfumes",
+          "value": "Saffron; generous odours"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Jupiter; Zeus; Brahma; Indra; Pluto as giver of wealth; Njord"
+        },
+        {
+          "label": "Final letter / value",
+          "value": "ך · 500"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "80–81",
+        "images": [
+          "IMG_8784.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Wheel of Fortune",
+          "paragraphs": [
+            "The wheel is described with Anubis, a demon carrying a trident, and a sword-bearing sphinx above. TARO and the four letters of the Tetragrammaton appear around it; the creatures of Ezekiel’s vision occupy the card’s corners.",
+            "The author reads the turning wheel as the cycle of karma and repeated existence, alternately raising and lowering worldly fortunes."
+          ]
+        },
+        {
+          "title": "Abundance and pronunciation",
+          "paragraphs": [
+            "Pluto appears as a source of wealth, while Njord is linked with winds, the sea and possessions. The book gives a guttural ch sound when the letter’s dot is omitted, and a separate final form valued at 500."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Blue",
+        "colors": [
+          "#407bde"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-10"
+      ]
+    },
+    {
+      "id": "path-22",
+      "modelKey": "Geburah / Tiphareth",
+      "kind": "path",
+      "number": 22,
+      "letterOrder": 12,
+      "title": "Lamed",
+      "hebrew": "ל",
+      "sourceName": "Lamed",
+      "subtitle": "Geburah — Tiphareth",
+      "paragraphs": [
+        "Lamed means ox-goad or whip. Its attribution to Libra, the scales, centres the path on balance, law and judgment. It joins Geburah with Tiphareth."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XI — Justice"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Libra — the Scales"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ל · L · 30"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Ox-goad; whip"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Faithful Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Blue"
+        },
+        {
+          "label": "Plant",
+          "value": "Aloe"
+        },
+        {
+          "label": "Animals",
+          "value": "Spider; elephant"
+        },
+        {
+          "label": "Perfume",
+          "value": "Galbanum"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Themis; Maat; Nemesis; Yama"
+        },
+        {
+          "label": "Tarot titles",
+          "value": "The Daughter of the Lords of Truth; The Ruler of the Balances"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "81–82",
+        "images": [
+          "IMG_8784.JPG",
+          "IMG_8785.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "Justice",
+          "paragraphs": [
+            "A solemn woman sits between two pillars with a sword in one hand and scales in the other. The card’s imagery mirrors Libra’s balance and the path’s concern with judgment."
+          ]
+        },
+        {
+          "title": "Law and judgment",
+          "paragraphs": [
+            "Themis represents law and custom; Maat is connected with the weighing of the heart in the Egyptian judgment of the dead. Nemesis and Yama extend the comparison to consequences, death and the settling of deeds."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Blue",
+        "colors": [
+          "#407bde"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-11"
+      ]
+    },
+    {
+      "id": "path-23",
+      "modelKey": "Geburah / Hod",
+      "kind": "path",
+      "number": 23,
+      "letterOrder": 13,
+      "title": "Mem",
+      "hebrew": "מ",
+      "sourceName": "Mem",
+      "subtitle": "Geburah — Hod",
+      "paragraphs": [
+        "Mem means water and is assigned the element of Water. Its shape is compared with waves. The path’s symbolism brings together the sea, sacramental drink and the figure of a saviour descending to bring light."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XII — The Hanged Man"
+        },
+        {
+          "label": "Element",
+          "value": "Water"
+        },
+        {
+          "label": "Letter / value",
+          "value": "מ · M · 40"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Water"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Stable Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Sea green"
+        },
+        {
+          "label": "Jewel",
+          "value": "Aquamarine or beryl"
+        },
+        {
+          "label": "Perfumes",
+          "value": "Onycha; myrrh"
+        },
+        {
+          "label": "Plants",
+          "value": "Water plants; lotus"
+        },
+        {
+          "label": "Magical implements",
+          "value": "Cup; sacramental wine (Soma)"
+        },
+        {
+          "label": "Kerubic symbols",
+          "value": "Eagle; snake; scorpion"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Tum; Ptah; Auromoth; Poseidon; Neptune"
+        },
+        {
+          "label": "Final letter / value",
+          "value": "ם · 600"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "82–83",
+        "images": [
+          "IMG_8785.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Hanged Man",
+          "paragraphs": [
+            "A man in a blue tunic hangs by one foot from a T-shaped gibbet, his head surrounded by a golden halo. The bent leg forms a cross and his arms form a downward-pointing triangle. The author reads the inverted figure as a saviour bringing light to the earthly world."
+          ]
+        },
+        {
+          "title": "Water and sacrament",
+          "paragraphs": [
+            "The cup and sacramental wine are connected with Soma, described as an elixir of immortality. The eagle, snake and scorpion are treated as kerubic symbols of Water, related respectively to humanity before redemption, magical force and final salvation."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Sea green",
+        "colors": [
+          "#51a99a"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-12"
+      ]
+    },
+    {
+      "id": "path-24",
+      "modelKey": "Tiphareth / Netzach",
+      "kind": "path",
+      "number": 24,
+      "letterOrder": 14,
+      "title": "Nun",
+      "hebrew": "נ",
+      "sourceName": "Nun",
+      "subtitle": "Tiphareth — Netzach",
+      "paragraphs": [
+        "Nun, pronounced “Noon” in the text, means fish. Its sign is Scorpio, ruled here by Mars. The central theme is regeneration through decay: the transformation of an old condition into a new one."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XIII — Death"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Scorpio"
+        },
+        {
+          "label": "Letter / value",
+          "value": "נ · N · 50"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Fish"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Imaginative Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Beetle-brown"
+        },
+        {
+          "label": "Jewel",
+          "value": "Snakestone"
+        },
+        {
+          "label": "Perfume",
+          "value": "Opoponax"
+        },
+        {
+          "label": "Plants",
+          "value": "Cactus; poisonous growths"
+        },
+        {
+          "label": "Sacred animal",
+          "value": "Beetle"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Mars; Ares; Apep; Kundalini; Khephra"
+        },
+        {
+          "label": "Magical formula",
+          "value": "Regeneration through putrefaction"
+        },
+        {
+          "label": "Final letter / value",
+          "value": "ן · 700"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "83–84",
+        "images": [
+          "IMG_8785.JPG",
+          "IMG_8786.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "Death",
+          "paragraphs": [
+            "The card is described as a black skeleton on a white horse carrying a scythe, recalling one of the Four Horsemen. It continues the path’s theme of dissolution as part of transformation."
+          ]
+        },
+        {
+          "title": "Regeneration",
+          "paragraphs": [
+            "The alchemical comparison describes base matter passing through corruption or chemical change before yielding gold. The author also applies this pattern to the mystical dark night of the soul: a period of spiritual dryness understood as a preparation for renewal.",
+            "Khephra, the beetle associated here with the midnight Sun, represents light within darkness. Kundalini is described through the image of a coiled serpent at the base of the spine."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Beetle-brown",
+        "colors": [
+          "#936841"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-13"
+      ]
+    },
+    {
+      "id": "path-25",
+      "modelKey": "Tiphareth / Yesod",
+      "kind": "path",
+      "number": 25,
+      "letterOrder": 15,
+      "title": "Samekh",
+      "hebrew": "ס",
+      "sourceName": "Samech",
+      "subtitle": "Tiphareth — Yesod",
+      "paragraphs": [
+        "Samekh, written “Samech” in the book, means prop. It is assigned Sagittarius and the upward-pointing arrow, which the author interprets as aspiration. The path rises from Yesod to Tiphareth, associated with the Sun."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XIV — Temperance"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Sagittarius — the Archer"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ס · S · 60"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Prop"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Tentative Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Green"
+        },
+        {
+          "label": "Jewel",
+          "value": "Jacinth"
+        },
+        {
+          "label": "Plant",
+          "value": "Rush, used for arrows"
+        },
+        {
+          "label": "Perfume",
+          "value": "Lignaloes"
+        },
+        {
+          "label": "Animal / creature",
+          "value": "Horse; centaur"
+        },
+        {
+          "label": "Symbols",
+          "value": "Arrow; bow; rainbow"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Diana; Apollo and Artemis as hunters; Ares"
+        },
+        {
+          "label": "Spiritual figures",
+          "value": "The Holy Guardian Angel; Asar-Un-Nefer"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "84–85",
+        "images": [
+          "IMG_8786.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "Temperance",
+          "paragraphs": [
+            "An angel in white robes bears a solar sign on the forehead. On the breast, the Tetragrammaton accompanies a gold triangle within a white square. Blue liquid passes from one golden chalice into another."
+          ]
+        },
+        {
+          "title": "Aspiration",
+          "paragraphs": [
+            "The angel is interpreted as the Holy Guardian Angel toward whom the aspirant turns. The arrow, solar signs and triangle reinforce the movement from Yesod toward Tiphareth and the ideal of perfected humanity expressed by Asar-Un-Nefer.",
+            "The text also links jacinth with the myth of Hyacinth and Apollo."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Green",
+        "colors": [
+          "#4d9f64"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-14"
+      ]
+    },
+    {
+      "id": "path-26",
+      "modelKey": "Tiphareth / Hod",
+      "kind": "path",
+      "number": 26,
+      "letterOrder": 16,
+      "title": "Ayin",
+      "hebrew": "ע",
+      "sourceName": "Ain",
+      "subtitle": "Tiphareth — Hod",
+      "paragraphs": [
+        "Ayin means eye, connected in the text with the eye of Shiva. Capricorn, the mountain goat, supplies the image of fearless upward movement. Its generative symbolism is interpreted as an expression of spiritual creative power."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XV — The Devil"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Capricorn — the Goat"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ע · O (nasal, in the book’s notation) · 70"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Eye"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Renovating Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Black"
+        },
+        {
+          "label": "Jewel",
+          "value": "Black diamond"
+        },
+        {
+          "label": "Perfume",
+          "value": "Musk"
+        },
+        {
+          "label": "Animals",
+          "value": "Goat; ass"
+        },
+        {
+          "label": "Plant",
+          "value": "Hemp"
+        },
+        {
+          "label": "Symbols",
+          "value": "Eye of Shiva; yoni; lingam"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Khem; Priapus; Pan; Bacchus"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "85–86",
+        "images": [
+          "IMG_8786.JPG",
+          "IMG_8787.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Devil",
+          "paragraphs": [
+            "The figure is a winged, goat-headed satyr with a pentagram on the brow. One hand points upward while the other holds a downward-pointing flaming brand. A horned male and female figure are chained to the throne."
+          ]
+        },
+        {
+          "title": "Creative force",
+          "paragraphs": [
+            "The author relates the yoni and lingam, the goat and the fertility deities to nature’s reproductive power. Bacchus and hemp add associations of intoxication and ecstasy. In the book’s spiritual interpretation, this force becomes conscious of its True Will and takes on a redemptive purpose.",
+            "The goat and ass are also connected with stories of Dionysus and Jesus riding an ass. Ayin is given a slightly nasal pronunciation."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Black",
+        "colors": [
+          "#20232a"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-15"
+      ]
+    },
+    {
+      "id": "path-27",
+      "modelKey": "Netzach / Hod",
+      "kind": "path",
+      "number": 27,
+      "letterOrder": 17,
+      "title": "Peh",
+      "hebrew": "פ",
+      "sourceName": "Pe",
+      "subtitle": "Netzach — Hod",
+      "paragraphs": [
+        "Peh means mouth. Its shape is compared with Kaph’s hollow hand containing a small tongue or Yod. This is the third reciprocal path, joining Netzach and Hod, with Mars providing its martial correspondences."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XVI — The Tower"
+        },
+        {
+          "label": "Planet",
+          "value": "Mars"
+        },
+        {
+          "label": "Letter / value",
+          "value": "פ · P / PH / F · 80"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Mouth"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Natural Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Red"
+        },
+        {
+          "label": "Metal",
+          "value": "Iron"
+        },
+        {
+          "label": "Jewels",
+          "value": "Ruby; red stones"
+        },
+        {
+          "label": "Animals",
+          "value": "Bear; wolf"
+        },
+        {
+          "label": "Plants",
+          "value": "Rue; pepper; absinthe"
+        },
+        {
+          "label": "Perfumes",
+          "value": "Pepper; pungent odours"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Horus; Mentu; Ares; Mars; Krishna as charioteer; Odin; the Valkyries"
+        },
+        {
+          "label": "Tarot titles",
+          "value": "The House of God; The Lord of the Hosts of the Mighty"
+        },
+        {
+          "label": "Final letter / value",
+          "value": "ף · 800"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "86–87",
+        "images": [
+          "IMG_8787.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The Tower",
+          "paragraphs": [
+            "Lightning strikes the crown-like top of a tower and breaks it apart. Flames emerge from three windows and two figures fall or leap from the structure. The card is also called the House of God."
+          ]
+        },
+        {
+          "title": "Martial force",
+          "paragraphs": [
+            "Mars repeats many of Geburah’s associations on a different level of the tree. Warrior deities, iron, red stones and pungent scents develop that relationship. Odin and the Valkyries are included through their connection with battle and the fallen.",
+            "The book connects Peh and Kaph with a magical formula of the Adeptus Major grade. Without its dot, Peh is pronounced ph or f; its final form has the value 800."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Red",
+        "colors": [
+          "#dc473d"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-16"
+      ]
+    },
+    {
+      "id": "path-28",
+      "modelKey": "Netzach / Yesod",
+      "kind": "path",
+      "number": 28,
+      "letterOrder": 18,
+      "title": "Tzaddi",
+      "hebrew": "צ",
+      "sourceName": "Tsaddi",
+      "subtitle": "Netzach — Yesod",
+      "paragraphs": [
+        "Tzaddi, written “Tsaddi” in the book, means fish hook and is assigned Aquarius, the water-bearer. The path links Netzach’s Venus with Yesod’s Moon, which the author treats as two feminine influences."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XVII — The Star"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Aquarius — the Water-bearer"
+        },
+        {
+          "label": "Letter / value",
+          "value": "צ · TS · 90"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Fish hook"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Natural Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Sky blue"
+        },
+        {
+          "label": "Jewel",
+          "value": "Chalcedony"
+        },
+        {
+          "label": "Plant",
+          "value": "Olive"
+        },
+        {
+          "label": "Animal",
+          "value": "Eagle"
+        },
+        {
+          "label": "Perfume",
+          "value": "Galbanum"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Juno; Athena; Ganymede; Ahepi; Aroueris"
+        },
+        {
+          "label": "Tarot titles",
+          "value": "The Daughter of the Firmament; The Dweller between the Waters"
+        },
+        {
+          "label": "Final letter / value",
+          "value": "ץ · 900"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "87–88",
+        "images": [
+          "IMG_8787.JPG",
+          "IMG_8788.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=48"
+      },
+      "sections": [
+        {
+          "title": "The Star",
+          "paragraphs": [
+            "A nude woman kneels beside water, pouring from a jug in each hand. Seven eight-pointed stars surround a larger star above her, continuing the water-bearer imagery of Aquarius."
+          ]
+        },
+        {
+          "title": "Arts and the water-bearer",
+          "paragraphs": [
+            "Juno represents womanhood in the book’s account, while Athena contributes associations with useful and elegant arts and the olive tree. Ganymede appears as cup-bearer, with the eagle recalling his ascent to Olympus. Chalcedony’s appearance is compared with watery clouds and stars."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Sky blue",
+        "colors": [
+          "#7fc3ed"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-17"
+      ]
+    },
+    {
+      "id": "path-29",
+      "modelKey": "Netzach / Malkuth",
+      "kind": "path",
+      "number": 29,
+      "letterOrder": 19,
+      "title": "Qoph",
+      "hebrew": "ק",
+      "sourceName": "Qoph",
+      "subtitle": "Netzach — Malkuth",
+      "paragraphs": [
+        "Qoph means back of the head and is assigned Pisces, the fishes. The book relates this path to an aspect of the astral plane, using fish, water and the cloudy brilliance of pearl as its central images."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XVIII — The Moon"
+        },
+        {
+          "label": "Zodiac",
+          "value": "Pisces — the Fishes"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ק · Q · 100"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Back of the head"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Corporeal Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Buff"
+        },
+        {
+          "label": "Jewel",
+          "value": "Pearl"
+        },
+        {
+          "label": "Sacred creature",
+          "value": "Dolphin"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Vishnu as the fish avatara; Neptune; Poseidon; Khephra; Jesus in Piscean symbolism; Oannes"
+        },
+        {
+          "label": "Related formula",
+          "value": "Tetragrammaton"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "88–89",
+        "images": [
+          "IMG_8788.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=48"
+      },
+      "sections": [
+        {
+          "title": "The Moon",
+          "paragraphs": [
+            "Moonlight falls across a night landscape. A jackal and wolf howl between two towers while a crayfish or crab emerges from water onto dry land."
+          ]
+        },
+        {
+          "title": "Fish and the astral plane",
+          "paragraphs": [
+            "The fish is treated as a generative symbol and compared across Vishnu’s fish incarnation, the Christian Ichthus and the fish-form of Oannes. The watery realm also supplies the links with Neptune and Poseidon.",
+            "Pearl’s cloudy lustre is compared with the forms and partly opaque visions of the astral plane, distinguished in the text from formless spiritual light."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Buff",
+        "colors": [
+          "#d7ba86"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-18"
+      ]
+    },
+    {
+      "id": "path-30",
+      "modelKey": "Hod / Yesod",
+      "kind": "path",
+      "number": 30,
+      "letterOrder": 20,
+      "title": "Resh",
+      "hebrew": "ר",
+      "sourceName": "Resh",
+      "subtitle": "Hod — Yesod",
+      "paragraphs": [
+        "Resh means head and is attributed to the Sun. The book develops a consistent group of solar correspondences: gold, yellow, sun-loving plants and deities of the solar disk."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XIX — The Sun"
+        },
+        {
+          "label": "Planet",
+          "value": "Sun"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ר · R · 200"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Head"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Collecting Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Yellow"
+        },
+        {
+          "label": "Metal",
+          "value": "Gold"
+        },
+        {
+          "label": "Jewel",
+          "value": "Crysoleth (the book’s spelling)"
+        },
+        {
+          "label": "Perfumes",
+          "value": "Cinnamon; olibanum"
+        },
+        {
+          "label": "Animals",
+          "value": "Lion; sparrowhawk"
+        },
+        {
+          "label": "Plants",
+          "value": "Sunflower; heliotrope; laurel"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Ra; Helios; Apollo; Surya; Horus; Kalki"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "89",
+        "images": [
+          "IMG_8788.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=48"
+      },
+      "sections": [
+        {
+          "title": "The Sun",
+          "paragraphs": [
+            "A brilliant sun shines above a crowned child on a white horse, with sunflowers behind. The author identifies the child with Horus and connects the horse with Kalki."
+          ]
+        },
+        {
+          "title": "Pronunciation",
+          "paragraphs": [
+            "Although the Sepher Yetsirah classifies Resh as a double letter, the author notes that he knows only its r sound. He tentatively suggests a strongly rolled r as a possible distinction."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Yellow",
+        "colors": [
+          "#efd14a"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-19"
+      ]
+    },
+    {
+      "id": "path-31",
+      "modelKey": "Hod / Malkuth",
+      "kind": "path",
+      "number": 31,
+      "letterOrder": 21,
+      "title": "Shin",
+      "hebrew": "ש",
+      "sourceName": "Shin",
+      "subtitle": "Hod — Malkuth",
+      "paragraphs": [
+        "Shin means tooth, compared in the book with a three-pronged molar. Its element is Fire. The sound sh and the imagery of flame connect the letter with the descent of spirit."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XX — The Last Judgment"
+        },
+        {
+          "label": "Element",
+          "value": "Fire"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ש · SH / S · 300"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "Tooth"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Perpetual Intelligence"
+        },
+        {
+          "label": "Jewel",
+          "value": "Fire opal"
+        },
+        {
+          "label": "Plants",
+          "value": "Red poppy; hibiscus"
+        },
+        {
+          "label": "Perfumes",
+          "value": "Olibanum; fiery odours"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Agni; Hades; Vulcan; Pluto; Thoum-aesh-neith; Kabeshunt; Tarpesheth"
+        },
+        {
+          "label": "Spiritual imagery",
+          "value": "The Holy Spirit at Pentecost; Gabriel"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "89–90",
+        "images": [
+          "IMG_8788.JPG",
+          "IMG_8789.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=48"
+      },
+      "sections": [
+        {
+          "title": "The Last Judgment",
+          "paragraphs": [
+            "Gabriel sounds a trumpet bearing a banner with a red cross. The dead rise from opened tombs, looking upward and lifting their arms toward the angel."
+          ]
+        },
+        {
+          "title": "Fire and spirit",
+          "paragraphs": [
+            "The author compares this path with the Holy Spirit descending as tongues of fire at Pentecost. Agni and the other fiery deities, fire opal and burning scents extend the elemental association.",
+            "The book distinguishes the sh sound of Shin from the s sound of Sin according to the dot’s position."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Red",
+        "colors": [
+          "#dc473d"
+        ],
+        "basis": "The Fire attribution of Shin; rendered red where the supplied entry gives no separate colour.",
+        "note": "Red represents Shin’s Fire attribution; the supplied entry gives no separate colour."
+      },
+      "tarotCardIds": [
+        "major-20"
+      ]
+    },
+    {
+      "id": "path-32",
+      "modelKey": "Yesod / Malkuth",
+      "kind": "path",
+      "number": 32,
+      "letterOrder": 22,
+      "title": "Tav",
+      "hebrew": "ת",
+      "sourceName": "Tov",
+      "subtitle": "Yesod — Malkuth",
+      "paragraphs": [
+        "Tav means a T-shaped cross and joins Yesod to Malkuth. The book gives this path two related perspectives: the densest region of the astral plane, attributed to Saturn, and the universe considered as a whole."
+      ],
+      "correspondences": [
+        {
+          "label": "Tarot",
+          "value": "XXI — The World"
+        },
+        {
+          "label": "Planet",
+          "value": "Saturn"
+        },
+        {
+          "label": "Letter / value",
+          "value": "ת · T / S · 400"
+        },
+        {
+          "label": "Letter meaning",
+          "value": "T-shaped cross"
+        },
+        {
+          "label": "Intelligence",
+          "value": "The Administrative Intelligence"
+        },
+        {
+          "label": "Colour",
+          "value": "Black"
+        },
+        {
+          "label": "Plants",
+          "value": "Ash; nightshade"
+        },
+        {
+          "label": "Perfumes",
+          "value": "Asafoetida; unpleasant odours"
+        },
+        {
+          "label": "Deities / figures",
+          "value": "Brahma; Pan; Gaea or Ge; Vidar; Saturn; Sebek"
+        },
+        {
+          "label": "Related quality",
+          "value": "Tamo-gunam — inertia and slothfulness"
+        },
+        {
+          "label": "Card symbols",
+          "value": "The Virgin of the World; man, eagle, bull and lion"
+        }
+      ],
+      "source": {
+        "title": "A Garden of Pomegranates",
+        "pages": "90–91",
+        "images": [
+          "IMG_8789.JPG"
+        ]
+      },
+      "sections": [
+        {
+          "title": "The World",
+          "paragraphs": [
+            "A female figure stands within a flowering wreath. The man, eagle, bull and lion occupy the four corners. The figure is described as the Virgin of the World, connected with Malkuth as the Daughter and the reflection below of the Shechinah above."
+          ]
+        },
+        {
+          "title": "Matter and the whole",
+          "paragraphs": [
+            "Brahma, Pan, Gaea and Vidar express the totality and enduring substance of nature. Saturn is also associated with the earth and agriculture. In the denser interpretation, Sebek, strong unpleasant odours and the quality of inertia represent the grossest condition of matter.",
+            "The text gives an s pronunciation for Tav when its dot is absent."
+          ]
+        }
+      ],
+      "palette": {
+        "name": "Black",
+        "colors": [
+          "#20232a"
+        ],
+        "basis": "Colour correspondence in the supplied book."
+      },
+      "tarotCardIds": [
+        "major-21"
+      ]
+    }
+  ],
+  "veils": [
+    {
+      "id": "ain",
+      "kind": "veil",
+      "number": 1,
+      "title": "Ain",
+      "subtitle": "Nothing · No-Thing",
+      "paragraphs": [
+        "Ain is Nothing, or No-Thing: the unknowable origin before any shape, form or distinction. The chapter places it under the heading zero, before Kether and the ten sephiroth.",
+        "Regardie describes this as Infinite Space and a causeless source of manifestation. Ordinary names and definitions depend on limits; Ain is approached as that which precedes such limits."
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "42–43",
+        "images": [
+          "IMG_8794.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=24"
+      },
+      "correspondences": [
+        {
+          "label": "Meaning",
+          "value": "Nothing; No-Thing"
+        },
+        {
+          "label": "Position",
+          "value": "Before the ten sephiroth; zero in the chapter’s account"
+        },
+        {
+          "label": "Related names",
+          "value": "Infinite Space; the Absolute; the Unknowable; the Causeless Cause"
+        },
+        {
+          "label": "Comparisons in the text",
+          "value": "Parabrahmam; Nuit; Tao; Spinoza’s Substance; the Egyptian image of threefold darkness"
+        },
+        {
+          "label": "Symbol",
+          "value": "Ananta, the serpent enclosing the universe with its tail in its mouth"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Before form and naming",
+          "paragraphs": [
+            "The opening quotation from the Zohar imagines a condition before any form has been produced. The author then explains why the intellect cannot describe it directly: a thing can be named through its distinctions, while Ain provides no distinction for a name to grasp.",
+            "He brings together Rabbi Azariel’s account of the limits of language and Blavatsky’s description of a boundless, eternal principle. The aim is to approach an origin beyond ordinary thought and perception."
+          ]
+        },
+        {
+          "title": "Images of the limitless",
+          "paragraphs": [
+            "Nuit expresses absolute space through the star-filled night sky. The Tao comparison approaches a reality beyond the alternatives of speech and silence, existence and non-existence. Spinoza’s Substance contributes the idea of something whose conception depends on no other thing.",
+            "The serpent Ananta, surrounding the universe and taking its own tail into its mouth, expresses infinity returning into itself. These are the author’s analogies for the same problem of representing what has no boundary."
+          ]
+        },
+        {
+          "title": "Ain, Ain Soph and Ain Soph Aur",
+          "paragraphs": [
+            "At the beginning of the Kether entry, the account moves from Ain to Ain Soph, Infinity, and then to Ain Soph Aur, Absolute Limitless Light. Through contraction, that light is described as concentrating into the primordial point of Kether.",
+            "The three veils remain above the numbered Tree. They give successive ways of contemplating its origin; Kether is the first sephirah in the manifested sequence."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ain-soph",
+      "kind": "veil",
+      "number": 2,
+      "title": "Ain Soph",
+      "subtitle": "Infinity · Limitless",
+      "paragraphs": [
+        "Ain Soph is Infinity, or the Limitless. In the chapter’s sequence it follows Ain and precedes Ain Soph Aur, the Absolute Limitless Light.",
+        "The book uses this sequence to approach the origin of manifestation: the infinite is expressed through Kether, and the other sephiroth unfold from that first point until the sequence reaches Malkuth."
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "43, 51–52, 62",
+        "images": [
+          "IMG_8794.JPG",
+          "IMG_8798.JPG",
+          "IMG_8799.JPG",
+          "IMG_8804.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=24"
+      },
+      "correspondences": [
+        {
+          "label": "Meaning",
+          "value": "Infinity; the Limitless"
+        },
+        {
+          "label": "Sequence",
+          "value": "Ain → Ain Soph → Ain Soph Aur → Kether"
+        },
+        {
+          "label": "Relation to the Tree",
+          "value": "The infinite approached through Kether and the emanation of the ten sephiroth"
+        },
+        {
+          "label": "Relation to Malkuth",
+          "value": "Shechinah as the spiritual presence of Ain Soph within the material world"
+        }
+      ],
+      "sections": [
+        {
+          "title": "From infinity to manifestation",
+          "paragraphs": [
+            "The brief formulation on page 43 describes Ain becoming Ain Soph and then Limitless Light in order to become comprehensible to itself. The later discussion expands the account: Ain Soph gives rise to the world through Kether and the successive sephiroth.",
+            "The chapter compares this sequence with the progression from unity to duality, trinity and multiplicity. It uses number as a way to follow the unfolding of differentiated existence."
+          ]
+        },
+        {
+          "title": "The limits of an explanation",
+          "paragraphs": [
+            "Regardie points out the difficulty in treating an abstract zero as an agent that does something. He discusses Infinite Space, Eternal Duration and Absolute Motion as aspects through which the Absolute has been contemplated.",
+            "The Great Breath of Brahma is one of the images used: worlds appear and withdraw with a cosmic exhalation and inhalation. Another account presents manifestation as the play of Nuit and Hadit, space and its central point. The author ultimately acknowledges that the intellect cannot fully account for the first emergence."
+          ]
+        },
+        {
+          "title": "Presence in the Kingdom",
+          "paragraphs": [
+            "In the Malkuth entry, Shechinah is described as the spiritual presence of Ain Soph abiding within material life. This connects the limitless origin with the completed Tree, and accompanies the teaching that Kether and Malkuth are present in one another in different ways."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ain-soph-aur",
+      "kind": "veil",
+      "number": 3,
+      "title": "Ain Soph Aur",
+      "subtitle": "Absolute Limitless Light",
+      "paragraphs": [
+        "Ain Soph Aur is Absolute Limitless Light, written Ain Soph Aour in these pages. It follows Ain and Ain Soph and is the veil immediately above Kether.",
+        "The book describes the light concentrating, through the contraction called Tsimtsum, into a central dimensionless point. That point is Kether, the Crown, from which the numbered Tree unfolds."
+      ],
+      "source": {
+        "title": "Israel Regardie · A Garden of Pomegranates",
+        "pages": "42–43",
+        "images": [
+          "IMG_8794.JPG"
+        ],
+        "url": "https://www.labirintoermetico.com/06numerologia_cabala/Isreael_Regardie_A_Garden_Of_Pomegranates_2Nd%20Ed.pdf#page=24"
+      },
+      "sourceName": "Ain Soph Aour",
+      "correspondences": [
+        {
+          "label": "Meaning",
+          "value": "Absolute Limitless Light"
+        },
+        {
+          "label": "Source spelling",
+          "value": "Ain Soph Aour"
+        },
+        {
+          "label": "Sequence",
+          "value": "Ain → Ain Soph → Ain Soph Aur → Kether"
+        },
+        {
+          "label": "Process described",
+          "value": "Tsimtsum — contraction or concentration into the primordial point"
+        },
+        {
+          "label": "Comparisons in the text",
+          "value": "Daivaprakriti; Adi-Buddha or Amitabha"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Light and the first point",
+          "paragraphs": [
+            "The passage uses light to express the transition from the limitless to the beginning of distinct manifestation. Kether is described as a point without dimension, the first definite principle in the Tree and the root of what follows.",
+            "An alternative image on the same page describes whirling forces heralding the primordial point. Both formulations lead from the unbounded origin to Kether’s unity."
+          ]
+        },
+        {
+          "title": "The author’s comparisons",
+          "paragraphs": [
+            "Regardie relates this Limitless Light to Daivaprakriti in the Vedantic comparison he gives, and to Adi-Buddha or Amitabha in his Buddhist comparison. These are analogies within the book’s comparative method.",
+            "Ain Soph Aur remains part of the account preceding the ten sephiroth. The Aces, white, diamond and other correspondences that follow in the chapter belong to Kether itself."
+          ]
+        }
+      ]
+    }
+  ]
+}
