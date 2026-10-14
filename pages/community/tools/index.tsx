@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import CommunityHeader from '@/components/community/CommunityHeader'
 import MetaDataHeader from '@/components/metadata/MetaDataHeader'
 
@@ -21,7 +22,7 @@ export default function Tools() {
             </div>
             <div className="community-tool-card__image">
               {/* A still of the same model; the gallery does not need a WebGL context. */}
-              <img src="/tools/tree-of-life/preview.jpg" alt="The interactive Tree of Life and its study notes" width={1920} height={873} />
+              <Image src="/tools/tree-of-life/preview.jpg" alt="The interactive Tree of Life and its study notes" width={1920} height={873} sizes="(max-width: 800px) 100vw, (max-width: 1512px) 50vw, 686px" />
             </div>
             <div className="community-tool-card__body">
               <h2>Tarot on the Tree of Life.</h2>
