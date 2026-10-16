@@ -125,6 +125,8 @@ Connected: create the coupon and public promotion code in Stripe, separately for
 
 ## Customer emails
 
+Stripe live receipt branding was saved on 2026-10-16 with public business name **Aaron LVX**, brand colour `#050404`, accent colour `#ed3541`, and `public/images/shop/lvx-receipt-icon-dark.png` as the icon. The original LVX artwork was padded to 2000 × 2000 without resampling or AI changes, then placed on black so the white lightning flash remains visible in Stripe's receipt icon. The transparent padded version is retained as `lvx-receipt-icon.png`. Branding is managed in Stripe's Business → Branding settings; changing these assets locally does not update Stripe automatically.
+
 - **Payment receipt:** Stripe. The customer's address is passed as `receipt_email`. Enable successful-payment and refund emails in Stripe's Customer emails settings; configure your public support address and branding. Stripe test receipts are not sent automatically. Ordinary receipts are used; paid-invoice generation (a separately priced Stripe feature) is not enabled.
 - **Shipping notification:** this site's `/api/shop/printful-webhook` receives Printful `package_shipped` events, re-fetches the order from Printful, and sends a black/red tracking email through Resend. Each package gets its own message; remaining items may arrive separately. The email uses only the package's shipped items. Replies go to `info@aaronjcunningham.com`.
 - **Merchant alerts:** enable Stripe payment notifications and Printful account/order notifications in their dashboards. This code does not send separate owner emails.
