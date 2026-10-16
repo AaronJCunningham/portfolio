@@ -1,6 +1,28 @@
 # LVX checkout: Stripe + Printful
 
-> The public store is currently locked by `SHOP_COMING_SOON=true` in `src/config/shop.ts`. It shows greyed-out purchase controls and blocks all checkout and provider webhook requests. Provider environment settings cannot override this flag. The development flow below requires temporarily setting it to `false` locally; restore `true` before publishing any preview. Only remove the public lock when the store is ready to launch.
+> The storefront is open (`SHOP_COMING_SOON=false`): prices, sizes and the bag are available without the announcement popup. Production payments remain unavailable until the provider configuration is complete. Offline simulated checkout runs only in development/tests, never in production.
+
+## Credentials for launch
+
+Put these in the git-ignored `.env.local` for testing and in the deployment host's server environment for production. Do not paste secrets into chat or commit them.
+
+| Setting | What to supply |
+| --- | --- |
+| `STRIPE_SECRET_KEY` | Stripe server API key from [API keys](https://dashboard.stripe.com/apikeys). Use `sk_test_…` for testing, then `sk_live_…` for sales. A restricted `rk_…` key is also supported with the permissions used by checkout. |
+| `STRIPE_WEBHOOK_SECRET` | The `whsec_…` signing secret for this deployment's Stripe webhook endpoint. Test, CLI and live endpoint secrets differ. |
+| `PRINTFUL_TOKEN` | [Private token](https://developers.printful.com/tokens) for the Manual order / API store, with `sync_products/read` and `orders` scopes. Add `webhooks` if configuring optional shipping notifications through the API. |
+| `PRINTFUL_STORE_ID` | Numeric store ID; required only for an account-scoped token. Prefer a token scoped to this single store. |
+| `PRINTFUL_POLO_S/M/L/XL/2XL/3XL/4XL/5XL` | Eight separate variables, one decorated **sync variant ID** for each black polo size. |
+| `PRINTFUL_SWEATSHIRT_CLASSIC_S/M/L/XL/2XL/3XL` | Six separate variables for the black Classic sweatshirt (288.2 g/m²). |
+| `PRINTFUL_SWEATSHIRT_HEAVYWEIGHT_S/M/L/XL/2XL` | Five separate variables for the black Heavyweight sweatshirt (350 g/m²). |
+
+After adding the Printful token, `npm run shop:variants` retrieves the product/size IDs. The products must be added to the API store with their print or embroidery artwork; product templates alone are not enough. No Stripe product IDs, price IDs or publishable key are needed by this implementation.
+
+`SHOP_QUOTE_SECRET` is generated locally by `npm run shop:prepare`; copy it securely to the host or generate a separate production value. Configure Stripe Tax, Stripe payouts and Printful billing. Current prices are €39 for the polo, €45 for Classic and €55 for Heavyweight. The sweatshirt prices were approved on 2026-10-16. The selected campaign photos are already in the catalog. The beanie is removed and needs no mapping.
+
+The production Stripe webhook URL is `https://www.aaronjcunningham.com/api/shop/webhook`, with events `checkout.session.completed` and `checkout.session.async_payment_succeeded`. After connected tests pass, set `SHOP_ORIGIN=https://www.aaronjcunningham.com`, `SHOP_CHECKOUT_ENABLED=true`, and `SHOP_LIVE_READY=true`, then rebuild/redeploy. Keep `SHOP_TAX_MODE=automatic`. Paid orders become uncharged Printful drafts until you confirm them for production.
+
+Optional custom shipping emails additionally need `RESEND_API_KEY`, a verified `SHOP_EMAIL_FROM`, the generated `PRINTFUL_WEBHOOK_SECRET`, and `SHOP_EMAIL_ENABLED=true`; see the email setup below. Core payments do not depend on Resend.
 
 ## Start here — accounts can wait
 
@@ -14,7 +36,7 @@ npm run shop:check
 npm run dev
 ```
 
-`shop:prepare` adds missing settings to the git-ignored `.env.local` and generates the two local secrets. It preserves existing values and never connects an account or enables payments. `shop:check` lists missing keys and all 11 product/size mappings without printing secrets or contacting providers. Exit code 1 means setup is incomplete, which is expected while accounts are disconnected. Both commands are safe to run again. For deployed environment checks use `NODE_ENV=production npm run shop:check`; the default follows `next dev` environment precedence.
+`shop:prepare` adds missing settings to the git-ignored `.env.local` and generates the two local secrets. It preserves existing values and never connects an account or enables payments. `shop:check` lists the public store lock, missing keys and all 19 product/option/size mappings without printing secrets or contacting providers. Exit code 1 means setup is incomplete, which is expected while accounts are disconnected. Both commands are safe to run again. For deployed environment checks use `NODE_ENV=production npm run shop:check`; the default follows `next dev` environment precedence.
 
 Open http://localhost:3000/community/shop. Leave `SHOP_CHECKOUT_ENABLED=false`, `SHOP_LIVE_READY=false`, `PRINTFUL_TEST_DRAFTS=false`, and `SHOP_EMAIL_ENABLED=false` while previewing. Use fictional contact details and the sample card below. The offline checkout simulates an order; it does not charge or fulfil it.
 
@@ -24,18 +46,18 @@ Open http://localhost:3000/community/shop. Leave `SHOP_CHECKOUT_ENABLED=false`, 
 
    | Site product | Sizes | Current sample price |
    | --- | --- | --- |
-   | LVX Polo | S, M, L, XL, 2XL | €39 |
-   | LVX Long Sleeve | S, M, L, XL, 2XL | €45 |
-   | LVX Beanie | One size | €25 |
+   | LVX Polo | S, M, L, XL, 2XL, 3XL, 4XL, 5XL | €39 |
+   | LVX Sweatshirt — Classic (288.2 g/m²) | S, M, L, XL, 2XL, 3XL | €45 |
+   | LVX Sweatshirt — Heavyweight (350 g/m²) | S, M, L, XL, 2XL | €55 |
 
-   Shop mockup PNGs are display assets; prepare suitable print/embroidery artwork for the chosen products. Check costs, final prices and size availability before selling. Add a private token with product read and order read/write access to `.env.local` (and later your host's server environment). For an account-scoped token also set `PRINTFUL_STORE_ID`.
+   The campaign photographs are display assets; prepare suitable print/embroidery artwork for the chosen products. Check costs, final prices and size availability before selling. Add a private token with product read and order read/write access to `.env.local` (and later your host's server environment). For an account-scoped token also set `PRINTFUL_STORE_ID`.
 2. **Size mapping:** run `npm run shop:variants`. This reads your Printful products and lists names, sizes, colors, decorated `syncVariantId` values and readiness. Copy the correct IDs into the matching `PRINTFUL_*` settings. Verify the artwork in Printful; do not use the catalog IDs. No products or orders are created by this command.
 3. **Stripe:** create the account, begin with a test secret key, and configure Stripe Tax as described below. Stripe collects customer payments; Printful charges you separately for production and shipping when you approve an order. No manually created Stripe product/price IDs or browser publishable key are needed for this hosted Checkout implementation.
-4. **Webhook:** configure the two events below. For your public domain the endpoint is `https://aaronjcunningham.com/api/shop/webhook`. Locally use the Stripe CLI command below and put its signing secret in `STRIPE_WEBHOOK_SECRET`.
+4. **Webhook:** configure the two events below. For your public domain the endpoint is `https://www.aaronjcunningham.com/api/shop/webhook`. Locally use the Stripe CLI command below and put its signing secret in `STRIPE_WEBHOOK_SECRET`.
 5. **Connected test:** run `npm run shop:check -- --remote` for read-only Stripe account/Tax and Printful variant checks. Then set `SHOP_CHECKOUT_ENABLED=true`, keep a Stripe **test** key and `SHOP_LIVE_READY=false`, and restart. Complete a purchase with Stripe's test card. Verify shipping, tax, successful payment, signed webhook delivery and the confirmation page. Test a declined card and a cancelled checkout too. To test fulfilment, opt into `PRINTFUL_TEST_DRAFTS=true` and verify one uncharged Printful draft's items, artwork, size and address. Leave it unconfirmed, then turn that setting off again.
 6. **Launch later:** finish Stripe business/payout details and Printful billing, replace sample prices/images where needed, and publish your actual delivery/returns information. Add the server settings to your host, use the HTTPS origin and live Stripe key plus the **live endpoint's** signing secret, and repeat configuration checks. Set `SHOP_LIVE_READY=true` only after the connected tests and launch review. Redeploy. Paid orders become Printful drafts, which you must review and confirm before production.
 
-Account verification, final artwork/product selection, margins, provider tests and launch remain outstanding. Configuration checks cannot validate those decisions. Custom shipping emails are a separate optional Resend setup below; they are not required to prepare Stripe and Printful.
+Product selection, size mapping, prices and connected sandbox tests were completed on 2026-10-16. Deployment/live activation and the remaining provider/account settings still need review. Configuration checks cannot establish tax obligations or production quality. Custom shipping emails are a separate optional Resend setup below; they are not required to prepare Stripe and Printful.
 
 ## Local workflow
 
@@ -71,9 +93,9 @@ Paid orders currently become **Printful drafts**. You review and confirm them in
 
 ## Configure providers later
 
-Add server environment variables from `.env.example` without overwriting unrelated settings. No secret uses `NEXT_PUBLIC_`. No accounts were connected during implementation.
+Add server environment variables from `.env.example` without overwriting unrelated settings. No secret uses `NEXT_PUBLIC_`. The Printful store products are connected and the sandbox payment/webhook flow has passed; production configuration and deployment remain separate.
 
-1. Set `STRIPE_SECRET_KEY` to a test key and configure Stripe Tax registrations, product tax treatment and inclusive pricing. Set `SHOP_TAX_MODE=automatic`; optionally set `STRIPE_PRODUCT_TAX_CODE`.
+1. Set `STRIPE_SECRET_KEY` to a test key and configure Stripe Tax for the seller's actual registrations and inclusive pricing. Set `SHOP_TAX_MODE=automatic`. The polo and sweatshirts explicitly default to Stripe's Clothing & Footwear code (`txcd_30011000`); `STRIPE_PRODUCT_TAX_CODE` can override it. The account's unrelated default service category is not inherited.
 2. Create a Printful Manual order / API store with decorated products. Add a private `PRINTFUL_TOKEN` with store-product read and order read/write permissions. Set `PRINTFUL_STORE_ID` for account-scoped tokens.
 3. Fill every `PRINTFUL_*` variant mapping in `.env.example` using decorated sync variant IDs from `GET /store/products/{id}`. Match the site's sizes/colors exactly.
 4. Leave `SHOP_SHIPPING_COUNTRIES` empty for worldwide provider availability, or provide an optional comma-separated country allowlist. There is no flat shipping configuration.
@@ -130,6 +152,20 @@ A deterministic `lvx_…` external ID (within Printful's 32-character limit) ded
 Stripe Checkout Session metadata records `awaiting_payment`, `draft_created`, `test_skipped`, or `needs_attention`, plus the Printful ID/reference where available. Fix configuration/service issues and resend failed events from Stripe Workbench. Inspect failed webhook deliveries regularly; retries are finite. Review the actual Printful production/shipping charges before confirming drafts, and cross-check refunds/cancellations manually.
 
 ## Verification and sources
+
+### Connected test — 2026-10-16
+
+- Verified all 19 decorated Printful variants against the real API. Corrected variant parsing to use the object directly inside `result`.
+- Completed a Stripe sandbox purchase containing a polo M (€39), Classic M (€45) and Heavyweight M (€55), plus the live Printful Germany shipping quote (€9.84): total €148.84. No real card charge.
+- Verified a declined test card, successful return to the confirmation page, and removal of purchased quantities from the bag.
+- The signed `checkout.session.completed` event returned HTTP 200 and created one uncharged Printful draft with exactly the three intended sync variant IDs and quoted delivery details. Replaying the signed event returned HTTP 200 and preserved the same draft ID. It was not confirmed for production.
+- Stripe's receipt history confirms one manual test receipt sent to the requested address. Inbox delivery has not been independently verified; the connected Gmail account is a different address. Test receipts require a manual send.
+- A separate checkout cancelled from Stripe returned to the store with its cart and address intact, remained unpaid, and created no fulfilment metadata. Its Stripe product was verified as Clothing & Footwear after correcting the account-default service classification.
+- Test and live Stripe currently have no active tax registrations. The owner reported a Canadian Stripe/payout account and no Canadian GST/HST registration. The test's €0 retail tax is provider output, not a determination that worldwide sales are tax exempt. No registrations were added.
+- Local `SHOP_CHECKOUT_ENABLED` and `PRINTFUL_TEST_DRAFTS` were returned to `false`, and the CLI listener stopped. Test credentials remain only in ignored `.env.development.local`; production credentials are separate.
+- All 35 automated shop tests and the production build passed after the fixes. The build requires network access for the site's existing Sanity content pages.
+
+Production still needs the quote encryption secret in Vercel, the updated code deployed, and checkout enabled after the remaining launch settings are reviewed. Live sales and live webhook delivery have not been tested by this sandbox run.
 
 `npm run test:shop` covers trusted prices, worldwide address validation, destination/quantity/service shipping, tax/discount arithmetic, encrypted/expired quotes, payment idempotency, signatures, draft duplication and lost responses, email escaping/authentication and disabled delivery. Tests mock providers and never send orders, payments or emails.
 

@@ -1,0 +1,128 @@
+{
+  "verifiedAt": "2026-10-16",
+  "store": {
+    "id": 18914414,
+    "name": "LVX Store",
+    "type": "Manual order platform / API"
+  },
+  "product": {
+    "id": 482195424,
+    "templateId": 108155184,
+    "printfulName": "New Polo",
+    "storefrontId": "polo",
+    "model": "SOL'S 11362",
+    "catalogTitle": "Unisex Premium Pique Polo Shirt",
+    "color": "Black",
+    "technique": "Flat embroidery",
+    "placement": "Left chest",
+    "threadColors": [
+      "Red",
+      "White"
+    ],
+    "currency": "EUR",
+    "retailPrice": 39,
+    "publishedInPrintful": true,
+    "dashboardUrl": "https://www.printful.com/dashboard/product-templates/published/18914414/482195424",
+    "catalogUrl": "https://www.printful.com/dashboard/custom/mens/polo-shirts/unisex-premium-pique-polo-shirt-sols-11362"
+  },
+  "variants": [
+    {
+      "size": "S",
+      "dashboardReference": "6ad22992256ce1",
+      "printfulPrice": 18.35,
+      "syncVariantId": 5577668440,
+      "catalogVariantId": 20624,
+      "apiVerified": true,
+      "artworkStatus": "ok"
+    },
+    {
+      "size": "M",
+      "dashboardReference": "6ad22992256d11",
+      "printfulPrice": 18.35,
+      "syncVariantId": 5577668441,
+      "catalogVariantId": 20610,
+      "apiVerified": true,
+      "artworkStatus": "ok"
+    },
+    {
+      "size": "L",
+      "dashboardReference": "6ad22992256d22",
+      "printfulPrice": 18.35,
+      "syncVariantId": 5577668442,
+      "catalogVariantId": 20617,
+      "apiVerified": true,
+      "artworkStatus": "ok"
+    },
+    {
+      "size": "XL",
+      "dashboardReference": "6ad22992256d41",
+      "printfulPrice": 18.35,
+      "syncVariantId": 5577668443,
+      "catalogVariantId": 20631,
+      "apiVerified": true,
+      "artworkStatus": "ok"
+    },
+    {
+      "size": "2XL",
+      "dashboardReference": "6ad22992256d54",
+      "printfulPrice": 19.65,
+      "syncVariantId": 5577668444,
+      "catalogVariantId": 20638,
+      "apiVerified": true,
+      "artworkStatus": "ok"
+    },
+    {
+      "size": "3XL",
+      "dashboardReference": "6ad22992256d64",
+      "printfulPrice": 20.95,
+      "syncVariantId": 5577668445,
+      "catalogVariantId": 20645,
+      "apiVerified": true,
+      "artworkStatus": "ok"
+    },
+    {
+      "size": "4XL",
+      "dashboardReference": "6ad22992256d78",
+      "printfulPrice": 22.25,
+      "syncVariantId": 5577668446,
+      "catalogVariantId": 20652,
+      "apiVerified": true,
+      "artworkStatus": "ok"
+    },
+    {
+      "size": "5XL",
+      "dashboardReference": "6ad22992256d88",
+      "printfulPrice": 23.55,
+      "syncVariantId": 5577668447,
+      "catalogVariantId": 20659,
+      "apiVerified": true,
+      "artworkStatus": "ok"
+    }
+  ],
+  "notes": [
+    "Prices were read from the Printful dashboard and exclude taxes and other charges.",
+    "Numeric sync variant IDs verified through the Printful API on 2026-10-16: all eight sizes are synced, active, Black, EUR 39, with left-chest flat embroidery and red/white threads.",
+    "No paid order was submitted. The published API-store product does not automatically deploy the website."
+  ],
+  "verification": {
+    "tokenConnected": true,
+    "allVariantsActive": true,
+    "embroideryFileId": 1072484202,
+    "threadColors": [
+      "#cc3333",
+      "#ffffff"
+    ],
+    "sampleShipping": {
+      "country": "DE",
+      "city": "Berlin",
+      "postalCode": "10115",
+      "size": "M",
+      "quantity": 1,
+      "service": "STANDARD",
+      "price": 4.49,
+      "currency": "EUR"
+    },
+    "paymentTested": false,
+    "orderCreated": false
+  }
+}

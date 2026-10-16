@@ -3,6 +3,7 @@ const nextConfig = {
   async redirects() {
     return [
       {source: '/shop/:path*', destination: '/community/shop/:path*', permanent: true},
+      {source: '/community/shop/long-sleeve', destination: '/community/shop/sweatshirt', permanent: true},
       {source: '/community/shop/demo', destination: '/community/shop/payment', permanent: false},
     ]
   },

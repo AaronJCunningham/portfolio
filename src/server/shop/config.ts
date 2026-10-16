@@ -1,4 +1,7 @@
 // Server only. Configure these in your hosting environment; never use NEXT_PUBLIC_ keys.
+// The store sells everyday clothing; never inherit an account's service tax code.
+export const productTaxCode = () => process.env.STRIPE_PRODUCT_TAX_CODE || 'txcd_30011000'
+
 export function shopConfig() {
   let origin = ''
   try {
@@ -17,11 +20,11 @@ export function shopConfig() {
 
 // Map each local size to the decorated product's Printful SYNC variant ID.
 // These are not blank catalog variant IDs or product template IDs.
-export function variantId(id: string, size: string): number {
-  const key = variantKey(id, size)
+export function variantId(id: string, size: string, option?: string): number {
+  const key = variantKey(id, size, option)
   const value = Number(process.env[key])
   if (!Number.isSafeInteger(value) || value <= 0) throw new Error(`Missing product mapping: ${key}`)
   return value
 }
 
-export const variantKey = (id: string, size: string) => `PRINTFUL_${id.replace(/-/g, '_').toUpperCase()}_${size.replace(/ /g, '_').toUpperCase()}`
+export const variantKey = (id: string, size: string, option?: string) => `PRINTFUL_${id.replace(/-/g, '_').toUpperCase()}${option ? `_${option.toUpperCase()}` : ''}_${size.replace(/ /g, '_').toUpperCase()}`

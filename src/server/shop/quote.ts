@@ -1,15 +1,17 @@
 import {createCipheriv, createDecipheriv, createHash, randomBytes} from 'node:crypto'
 import type Stripe from 'stripe'
-import {products} from '../../components/shop/products'
+import {productSelection} from '../../components/shop/products'
+import {cartItemKey} from '../../components/shop/cart'
 import type {CheckoutInput, Discount, OrderQuote, QuotedItem, ShippingOption, Tax} from '../../components/shop/checkout-types'
-import {shopConfig, variantId} from './config'
+import {shopConfig, variantId, productTaxCode} from './config'
 import {parseInput, CheckoutError} from './validation'
 import {localDiscount, localShipping, localTax} from './local-provider'
 import {checkVariant, printfulRequest} from './printful'
 import {stripeClient} from './stripe'
 
 export type Snapshot = Omit<OrderQuote, 'token'> & {version: 2; mode: 'local' | 'connected'; input: CheckoutInput}
-export const connectedMode = () => process.env.SHOP_CHECKOUT_ENABLED === 'true'
+// Production must never fall back to simulated shipping, card fields or receipts.
+export const connectedMode = () => process.env.NODE_ENV === 'production' || process.env.SHOP_CHECKOUT_ENABLED === 'true'
 function encryptionKey() {
   const secret = process.env.SHOP_QUOTE_SECRET
   if (connectedMode() && (!secret || secret.length < 32)) throw new CheckoutError('Checkout is temporarily unavailable.', 503)
@@ -58,7 +60,7 @@ export function discountedLines(items: QuotedItem[], discount: number) {
   return items.map((item, index) => {
     const off = index === items.length - 1 ? remaining : Math.floor(discount * item.amount / subtotal)
     remaining -= off
-    return {amount: item.amount - off, reference: `${item.id}:${item.size}`, tax_behavior: 'inclusive' as const, tax_code: process.env.STRIPE_PRODUCT_TAX_CODE || undefined}
+    return {amount: item.amount - off, reference: cartItemKey(item), tax_behavior: 'inclusive' as const, tax_code: productTaxCode()}
   })
 }
 
@@ -68,8 +70,8 @@ export async function calculateQuote(raw: unknown, stripeOverride?: Stripe): Pro
   if (connected && shopConfig().countries.length && !shopConfig().countries.includes(input.address.country)) throw new CheckoutError('Delivery is not available to this country.', 422, {'address.country': 'Choose another destination.'})
   if (connected && !shopConfig().ready) throw new CheckoutError('Checkout is temporarily unavailable. Please try again shortly.', 503)
   const items: QuotedItem[] = input.items.map(item => {
-    const product = products.find(product => product.id === item.id)!
-    return {...item, name: product.name, unitAmount: Math.round(product.price * 100), amount: Math.round(product.price * 100) * item.quantity}
+    const {name, price} = productSelection(item.id, item.option)
+    return {...item, name, unitAmount: Math.round(price * 100), amount: Math.round(price * 100) * item.quantity}
   })
   const subtotal = items.reduce((sum, item) => sum + item.amount, 0)
   let discount: Discount | null
@@ -78,7 +80,7 @@ export async function calculateQuote(raw: unknown, stripeOverride?: Stripe): Pro
   const stripe = connected ? stripeOverride || stripeClient() : null
   if (connected) {
     await Promise.all(items.map(async item => {
-      item.syncVariantId = variantId(item.id, item.size)
+      item.syncVariantId = variantId(item.id, item.size, item.option)
       const variant = await checkVariant(item.syncVariantId)
       item.catalogVariantId = variant.variant_id
       if (!item.catalogVariantId) throw new CheckoutError('An item is unavailable. Please update your bag.', 409)

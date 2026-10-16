@@ -5,12 +5,13 @@ const {test, beforeEach, afterEach} = require('node:test')
 const assert = require('node:assert/strict')
 const {Readable} = require('node:stream')
 const Stripe = require('stripe')
-const {parseCart} = require('../src/components/shop/cart.ts')
+const {parseCart, subtractPurchased} = require('../src/components/shop/cart.ts')
 const {parseInput} = require('../src/server/shop/validation.ts')
 const {shopConfig} = require('../src/server/shop/config.ts')
-const {calculateQuote, publicQuote, openQuote, sealQuote, discountedLines} = require('../src/server/shop/quote.ts')
+const {calculateQuote, publicQuote, openQuote, sealQuote, discountedLines, connectedMode} = require('../src/server/shop/quote.ts')
 const {createCheckout, revalidateQuote} = require('../src/server/shop/checkout.ts')
 const {fulfilCheckout} = require('../src/server/shop/fulfilment.ts')
+const {checkVariant} = require('../src/server/shop/printful.ts')
 const stripeModule = require('../src/server/shop/stripe.ts')
 const checkoutHandler = require('../pages/api/shop/checkout.ts').default
 const quoteHandler = require('../pages/api/shop/quote.ts').default
@@ -20,7 +21,7 @@ const originalComingSoon = shopAvailability.SHOP_COMING_SOON
 const originalFetch = global.fetch, originalEnv = {...process.env}, originalClient = stripeModule.stripeClient
 const attempt = 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa'
 const ok = result => new Response(JSON.stringify({code: 200, result}), {status: 200})
-const input = () => ({items: [{id:'beanie',size:'One size',quantity:1}],email:'alex@example.com',phone:'',address:{name:'Alex',line1:'Example 12',line2:'',city:'Berlin',postalCode:'10115',country:'DE',state:''},billing:null,coupon:''})
+const input = () => ({items: [{id:'polo',size:'M',quantity:1}],email:'alex@example.com',phone:'',address:{name:'Alex',line1:'Example 12',line2:'',city:'Berlin',postalCode:'10115',country:'DE',state:''},billing:null,coupon:''})
 const response = () => ({statusCode:200,headers:{},setHeader(k,v){this.headers[k]=v},status(n){this.statusCode=n;return this},json(v){this.body=v;return this},end(){return this}})
 const request = body => ({method:'POST',headers:{origin:'http://localhost:3100',host:'localhost:3100'},body})
 function fixture(overrides={}) {
@@ -31,10 +32,26 @@ function fixture(overrides={}) {
 }
 beforeEach(()=>{
   shopAvailability.SHOP_COMING_SOON=false
-  Object.assign(process.env,{SHOP_CHECKOUT_ENABLED:'false',SHOP_ORIGIN:'http://localhost:3100',STRIPE_SECRET_KEY:'sk_test_fake',STRIPE_WEBHOOK_SECRET:'whsec_fake',PRINTFUL_TOKEN:'fake',PRINTFUL_TEST_DRAFTS:'true',SHOP_TAX_MODE:'automatic',SHOP_SHIPPING_COUNTRIES:'',SHOP_QUOTE_SECRET:'a-local-test-secret-longer-than-thirty-two-characters',PRINTFUL_BEANIE_ONE_SIZE:'101',SHOP_LIVE_READY:'false'})
+  process.env.NODE_ENV='test'
+  Object.assign(process.env,{SHOP_CHECKOUT_ENABLED:'false',SHOP_ORIGIN:'http://localhost:3100',STRIPE_SECRET_KEY:'sk_test_fake',STRIPE_WEBHOOK_SECRET:'whsec_fake',PRINTFUL_TOKEN:'fake',PRINTFUL_TEST_DRAFTS:'true',SHOP_TAX_MODE:'automatic',SHOP_SHIPPING_COUNTRIES:'',SHOP_QUOTE_SECRET:'a-local-test-secret-longer-than-thirty-two-characters',PRINTFUL_POLO_M:'101',SHOP_LIVE_READY:'false'})
   global.fetch=async()=>{throw Error('Unexpected external request')}
 })
 afterEach(()=>{global.fetch=originalFetch;stripeModule.stripeClient=originalClient;process.env={...originalEnv};shopAvailability.SHOP_COMING_SOON=originalComingSoon})
+test('an open production store cannot complete simulated orders when providers are disconnected',async()=>{
+  const token=sealQuote(await calculateQuote(input()))
+  process.env.NODE_ENV='production'
+  assert.equal(connectedMode(),true)
+  assert.throws(()=>openQuote(token),/expired/)
+  await assert.rejects(calculateQuote(input()),/temporarily unavailable/)
+  stripeModule.stripeClient=()=>{throw Error('Disconnected production checkout must not contact Stripe')}
+  for(const [handler,body] of [[quoteHandler,input()],[checkoutHandler,{token,attempt}]]) {
+    const res=response();await handler(request(body),res)
+    assert.equal(res.statusCode,503)
+    assert.match(res.body.error,/temporarily unavailable/)
+    assert.equal(res.body.receipt,undefined)
+    assert.equal(res.body.url,undefined)
+  }
+})
 test('coming-soon store blocks quotes, orders and webhooks even with providers enabled',async()=>{
   shopAvailability.SHOP_COMING_SOON=true
   stripeModule.stripeClient=()=>{throw Error('Coming-soon store must not contact Stripe')}
@@ -53,7 +70,57 @@ test('coming-soon store blocks quotes, orders and webhooks even with providers e
   }
 })
 test('cart rejects unknown products, wrong sizes, fractions and duplicate limit bypass',()=>{
-  for(const value of [[],[{id:'bad',size:'M',quantity:1}],[{id:'beanie',size:'M',quantity:1}],[{id:'beanie',size:'One size',quantity:1.5}],[{id:'beanie',size:'One size',quantity:10},{id:'beanie',size:'One size',quantity:1}]])assert.throws(()=>parseCart(value))
+  for(const value of [[],[{id:'bad',size:'M',quantity:1}],[{id:'beanie',size:'One size',quantity:1}],[{id:'polo',size:'One size',quantity:1}],[{id:'polo',size:'M',quantity:1.5}],[{id:'polo',size:'M',quantity:10},{id:'polo',size:'M',quantity:1}]])assert.throws(()=>parseCart(value))
+})
+test('Printful variant lookup accepts the direct API result and rejects unavailable mappings',async()=>{
+  const variant={id:101,variant_id:20610,synced:true,is_ignored:false,availability_status:'active'}
+  global.fetch=async()=>ok(variant)
+  assert.deepEqual(await checkVariant(101),variant)
+  for(const invalid of [{...variant,id:102},{...variant,synced:false},{...variant,is_ignored:true},{...variant,availability_status:'discontinued'}]) {
+    global.fetch=async()=>ok(invalid)
+    await assert.rejects(checkVariant(101),/not ready/)
+  }
+})
+test('sweatshirt weights stay separate and old bags migrate to Classic',()=>{
+  const cart=parseCart([{id:'long-sleeve',size:'M',quantity:1},{id:'sweatshirt',option:'classic',size:'M',quantity:1},{id:'sweatshirt',option:'heavyweight',size:'M',quantity:1}])
+  assert.deepEqual(cart,[{id:'sweatshirt',size:'M',quantity:2,option:'classic'},{id:'sweatshirt',size:'M',quantity:1,option:'heavyweight'}])
+  assert.deepEqual(subtractPurchased(cart,[{id:'sweatshirt',option:'classic',size:'M',quantity:2}]),[cart[1]])
+  for(const item of [
+    {id:'sweatshirt',size:'M'}, {id:'sweatshirt',option:'unknown',size:'M'},
+    {id:'sweatshirt',option:'heavyweight',size:'3XL'}, {id:'polo',option:'classic',size:'M'},
+  ]) assert.throws(()=>parseCart([{...item,quantity:1}]))
+  assert.equal(parseCart([{id:'sweatshirt',option:'classic',size:'3XL',quantity:1}])[0].size,'3XL')
+})
+test('the server prices both sweatshirt weights and gives same-size lines distinct tax references',async()=>{
+  const quote=await calculateQuote({...input(),items:[{id:'sweatshirt',option:'classic',size:'M',quantity:1,price:0},{id:'sweatshirt',option:'heavyweight',size:'M',quantity:1,price:1}]})
+  assert.equal(quote.subtotal,10000)
+  assert.deepEqual(quote.items.map(item=>item.unitAmount),[4500,5500])
+  assert.deepEqual(quote.items.map(item=>item.name),['LVX Sweatshirt — Classic','LVX Sweatshirt — Heavyweight'])
+  assert.equal(new Set(discountedLines(quote.items,0).map(line=>line.reference)).size,2)
+})
+test('both sweatshirt choices retain their own price and decorated variant through Stripe and fulfilment',async()=>{
+  Object.assign(process.env,{SHOP_CHECKOUT_ENABLED:'true',PRINTFUL_SWEATSHIRT_CLASSIC_M:'201',PRINTFUL_SWEATSHIRT_HEAVYWEIGHT_M:'202'})
+  let shipment, submitted, checkout
+  global.fetch=async(url,options)=>{
+    if(url.includes('/store/variants/')){const id=Number(url.split('/').pop());return ok({id,variant_id:id+1000,synced:true,is_ignored:false,availability_status:'active'})}
+    if(url.endsWith('/shipping/rates')){shipment=JSON.parse(options.body);return ok([{id:'STANDARD',name:'Standard',rate:'6.49',currency:'EUR'}])}
+    if(options.method==='GET')return new Response('{}',{status:404})
+    submitted=JSON.parse(options.body);return ok({id:1001,status:'draft'})
+  }
+  const {stripe}=fixture()
+  stripe.tax={calculations:{create:async()=>({id:'taxcalc_1',amount_total:10649,tax_amount_inclusive:1700,tax_amount_exclusive:0})}}
+  stripe.customers={create:async()=>({id:'cus_1'})}
+  stripe.checkout.sessions.create=async value=>{checkout=value;return{id:'cs_1'}}
+  const quote=await calculateQuote({...input(),items:[{id:'sweatshirt',option:'classic',size:'M',quantity:1},{id:'sweatshirt',option:'heavyweight',size:'M',quantity:1}]},stripe)
+  assert.deepEqual(shipment.items,[{variant_id:1201,quantity:1},{variant_id:1202,quantity:1}])
+  await createCheckout(quote,attempt,stripe)
+  assert.ok(checkout.line_items.every(line=>line.price_data.product_data.tax_code==='txcd_30011000'))
+  assert.deepEqual(checkout.line_items.map(line=>[line.price_data.unit_amount,line.price_data.product_data.metadata.option,line.price_data.product_data.metadata.printful_variant_id]),[[4500,'classic','201'],[5500,'heavyweight','202']])
+  stripe.checkout.sessions.listLineItems=async()=>({has_more:false,data:checkout.line_items.map(line=>({quantity:line.quantity,price:{product:line.price_data.product_data}}))})
+  // Fulfilment uses the purchased snapshot, even if the live mapping changes later.
+  process.env.PRINTFUL_SWEATSHIRT_HEAVYWEIGHT_M='999'
+  await fulfilCheckout('cs_test_mock123456789',stripe)
+  assert.deepEqual(submitted.items,[{sync_variant_id:201,quantity:1},{sync_variant_id:202,quantity:1}])
 })
 test('validates global addresses, required regions, postal formats and separate billing',()=>{
   const us=input();us.address={...us.address,country:'US',postalCode:'90210'};assert.throws(()=>parseInput(us),e=>!!e.fields['address.state'])
@@ -64,7 +131,7 @@ test('validates global addresses, required regions, postal formats and separate 
 test('shipping varies with destination, quantities, product mix, service and remote region',async()=>{
   const de=await calculateQuote(input());const au=input();au.address={...au.address,country:'AU',state:'NSW',postalCode:'2000'};const australia=await calculateQuote(au);assert.ok(australia.shipping.amount>de.shipping.amount)
   const multi=input();multi.items[0].quantity=3;assert.ok((await calculateQuote(multi)).shipping.amount>de.shipping.amount)
-  multi.items.push({id:'polo',size:'M',quantity:1});assert.ok((await calculateQuote(multi)).shipping.amount>(await calculateQuote({...multi,items:multi.items.slice(0,1)})).shipping.amount)
+  multi.items.push({id:'long-sleeve',size:'M',quantity:1});assert.ok((await calculateQuote(multi)).shipping.amount>(await calculateQuote({...multi,items:multi.items.slice(0,1)})).shipping.amount)
   assert.ok((await calculateQuote({...input(),shippingId:'EXPRESS'})).shipping.amount>de.shipping.amount)
   const us=input();us.address={...us.address,country:'US',state:'AK',postalCode:'99501'};assert.equal((await calculateQuote(us)).shippingOptions.length,1)
 })
@@ -74,15 +141,15 @@ test('unsupported destinations and unavailable service IDs fail before payment',
 })
 test('discount applies to items only and tax is recalculated on discounted goods and shipping',async()=>{
   const plain=await calculateQuote(input());const reduced=await calculateQuote({...input(),coupon:'lvxcomm'})
-  assert.equal(reduced.discount.amount,375);assert.equal(reduced.shipping.amount,plain.shipping.amount)
-  assert.equal(reduced.total,2500-375+reduced.shipping.amount)
+  assert.equal(reduced.discount.amount,585);assert.equal(reduced.shipping.amount,plain.shipping.amount)
+  assert.equal(reduced.total,3900-585+reduced.shipping.amount)
   assert.equal(reduced.tax.amount,Math.round(reduced.total*1900/11900));assert.ok(reduced.tax.amount<plain.tax.amount)
   const us=input();us.address={...us.address,country:'US',state:'OR',postalCode:'97035'};assert.equal((await calculateQuote(us)).tax.amount,0)
   await assert.rejects(calculateQuote({...input(),coupon:'BAD'}),/invalid or has expired/)
 })
 test('server ignores tampered prices, totals and client tax/shipping amounts',async()=>{
   const value=input();value.items[0].price=0;value.total=0;value.shipping=0;value.tax=0
-  const result=await calculateQuote(value);assert.equal(result.subtotal,2500);assert.ok(result.total>2500)
+  const result=await calculateQuote(value);assert.equal(result.subtotal,3900);assert.ok(result.total>3900)
 })
 test('quotes are encrypted, expire, reject tampering and cannot cross local/live mode',async()=>{
   const snapshot=await calculateQuote(input());const token=sealQuote(snapshot)
@@ -103,20 +170,21 @@ test('offline quote and submit use no external service; retries return the same 
   const res=response();await quoteHandler(request(input()),res);assert.equal(res.statusCode,200)
   const one=response();await checkoutHandler(request({token:res.body.token,attempt}),one);assert.equal(one.statusCode,200);assert.equal(one.body.receipt.total,res.body.total)
   const two=response();await checkoutHandler(request({token:res.body.token,attempt}),two);assert.equal(one.body.receipt.reference,two.body.receipt.reference)
-  assert.equal(one.body.receipt.items[0].name,'LVX Beanie')
+  assert.equal(one.body.receipt.items[0].name,'LVX Polo')
 })
 test('cross-origin quote and submission fail',async()=>{
   for(const handler of [quoteHandler,checkoutHandler]){const req=request(input());req.headers.origin='https://evil.example';const res=response();await handler(req,res);assert.equal(res.statusCode,403)}
 })
 test('connected shipping uses catalog variants and customer address; Stripe Tax sees discounted amounts',async()=>{
   process.env.SHOP_CHECKOUT_ENABLED='true';const calls=[]
-  global.fetch=async(url,options)=>{calls.push({url,body:options.body&&JSON.parse(options.body)});if(options.method==='GET')return ok({sync_variant:{id:101,variant_id:2001,synced:true,is_ignored:false,availability_status:'active'}});return ok([{id:'STANDARD',name:'Standard',rate:'6.49',currency:'EUR',minDeliveryDays:5,maxDeliveryDays:10}])}
-  const taxes=[];const stripe={promotionCodes:{list:async()=>({data:[{id:'promo_1',code:'LVXCOMM',active:true,customer:null,restrictions:{first_time_transaction:false},promotion:{coupon:{valid:true,percent_off:15}}}]})},tax:{calculations:{create:async params=>{taxes.push(params);return {id:'taxcalc_1',amount_total:2774,tax_amount_inclusive:443,tax_amount_exclusive:0}}}}}
+  global.fetch=async(url,options)=>{calls.push({url,body:options.body&&JSON.parse(options.body)});if(options.method==='GET')return ok({id:101,variant_id:2001,synced:true,is_ignored:false,availability_status:'active'});return ok([{id:'STANDARD',name:'Standard',rate:'6.49',currency:'EUR',minDeliveryDays:5,maxDeliveryDays:10}])}
+  const taxes=[];const stripe={promotionCodes:{list:async()=>({data:[{id:'promo_1',code:'LVXCOMM',active:true,customer:null,restrictions:{first_time_transaction:false},promotion:{coupon:{valid:true,percent_off:15}}}]})},tax:{calculations:{create:async params=>{taxes.push(params);return {id:'taxcalc_1',amount_total:3964,tax_amount_inclusive:633,tax_amount_exclusive:0}}}}}
   const quote=await calculateQuote({...input(),coupon:'LVXCOMM'},stripe)
-  assert.equal(calls[1].body.items[0].variant_id,2001);assert.equal(calls[1].body.recipient.zip,'10115');assert.equal(taxes[0].line_items[0].amount,2125);assert.equal(taxes[0].shipping_cost.amount,649);assert.equal(quote.tax.amount,443)
+  assert.equal(calls[1].body.items[0].variant_id,2001);assert.equal(calls[1].body.recipient.zip,'10115');assert.equal(taxes[0].line_items[0].amount,3315);assert.equal(taxes[0].shipping_cost.amount,649);assert.equal(quote.tax.amount,633)
+  assert.equal(taxes[0].line_items[0].tax_code,'txcd_30011000')
 })
 test('connected payment preserves reviewed shipping, coupon, and address with stable idempotency',async()=>{
-  const quote=await calculateQuote(input());quote.mode='connected';quote.items[0].syncVariantId=101;quote.discount={code:'LVXCOMM',amount:375,promotionId:'promo_1'}
+  const quote=await calculateQuote(input());quote.mode='connected';quote.items[0].syncVariantId=101;quote.discount={code:'LVXCOMM',amount:585,promotionId:'promo_1'}
   process.env.SHOP_CHECKOUT_ENABLED='true';const calls=[];const customers=[]
   const stripe={customers:{create:async(...args)=>{customers.push(args);return{id:'cus_1'}}},checkout:{sessions:{create:async(...args)=>{calls.push(args);return{id:'cs_1'}}}}}
   await createCheckout(quote,attempt,stripe);await createCheckout(quote,attempt,stripe)

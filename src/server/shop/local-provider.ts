@@ -18,10 +18,9 @@ export function localShipping(input: CheckoutInput, items: QuotedItem[]): Shippi
   const zone = country === 'DE' ? 0 : eu.has(country) ? 1 : ['GB', 'US', 'CA'].includes(country) ? 2 : ['AU', 'NZ', 'JP'].includes(country) ? 3 : 4
   const base = [399, 599, 799, 999, 1299][zone]
   const extra = [125, 175, 225, 275, 325][zone]
-  const apparel = items.filter(item => item.id !== 'beanie').reduce((sum, item) => sum + item.quantity, 0)
-  const hats = items.filter(item => item.id === 'beanie').reduce((sum, item) => sum + item.quantity, 0)
+  const apparel = items.reduce((sum, item) => sum + item.quantity, 0)
   const remote = (country === 'US' && ['AK', 'HI'].includes(state)) || (country === 'AU' && postalCode.startsWith('08'))
-  const amount = (apparel ? base + (apparel - 1) * extra : 0) + (hats ? base - 50 + (hats - 1) * extra : 0) + (remote ? 600 : 0)
+  const amount = (apparel ? base + (apparel - 1) * extra : 0) + (remote ? 600 : 0)
   const minDays = [5, 7, 8, 10, 12][zone] + (remote ? 4 : 0)
   const standard = {id: 'STANDARD', name: 'Standard delivery', amount, minDays, maxDays: minDays + 7}
   return zone === 4 || remote ? [standard] : [standard, {id: 'EXPRESS', name: 'Express delivery', amount: amount + 950 + 100 * items.reduce((n, item) => n + item.quantity, 0), minDays: 3 + zone, maxDays: 7 + zone}]

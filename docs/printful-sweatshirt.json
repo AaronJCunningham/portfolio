@@ -1,0 +1,325 @@
+{
+  "verifiedAt": "2026-10-16",
+  "storeId": 18914414,
+  "currency": "EUR",
+  "source": "Printful template Product details and store products API",
+  "products": [
+    {
+      "id": 482199457,
+      "name": "LVX Sweatshirt \u2014 Heavyweight",
+      "variants": [
+        {
+          "size": "S",
+          "color": "Black",
+          "id": 5577682373,
+          "catalogVariantId": 12585,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "55.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590912,
+              "type": "preview",
+              "filename": "unisex-eco-changer-2.0-sweatshirt-black-front-6ad22db180aba.jpg",
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "size": "M",
+          "color": "Black",
+          "id": 5577682374,
+          "catalogVariantId": 12586,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "55.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590912,
+              "type": "preview",
+              "filename": "unisex-eco-changer-2.0-sweatshirt-black-front-6ad22db180aba.jpg",
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "size": "L",
+          "color": "Black",
+          "id": 5577682375,
+          "catalogVariantId": 12587,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "55.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590912,
+              "type": "preview",
+              "filename": "unisex-eco-changer-2.0-sweatshirt-black-front-6ad22db180aba.jpg",
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "size": "XL",
+          "color": "Black",
+          "id": 5577682376,
+          "catalogVariantId": 12588,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "55.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590912,
+              "type": "preview",
+              "filename": "unisex-eco-changer-2.0-sweatshirt-black-front-6ad22db180aba.jpg",
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "size": "2XL",
+          "color": "Black",
+          "id": 5577682377,
+          "catalogVariantId": 12589,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "55.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590912,
+              "type": "preview",
+              "filename": "unisex-eco-changer-2.0-sweatshirt-black-front-6ad22db180aba.jpg",
+              "status": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 482199151,
+      "name": "LVX Sweatshirt \u2014 Classic",
+      "variants": [
+        {
+          "size": "S",
+          "color": "Black",
+          "id": 5577681005,
+          "catalogVariantId": 11254,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "45.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590214,
+              "type": "preview",
+              "filename": "unisex-premium-sweatshirt-black-back-6ad22d442497d.jpg",
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "size": "M",
+          "color": "Black",
+          "id": 5577681006,
+          "catalogVariantId": 11255,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "45.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590214,
+              "type": "preview",
+              "filename": "unisex-premium-sweatshirt-black-back-6ad22d442497d.jpg",
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "size": "L",
+          "color": "Black",
+          "id": 5577681007,
+          "catalogVariantId": 11256,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "45.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590214,
+              "type": "preview",
+              "filename": "unisex-premium-sweatshirt-black-back-6ad22d442497d.jpg",
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "size": "XL",
+          "color": "Black",
+          "id": 5577681008,
+          "catalogVariantId": 11257,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "45.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590214,
+              "type": "preview",
+              "filename": "unisex-premium-sweatshirt-black-back-6ad22d442497d.jpg",
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "size": "2XL",
+          "color": "Black",
+          "id": 5577681009,
+          "catalogVariantId": 11258,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "45.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590214,
+              "type": "preview",
+              "filename": "unisex-premium-sweatshirt-black-back-6ad22d442497d.jpg",
+              "status": "ok"
+            }
+          ]
+        },
+        {
+          "size": "3XL",
+          "color": "Black",
+          "id": 5577681010,
+          "catalogVariantId": 13258,
+          "synced": true,
+          "ignored": false,
+          "availability": "active",
+          "retailPrice": "45.00",
+          "currency": "EUR",
+          "files": [
+            {
+              "id": 1072484202,
+              "type": "front_dtf",
+              "filename": "55.png",
+              "status": "ok"
+            },
+            {
+              "id": 1087590214,
+              "type": "preview",
+              "filename": "unisex-premium-sweatshirt-black-back-6ad22d442497d.jpg",
+              "status": "ok"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "PRINTFUL_SWEATSHIRT_HEAVYWEIGHT_S": "5577682373",
+    "PRINTFUL_SWEATSHIRT_HEAVYWEIGHT_M": "5577682374",
+    "PRINTFUL_SWEATSHIRT_HEAVYWEIGHT_L": "5577682375",
+    "PRINTFUL_SWEATSHIRT_HEAVYWEIGHT_XL": "5577682376",
+    "PRINTFUL_SWEATSHIRT_HEAVYWEIGHT_2XL": "5577682377",
+    "PRINTFUL_SWEATSHIRT_CLASSIC_S": "5577681005",
+    "PRINTFUL_SWEATSHIRT_CLASSIC_M": "5577681006",
+    "PRINTFUL_SWEATSHIRT_CLASSIC_L": "5577681007",
+    "PRINTFUL_SWEATSHIRT_CLASSIC_XL": "5577681008",
+    "PRINTFUL_SWEATSHIRT_CLASSIC_2XL": "5577681009",
+    "PRINTFUL_SWEATSHIRT_CLASSIC_3XL": "5577681010"
+  },
+  "garments": {
+    "classic": {
+      "templateId": 107851807,
+      "model": "Cotton Heritage M2480",
+      "fabricWeightGsm": 288.2,
+      "composition": "65% cotton, 35% polyester; 100% cotton face",
+      "retailPriceEur": 45
+    },
+    "heavyweight": {
+      "templateId": 108155326,
+      "model": "Stanley/Stella STSU178",
+      "fabricWeightGsm": 350,
+      "composition": "100% organic ring-spun combed cotton",
+      "retailPriceEur": 55,
+      "sizing": "EU sizing; US customers should order one size up"
+    }
+  }
+}

@@ -27,10 +27,10 @@ export default function Shop() {
               <span className="grid-container">
                 <span className="work-card__meta"><span>{`//0${index + 1}`}</span><span>BLACK / {product.sizes.length === 1 ? product.sizes[0] : `${product.sizes[0]}–${product.sizes[product.sizes.length - 1]}`}</span></span>
                 <span className="image_container"><span className="image_container__inner">
-                  <Image src={product.images[0].src} alt={product.images[0].alt} fill sizes="(max-width: 700px) calc(100vw - 64px), 30vw" priority />
+                  <Image src={product.images[0].src} alt={product.images[0].alt} fill sizes="(max-width: 700px) calc(100vw - 64px), 45vw" priority />
                 </span></span>
                 <span className="title-container"><span className="shop-card__title">{product.name}</span><span className="work-card__arrow" aria-hidden="true">↗</span></span>
-                <span className="shop-card__details"><span>{product.description}</span>{!SHOP_COMING_SOON && <span className="shop-card__price">{money(product.price)}</span>}</span>
+                <span className="shop-card__details"><span>{product.description}</span>{!SHOP_COMING_SOON && <span className="shop-card__price">{product.options ? 'From ' : ''}{money(product.price)}</span>}</span>
               </span>
             </Link>
           ))}

@@ -22,8 +22,8 @@ export async function printfulRequest<T>(path: string, body?: unknown): Promise<
 }
 
 export async function checkVariant(id: number) {
-  const result = await printfulRequest<{sync_variant: {id: number; variant_id: number; synced: boolean; is_ignored: boolean; availability_status?: string}}>(`/store/variants/${id}`)
-  const variant = result.sync_variant
+  // This endpoint returns the variant directly in result (not sync_variant).
+  const variant = await printfulRequest<{id: number; variant_id: number; synced: boolean; is_ignored: boolean; availability_status?: string}>(`/store/variants/${id}`)
   if (!variant || variant.id !== id || !variant.synced || variant.is_ignored ||
     (variant.availability_status && variant.availability_status !== 'active')) {
     throw new Error('This product is not ready for fulfilment')

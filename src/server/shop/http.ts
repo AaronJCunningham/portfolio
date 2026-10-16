@@ -8,6 +8,10 @@ export function allowRequest(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Cache-Control', 'private, no-store')
   if (req.method !== 'POST') {res.setHeader('Allow', 'POST'); res.status(405).end(); return false}
   if (SHOP_COMING_SOON) {res.status(503).json({error: 'COMING SOON — shopping is not available yet.'}); return false}
+  if (process.env.NODE_ENV === 'production' && !shopConfig().ready) {
+    res.status(503).json({error: 'Checkout is temporarily unavailable. Your bag is saved. Please try again shortly.'})
+    return false
+  }
   const origin = req.headers.origin
   let same = origin === shopConfig().origin
   // Offline localhost previews may run on a different port; never allow this in connected mode.

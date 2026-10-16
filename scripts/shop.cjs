@@ -9,6 +9,7 @@ function loadShop() {
     compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, esModuleInterop: true},
   }).outputText, filename)
   return {
+    ...require('../src/config/shop.ts'),
     ...require('../src/server/shop/config.ts'),
     ...require('../src/server/shop/printful.ts'),
     ...require('../src/components/shop/products.ts'),
@@ -59,12 +60,13 @@ function inspectConfig(env, products, variantKey) {
     if (!origin?.startsWith('https://')) issues.push('Live checkout requires an HTTPS SHOP_ORIGIN.')
     if (env.SHOP_LIVE_READY !== 'true') issues.push('Live checkout remains locked by SHOP_LIVE_READY (leave locked until connected tests pass).')
   }
-  const mappings = products.flatMap(product => product.sizes.map(size => {
-    const key = variantKey(product.id, size), id = Number(env[key])
+  const mappings = products.flatMap(product => (product.options || [{sizes: product.sizes}]).flatMap(option => option.sizes.map(size => {
+    const key = variantKey(product.id, size, option.id), id = Number(env[key])
+    const name = option.name ? `${product.name} — ${option.name}` : product.name
     const valid = Number.isSafeInteger(id) && id > 0
-    if (!valid) issues.push(`${key}: choose the decorated Printful sync variant for ${product.name}, ${size}.`)
-    return {product: product.name, size, key, id: valid ? id : null}
-  }))
+    if (!valid) issues.push(`${key}: choose the decorated Printful sync variant for ${name}, ${size}.`)
+    return {product: name, size, key, id: valid ? id : null}
+  })))
   const used = new Set()
   for (const row of mappings) {
     if (row.id && used.has(row.id)) issues.push(`${row.key}: sync variant is used by another size/product; check the mapping.`)
@@ -115,6 +117,7 @@ async function main() {
     return
   }
   const report = inspectConfig(process.env, shop.products, shop.variantKey)
+  console.log(`Public store: ${shop.SHOP_COMING_SOON ? 'COMING SOON lock is on (src/config/shop.ts; rebuild after changing)' : 'purchase controls enabled'}`)
   console.log(`Checkout: ${process.env.SHOP_CHECKOUT_ENABLED === 'true' ? 'connected mode requested' : 'offline preview; payments disabled'}`)
   console.log(`Product mappings: ${report.mappings.filter(row => row.id).length}/${report.mappings.length}`)
   if (report.issues.length) {

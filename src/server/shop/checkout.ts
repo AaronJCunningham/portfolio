@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto'
 import type Stripe from 'stripe'
-import {shopConfig} from './config'
+import {shopConfig, productTaxCode} from './config'
 import {openQuote, calculateQuote, stripeAddress} from './quote'
 import type {Snapshot} from './quote'
 import {CheckoutError} from './validation'
@@ -39,7 +39,7 @@ export async function createCheckout(snapshot: Snapshot, attempt: string, stripe
     automatic_tax: {enabled: true},
     line_items: snapshot.items.map(item => ({quantity: item.quantity, price_data: {
       currency: 'eur', unit_amount: item.unitAmount, tax_behavior: 'inclusive',
-      product_data: {name: `${item.name} — ${item.size}`, tax_code: process.env.STRIPE_PRODUCT_TAX_CODE || undefined, metadata: {product_id: item.id, size: item.size, printful_variant_id: String(item.syncVariantId)}},
+      product_data: {name: `${item.name} — ${item.size}`, tax_code: productTaxCode(), metadata: {product_id: item.id, option: item.option || '', size: item.size, printful_variant_id: String(item.syncVariantId)}},
     }})),
     metadata: {shop: SHOP_VERSION, fulfilment: 'awaiting_payment', shipping_service: snapshot.shipping.id, shipping_name: snapshot.shipping.name},
     payment_intent_data: {receipt_email: snapshot.input.email, metadata: {shop: SHOP_VERSION}},

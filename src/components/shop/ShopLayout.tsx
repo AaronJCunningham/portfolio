@@ -2,9 +2,9 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {createContext, useContext, useEffect, useRef, useState} from 'react'
 import type {ReactNode} from 'react'
-import {money, products} from './products'
+import {money, productSelection} from './products'
 import type {Product, Size} from './products'
-import {CART_STORAGE_KEY, parseCart} from './cart'
+import {CART_STORAGE_KEY, parseCart, cartItemKey, subtractPurchased} from './cart'
 import type {CartItem} from './cart'
 import CartItems from './CartItems'
 import CommunityHeader from '@/components/community/CommunityHeader'
@@ -16,7 +16,7 @@ const purchaseRoutes = new Set(['/community/shop/checkout', '/community/shop/pay
 
 type CartState = {
   cart: CartItem[]; hydrated: boolean; subtotal: number;
-  add: (product: Product, size: Size) => void;
+  add: (product: Product, size: Size, option?: string) => void;
   update: (item: CartItem, quantity: number) => void;
   completePurchase: (sessionId: string) => void;
   completeDemoPurchase: (items: CartItem[]) => void;
@@ -44,17 +44,17 @@ export default function ShopLayout({children}: {children: ReactNode}) {
     if (hydrated && !SHOP_COMING_SOON) try { localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart)) } catch { /* The bag still works when storage is unavailable. */ }
   }, [cart, hydrated])
   const count = cart.reduce((sum, item) => sum + item.quantity, 0)
-  const subtotal = cart.reduce((sum, item) => sum + products.find(product => product.id === item.id)!.price * item.quantity, 0)
+  const subtotal = cart.reduce((sum, item) => sum + productSelection(item.id, item.option).price * item.quantity, 0)
 
-  function add(product: Product, size: Size) {
+  function add(product: Product, size: Size, option?: string) {
     if (SHOP_COMING_SOON) return
-    try { setCart(parseCart([...cart, {id: product.id, size, quantity: 1}])); setMessage('') }
+    try { setCart(parseCart([...cart, {id: product.id, size, quantity: 1, ...(option ? {option} : {})}])); setMessage('') }
     catch (error) { setMessage((error as Error).message) }
     dialog.current?.showModal()
   }
   function update(item: CartItem, quantity: number) {
     if (SHOP_COMING_SOON) return
-    const next = cart.flatMap(row => row.id === item.id && row.size === item.size ? (quantity ? [{...row, quantity}] : []) : [row])
+    const next = cart.flatMap(row => cartItemKey(row) === cartItemKey(item) ? (quantity ? [{...row, quantity}] : []) : [row])
     try { setCart(next.length ? parseCart(next) : []); setMessage('') } catch (error) { setMessage((error as Error).message) }
   }
   function completePurchase(sessionId: string) {
@@ -64,11 +64,7 @@ export default function ShopLayout({children}: {children: ReactNode}) {
       const saved = localStorage.getItem(key)
       if (!saved) return
       const purchased = parseCart(JSON.parse(saved))
-      const remaining = cart.flatMap(row => {
-        const paid = purchased.find(item => item.id === row.id && item.size === row.size)
-        const quantity = row.quantity - (paid?.quantity || 0)
-        return quantity > 0 ? [{...row, quantity}] : []
-      })
+      const remaining = subtractPurchased(cart, purchased)
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(remaining))
       localStorage.removeItem(key)
       setCart(remaining)
@@ -76,11 +72,7 @@ export default function ShopLayout({children}: {children: ReactNode}) {
   }
 
   function completeDemoPurchase(items: CartItem[]) {
-    setCart(current => current.flatMap(row => {
-      const purchased = items.find(item => item.id === row.id && item.size === row.size)
-      const quantity = row.quantity - (purchased?.quantity || 0)
-      return quantity > 0 ? [{...row, quantity}] : []
-    }))
+    setCart(current => subtractPurchased(current, items))
   }
 
   return <CartContext.Provider value={{cart, hydrated, subtotal, add, update, completePurchase, completeDemoPurchase}}>
