@@ -121,6 +121,8 @@ Local: edit `localCoupons` in `src/server/shop/local-provider.ts`; `LVXCOMM` is 
 
 Connected: create the coupon and public promotion code in Stripe, separately for test and live mode. Codes are entered on the site's review screen and validated server-side for activity, expiry, redemption limits, minimum amount and currency. The validated code is passed into Checkout. Product-restricted, customer-specific and first-purchase-only codes are not supported by this guest flow. To rotate a code, deactivate it and create its replacement in Stripe. Discounts reduce retail revenue, not Printful's costs.
 
+`LVX10` was created and verified in Stripe test and live mode on 2026-10-16: **10% off merchandise**, with shipping unchanged, no expiry, no minimum spend and no redemption limit. Both modes use coupon `lvx10-10pct-20261016`; the live promotion is `promo_1URCRy2L1C1TtY9QXthryYtF` and the test promotion is `promo_1URCRM2L1C1TtY9QGgCGoaqk`. The actual shop quote and Stripe test Checkout both showed €139.00 merchandise − €13.90 discount + €9.84 shipping = €134.94. The unpaid test session was expired afterward; no payment or fulfilment order was submitted. Creating this code did not change the live-checkout activation settings.
+
 ## Customer emails
 
 - **Payment receipt:** Stripe. The customer's address is passed as `receipt_email`. Enable successful-payment and refund emails in Stripe's Customer emails settings; configure your public support address and branding. Stripe test receipts are not sent automatically. Ordinary receipts are used; paid-invoice generation (a separately priced Stripe feature) is not enabled.

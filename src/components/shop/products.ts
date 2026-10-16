@@ -31,7 +31,7 @@ export const products: Product[] = [
     name: 'LVX Polo',
     price: 39,
     sizes: poloSizes,
-    description: 'Black premium piqué polo with a red and white LVX emblem embroidered on the left chest.',
+    description: 'Black premium piqué polo with a red and white LVX emblem embroidered on the left chest. The LVX emblem traces the lightning flash descending from Kether to Malkuth, set over a pentagram of fire. An expression of the Shekinah—divine presence taking form.',
     images: [
       {src: '/images/shop/lvx-polo-portrait.jpg', alt: 'Black LVX polo worn at a wooden doorway, showing the embroidered red and white chest emblem'},
       {src: '/images/shop/lvx-polo-ivy.jpg', alt: 'LVX polo styled with black trousers beside an ivy-covered stone doorway'},
@@ -44,7 +44,7 @@ export const products: Product[] = [
     name: 'LVX Sweatshirt',
     price: 45,
     sizes: [...sizes, '3XL'],
-    description: 'Black crewneck sweatshirt with a large red and white LVX print. Choose Classic or Heavyweight.',
+    description: 'Black crewneck sweatshirt with a large red and white LVX print. Choose Classic or Heavyweight. The LVX emblem traces the lightning flash descending from Kether to Malkuth, set over a pentagram of fire. An expression of the Shekinah—divine presence taking form.',
     options: [
       {
         id: 'classic', name: 'Classic', price: 45, sizes: [...sizes, '3XL'],
