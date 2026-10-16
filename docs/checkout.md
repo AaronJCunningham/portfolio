@@ -165,7 +165,7 @@ Stripe Checkout Session metadata records `awaiting_payment`, `draft_created`, `t
 - Local `SHOP_CHECKOUT_ENABLED` and `PRINTFUL_TEST_DRAFTS` were returned to `false`, and the CLI listener stopped. Test credentials remain only in ignored `.env.development.local`; production credentials are separate.
 - All 35 automated shop tests and the production build passed after the fixes. The build requires network access for the site's existing Sanity content pages.
 
-Production still needs the quote encryption secret in Vercel, the updated code deployed, and checkout enabled after the remaining launch settings are reviewed. Live sales and live webhook delivery have not been tested by this sandbox run.
+Vercel Production configuration was checked on 2026-10-16: the quote encryption secret and explicit clothing tax code are now saved, all 19 variant IDs and the store ID match the tested catalog, and the existing Stripe key, Stripe webhook secret and Printful token were preserved. `SHOP_CHECKOUT_ENABLED` and `SHOP_LIVE_READY` remain `false`; live activation requires explicit launch approval. Test draft creation and optional custom emails remain off. The updated code still needs deployment. Live sales and live webhook delivery have not been tested by this sandbox run.
 
 `npm run test:shop` covers trusted prices, worldwide address validation, destination/quantity/service shipping, tax/discount arithmetic, encrypted/expired quotes, payment idempotency, signatures, draft duplication and lost responses, email escaping/authentication and disabled delivery. Tests mock providers and never send orders, payments or emails.
 
