@@ -1,15 +1,29 @@
 import {createFrameState} from './recipe.mjs';
 import {baseShader,sortingShader,feedbackShader,finalShader,reactionShader} from './shaders.mjs';
 
-export async function createFilm(canvas,width,height,recipe) {
+/**
+ * The same effect engine is used by the browser tool and the optional offline renderer.
+ * @param {HTMLCanvasElement | OffscreenCanvas} canvas
+ * @param {number} width
+ * @param {number} height
+ * @param {any} recipe
+ * @param {{loadImage?: (asset: any) => Promise<ImageBitmap>, fontUrl?: string, signal?: AbortSignal}} options
+ */
+export async function createFilm(canvas,width,height,recipe,options={}) {
  const frameState=createFrameState(recipe);
  const adapter=await navigator.gpu?.requestAdapter({powerPreference:'high-performance'});
  if(!adapter)throw new Error('WebGPU adapter unavailable.');
  const device=await adapter.requestDevice();
+ let context, font, disposed=false;
+ const dispose=()=>{if(disposed)return;disposed=true;options.signal?.removeEventListener('abort',dispose);context?.unconfigure();device.destroy();if(font)document.fonts.delete(font);};
+ options.signal?.addEventListener('abort',dispose,{once:true});
+ try {
+ options.signal?.throwIfAborted();
  const errors=[];device.addEventListener('uncapturederror',e=>errors.push(e.error.message));
  device.lost.then(info=>errors.push('GPU device lost: '+info.message));
  canvas.width=width;canvas.height=height;
- const context=canvas.getContext('webgpu');
+ context=canvas.getContext('webgpu');
+ if(!context)throw new Error('WebGPU canvas unavailable.');
  const format=navigator.gpu.getPreferredCanvasFormat();
  context.configure({device,format,alphaMode:'opaque',usage:GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.COPY_SRC});
  const sampler=device.createSampler({magFilter:'linear',minFilter:'linear',addressModeU:'clamp-to-edge',addressModeV:'clamp-to-edge'});
@@ -41,12 +55,16 @@ export async function createFilm(canvas,width,height,recipe) {
  let warm=device.createCommandEncoder();evolve(warm,180);device.queue.submit([warm.finish()]);
  const manifest={assets:recipe.assets};
  const assets=new Map();
- await Promise.all([...new Set(recipe.shots.map(s=>s[1]))].map(async name=>{
+ for(const name of new Set(recipe.shots.map(s=>s[1]))) {
+  options.signal?.throwIfAborted();
   const asset=manifest.assets.find(a=>a.name===name);if(!asset)throw new Error('Missing image '+name);
-  const blob=await fetch('/'+asset.src).then(r=>r.blob());const bitmap=await createImageBitmap(blob);
-  const tex=texture(bitmap.width,bitmap.height);device.queue.copyExternalImageToTexture({source:bitmap},{texture:tex},{width:bitmap.width,height:bitmap.height});assets.set(name,tex);bitmap.close();
- }));
- const font=new FontFace('LVXMono','url(/engine/mono.woff2)');await font.load();document.fonts.add(font);
+  const bitmap=options.loadImage?await options.loadImage(asset):await createImageBitmap(await fetch('/'+asset.src,{signal:options.signal}).then(r=>{if(!r.ok)throw new Error('Image could not be loaded.');return r.blob();}));
+  try {
+   options.signal?.throwIfAborted();
+   const tex=texture(bitmap.width,bitmap.height);device.queue.copyExternalImageToTexture({source:bitmap},{texture:tex},{width:bitmap.width,height:bitmap.height});assets.set(name,tex);
+  } finally {bitmap.close();}
+ }
+ if(recipe.typography.cues.length){font=new FontFace('LVXMono',`url(${options.fontUrl||'/engine/mono.woff2'})`);await font.load();options.signal?.throwIfAborted();document.fonts.add(font);}
  const textCanvas=new OffscreenCanvas(width,height);const ctx=textCanvas.getContext('2d');const textTexture=texture(width,height);
  const sortBinding=bind(sorting,[uniform,raw.createView(),sorted.createView()]);
  const draw=(encoder,pipeline,binding,target)=>{const pass=encoder.beginRenderPass({colorAttachments:[{view:target,clearValue:{r:0,g:0,b:0,a:1},loadOp:'clear',storeOp:'store'}]});pass.setPipeline(pipeline);pass.setBindGroup(0,binding);pass.draw(3);pass.end();};
@@ -65,6 +83,8 @@ export async function createFilm(canvas,width,height,recipe) {
   device.queue.copyExternalImageToTexture({source:textCanvas},{texture:textTexture},{width,height});
  }
  async function frame(f){
+  options.signal?.throwIfAborted();
+  if(disposed)throw new Error('Renderer has been released.');
   if(f!==lastFrame+1)throw new Error(`Feedback rendering must be sequential: expected ${lastFrame+1}, got ${f}`);
   const s=frameState(f);lettering(f,s);
   const focus=width/height>.7?[s.layout.focus[0],recipe.instagramFocusY?.[s.shot[1]]??s.layout.focus[1]]:s.layout.focus;
@@ -82,5 +102,6 @@ export async function createFilm(canvas,width,height,recipe) {
   if(errors.length)throw new Error(errors.join('\n'));
  }
  async function reset(){resetChem();chemIndex=0;historyIndex=0;lastFrame=-1;const en=device.createCommandEncoder();evolve(en,180);device.queue.submit([en.finish()]);await device.queue.onSubmittedWorkDone();}
- return {frame,reset,device,errors,adapterInfo:{vendor:adapter.info.vendor,architecture:adapter.info.architecture,description:adapter.info.description},recipe};
+ return {frame,reset,dispose,device,errors,adapterInfo:{vendor:adapter.info.vendor,architecture:adapter.info.architecture,description:adapter.info.description},recipe};
+ } catch(error) {dispose();throw error;}
 }

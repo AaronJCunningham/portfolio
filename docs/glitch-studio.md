@@ -1,10 +1,51 @@
 # Glitch Studio
 
-`/community/tools/glitch-studio` is a free photo-to-video tool listed in Community Tools. It reuses the approved Motion Studio v007 WebGPU/WGSL engine, including its 32 passages, 26-frame image windows, six-frame blends, 282 effect frames and 1,114-frame duration. The original `~/programming/motion-studio` project and exports are unchanged.
+`/community/tools/glitch-studio` creates a video entirely in the visitor’s browser. It needs **no render server, paid video API, upload endpoint, environment variable or always-on Mac**. Deploy the Next.js site normally. `NEXT_PUBLIC_GLITCH_RENDERER_URL` is no longer read.
 
-Visitors upload 1–32 still JPG, PNG or WebP images. A seeded shuffle bag balances appearances, avoids adjacent duplicates when possible, and scores candidates for repeat distance and recurring transitions. Every uploaded image appears. The film is 37.13 seconds at 30 fps, silent H.264 MP4, in 720×1280 (9:16) or 720×900 (4:5). Optional text replaces the original project-specific phrases, using the same restrained text timing and movement. Each new render gets a fresh seed; the sequence is retained with the job.
+## Browser workflow
 
-## Run locally
+Visitors select 1–32 JPG, PNG or WebP photos. Files remain local. The approved Motion Studio v007 WebGPU effects run on an `OffscreenCanvas`; WebCodecs and the bundled, open-source Mediabunny library encode H.264 into a local MP4 blob. The download link saves that blob directly. There is no network upload, render queue, hourly creation quota, storage service or one-hour video expiry.
+
+The film retains 32 passages, 26-frame holds, six-frame blends and 282 effect frames: 1,114 frames / 37.13 seconds at 30 fps. The two output sizes remain 720×1280 (9:16) and 720×900 (4:5). Encoding targets 8 Mbps. Optional text is limited to 36 characters. The original Motion Studio project is unchanged.
+
+A seeded shuffle bag uses every photo, balances appearances and spreads repetitions. Each new export receives a random seed. One photo works; multiple photos avoid adjacent duplicates.
+
+## Compatibility and lifecycle
+
+- The page tests actual WebGPU adapter/device availability and H.264 encoding at both output sizes. Unsupported browsers receive an explanatory dialog recommending current Chrome or Edge with graphics acceleration. Browser brands are not blocked if the required features work.
+- HTTPS is required in production; localhost is a secure context for development. No experimental browser flags are requested.
+- Keep the page open during creation. A screen wake lock is requested where available, but mobile background/screen-lock behaviour varies. The page warns before unloading during an export.
+- Cancel stops generation, closes the encoder and releases GPU resources. A completed previous video remains downloadable if a new attempt is cancelled or fails.
+- Files are limited to 8 MiB each / 64 MiB total / 24 megapixels per decoded image. Full-size photos are decoded sequentially, resized to a maximum 1,280-pixel edge, and released after copying to GPU textures.
+- Download before closing or reloading: photos and output blobs are not persisted. Object URLs and GPU resources are released on replacement/unmount/completion/cancellation.
+- Rendering speed, memory headroom and encoder availability depend on the user’s device. Mobile and in-app browser support must be tested on real devices before advertising support.
+
+## Run and verify locally
+
+```sh
+npm ci
+npm run dev -- --hostname 127.0.0.1 --port 3000
+```
+
+Open `http://localhost:3000/community/tools/glitch-studio`. No second process is needed.
+
+```sh
+npm run test:glitch
+npx tsc --noEmit
+npm run build
+```
+
+The development-only `/dev/glitch-studio-check` page supplies the site’s existing public sample photos through the real file input, then exercises the same production component. It can check complete MP4 packet counts, duration, dimensions, decode nonblank sample frames and flag requests to the old renderer endpoints. It supports one/six/32 photos and a corrupt-image fixture. This route returns 404 in production.
+
+Browser support and file validation have automated regression coverage, alongside the shared sequence/timing and legacy service tests.
+
+### Browser acceptance — 18 October 2026
+
+Chrome on the development Mac completed exports through the real component and file-input change handler with six photos plus text (720×1280), one photo without text (720×900), and the maximum 32 photos (720×900). All three MP4s contained 1,114 H.264 packets and a 37.133-second duration. Five decoded frames per export were checked for nonblank content; representative encoded frames were also inspected visually. The six-photo and one-photo files were downloaded through the page and independently checked with FFprobe: H.264, yuv420p, 30 fps, the expected dimensions and 1,114 frames.
+
+The browser verification recorded zero requests to the legacy renderer. Cancellation restored the controls and retained the previous download; a corrupt JPEG displayed a readable error. All 13 automated tests passed, including unsupported browser/codec cases and file limits. TypeScript and the final production build passed without lint warnings. File selection fixtures use existing public site photos; native operating-system file-picker automation remains limited by the browser extension. Real mobile devices have not yet been tested.
+
+## Optional offline render service
 
 Use Node 22. Install the render service separately so Chromium and image-processing dependencies do not enter the website bundle:
 
@@ -26,28 +67,15 @@ In a second terminal:
 npm run dev
 ```
 
-Open `http://localhost:3000/community/tools/glitch-studio`. In development, the page uses the current hostname on port 4319. Configure `GLITCH_ALLOWED_ORIGINS` if using another website port. The service is bound to loopback by default.
+This starts the optional legacy HTTP API on loopback port 4319. The website no longer connects to this service. Its API remains available for offline rendering and regression checks.
 
 ## Rendering and compatibility
 
-All image processing and video generation run in `services/glitch-studio`. The site only previews local thumbnails, sends multipart uploads, polls job status and plays/downloads MP4s. Visitors do not need Chrome or WebGPU. No browser-name detection is used.
+This section describes only the optional offline service, not the public browser tool.
 
-Startup creates a synthetic image, compiles the actual shaders, renders two 720×1280 frames and encodes an MP4. Missing Chrome, unavailable WebGPU, shader errors and missing/broken FFmpeg make `/health` report `available: false`. The page disables creation and displays a temporary-unavailability message. Operator diagnostics stay in server logs. A failed check is retried once per minute; a render failure makes the service unavailable until a fresh check passes.
+The optional service startup creates a synthetic image, compiles the actual shaders, renders two 720×1280 frames and encodes an MP4. Missing Chrome, unavailable WebGPU, shader errors and missing/broken FFmpeg make `/health` report `available: false`. The API rejects jobs while unavailable. Operator diagnostics stay in server logs. A failed check is retried once per minute; a render failure makes the service unavailable until a fresh check passes.
 
 Rendering uses an isolated headless browser, with its network restricted to a dedicated loopback HTTP server. That private server serves only the renderer code, sanitized images and the current job configuration. GPU history is advanced sequentially from frame zero. One video renders at a time, and the public API admits at most five pending jobs. Each render has a 20-minute timeout.
-
-## Public deployment
-
-The website and renderer have different hosting requirements. Deploy the Next.js site through its existing hosting process. Run the renderer as a **long-lived Node 22 service with a compatible GPU, Chrome/Chromium and FFmpeg**, behind HTTPS. It is not a Next.js request handler and is not intended for ordinary serverless function runtimes.
-
-1. On the render host, install this service using its lockfile and configure its `.env`. Run it as an unprivileged user; the browser sandbox remains enabled.
-2. Mount a persistent private disk at `GLITCH_DATA_DIR`. Do not expose this directory through the web server or back it up as a photo archive.
-3. Set `GLITCH_ALLOWED_ORIGINS` to the exact production website origin(s), without trailing slashes. Default access is limited to the local development origins.
-4. Proxy the service through an HTTPS origin, allow multipart uploads up to 64 MB, and give uploads a 120-second timeout. HTTP range requests must pass through for MP4 playback. Configure `GLITCH_TRUST_PROXY` only for the actual trusted proxy count, with inbound forwarded IP headers replaced at the edge.
-5. Run `npm run glitch:check` on that host and confirm `/health` reports available. Linux uses the Vulkan WebGPU flags described in [Chrome's headless GPU guidance](https://developer.chrome.com/blog/supercharge-web-ai-testing). Hardware and driver compatibility must be tested on the actual host; local macOS validation does not establish Linux GPU compatibility.
-6. Set `NEXT_PUBLIC_GLITCH_RENDERER_URL=https://your-renderer-origin` in the website build environment, then rebuild/deploy the website. Uploads and MP4 downloads go directly to the renderer, avoiding a serverless website's body and response limits. The endpoint is public configuration, not a secret.
-
-When the public renderer URL is absent, a production build shows the unavailable state. No remote GPU service is provisioned by this code. The browser path can be configured independently of Chrome branding; see [Playwright browser configuration](https://playwright.dev/docs/browsers).
 
 ## Limits and lifecycle
 
@@ -70,7 +98,7 @@ npm run build
 
 The automated service tests cover every supported image count, balanced repetition, no adjacent repeats, preservation of timing, missing browser, unavailable renderer, invalid files/options/origins, upload limits, queue serialization, rate limits, range downloads, removal and expiry. The compatibility check exercises the real GPU renderer and encoder; a full-film render remains the performance and visual acceptance test for each deployment host.
 
-### Local verification — 18 October 2026
+### Historical service verification — 18 October 2026
 
 Nine automated tests and the production Next.js build passed. A six-photo vertical render completed in about 60 seconds on the development Mac; the downloaded file decoded as H.264 / yuv420p / Rec.709, 720×1280, 30 fps, 1,114 frames, 37.133 seconds (68,583,007 bytes). A one-photo portrait render also completed and downloaded: 720×900, 1,114 frames, 37.133 seconds (50,000,706 bytes). Sample encoded frames were inspected. These are local measurements, not hosted performance or cost estimates.
 

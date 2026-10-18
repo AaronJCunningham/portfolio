@@ -54,6 +54,8 @@
   .glitch-studio__create > span, .glitch-studio__download > span { color: inherit; font-size: 1.35rem; }
   .glitch-studio__create:hover:not(:disabled), .glitch-studio__download:hover { background: #f0515b; color: #080707; }
   .glitch-studio__create:disabled { opacity: .4; cursor: not-allowed; }
+  .glitch-studio__cancel { display: block; margin: 12px auto 0; padding: 10px 18px; border: 1px solid var(--community-line); background: transparent; color: var(--community-ink); font-size: .7rem; cursor: pointer; }
+  .glitch-studio__formats label:has(input:disabled) { opacity: .4; cursor: not-allowed; }
   .glitch-studio__privacy { font-size: .54rem; line-height: 1.85; color: var(--community-muted); margin: 14px 0 0; }
   .glitch-studio__output { position: sticky; top: 24px; }
   .glitch-studio__screen { min-height: 400px; height: clamp(400px, 42vw, 580px); background: #100c0d; border: 1px solid var(--community-line); display: flex; justify-content: center; overflow: hidden; }
