@@ -38,6 +38,7 @@
       &[aria-current], &:hover { color: var(--community-ink); }
       &[aria-current]::after { content: ''; position: absolute; bottom: 2px; left: 0; width: 18px; height: 2px; background: var(--community-red); }
     }
+    .community-discord { gap: 8px; white-space: nowrap; svg { width: 18px; height: 18px; flex-shrink: 0; } }
   }
   .community-brand {
     white-space: nowrap;
