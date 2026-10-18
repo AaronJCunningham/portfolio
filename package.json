@@ -9,6 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "test:shop": "node --test tests/shop.test.cjs tests/shop-setup.test.cjs",
+    "test:glitch": "npm --prefix services/glitch-studio test",
+    "glitch:renderer": "npm --prefix services/glitch-studio start",
+    "glitch:check": "npm --prefix services/glitch-studio run check",
     "shop:prepare": "node scripts/shop.cjs prepare",
     "shop:check": "node scripts/shop.cjs check",
     "shop:variants": "node scripts/shop.cjs variants"

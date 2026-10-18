@@ -6,8 +6,13 @@
   --community-edge: clamp(24px, 3.6vw, 56px);
   color: var(--community-ink);
   background: #050404;
+  accent-color: var(--community-red);
 
+  // Keep the portfolio's global cyan heading/span rules out of Community.
+  h1, h2, h3, h4, h5, h6 { color: var(--community-ink); }
+  span { color: inherit; }
   a { color: inherit; }
+  ::selection { background: rgba(237, 53, 65, .35); color: var(--community-ink); }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--community-red); outline-offset: 5px; }
 
   .community-header {

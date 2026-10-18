@@ -1,0 +1,16 @@
+{
+  "name": "glitch-studio-renderer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check": "node --env-file-if-exists=.env check.mjs"
+  },
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "express": "^5.1.0",
+    "playwright-core": "^1.56.0",
+    "sharp": "^0.34.5"
+  }
+}

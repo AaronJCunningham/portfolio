@@ -5,6 +5,7 @@ The YouTube-facing area lives under `/community` and has its own navigation and 
 - `/community`: landing page with a mouse-responsive particle cloud.
 - `/community/resources`: a reading-room placeholder with an explicit coming-soon state.
 - `/community/tools`: the tools collection.
+- `/community/tools/glitch-studio`: free photo-to-video creation using the Motion Studio shader engine; see [Glitch Studio setup and rendering](glitch-studio.md).
 - `/community/tools/tree-of-life`: a solid Tree of Life with swirling particles, using the null-site Proof of Belief aesthetic.
 - `/community/shop`: merchandise collection.
 - `/community/shop/[id]`: individual products.

@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Glitch Studio renderer</title></head>
+<body style="margin:0"><canvas></canvas><script type="module">
+import {createFilm} from '/engine/engine.mjs';
+window.filmReady=(async()=>{
+  const response=await fetch(location.pathname.replace('/render','/config'));
+  if(!response.ok)throw new Error('Render configuration unavailable.');
+  const config=await response.json();
+  window.film=await createFilm(document.querySelector('canvas'),config.width,config.height,config.recipe);
+  return true;
+})();
+</script></body></html>

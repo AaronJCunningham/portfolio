@@ -1,0 +1,96 @@
+.community-theme {
+  .glitch-studio { min-height: 100svh; padding: 0 var(--community-edge) 72px; background: #080707; }
+  .glitch-studio__main { max-width: 1400px; margin: 0 auto; background: transparent; padding-top: 32px; }
+  .glitch-studio__back { display: inline-block; font-size: .64rem; color: var(--community-muted); padding: 10px 0; }
+  .glitch-studio__intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 36px 0 44px; }
+  .glitch-studio__intro h1 { margin: 18px 0 22px; color: var(--community-ink); text-transform: none; font-family: var(--font-display), sans-serif; font-size: clamp(3.4rem, 6.5vw, 7rem); line-height: .97; letter-spacing: -.065em; }
+  .glitch-studio__intro h1 em { color: var(--community-red); font-style: normal; }
+  .glitch-studio__description { max-width: 650px; font-size: .78rem; line-height: 1.9; color: var(--community-muted); margin: 0; }
+  .glitch-studio__spec { font-size: .58rem; line-height: 2; text-align: right; letter-spacing: .08em; color: var(--community-muted); margin-bottom: 3px; white-space: nowrap; }
+  .glitch-studio__workspace { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .85fr); align-items: start; gap: clamp(28px, 5vw, 80px); border-top: 1px solid var(--community-line); padding-top: 28px; }
+  .glitch-studio__input, .glitch-studio__output { min-width: 0; }
+  .glitch-studio__section-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 28px; margin-bottom: 18px; }
+  .glitch-studio__section-heading h2, .glitch-studio__options legend { font-size: .82rem; line-height: 1.5; margin: 0; padding: 0; text-transform: none; letter-spacing: -.01em; }
+  .glitch-studio__section-heading h2 span, .glitch-studio__options legend > span { color: var(--community-red); margin-right: 14px; font-size: .6rem; }
+  .glitch-studio__section-heading > span { font-size: .52rem; color: var(--community-muted); letter-spacing: .07em; }
+  .glitch-studio__dropzone { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 216px; padding: 28px 20px; box-sizing: border-box; text-align: center; border: 1px dashed rgba(243, 238, 235, .3); background: #0e0c0c; cursor: pointer; transition: border-color .2s, background .2s; }
+  .glitch-studio__dropzone:hover, .glitch-studio__dropzone.is-dragging { border-color: var(--community-red); background: #170d0e; }
+  .glitch-studio__dropzone:focus-within { outline: 2px solid var(--community-red); outline-offset: 4px; }
+  .glitch-studio__dropzone svg { color: var(--community-red); margin-bottom: 12px; }
+  .glitch-studio__dropzone strong { font-size: .83rem; font-weight: 400; }
+  .glitch-studio__dropzone > span { font-size: .67rem; color: var(--community-muted); }
+  .glitch-studio__dropzone small { font-size: .5rem; color: var(--community-muted); letter-spacing: .05em; margin-top: 12px; }
+  .glitch-studio__dropzone.is-disabled { opacity: .5; cursor: wait; }
+  .glitch-studio__file-input { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); }
+  .glitch-studio__photos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 16px 0 12px; }
+  .glitch-studio__photos figure { margin: 0; position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #171313; }
+  .glitch-studio__photos img { width: 100%; height: 100%; object-fit: cover; }
+  .glitch-studio__photos figcaption { position: absolute; bottom: 0; left: 0; padding: 7px; font-size: .5rem; background: #080707c9; }
+  .glitch-studio__photos button { position: absolute; top: 0; right: 0; background: #080707db; color: white; border: 0; width: 30px; height: 30px; font-size: 1.15rem; cursor: pointer; }
+  .glitch-studio__text-button { display: inline-block; border: 0; border-bottom: 1px solid currentColor; padding: 3px 0; color: var(--community-ink); background: none; font-size: .62rem; cursor: pointer; }
+  .glitch-studio__note { color: var(--community-muted); font-size: .62rem; line-height: 1.85; margin: 14px 0 0; }
+  .glitch-studio__options { border: 0; margin: 32px 0 24px; padding: 0; min-width: 0; }
+  .glitch-studio__options legend { margin-bottom: 18px; }
+  .glitch-studio__formats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 26px; }
+  .glitch-studio__formats label { cursor: pointer; display: flex; align-items: center; gap: 16px; border: 1px solid var(--community-line); background: #0c0b0b; min-height: 86px; padding: 16px; box-sizing: border-box; position: relative; }
+  .glitch-studio__formats label.is-selected { border-color: var(--community-red); background: #170d0e; }
+  .glitch-studio__formats label:focus-within { outline: 2px solid var(--community-red); outline-offset: 3px; }
+  .glitch-studio__formats input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .glitch-studio__formats strong { display: block; font-size: .7rem; font-weight: 400; color: var(--community-ink); }
+  .glitch-studio__formats small { display: block; font-size: .52rem; color: var(--community-muted); margin-top: 9px; }
+  .glitch-studio__format-icon { display: block; width: 20px; height: 35px; border: 1px solid var(--community-muted); flex-shrink: 0; }
+  .glitch-studio__format-icon.is-portrait { width: 26px; height: 33px; }
+  .is-selected .glitch-studio__format-icon { border-color: var(--community-red); }
+  .glitch-studio__title-label { display: flex; justify-content: space-between; font-size: .68rem; margin-bottom: 12px; }
+  .glitch-studio__title-label span { color: var(--community-muted); font-size: .5rem; }
+  .glitch-studio__title { box-sizing: border-box; width: 100%; background: #0c0b0b; border: 1px solid var(--community-line); color: var(--community-ink); padding: 15px; font-size: .72rem; border-radius: 0; }
+  .glitch-studio__title:focus { outline: 1px solid var(--community-red); }
+  .glitch-studio__title::placeholder { color: rgba(243, 238, 235, .3); }
+  .glitch-studio__availability { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: .58rem; color: var(--community-muted); margin: 22px 0 12px; min-height: 20px; }
+  .glitch-studio__light { width: 5px; height: 5px; background: #b18d51; border-radius: 50%; }
+  .glitch-studio__light.is-ready { background: #a6bda4; }
+  .glitch-studio__light.is-offline { background: var(--community-red); }
+  .glitch-studio__create, .glitch-studio__download { box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; min-height: 58px; padding: 16px 22px; border: 1px solid var(--community-red); background: var(--community-red); color: #080707; text-align: left; font-size: .75rem; font-weight: 400; cursor: pointer; }
+  .glitch-studio__create > span, .glitch-studio__download > span { color: inherit; font-size: 1.35rem; }
+  .glitch-studio__create:hover:not(:disabled), .glitch-studio__download:hover { background: #f0515b; color: #080707; }
+  .glitch-studio__create:disabled { opacity: .4; cursor: not-allowed; }
+  .glitch-studio__privacy { font-size: .54rem; line-height: 1.85; color: var(--community-muted); margin: 14px 0 0; }
+  .glitch-studio__output { position: sticky; top: 24px; }
+  .glitch-studio__screen { min-height: 400px; height: clamp(400px, 42vw, 580px); background: #100c0d; border: 1px solid var(--community-line); display: flex; justify-content: center; overflow: hidden; }
+  .glitch-studio__screen video { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .glitch-studio__caption { font-size: .62rem; line-height: 1.85; color: var(--community-muted); margin: 18px 0 8px; }
+  .glitch-studio__flash-note { font-size: .53rem; line-height: 1.7; color: var(--community-muted); margin: 12px 0 24px; }
+  .glitch-studio__output-footer { display: flex; justify-content: space-between; gap: 12px; padding-top: 18px; border-top: 1px solid var(--community-line); font-size: .45rem; letter-spacing: .06em; }
+  .glitch-studio__output-footer span { color: var(--community-muted); }
+  .glitch-studio__download { margin-top: 16px; }
+  .glitch-studio__progress { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; text-align: center; width: 100%; box-sizing: border-box; }
+  .glitch-studio__progress-mark { font-family: var(--font-display), sans-serif; font-size: 4.4rem; letter-spacing: -.07em; font-weight: 200; color: var(--community-ink); margin-bottom: 32px; }
+  .glitch-studio__progress-mark span { color: var(--community-red); }
+  .glitch-studio__progress h3 { font-size: .82rem; margin: 0 0 24px; }
+  .glitch-studio__progress progress { width: 100%; max-width: 260px; height: 3px; appearance: none; border: 0; background: #352628; accent-color: var(--community-red); }
+  .glitch-studio__progress progress::-webkit-progress-bar { background: #352628; }
+  .glitch-studio__progress progress::-webkit-progress-value { background: var(--community-red); }
+  .glitch-studio__progress progress::-moz-progress-bar { background: var(--community-red); }
+  .glitch-studio__progress p { color: var(--community-muted); font-size: .62rem; margin: 14px 0 26px; }
+  .glitch-studio__progress small { color: var(--community-muted); font-size: .58rem; line-height: 1.8; max-width: 230px; }
+  .glitch-studio__failure { padding: 16px; border: 1px solid var(--community-red); font-size: .65rem; line-height: 1.8; margin-top: 16px; }
+  .glitch-studio__dialog { background: #100d0d; color: var(--community-ink); border: 1px solid var(--community-line); padding: 32px; width: min(420px, calc(100vw - 48px)); box-sizing: border-box; }
+  .glitch-studio__dialog::backdrop { background: #000b; }
+  .glitch-studio__dialog h2 { font-family: var(--font-display), sans-serif; text-transform: none; font-size: 2rem; margin: 0 0 16px; }
+  .glitch-studio__dialog p { font-size: .75rem; line-height: 1.8; }
+  .glitch-studio__dialog button { margin-top: 18px; padding: 12px 24px; background: var(--community-red); color: #080707; border: 0; cursor: pointer; }
+  @media (max-width: 800px) {
+    .glitch-studio__intro { display: block; padding-top: 24px; }
+    .glitch-studio__spec { text-align: left; margin-top: 22px; }
+    .glitch-studio__workspace { grid-template-columns: 1fr; gap: 40px; }
+    .glitch-studio__output { position: static; }
+    .glitch-studio__screen { height: 500px; }
+    .glitch-studio__photos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  @media (max-width: 400px) {
+    .glitch-studio__formats label { padding: 12px; gap: 10px; }
+    .glitch-studio__formats small { font-size: .47rem; }
+    .glitch-studio__intro h1 { font-size: 3rem; }
+    .glitch-studio__photos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+}
