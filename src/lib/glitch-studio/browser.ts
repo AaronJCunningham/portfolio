@@ -9,7 +9,8 @@ export type Progress = {stage:'preparing' | 'rendering' | 'encoding'; percent:nu
 export type Support = {supported:boolean; reason:string; formats:string[]}
 export type RenderResult = {blob:Blob; width:number; height:number; frames:number; fps:number; seconds:number}
 
-const BITRATE = 8_000_000
+const BITRATE = 24_000_000
+const PHOTO_MAX_EDGE = 2560
 const fontUrl = '/tools/glitch-studio/mono.woff2'
 const yieldToBrowser = () => new Promise<void>(resolve => setTimeout(resolve, 0))
 
@@ -38,7 +39,7 @@ async function loadPhoto(file:File, signal:AbortSignal):Promise<ImageBitmap> {
   try {
     signal.throwIfAborted()
     if(original.width*original.height>LIMITS.pixels)throw new Error(`“${file.name}” is larger than 24 megapixels. Resize it before adding it.`)
-    const scale = Math.min(1, 1280/Math.max(original.width, original.height))
+    const scale = Math.min(1, PHOTO_MAX_EDGE/Math.max(original.width, original.height))
     // Release each decoded full-size photo before preparing the next one.
     return await createImageBitmap(original, {resizeWidth:Math.max(1,Math.round(original.width*scale)), resizeHeight:Math.max(1,Math.round(original.height*scale)), resizeQuality:'high'})
   } finally {original.close()}

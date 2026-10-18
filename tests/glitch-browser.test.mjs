@@ -20,7 +20,7 @@ test('HTTP, unavailable GPU and unsupported MP4 are blocked before choosing phot
   assert.match(noCodec.reason,/cannot export either MP4 size/);
 });
 test('only sizes with a working encoder are offered, regardless of browser brand',async()=>{
-  const partial=await probeSupport({...supported,probeEncoding:async({height})=>height===900});
+  const partial=await probeSupport({...supported,probeEncoding:async({height})=>height===1350});
   assert.equal(partial.supported,true);
   assert.deepEqual(partial.formats,['portrait']);
   assert.deepEqual((await probeSupport(supported)).formats,['vertical','portrait']);

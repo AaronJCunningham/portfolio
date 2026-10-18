@@ -1,6 +1,6 @@
 export const FORMATS = {
-  vertical: {width:720, height:1280, label:'Social media', ratio:'9:16'},
-  portrait: {width:720, height:900, label:'Instagram posts', ratio:'4:5'},
+  vertical: {width:1080, height:1920, label:'Social media', ratio:'9:16'},
+  portrait: {width:1080, height:1350, label:'Instagram posts', ratio:'4:5'},
 };
 export const LIMITS = {images:32, fileBytes:8*1024*1024, totalBytes:64*1024*1024, pixels:24_000_000};
 export const BROWSER_HELP = 'Use an up-to-date Chrome-compatible browser, such as Chrome or Edge, with graphics acceleration enabled. If you opened this inside another app, open the link in your browser.';

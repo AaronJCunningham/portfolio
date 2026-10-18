@@ -80,6 +80,7 @@
   .glitch-studio__dialog::backdrop { background: #000b; }
   .glitch-studio__dialog h2 { font-family: var(--font-display), sans-serif; text-transform: none; font-size: 2rem; margin: 0 0 16px; }
   .glitch-studio__dialog p { font-size: .75rem; line-height: 1.8; }
+  .glitch-studio__dialog a { color: var(--community-red); text-decoration: underline; text-underline-offset: 3px; }
   .glitch-studio__dialog button { margin-top: 18px; padding: 12px 24px; background: var(--community-red); color: #080707; border: 0; cursor: pointer; }
   @media (max-width: 800px) {
     .glitch-studio__intro { display: block; padding-top: 24px; }

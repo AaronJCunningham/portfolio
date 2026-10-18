@@ -6,7 +6,7 @@
 
 Visitors select 1–32 JPG, PNG or WebP photos. Files remain local. The approved Motion Studio v007 WebGPU effects run on an `OffscreenCanvas`; WebCodecs and the bundled, open-source Mediabunny library encode H.264 into a local MP4 blob. The download link saves that blob directly. There is no network upload, render queue, hourly creation quota, storage service or one-hour video expiry.
 
-The film retains 32 passages, 26-frame holds, six-frame blends and 282 effect frames: 1,114 frames / 37.13 seconds at 30 fps. The two output sizes remain 720×1280 (9:16) and 720×900 (4:5). Encoding targets 8 Mbps. Optional text is limited to 36 characters. The original Motion Studio project is unchanged.
+The film retains 32 passages, 26-frame holds, six-frame blends and 282 effect frames: 1,114 frames / 37.13 seconds at 30 fps. The two output sizes are 1080×1920 (9:16) and 1080×1350 (4:5). Encoding targets 24 Mbps with the encoder’s quality mode. Effects and text render at the full output resolution. Optional text is limited to 36 characters. The original Motion Studio project is unchanged.
 
 A seeded shuffle bag uses every photo, balances appearances and spreads repetitions. Each new export receives a random seed. One photo works; multiple photos avoid adjacent duplicates.
 
@@ -16,7 +16,7 @@ A seeded shuffle bag uses every photo, balances appearances and spreads repetiti
 - HTTPS is required in production; localhost is a secure context for development. No experimental browser flags are requested.
 - Keep the page open during creation. A screen wake lock is requested where available, but mobile background/screen-lock behaviour varies. The page warns before unloading during an export.
 - Cancel stops generation, closes the encoder and releases GPU resources. A completed previous video remains downloadable if a new attempt is cancelled or fails.
-- Files are limited to 8 MiB each / 64 MiB total / 24 megapixels per decoded image. Full-size photos are decoded sequentially, resized to a maximum 1,280-pixel edge, and released after copying to GPU textures.
+- Files are limited to 8 MiB each / 64 MiB total / 24 megapixels per decoded image. Full-size photos are decoded sequentially, downscaled only if needed to a maximum 2,560-pixel edge, and released after copying to GPU textures.
 - Download before closing or reloading: photos and output blobs are not persisted. Object URLs and GPU resources are released on replacement/unmount/completion/cancellation.
 - Rendering speed, memory headroom and encoder availability depend on the user’s device. Mobile and in-app browser support must be tested on real devices before advertising support.
 
@@ -39,7 +39,13 @@ The development-only `/dev/glitch-studio-check` page supplies the site’s exist
 
 Browser support and file validation have automated regression coverage, alongside the shared sequence/timing and legacy service tests.
 
-### Browser acceptance — 18 October 2026
+### 1080-pixel browser acceptance — 18 October 2026
+
+Chrome on the development Mac completed a six-photo export with text at 1080×1920 and a 32-photo export at 1080×1350. The fixtures use 2,400-pixel source photos. Both downloaded MP4s passed the browser verifier and independent FFprobe inspection: H.264, yuv420p, 30 fps, 1,114 frames and 37.133 seconds. Measured bitrates were 23.97 and 24.03 Mbps, with file sizes of 111,284,397 and 111,532,263 bytes respectively. Each export decoded five nonblank sample frames; a contact sheet of the vertical video was inspected for image detail and effects. No legacy renderer requests were made. The Instagram tagging popup also appeared and could be dismissed while rendering continued.
+
+The browser verifier now rejects incorrect dimensions/codecs or missing frames. Browser regression tests, TypeScript checks and the production Next.js build passed. These results cover desktop Chrome; real mobile devices remain untested.
+
+### Initial 720-pixel browser acceptance — 18 October 2026
 
 Chrome on the development Mac completed exports through the real component and file-input change handler with six photos plus text (720×1280), one photo without text (720×900), and the maximum 32 photos (720×900). All three MP4s contained 1,114 H.264 packets and a 37.133-second duration. Five decoded frames per export were checked for nonblank content; representative encoded frames were also inspected visually. The six-photo and one-photo files were downloaded through the page and independently checked with FFprobe: H.264, yuv420p, 30 fps, the expected dimensions and 1,114 frames.
 

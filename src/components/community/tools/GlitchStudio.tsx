@@ -17,6 +17,7 @@ export default function GlitchStudio() {
   const [result,setResult] = useState<Result | null>(null)
   const [notice,setNotice] = useState('')
   const [error,setError] = useState<string | null>(null)
+  const [showSharePrompt,setShowSharePrompt] = useState(false)
   const dialog = useRef<HTMLDialogElement>(null)
   const controller = useRef<AbortController | null>(null)
   const outputUrl = useRef<string | null>(null)
@@ -59,9 +60,11 @@ export default function GlitchStudio() {
   },[busy])
 
   useEffect(() => {
-    if(error && !dialog.current?.open)dialog.current?.showModal()
-    if(!error && dialog.current?.open)dialog.current.close()
-  },[error])
+    if((error || showSharePrompt) && !dialog.current?.open)dialog.current?.showModal()
+    if(!error && !showSharePrompt && dialog.current?.open)dialog.current.close()
+  },[error,showSharePrompt])
+
+  function dismissDialog() {setError(null);setShowSharePrompt(false)}
 
   function replacePhotos(next:Photo[]) {photosRef.current=next;setPhotos(next)}
   function addPhotos(files:FileList | File[]) {
@@ -84,6 +87,7 @@ export default function GlitchStudio() {
     const task=new AbortController()
     controller.current=task
     setError(null);setNotice('');setProgress({stage:'preparing',percent:0})
+    setShowSharePrompt(true)
     let wakeLock:WakeLockSentinel | undefined
     try {
       try {wakeLock=await navigator.wakeLock?.request('screen')} catch { /* Keep working if screen wake lock is unavailable. */ }
@@ -183,7 +187,7 @@ export default function GlitchStudio() {
 
       <section className="glitch-studio__output" aria-label="Video preview">
         <div className="glitch-studio__section-heading"><h2>{busy ? 'Creating your video' : complete ? 'Your video' : 'Video preview'}</h2><span>{busy ? 'PROCESSING ON YOUR DEVICE' : complete ? 'READY TO DOWNLOAD' : 'EXAMPLE VIDEO'}</span></div>
-        <div className={`glitch-studio__screen${result?.height === 900 ? ' is-portrait' : ''}`}>
+        <div className={`glitch-studio__screen${result?.height === FORMATS.portrait.height ? ' is-portrait' : ''}`}>
           {busy ? <div className="glitch-studio__progress" role="status" aria-live="polite">
             <span className="glitch-studio__progress-mark" aria-hidden="true">G<span>/</span>S</span>
             <h3>{status}</h3>
@@ -200,8 +204,10 @@ export default function GlitchStudio() {
         <div className="glitch-studio__output-footer"><span>PHOTO TO VIDEO</span><span>LVX / GLITCH STUDIO</span></div>
       </section>
     </div>
-    <dialog className="glitch-studio__dialog" ref={dialog} aria-labelledby="glitch-dialog-title" onCancel={() => setError(null)}>
-      <h2 id="glitch-dialog-title">One moment.</h2><p>{error}</p><button onClick={() => setError(null)}>Got it</button>
+    <dialog className="glitch-studio__dialog" ref={dialog} aria-labelledby="glitch-dialog-title" aria-describedby="glitch-dialog-message" onCancel={dismissDialog}>
+      <h2 id="glitch-dialog-title">{error?'One moment.':'Sharing your video?'}</h2>
+      <p id="glitch-dialog-message">{error || <>If you share on social media, please tag <a href="https://www.instagram.com/aaronlvx_/" target="_blank" rel="noopener noreferrer">@aaronlvx_</a> if you want.</>}</p>
+      <button type="button" onClick={dismissDialog}>Got it</button>
     </dialog>
   </main>
 }

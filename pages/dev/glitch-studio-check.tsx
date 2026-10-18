@@ -38,6 +38,8 @@ export default function GlitchStudioCheck() {
         if(!track)throw new Error('Missing video track.')
         const stats=await track.computePacketStats()
         const duration=await input.computeDuration()
+        if(track.codec!=='avc' || track.displayWidth!==1080 || ![1920,1350].includes(track.displayHeight))throw new Error('Expected a 1080-wide H.264 export in one of the two supported sizes.')
+        if(stats.packetCount!==1114 || Math.abs(duration-1114/30)>1/30)throw new Error('The export is missing frames or has the wrong duration.')
         const sink=new VideoSampleSink(track)
         let inspected=0
         for(const second of [0,5,15,30,37]) {
