@@ -2,6 +2,8 @@
 
 Added locally on 23 October 2026. No deployment or Sanity publication was performed.
 
+The case study now highlights Berlin's map-data pipeline, procedural generation and custom landmark work.
+
 ## Portfolio flow
 
 - `/work`: a playable project card, with a real screenshot and an excerpt introducing the mapped city and ways to explore it.
