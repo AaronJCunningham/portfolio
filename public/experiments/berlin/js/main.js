@@ -37,7 +37,7 @@ async function initApp() {
   };
 
   if (loadingStatus) {
-    loadingStatus.textContent = `Initializing Three.js r${THREE.REVISION} WebGPURenderer & TSL Shaders...`;
+    loadingStatus.textContent = 'Getting the city ready…';
   }
 
   // 1. Initialize Three.js WebGPURenderer with 32-bit float reversedDepthBuffer
@@ -73,7 +73,7 @@ async function initApp() {
   markInit('lighting');
 
   if (loadingStatus) {
-    loadingStatus.textContent = 'Constructing Berlin Districts, Landmarks & Streetscape...';
+    loadingStatus.textContent = 'Opening the streets…';
   }
 
   // 3. Build Manhattan Geography, Iconic Landmarks, Blocks, Street Details & Traffic
@@ -551,7 +551,7 @@ async function initApp() {
   // The loading screen stays up while the shaders compile (precompileShaders() & the warm-up frame, see the loop) and
   // until the first frame is on screen
   if (loadingStatus) {
-    loadingStatus.textContent = 'Compiling Shaders & Render Pipelines...';
+    loadingStatus.textContent = 'Bringing Berlin to life…';
   }
 
   // 6b. Shader pre-compilation behind the loading screen. compileAsync() builds the node graphs in slices and has the GPU
@@ -617,7 +617,8 @@ async function initApp() {
         for (const object of job) await compile(object);
         done++;
         if (loadingStatus) {
-          loadingStatus.textContent = `Compiling Shaders & Render Pipelines... ${Math.round((done / jobs.length) * 100)}%`;
+          const message = done < jobs.length * 0.75 ? 'Bringing Berlin to life…' : 'Your ride is almost ready…';
+          if (loadingStatus.textContent !== message) loadingStatus.textContent = message;
         }
         setLoadingProgress(done / jobs.length);
       }
@@ -739,5 +740,11 @@ async function initApp() {
 initApp().catch((error) => {
   console.error(error);
   const status = document.getElementById('loading-status');
-  if (status) status.textContent = `Unable to start Berlin: ${error.message}`;
+  if (status) status.textContent = 'Berlin couldn’t open this time. Please try again.';
+  document.getElementById('loading-overlay')?.classList.add('has-error');
+  const retry = document.getElementById('loading-retry');
+  if (retry) {
+    retry.hidden = false;
+    retry.addEventListener('click', () => window.location.reload());
+  }
 });
