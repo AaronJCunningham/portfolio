@@ -4,8 +4,8 @@ Added locally on 23 October 2026. No deployment or Sanity publication was perfor
 
 ## Portfolio flow
 
-- `/work`: a playable project card, with a real screenshot and an excerpt explicitly crediting Mr. Doob.
-- `/berlin-driving-simulator`: a project article with an Explore Berlin action, prominent original NYC credit, screenshots, the Ringbahn scope, Aaron's direction/adaptation contribution, and AI-assisted development disclosure.
+- `/work`: a playable project card, with a real screenshot and an excerpt introducing the mapped city and ways to explore it.
+- `/berlin-driving-simulator`: a project article covering the OpenStreetMap pipeline, procedural generation, custom landmarks, interaction refinements and rendering at city scale. It includes an Explore Berlin action, a single linked Mr. Doob credit near the top, screenshots, Aaron's contribution and AI-assisted development disclosure.
 - `/play/berlin`: a full-document rewrite to the standalone simulator. Its back arrow returns to the article, and “Original NYC version by Mr. Doob” opens `https://mrdoob.github.io/slop-newyork/`.
 
 The simulation is not imported into Next.js or React. Its native import map preserves the original pinned Three.js r187dev, WebGPU/TSL modules, controls and rendering pipeline. The Work and article pages load images and page content; the large geographic module loads only after entering the experience.

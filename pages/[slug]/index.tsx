@@ -164,12 +164,6 @@ export default function DynamicProject({project, previousProject, nextProject}: 
                   <dt>{project.attribution ? 'BERLIN ADAPTATION' : 'AUTHOR'}</dt>
                   <dd>AARON J. CUNNINGHAM</dd>
                 </div>
-                {project.attribution && (
-                  <div>
-                    <dt>ORIGINAL SIMULATION</dt>
-                    <dd>{project.attribution.creator} / {project.attribution.sourceTitle}</dd>
-                  </div>
-                )}
                 {publishedDate && (
                   <div>
                     <dt>PUBLISHED</dt>
