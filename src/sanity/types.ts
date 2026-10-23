@@ -43,12 +43,18 @@ export type ProjectListItem = {
   mainImage?: SanityImage
   seo?: ProjectSeo
   imageUrl?: string
+  experiencePath?: string
 }
 
 export type Project = ProjectListItem & {
   body?: unknown[]
   links?: ProjectLink[]
   seoImageUrl?: string
+  experienceLabel?: string
+  standaloneExperience?: boolean
+  roleLabel?: string
+  attribution?: {label: string; url: string; sourceTitle: string; creator: string}
+  gallery?: Array<{src: string; alt: string; caption: string}>
 }
 
 export type ProjectNavItem = {

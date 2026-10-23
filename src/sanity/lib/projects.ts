@@ -1,4 +1,5 @@
 import {client} from './client'
+import {berlinDrivingProject, includeBerlinDriving} from '@/content/berlin-driving-simulator'
 import {
   matterReelProjectsQuery,
   projectBySlugQuery,
@@ -7,27 +8,34 @@ import {
   projectsQuery,
   resourcesQuery,
   resourceSlugsQuery,
+  berlinDrivingPresenceQuery,
 } from './queries'
 import type {Project, ProjectListItem, ProjectNavItem} from '../types'
 
-export function getProjects() {
-  return client.fetch<ProjectListItem[]>(projectsQuery)
+export async function getProjects() {
+  const [projects, cmsOwnsBerlin] = await Promise.all([client.fetch<ProjectListItem[]>(projectsQuery), client.fetch<boolean>(berlinDrivingPresenceQuery)])
+  return includeBerlinDriving(projects, berlinDrivingProject, cmsOwnsBerlin)
 }
 
 export function getMatterReelProjects(slugs: readonly string[]) {
   return client.fetch<ProjectListItem[]>(matterReelProjectsQuery, {slugs})
 }
 
-export function getProjectBySlug(slug: string) {
-  return client.fetch<Project | null>(projectBySlugQuery, {slug})
+export async function getProjectBySlug(slug: string) {
+  const project = await client.fetch<Project | null>(projectBySlugQuery, {slug})
+  if (project) return project
+  if (slug === berlinDrivingProject.slug) return await client.fetch<boolean>(berlinDrivingPresenceQuery) ? null : berlinDrivingProject
+  return null
 }
 
-export function getProjectSlugs() {
-  return client.fetch<{slug: string}[]>(projectSlugsQuery)
+export async function getProjectSlugs() {
+  const [slugs, cmsOwnsBerlin] = await Promise.all([client.fetch<{slug: string}[]>(projectSlugsQuery), client.fetch<boolean>(berlinDrivingPresenceQuery)])
+  return includeBerlinDriving(slugs, {slug: berlinDrivingProject.slug}, cmsOwnsBerlin)
 }
 
-export function getProjectNavigation() {
-  return client.fetch<ProjectNavItem[]>(projectNavQuery)
+export async function getProjectNavigation() {
+  const [projects, cmsOwnsBerlin] = await Promise.all([client.fetch<ProjectNavItem[]>(projectNavQuery), client.fetch<boolean>(berlinDrivingPresenceQuery)])
+  return includeBerlinDriving(projects, {slug: berlinDrivingProject.slug, title: berlinDrivingProject.title}, cmsOwnsBerlin)
 }
 
 export function getResources() {

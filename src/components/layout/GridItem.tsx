@@ -32,7 +32,7 @@ export const GridItem: FC<GridItemProps> = ({post, index}) => {
       <article className="grid-container">
         <div className="work-card__meta">
           <span>{`//${String(index + 1).padStart(2, '0')}`}</span>
-          <span>{displayYear}</span>
+          <span>{post.experiencePath ? 'PLAYABLE / ' : ''}{displayYear}</span>
         </div>
         <div className="image_container">
           <div className="image_container__inner">

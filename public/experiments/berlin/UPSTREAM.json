@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/mrdoob/slop-newyork",
+  "commit": "9301fcbe4009b83480e4d916f7e1f308b23b17cc",
+  "threeRepository": "https://github.com/mrdoob/three.js",
+  "threeCommit": "ee6a50ecf766fd9010951ab384120db9dd13b902",
+  "threeRevision": "187dev",
+  "adaptation": "Berlin Mitte geographic data and city-specific content; original WebGPU/TSL engine and application systems"
+}

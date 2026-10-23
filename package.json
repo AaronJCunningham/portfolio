@@ -8,6 +8,8 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
+    "test:berlin": "node --test tests/berlin-portfolio.test.cjs",
+    "sync:berlin": "node scripts/sync-berlin-simulator.mjs",
     "test:shop": "node --test tests/shop.test.cjs tests/shop-setup.test.cjs",
     "test:glitch": "node --test tests/glitch-browser.test.mjs && npm --prefix services/glitch-studio test",
     "glitch:renderer": "npm --prefix services/glitch-studio start",

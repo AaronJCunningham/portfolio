@@ -34,6 +34,7 @@ const projectCardFields = /* groq */ `
   excerpt,
   publishedAt,
   sortOrder,
+  experiencePath,
   "isResource": ${resourceFilter},
   mainImage { ${imageFields} },
   seo {
@@ -96,6 +97,11 @@ export const projectNavQuery = defineQuery(/* groq */ `
     title,
     "slug": slug.current
   }
+`)
+
+// Even a hidden published record owns its slug; the local launch fallback must respect it.
+export const berlinDrivingPresenceQuery = defineQuery(/* groq */ `
+  count(*[_type == "project" && slug.current == "berlin-driving-simulator" && !(_id in path("drafts.**"))]) > 0
 `)
 
 export const resourcesQuery = defineQuery(/* groq */ `
