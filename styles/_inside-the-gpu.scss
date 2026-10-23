@@ -1,0 +1,156 @@
+.community-theme .gpu {
+  --gpu-accent: #fa7653;
+  --gpu-muted: #9ca7a8;
+  --gpu-line: rgba(189, 207, 207, .18);
+  box-sizing: border-box;
+  color: #f3eeeb;
+  background: #080c0e;
+  min-height: 100svh;
+  padding: 0 clamp(20px, 3.5vw, 56px);
+  color-scheme: dark;
+  *, *::before, *::after { box-sizing: border-box; }
+  button, select { color: inherit; background: none; border: 1px solid var(--gpu-line); font: inherit; font-size: .65rem; cursor: pointer; min-height: 44px; border-radius: 0; }
+  button { padding: 10px 14px; transition: color .2s, border-color .2s, background .2s; }
+  button:hover { color: var(--gpu-accent); border-color: var(--gpu-accent); }
+  button:disabled { opacity: .35; cursor: default; }
+  button:focus-visible, a:focus-visible, summary:focus-visible, canvas:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--gpu-accent); outline-offset: 4px; }
+  button[aria-pressed="true"] { color: var(--gpu-accent); }
+  h1, h2, p { margin: 0; }
+  a:hover { color: var(--gpu-accent); }
+  .gpu__header { height: 76px; display: flex; justify-content: space-between; align-items: center; gap: 16px; border-bottom: 1px solid var(--gpu-line); }
+  .gpu__back, .gpu__edition { font-size: .58rem; letter-spacing: .08em; }
+  .gpu__back { min-height: 44px; display: flex; align-items: center; gap: 12px; }
+  .gpu__edition { color: var(--gpu-muted); }
+  .community-brand { font-size: .7rem; }
+  .gpu__experience { display: grid; grid-template-columns: minmax(280px, 31%) minmax(0, 1fr); min-height: 620px; height: calc(100svh - 258px); max-height: 1050px; }
+  .gpu__story { padding: 32px 32px 28px 0; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; position: relative; z-index: 2; }
+  .gpu__eyebrow { display: flex; align-items: center; gap: 8px; font-size: .55rem; line-height: 1.6; letter-spacing: .1em; color: var(--gpu-muted); }
+  .gpu__eyebrow i, .gpu__world-top i { display: inline-block; width: 5px; height: 5px; background: var(--gpu-accent); border-radius: 50%; }
+  .gpu__identity h1 { font-family: var(--font-display), sans-serif; font-size: clamp(4.6rem, 6.8vw, 7.6rem); line-height: .9; letter-spacing: -.075em; text-transform: none; margin: 23px 0 15px; }
+  .gpu__identity h1 em { color: var(--gpu-accent); font-style: normal; }
+  .gpu__intro { color: var(--gpu-muted); font-size: .65rem; }
+  .gpu__lesson { position: relative; padding-top: 21px; border-top: 1px solid var(--gpu-line); }
+  .gpu__lesson .thin-frame__outline { position: absolute; inset: -1px 0 auto; height: 1px; pointer-events: none; }
+  .gpu__lesson .thin-frame__outline::after { content: ''; width: 4px; height: 4px; background: var(--gpu-accent); display: block; position: absolute; top: -1px; right: 0; }
+  .gpu__lesson .gpu__eyebrow { color: var(--gpu-accent); justify-content: space-between; }
+  .gpu__lesson h2 { font-family: var(--font-display), sans-serif; font-size: clamp(1.55rem, 2.2vw, 2.4rem); line-height: 1.14; text-transform: none; letter-spacing: -.045em; white-space: pre-line; margin: 17px 0 13px; }
+  .gpu__caption { color: #b6bebe; font-size: .68rem; line-height: 1.85; }
+  .gpu__fact { padding: 12px 0; margin-top: 12px; border-top: 1px solid var(--gpu-line); color: var(--gpu-accent); font-size: .59rem; line-height: 1.7; }
+  .gpu__interaction { min-height: 65px; margin-top: 3px; }
+  .gpu__interaction label { display: flex; justify-content: space-between; color: #d4d7d5; font-size: .64rem; }
+  output { color: var(--gpu-accent); }
+  input[type="range"] { width: 100%; height: 28px; margin: 5px 0; accent-color: var(--gpu-accent); cursor: ew-resize; }
+  select { width: 100%; margin: 10px 0; padding: 10px; background: #11191c; }
+  small { display: block; color: var(--gpu-muted); font-size: .56rem; line-height: 1.8; }
+  .gpu__space-steps { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .gpu__space-steps button { padding: 4px; border: 0; font-size: .55rem; min-height: 32px; }
+  .gpu__code { padding: 12px; border: 1px solid var(--gpu-line); display: grid; gap: 7px; font-size: .6rem; }
+  .gpu__code span { font-size: .5rem; color: var(--gpu-accent); }
+  code { font-family: inherit; }
+  .gpu__toggle { width: 100%; display: flex; align-items: center; gap: 10px; text-align: left; }
+  .gpu__switch { width: 25px; height: 14px; border: 1px solid var(--gpu-muted); border-radius: 10px; position: relative; }
+  .gpu__switch::after { content: ''; position: absolute; width: 8px; height: 8px; top: 2px; left: 2px; background: var(--gpu-muted); border-radius: 50%; }
+  [aria-pressed="true"] .gpu__switch::after { left: 13px; background: var(--gpu-accent); }
+  .gpu__branch { display: block; font-size: .57rem; color: var(--gpu-accent); padding: 10px 0; }
+  .gpu__step { margin-bottom: 10px; }
+  .gpu__depth-key { display: flex; justify-content: space-between; font-size: .58rem; margin: 4px 0 8px; }
+  .gpu__depth-key span:first-child { color: #8fd6c8; }
+  .gpu__depth-key span:last-child { color: #fa7653; }
+  .gpu__world { position: relative; min-width: 0; overflow: hidden; border-right: 1px solid var(--gpu-line); border-left: 1px solid var(--gpu-line); background: #080c0e; }
+  .gpu__world-top, .gpu__world-bottom { position: absolute; z-index: 2; left: 22px; right: 22px; display: flex; justify-content: space-between; gap: 12px; font-size: .5rem; letter-spacing: .07em; pointer-events: none; color: var(--gpu-muted); }
+  .gpu__world-top { top: 25px; }
+  .gpu__world-top span:first-child { display: flex; align-items: center; gap: 8px; }
+  .gpu__world-bottom { bottom: 22px; }
+  .gpu-world-label { color: #d1c1ac; background: #080c0eb3; padding: 5px 8px; white-space: nowrap; font-size: 8px; letter-spacing: .12em; user-select: none; }
+  .gpu-world-label__large { font: 34px var(--font-display), sans-serif; letter-spacing: .1em; }
+  .gpu__loading, .gpu__unavailable { position: absolute; inset: 35% 12% auto; text-align: center; font-size: .75rem; line-height: 1.8; color: var(--gpu-muted); }
+  .gpu__unavailable button { margin-top: 15px; }
+  .gpu__final { position: absolute; z-index: 2; left: 30px; right: 30px; bottom: 50px; padding-top: 60px; pointer-events: none; background: linear-gradient(transparent, #080c0ee6 48%); }
+  .gpu__final p { font-family: var(--font-display), sans-serif; font-size: clamp(4rem, 8.2vw, 10rem); letter-spacing: -.075em; line-height: .95; }
+  .gpu__final h2 { font-family: var(--font-display), sans-serif; font-size: clamp(1.3rem, 2.4vw, 2.5rem); letter-spacing: -.045em; text-transform: none; margin: 9px 0 14px; }
+  .gpu__final em { color: var(--gpu-accent); font-style: normal; }
+  .gpu__final > span { font-size: .65rem; color: #c3c4bb; }
+  .gpu__final small { margin-top: 7px; font-size: .5rem; }
+  .gpu__share { display: flex; gap: 8px; flex-wrap: wrap; }
+  .gpu__share button:first-child { background: var(--gpu-accent); color: #080c0e; border-color: var(--gpu-accent); }
+  .gpu__transport { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid var(--gpu-line); }
+  .gpu__view-controls, .gpu__travel { display: flex; gap: 6px; }
+  .gpu__view-controls button { border-color: transparent; color: var(--gpu-muted); font-size: .58rem; padding: 8px; }
+  .gpu__view-controls button[aria-pressed="true"] { color: var(--gpu-accent); }
+  .gpu__transport > p { color: var(--gpu-muted); font-size: .52rem; line-height: 1.6; }
+  .gpu__travel button:last-child { min-width: 135px; display: flex; justify-content: space-between; gap: 20px; }
+  .gpu__travel button:last-child span { color: var(--gpu-accent); }
+  .gpu__stages { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid var(--gpu-line); border-bottom: 1px solid var(--gpu-line); }
+  .gpu__stages button { display: flex; position: relative; align-items: center; gap: 12px; min-height: 65px; border: 0; border-right: 1px solid var(--gpu-line); color: var(--gpu-muted); padding: 13px 17px; font-size: .6rem; }
+  .gpu__stages button:last-child { border-right: 0; }
+  .gpu__stages button > span:first-child { font-size: .5rem; opacity: .6; }
+  .gpu__stages button[aria-current] { color: #f3eeeb; background: #ffffff05; }
+  .gpu__stages button[aria-current]::before { content: ''; position: absolute; height: 2px; background: var(--gpu-accent); top: -1px; left: 0; right: 0; }
+  .gpu__stages button[aria-current] i { width: 4px; height: 4px; border-radius: 50%; background: var(--gpu-accent); margin-left: auto; }
+  .gpu__footer { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; padding: 19px 0; font-size: .48rem; letter-spacing: .06em; color: var(--gpu-muted); }
+  .gpu__footer > span { padding-top: 5px; }
+  .gpu__footer details { max-width: 660px; flex: 1; text-align: center; }
+  .gpu__footer summary { padding: 5px 0; cursor: pointer; font-size: .56rem; }
+  .gpu__method { text-align: left; letter-spacing: 0; padding: 26px 0; }
+  .gpu__method h2 { font: 1.7rem var(--font-display), sans-serif; text-transform: none; }
+  .gpu__method p { font-size: .65rem; line-height: 1.9; margin: 16px 0; }
+  .gpu__method dl { font-size: .65rem; }
+  .gpu__method dl > div { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--gpu-line); }
+  .gpu__method dl > div:last-child { color: var(--gpu-accent); }
+  .gpu__method a { text-decoration: underline; text-underline-offset: 3px; }
+  .gpu__device { overflow-wrap: anywhere; }
+  .gpu__notice { font-size: .7rem; color: var(--gpu-accent); padding: 20px 0 4px; overflow-wrap: anywhere; }
+
+  @media (min-width: 761px) and (max-height: 820px) {
+    .gpu__experience { min-height: 600px; }
+    .gpu__identity h1 { font-size: 5rem; }
+    .gpu__story { gap: 20px; padding-top: 25px; }
+  }
+  @media (max-width: 1050px) {
+    .gpu__edition { display: none; }
+    .gpu__transport > p { display: none; }
+    .gpu__stages button { flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 8px; }
+    .gpu__stages button[aria-current] i { position: absolute; right: 8px; top: 15px; }
+    .gpu__story { padding-right: 22px; }
+  }
+  @media (max-width: 760px) {
+    padding: 0 18px;
+    .gpu__header { height: 64px; }
+    .gpu__back { font-size: .5rem; }
+    .gpu__experience { display: flex; flex-direction: column; height: auto; max-height: none; min-height: 0; }
+    .gpu__story { display: contents; }
+    .gpu__identity { order: 0; padding: 24px 0 20px; }
+    .gpu__identity h1 { font-size: clamp(3.2rem, 12vw, 5.5rem); margin: 12px 0; }
+    .gpu__identity h1 br { display: none; }
+    .gpu__eyebrow { font-size: .48rem; }
+    .gpu__intro { font-size: .59rem; }
+    .gpu__world { order: 1; height: 440px; height: clamp(340px, 52svh, 520px); border: 1px solid var(--gpu-line); }
+    .gpu__world-top, .gpu__world-bottom { font-size: .42rem; left: 12px; right: 12px; }
+    .gpu__world-top { top: 14px; }
+    .gpu__world-bottom { bottom: 14px; }
+    .gpu__lesson { order: 2; padding: 24px 0 20px; border: 0; }
+    .gpu__lesson h2 { font-size: 2rem; white-space: normal; max-width: 360px; }
+    .gpu__lesson .thin-frame__outline { display: none; }
+    .gpu__caption { font-size: .72rem; }
+    .gpu__interaction { min-height: 0; }
+    .gpu__interaction small { font-size: .61rem; }
+    .gpu__final { left: 18px; right: 18px; bottom: 40px; padding-top: 50px; }
+    .gpu__final p { font-size: 4.8rem; }
+    .gpu__final h2 { font-size: 1.5rem; margin-bottom: 9px; }
+    .gpu__final > span { font-size: .5rem; }
+    .gpu__final small { font-size: .43rem; }
+    .gpu__transport { flex-wrap: wrap; gap: 8px; }
+    .gpu__view-controls { gap: 1px; }
+    .gpu__view-controls button { padding: 8px 5px; font-size: .53rem; }
+    .gpu__travel { margin-left: auto; }
+    .gpu__travel button:last-child { min-width: 104px; gap: 12px; }
+    .gpu__stages button { padding: 12px 3px; font-size: .48rem; }
+    .gpu__stages button[aria-current] i { display: none; }
+    .gpu__footer { flex-wrap: wrap; gap: 12px; }
+    .gpu__footer > span { font-size: .42rem; }
+    .gpu__footer details { order: 3; flex-basis: 100%; }
+    .gpu__footer summary { min-height: 40px; padding: 12px; }
+    .gpu-world-label { font-size: 6px; padding: 4px; }
+  }
+  @media (prefers-reduced-motion: reduce) { button { transition: none; } }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Berlin Driving Simulator",
+  "projectPath": "/berlin-driving-simulator",
+  "experiencePath": "/play/berlin",
+  "original": "https://mrdoob.github.io/slop-newyork/",
+  "upstream": {
+    "repository": "https://github.com/mrdoob/slop-newyork",
+    "commit": "9301fcbe4009b83480e4d916f7e1f308b23b17cc",
+    "threeRepository": "https://github.com/mrdoob/three.js",
+    "threeCommit": "ee6a50ecf766fd9010951ab384120db9dd13b902",
+    "threeRevision": "187dev",
+    "adaptation": "Berlin Mitte geographic data and city-specific content; original WebGPU/TSL engine and application systems"
+  },
+  "dataSha256": "3fb0060758085b8a46bd2270c63dde2261b66a6b7d06460fefbb6a58a92c1d47",
+  "dataLicense": "ODbL-1.0",
+  "license": "MIT"
+}

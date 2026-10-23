@@ -1,4 +1,5 @@
 const config = {
+  sourceDir: process.env.NEXT_BUILD_DIR || '.next',
   siteUrl: "https://www.aaronjcunningham.com",
   generateRobotsTxt: true,
   generateIndexSitemap: false,

@@ -59,6 +59,15 @@ export default function DynamicProject({project, previousProject, nextProject}: 
       name: 'Aaron J. Cunningham',
       url: 'https://www.aaronjcunningham.com',
     },
+    ...(project.attribution && {
+      isBasedOn: {
+        '@type': 'SoftwareApplication',
+        name: project.attribution.sourceTitle,
+        url: project.attribution.url,
+        author: {'@type': 'Person', name: project.attribution.creator},
+      },
+      creditText: project.attribution.label,
+    }),
   }
 
   return (
@@ -71,27 +80,46 @@ export default function DynamicProject({project, previousProject, nextProject}: 
         structuredData={projectStructuredData}
       />
 
-      <div className="project-experience">
+      <div className={`project-experience${project.attribution ? ' project-experience--adaptation' : ''}`}>
 
         <main className="project-case">
           <header className="project-masthead">
             <Link className="project-mark" href="/" aria-label="Return home">
               AJC
             </Link>
-            <span>CASE STUDY / SELECTED WORK</span>
+            <span>{project.attribution ? 'INTERACTIVE EXPERIMENT / SELECTED WORK' : 'CASE STUDY / SELECTED WORK'}</span>
           </header>
 
           <section className="project-hero" aria-labelledby="project-title">
             <div className="project-kicker">
-              <span>{'// CASE STUDY'}</span>
+              <span>{project.attribution ? '// INTERACTIVE EXPERIMENT' : '// CASE STUDY'}</span>
               <span>{publishedDate || 'SELECTED PROJECT'}</span>
             </div>
             <h1 id="project-title">{project.title}</h1>
             {project.excerpt && <p>{project.excerpt}</p>}
 
+            {project.experiencePath && /^\/(?!\/)[a-z0-9/-]+$/.test(project.experiencePath) && (
+              <div className="project-hero__actions">
+                {project.standaloneExperience ? (
+                  <a className="project-play-link" href={project.experiencePath}>
+                    {project.experienceLabel || 'Enter experience'} <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <Link className="project-play-link" href={project.experiencePath}>
+                    {project.experienceLabel || 'Enter experience'} <span aria-hidden="true">↗</span>
+                  </Link>
+                )}
+                {project.attribution && (
+                  <a className="project-original-credit" href={project.attribution.url} target="_blank" rel="noopener noreferrer">
+                    {project.attribution.label} <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
+            )}
+
             <div className="project-hero__footer">
               <span>AARON J. CUNNINGHAM</span>
-              <span>DESIGN / DEVELOPMENT / PRODUCT</span>
+              <span>{project.roleLabel || 'DESIGN / DEVELOPMENT / PRODUCT'}</span>
               <i aria-hidden="true" />
             </div>
           </section>
@@ -114,6 +142,17 @@ export default function DynamicProject({project, previousProject, nextProject}: 
             </figure>
           )}
 
+          {project.gallery && project.gallery.length > 0 && (
+            <div className="project-gallery" aria-label="Views from the simulator">
+              {project.gallery.map(image => (
+                <figure key={image.src}>
+                  <Image src={image.src} alt={image.alt} width={1920} height={873} sizes="(max-width: 820px) calc(100vw - 40px), 40vw" />
+                  <figcaption>{image.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+
           <section className="project-content" aria-label={`${project.title} case study content`}>
             <aside className="project-content__rail">
               <div>
@@ -122,9 +161,15 @@ export default function DynamicProject({project, previousProject, nextProject}: 
               </div>
               <dl>
                 <div>
-                  <dt>AUTHOR</dt>
+                  <dt>{project.attribution ? 'BERLIN ADAPTATION' : 'AUTHOR'}</dt>
                   <dd>AARON J. CUNNINGHAM</dd>
                 </div>
+                {project.attribution && (
+                  <div>
+                    <dt>ORIGINAL SIMULATION</dt>
+                    <dd>{project.attribution.creator} / {project.attribution.sourceTitle}</dd>
+                  </div>
+                )}
                 {publishedDate && (
                   <div>
                     <dt>PUBLISHED</dt>
@@ -138,8 +183,8 @@ export default function DynamicProject({project, previousProject, nextProject}: 
                     <a
                       key={link._key || link.url}
                       href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target={link.url.startsWith('/') && !link.url.startsWith('//') ? undefined : '_blank'}
+                      rel={link.url.startsWith('/') && !link.url.startsWith('//') ? undefined : 'noopener noreferrer'}
                     >
                       {link.label} <span aria-hidden="true">↗</span>
                     </a>

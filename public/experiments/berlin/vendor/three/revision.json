@@ -1,0 +1,26 @@
+{
+  "repository": "https://github.com/mrdoob/three.js",
+  "commit": "ee6a50ecf766fd9010951ab384120db9dd13b902",
+  "revision": "187dev",
+  "sha256": {
+    "LICENSE": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "build/three.tsl.js": "7030350f22f1e89629a65c683371ace98c1c93420b3d08475fca9636018641bb",
+    "build/three.webgpu.js": "eec98f67fdf8ad3ef75379e227227400832c98ca02b7296bd7648fa4bd3ea550",
+    "examples/jsm/lighting/ClusteredLighting.js": "28d00d4a745a8927d7e0f0d8664d94d23d98ffea120ff54183b40973be45bf17",
+    "examples/jsm/lights/SunLight.js": "580a50687031518ea66e4b0cb85884d657d2f7dc72d38e64e6c874d51f5aa2eb",
+    "examples/jsm/lights/SunLightNode.js": "d64be448da7631e35c8382b4b80906326613739f4891301820886bddaaf9c337",
+    "examples/jsm/objects/SkyMesh.js": "64804362f468a70d5d0283161241d85ef5c47fa1944ca916542a04217c3ebe64",
+    "examples/jsm/tsl/display/BloomNode.js": "e7a39bf41581b5ada6463dfd2e571c6fff27648e459cc0d7fd13d64bbcf0f6ea",
+    "examples/jsm/tsl/display/SSRNode.js": "38a173b21e9825fe3cdfaf319ba29c4bfb6693536aae9ae517c037fb5bb15967",
+    "examples/jsm/utils/BufferGeometryUtils.js": "48916101a392fd03e0d93dd8ff4b292e14262b64df82b23b5068a6c7578bade3",
+    "package.json": "50e651ded364f9b1d0325bec5af816e2fd83679b9122ba58b4f009862bd4cd0c",
+    "build/three.core.js": "14a79693ba3790a71a371131005d0309d5f3d43040f1270e69a77454576d8730",
+    "examples/jsm/lights/SunLightShadow.js": "fd3ecd1e7d426813607f2829a1f767c0473ddbf3b3507d1cc9cca888a6839e31",
+    "examples/jsm/lights/SunShadowNode.js": "3e5e7f347c49f59b946b6958f2b88863fc7ee38fd6b992917f4a6c2f2190654c",
+    "examples/jsm/tsl/display/ImportanceSampledEnvironment.js": "a938b9efb1432628871515c030a069d91694e708c1b6ad2ebaa691aecdbd16ef",
+    "examples/jsm/tsl/display/boxBlur.js": "fa6f4ce3c9b1205fa3cc8a9da7783e57405402b6aa62a4bd984a8b0ac5ded115",
+    "examples/jsm/tsl/lighting/ClusteredLightsNode.js": "19eb45bf3b6f3f9f14c02ba43dd8ee004fc69a6db6bdd2899bd06b3d5b4d7b0e",
+    "examples/jsm/tsl/utils/RNoise.js": "a235650eba39528ff10f987c497552c65a3affc4633591f34aae24b4ae98a20b",
+    "examples/jsm/tsl/utils/SpecularHelpers.js": "34b6de70b079a1418eb8fe7fc3588f32860f3f591cbac965c062fff8e73ffb19"
+  }
+}

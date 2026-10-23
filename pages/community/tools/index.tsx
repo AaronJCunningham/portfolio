@@ -5,7 +5,7 @@ import MetaDataHeader from '@/components/metadata/MetaDataHeader'
 
 export default function Tools() {
   return <>
-    <MetaDataHeader exactTitle title="Tools — Aaron LVX" content="Tools for study and creation. Explore Tarot on the Tree of Life and turn your photos into motion with Glitch Studio." canonical="https://aaronjcunningham.com/community/tools" image="https://aaronjcunningham.com/tools/preview.jpg" imageAlt="The Aaron LVX tools page, featuring Tarot on the Tree of Life and Glitch Studio" />
+    <MetaDataHeader exactTitle title="Tools — Aaron LVX" content="Tools for study and creation. Explore Tarot on the Tree of Life and turn photos into motion with Glitch Studio." canonical="https://aaronjcunningham.com/community/tools" image="https://aaronjcunningham.com/tools/preview.jpg" imageAlt="The Aaron LVX tools collection: Tarot on the Tree of Life and Glitch Studio" />
     <div className="community-tools">
       <CommunityHeader />
       <main className="community-tools__main">

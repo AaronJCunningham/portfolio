@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: process.env.NEXT_BUILD_DIR || '.next',
+  async rewrites() {
+    return [{source: '/play/berlin', destination: '/experiments/berlin/index.html'}]
+  },
+  async headers() {
+    return [{
+      source: '/experiments/berlin/:path*',
+      headers: [{key: 'Cache-Control', value: 'public, max-age=0, s-maxage=86400, stale-while-revalidate=604800'}],
+    }]
+  },
   async redirects() {
     return [
       {source: '/shop/:path*', destination: '/community/shop/:path*', permanent: true},
