@@ -1,0 +1,10 @@
+pedestrian-scream.mp3
+"Short Scream" by riippumattog (February 14, 2025).
+Source: https://freesound.org/people/riippumattog/sounds/788867/
+License: Creative Commons Zero 1.0 (CC0)
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Unmodified high-quality MP3 preview downloaded from:
+https://cdn.freesound.org/previews/788/788867_15115102-hq.mp3
+The source page permits copying, modification, distribution and commercial use.
+The simulator normalizes playback volume in memory and slightly varies pitch.

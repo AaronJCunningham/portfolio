@@ -1,5 +1,5 @@
 import { createSynthResources, createMotorVoice, setControlRate } from './audio-synthesis.js';
-import { createEventResources, playEvent, createWindVoice } from './audio-events.js';
+import { createEventResources, loadScreamSample, playEvent, createWindVoice } from './audio-events.js';
 import { CityAudioSources } from './audio-sources.js';
 import { CityAcoustics } from './audio-acoustics.js';
 
@@ -159,6 +159,9 @@ class CityAudioSystem {
       listener.upX, listener.upY, listener.upZ
     );
     this.resources = createEventResources(context, createSynthResources(context));
+    loadScreamSample(context, this.resources).catch(error => {
+      if (!this.disposed) console.warn('[audio] Unable to load pedestrian scream', error);
+    });
     this.mix = context.createGain();
     this.compressor = context.createDynamicsCompressor();
     this.compressor.threshold.value = -16;
@@ -365,6 +368,7 @@ class CityAudioSystem {
 
   scream(ped) {
     if (!this.ready || !this.enabled || !this.haveListener || this.context?.state !== 'running' || document.hidden) return false;
+    if (!this.resources?.screams?.length) return false;
     const now = this.context.currentTime;
     // One short cry at most every 0.8 s across the crowd; never a continuous chorus.
     if (now - this.lastScream < 0.8) return false;

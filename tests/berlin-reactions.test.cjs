@@ -79,8 +79,8 @@ test('waits for the car to clear, recovers smoothly, and does not retrigger duri
   }
 });
 
-const { createEventResources, playEvent } = load('audio-events.js', { './audio-synthesis.js': { setControlRate() {} } });
-test('short procedural cries use reusable finite buffers and a single scheduled audio source', () => {
+const { createEventResources, loadScreamSample, playEvent } = load('audio-events.js', { './audio-synthesis.js': { setControlRate() {} } });
+test('the local scream MP3 is fetched and decoded once, then reused as a short spatial event', async () => {
   const sources = [];
   const parameter = () => ({ value: 0, cancelScheduledValues() {}, setTargetAtTime() {} });
   const node = () => ({ connect(target) { return target; }, disconnect() {}, gain: parameter() });
@@ -91,19 +91,38 @@ test('short procedural cries use reusable finite buffers and a single scheduled 
     createBufferSource() { const s = { ...node(), playbackRate: parameter(), start(t) { this.startAt = t; }, stop(t) { this.stopAt = t; } }; sources.push(s); return s; }
   };
   const resources = createEventResources(ctx, {});
-  assert.equal(resources.screams.length, 6);
-  for (const buffer of resources.screams) {
-    assert.ok(buffer.duration >= 0.42 && buffer.duration <= 0.57);
-    let peak = 0;
-    for (const sample of buffer.getChannelData(0)) { assert.ok(Number.isFinite(sample)); peak = Math.max(peak, Math.abs(sample)); }
-    assert.ok(peak > 0.45 && peak <= 0.51);
-  }
+  const mp3 = fs.readFileSync('public/experiments/berlin/audio/pedestrian-scream.mp3');
+  assert.ok(mp3.subarray(0, 3).toString() === 'ID3' || (mp3[0] === 0xff && (mp3[1] & 0xe0) === 0xe0), 'valid MP3 tag or MPEG frame header');
+  assert.ok(mp3.length < 25000);
+  assert.equal(resources.screams.length, 0);
+  playEvent(ctx, resources, 'scream', node());
+  assert.equal(sources.length, 0, 'no empty or synthetic voice before the recording is ready');
+  const channels = [new Float32Array([0, 0.8, -0.4, 0]), new Float32Array([0, -0.4, 0.2, 0])];
+  const decoded = { duration: 0.65, numberOfChannels: 2, getChannelData: i => channels[i] };
+  let requests = 0, decodes = 0;
+  ctx.decodeAudioData = async bytes => { decodes++; assert.deepEqual(Buffer.from(bytes), mp3); return decoded; };
+  await loadScreamSample(ctx, resources, async url => {
+    requests++; assert.equal(url, '/experiments/berlin/audio/pedestrian-scream.mp3');
+    return { ok: true, arrayBuffer: async () => mp3.buffer.slice(mp3.byteOffset, mp3.byteOffset + mp3.byteLength) };
+  });
+  assert.equal(resources.screams[0], decoded);
+  assert.equal(Math.max(...channels.flatMap(c => [...c].map(Math.abs))), 0.5);
   const event = playEvent(ctx, resources, 'scream', node(), { seed: 4, intensity: 0.75 });
   assert.equal(sources.length, 1);
-  assert.ok(event.endTime > 10.3 && event.endTime < 10.7);
+  assert.ok(event.endTime > 10.6 && event.endTime < 10.8);
+  assert.equal(sources[0].buffer, decoded);
   assert.equal(sources[0].stopAt, event.endTime);
   event.dispose(true);
   assert.equal(sources[0].stopAt, 10);
+  playEvent(ctx, resources, 'scream', node(), { seed: 7 });
+  assert.equal(sources[1].buffer, decoded);
+  assert.equal(requests, 1); assert.equal(decodes, 1);
+});
+
+test('a failed audio download leaves screams silent without disrupting other sounds', async () => {
+  const resources = { screams: [], footsteps: ['existing'] };
+  await assert.rejects(loadScreamSample({}, resources, async () => ({ ok: false, status: 404 })), /HTTP 404/);
+  assert.deepEqual(resources, { screams: [], footsteps: ['existing'] });
 });
 
 const { CityAudioSystem } = load('audio-system.js', {
@@ -115,8 +134,10 @@ test('screams obey mute, visibility, range result, and global cooldown without q
   try {
     let emitted = 0;
     const system = { ready: true, enabled: true, haveListener: true, context: { state: 'running', currentTime: 10 },
-      lastScream: -Infinity, emit() { emitted++; return true; } };
+      resources: { screams: [] }, lastScream: -Infinity, emit() { emitted++; return true; } };
     const scream = () => CityAudioSystem.prototype.scream.call(system, { ...person(), rig: { seed: 1 } });
+    assert.equal(scream(), false);
+    system.resources.screams = [{}];
     assert.equal(scream(), true); assert.equal(scream(), false);
     system.context.currentTime = 11;
     system.enabled = false; assert.equal(scream(), false);

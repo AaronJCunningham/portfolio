@@ -97,19 +97,21 @@ function buildBerlinCityGrid(scene) {
   // Berlin is a continuous inland city: subtract the actual Spree/canal outlines
   // from the land. Islands inside water polygons are restored as land polygons.
   const water = (BERLIN_DATA.water || []).filter(w => w.ring?.length >= 6);
+  const waterY = ISLAND_BOUNDS.waterLevel;
+  const bankTop = 0.19, bankBottom = waterY - 0.03;
   const land = [{ x: -16000, z: -16000 }, { x: 16000, z: -16000 }, { x: 16000, z: 16000 }, { x: -16000, z: 16000 }];
   collect(berlinPolygonGeometry(land, water.map(w => berlinPoints(w.ring)), -0.025), sidewalkMat);
   for (const feature of water) {
     const ring = berlinPoints(feature.ring), holes = (feature.holes || []).map(berlinPoints);
-    collect(berlinPolygonGeometry(ring, holes, -0.65), waterMat);
+    collect(berlinPolygonGeometry(ring, holes, waterY), waterMat);
     for (const hole of holes) collect(berlinPolygonGeometry(hole, [], -0.025), sidewalkMat);
     for (const edge of [ring, ...holes]) for (let i = 0; i < edge.length; i++) {
       const a = edge[i], b = edge[(i + 1) % edge.length];
       const len = Math.hypot(b.x - a.x, b.z - a.z);
       if (len < 0.4) continue;
-      const wall = new THREE.BoxGeometry(len + 0.05, 0.87, 0.38);
+      const wall = new THREE.BoxGeometry(len + 0.05, bankTop - bankBottom, 0.38);
       wall.rotateY(-Math.atan2(b.z - a.z, b.x - a.x));
-      wall.translate((a.x + b.x) / 2, -0.245, (a.z + b.z) / 2);
+      wall.translate((a.x + b.x) / 2, (bankTop + bankBottom) / 2, (a.z + b.z) / 2);
       collect(wall, curbMat);
     }
   }
