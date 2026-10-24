@@ -16,23 +16,73 @@ The simulation is not imported into Next.js or React. Its native import map pres
 
 The production integration includes Berlin only. Inside the GPU and One Frame remain on `feat/inside-the-gpu`, including their routes, cards, assets and tests.
 
-## Refresh the simulation
+## Edit the simulation
 
-From this portfolio checkout:
+This portfolio is the source of truth. Edit `public/experiments/berlin/index.html`, `css/` and `js/` directly in this checkout, then run `npm run test:berlin` and check `/play/berlin` in the local portfolio. The old standalone checkout is not a dependency and must not be synced over these files.
 
-```sh
-npm run sync:berlin
-# Or provide another checkout explicitly:
-node scripts/sync-berlin-simulator.mjs /absolute/path/to/slop-berlin-webgpu
-```
-
-The sync helper copies runtime CSS, JavaScript, vendored Three.js, MIT license and upstream pin into `public/experiments/berlin`. It adds a stable base URL, a return-to-project link, and the article canonical URL to the exported HTML. No source rewrite, dependency upgrade, commit or deployment occurs.
+The native import map, pinned Three.js, MIT license, data attribution, base URL and return-to-project link are maintained here. The former cross-repository sync command has been removed to prevent overwriting portfolio changes.
 
 The adapted OSM database remains downloadable as `data/berlin.json.gz`, alongside its attribution. Compression avoids distributing a second 51 MB uncompressed copy in the static package; startup uses the existing geographic module. The resulting export has 57 files totalling about 86.5 MB. `export-manifest.json` records the upstream pin and exact map-data SHA-256. Raw retrieval files, the Python environment and the regional PBF are excluded.
 
 All public runtime files ship in this checkout, so a Vercel build does not need the sibling source checkout or a fresh OSM fetch. The normal portfolio build remains `npm run build`. This is prepared locally; hosting and bandwidth limits should be reviewed when publishing the whole portfolio.
 
 ## Validation
+
+### Mitte geometry trial — 23 October 2026
+
+`/play/berlin/mitte` is an unlisted comparison view built directly in this portfolio, sharing its vendored WebGPU renderer. It does not replace the driving simulator. Five street viewpoints and a same-camera toggle compare official LoD2 surfaces with plain extrusions of the existing OSM footprints and heights. Click official buildings for source records.
+
+The 4 km² trial uses four 1 km tiles from Berlin's [official LoD2 dataset](https://daten.berlin.de/datensaetze/3d-gebaudemodelle-im-level-of-detail-2-lod-2-3c7c49af), licensed dl-de/zero-2-0: 5,239 buildings, 11,608 building records/parts, 452,672 triangles. Model record dates are March 2026; these are not guarantees of survey recency. Source ZIP URLs, hashes, conversion validation and all 13 self-intersecting source-surface repairs are recorded in `public/experiments/berlin/mitte/data/manifest.json`. Repairs resolve existing crossing edges in the surface plane; valid source surfaces remain unchanged, apart from millimetre coordinate rounding. Every triangulated polygon is checked for projected area preservation, including holes.
+
+This tests building geometry, not photographic appearance. Walls have no real windows, doors, storefronts or colours; roof forms are generalized. Ground between buildings is interpolated from building-base elevations. Street-level movement is an inspection camera without building collisions. The [2025 textured mesh](https://daten.berlin.de/datensaetze/3d-meshmodell-berlin) would be a separate appearance test; its download portal and raw data endpoints returned maintenance HTML during this trial. No textured assets were imported.
+
+Only the final ~5.5 MB compressed trial data ships. Raw CityGML and the Python environment stay in the ignored portfolio cache. Rebuild from this checkout:
+
+```sh
+python3 -m venv .cache/berlin-mitte/venv
+.cache/berlin-mitte/venv/bin/pip install -r scripts/mitte-requirements.txt
+.cache/berlin-mitte/venv/bin/python scripts/prepare-mitte-data.py
+node scripts/pack-mitte-data.mjs
+npm run test:mitte
+```
+
+The converter checks surface areas; the tests check source hashes, complete mesh coverage, each building's preserved 3D extent, and street viewpoint positions. Browser checks cover both layers and street-level navigation. This is not an independent survey of the source data's real-world accuracy.
+
+### Auguststraße style trial
+
+`/play/berlin/auguststrasse` now tests the original simulator’s simpler visual language on about 80 m of street. Official ground outlines and street-wall heights become flat-roofed blocks, with mapped floor counts where available. Other storey counts are explicitly height estimates. Courtyards and variations in building scale remain; fine roof forms and modeled facade fittings are omitted.
+
+Canvas-generated window patterns, pale plaster and a restrained brick palette give the blocks character. Published references inform KW’s two-storey frontage and blue entrance, and the former Jewish girls’ school’s red-brown facade and main window rhythm. These are visual approximations, not photographic facade reconstructions. Neighbouring colours and window positions, street furniture and parked cars are illustrative; no businesses are invented. Reference photographs are not redistributed.
+
+The same small viewer supports a **Simple street / Building shapes** toggle and three viewpoints. Grounded extrusions extend down into the interpolated terrain, while source wall-top heights remain fixed. The larger Mitte comparison retains its official surfaces and separate foundation skirts. All changes live in this portfolio; the main driving simulator has not been replaced by this trial.
+
+Rebuild the small data subset after preparing the full Mitte cache and the Auguststraße OSM street extract in `.cache/berlin-mitte/references/osm.json` (Overpass bbox 52.5257,13.3925,52.5280,13.3990):
+
+```sh
+.cache/berlin-mitte/venv/bin/python scripts/prepare-auguststrasse.py
+node scripts/pack-mitte-data.mjs --auguststrasse
+npm run test:mitte
+```
+
+The data tests verify mapped storey counts, source footprint bounds, fixed wall-top heights and continuous ground contact. The browser check covers both appearance layers and the KW, school and along-street views.
+
+### Live Mitte buildings
+
+The main `/play/berlin` scene now uses simplified official LoD2 ground outlines and wall heights throughout the existing Mitte locality boundary. This replaces 9,817 OSM records with 16,277 simple building masses, preserving different heights within a building. The 442 unmatched OSM records retain their geometry. Adjoining official parts in the same one-metre height band are merged and outlines simplified by 0.6 m. This approved Mitte result is preserved verbatim by the Ringbahn expansion below. Streets, vehicles, landmarks and the Auguststraße example are unchanged.
+
+The renderer keeps its six shared facade materials, instanced wall boxes, merged roofs and existing streaming. Wall-instance input rises from 577,168 to 595,999 across the city (3.3%). No detailed model surfaces, image textures or new props are added. Available mapped colours and the two existing architectural references adjust wall tint through a per-instance attribute. Storeys use the same procedural window shader; ground-floor shop decoration is not inferred for the replacement masses.
+
+Source ZIP hashes and conversion limits are in `public/experiments/berlin/data/mitte-buildings.json`. Raw data stays in the ignored portfolio cache. Rebuild with `.cache/berlin-mitte/venv/bin/python scripts/update-mitte-buildings.py --apply`; the converter uses its cached original OSM export and updates both the runtime module and downloadable data. Validate with `node --test tests/mitte-live.test.cjs` and `npm run test:berlin`.
+
+### Full Ringbahn building coverage
+
+The same conversion now covers the remaining Ringbahn interior across all 18 other mapped localities. 110 official tiles supply 99,476 simple masses replacing 52,607 former records; 4,451 unmatched records retain their existing geometry. The original Mitte result, all other map layers, the Ringbahn boundary, and Berghain’s custom model/source footprint are preserved. Colours carry over where mapped; no detailed meshes, textures or props are added.
+
+The renderer uses the same shared facade materials and spatial instancing. Total wall input changes from 595,999 to 690,797 segments (+15.91%); this is a geometry count, not an FPS measurement. For 101 near-touching outlines, extra coordinate precision prevents rounding from creating self-intersections. The 0.6 m simplification and building shapes are otherwise unchanged. Static geography is split into `nyc-geodata.js` and `berlin-geodata.js` to keep each file below 100 MiB, while preserving the existing `GEO` interface.
+
+Source tile hashes, per-locality coverage and preservation hashes are in `public/experiments/berlin/data/ringbahn-buildings.json`. Rebuild with `.cache/berlin-mitte/venv/bin/python scripts/update-mitte-buildings.py --ringbahn --apply`. This extends a cached snapshot of the approved Mitte version, making repeat runs deterministic. Run `npm run test:berlin` for the portfolio, data-preservation, geometry and pedestrian-reaction checks. All 18 checks pass. Browser checks in Kreuzberg, Charlottenburg and Prenzlauer Berg load the expanded WebGPU scene without application errors; screenshots are in `docs/qa/berlin/ringbahn-*.png`.
+
+### Portfolio integration
 
 ```sh
 npm run test:berlin

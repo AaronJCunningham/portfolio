@@ -1,0 +1,148 @@
+{
+  "name": "Mitte building accuracy trial",
+  "areaKm2": 4,
+  "boundsUTM": [
+    390000,
+    5820000,
+    392000,
+    5822000
+  ],
+  "originUTM": [
+    391000,
+    5821000,
+    32
+  ],
+  "crs": "EPSG:25833 + DHHN2016 height",
+  "sourceDates": [
+    "2026-03-02",
+    "2026-03-22"
+  ],
+  "downloadedAt": "2026-10-23T15:48:34.240174+00:00",
+  "sources": [
+    {
+      "file": "LoD2_390_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5820.zip",
+      "bytes": 6022489,
+      "sha256": "d9d9a229be3e5a54dfa96e3fee8c6b66bf89fc8cc01620e229d2b00374bd3f31"
+    },
+    {
+      "file": "LoD2_390_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5821.zip",
+      "bytes": 5592413,
+      "sha256": "dcc6852d4747e59b6f0dd7578aa67cbc5bc12b4585dcfd671adb61da2598c528"
+    },
+    {
+      "file": "LoD2_391_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5820.zip",
+      "bytes": 6731543,
+      "sha256": "ed927ae9ab86d06815eaa9e95e4a7abf328a876e7e680986192314155e203a08"
+    },
+    {
+      "file": "LoD2_391_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5821.zip",
+      "bytes": 7590605,
+      "sha256": "88eec8854862954faacbd6847a89eb73c517dc43be0633f5a7632d6d9e0bb2e7"
+    }
+  ],
+  "license": "Datenlizenz Deutschland – Zero – Version 2.0",
+  "licenseUrl": "https://www.govdata.de/dl-de/zero-2-0",
+  "sourceUrl": "https://daten.berlin.de/datensaetze/3d-gebaudemodelle-im-level-of-detail-2-lod-2-3c7c49af",
+  "buildingParts": 11608,
+  "buildings": 5239,
+  "baselineParts": 4266,
+  "limitations": [
+    "LoD2 roof forms are generalized; façades have no photographic textures or window/door geometry.",
+    "Ground between buildings is interpolated from building bases.",
+    "The comparison uses neutral extrusions of the existing OSM building data, without invented shopfronts.",
+    "The textured mesh source could not be retrieved because its portal and tile endpoints returned maintenance pages."
+  ],
+  "sourceGeometryRepairs": [
+    {
+      "building": "DEBE3DcvSSvdET76",
+      "kind": "RoofSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 2
+    },
+    {
+      "building": "DEBE3DgYqyHq3cLA",
+      "kind": "ClosureSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 1
+    },
+    {
+      "building": "DEBE3Dfyxyl6wGjY",
+      "kind": "RoofSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 2
+    },
+    {
+      "building": "DEBE3Dfyxyl6wGjY",
+      "kind": "GroundSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 2
+    },
+    {
+      "building": "DEBE3Dmo6r4v9ZFD",
+      "kind": "WallSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 2
+    },
+    {
+      "building": "DEBE3DGYHAedeZAp",
+      "kind": "WallSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 1
+    },
+    {
+      "building": "DEBE3DwFF86lOAzh",
+      "kind": "WallSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 2
+    },
+    {
+      "building": "DEBE3Dk5hn81yUMx",
+      "kind": "WallSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 1
+    },
+    {
+      "building": "DEBE3DTlq8KxWBni",
+      "kind": "WallSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 1
+    },
+    {
+      "building": "DEBE3DpksOII3pJF",
+      "kind": "WallSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 1
+    },
+    {
+      "building": "DEBE3DfHWz3D7eGc",
+      "kind": "GroundSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 1
+    },
+    {
+      "building": "DEBE3DfHWz3D7eGc",
+      "kind": "RoofSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 1
+    },
+    {
+      "building": "DEBE3DcpwLL7M8EK",
+      "kind": "WallSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 1
+    }
+  ],
+  "geometrySha256": "6e6117a0582d037c07d7470f988f90996d342bcfa1d9f9b3d376fcde3ae1fed5",
+  "geometryBytes": 16296192,
+  "triangles": 452672,
+  "validation": {
+    "polygonCount": 166345,
+    "maxProjectedAreaErrorM2": 1.1641532182693481e-10,
+    "courtyardHolesPreserved": true
+  },
+  "groundConnection": "Additional foundation skirts join source ground outlines to interpolated terrain. Surveyed vertices remain unchanged; skirts are a rendering adaptation."
+}

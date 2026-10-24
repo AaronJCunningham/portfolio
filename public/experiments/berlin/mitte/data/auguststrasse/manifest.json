@@ -1,0 +1,107 @@
+{
+  "name": "Auguststraße — 80 m simplified street study",
+  "areaKm2": 0.012,
+  "boundsUTM": [
+    390000,
+    5820000,
+    392000,
+    5822000
+  ],
+  "originUTM": [
+    391000,
+    5821000,
+    32
+  ],
+  "crs": "EPSG:25833 + DHHN2016 height",
+  "sourceDates": [
+    "2026-03-02",
+    "2026-03-22"
+  ],
+  "downloadedAt": "2026-10-23T15:48:34.240174+00:00",
+  "sources": [
+    {
+      "file": "LoD2_390_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5820.zip",
+      "bytes": 6022489,
+      "sha256": "d9d9a229be3e5a54dfa96e3fee8c6b66bf89fc8cc01620e229d2b00374bd3f31"
+    },
+    {
+      "file": "LoD2_390_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5821.zip",
+      "bytes": 5592413,
+      "sha256": "dcc6852d4747e59b6f0dd7578aa67cbc5bc12b4585dcfd671adb61da2598c528"
+    },
+    {
+      "file": "LoD2_391_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5820.zip",
+      "bytes": 6731543,
+      "sha256": "ed927ae9ab86d06815eaa9e95e4a7abf328a876e7e680986192314155e203a08"
+    },
+    {
+      "file": "LoD2_391_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5821.zip",
+      "bytes": 7590605,
+      "sha256": "88eec8854862954faacbd6847a89eb73c517dc43be0633f5a7632d6d9e0bb2e7"
+    }
+  ],
+  "license": "Datenlizenz Deutschland – Zero – Version 2.0",
+  "licenseUrl": "https://www.govdata.de/dl-de/zero-2-0",
+  "sourceUrl": "https://daten.berlin.de/datensaetze/3d-gebaudemodelle-im-level-of-detail-2-lod-2-3c7c49af",
+  "buildingParts": 76,
+  "buildings": 33,
+  "baselineParts": 24,
+  "limitations": [
+    "LoD2 roof forms are generalized; façades have no photographic textures or window/door geometry.",
+    "Ground between buildings is interpolated from building bases.",
+    "The comparison uses neutral extrusions of the existing OSM building data, without invented shopfronts.",
+    "The textured mesh source could not be retrieved because its portal and tile endpoints returned maintenance pages."
+  ],
+  "sourceGeometryRepairs": [
+    {
+      "building": "DEBE3DpksOII3pJF",
+      "kind": "WallSurface",
+      "action": "resolved intersecting source edges",
+      "pieces": 1
+    }
+  ],
+  "detailScope": "80 m of Auguststraße; a narrow surrounding block supplies context.",
+  "appearanceReferences": [
+    {
+      "title": "KW — current visitor page and facade photograph",
+      "url": "https://www.kw-berlin.de/de/besuch/information"
+    },
+    {
+      "title": "School restoration — architects and detail photographs",
+      "url": "https://gruentuchernst.de/projekte/p303/"
+    },
+    {
+      "title": "School facade after restoration",
+      "url": "https://commons.wikimedia.org/wiki/File:Ehemalige_J%C3%BCdische_M%C3%A4dchenschule_Berlin.jpg"
+    },
+    {
+      "title": "Berlin heritage record — Auguststraße 69",
+      "url": "https://denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09035057"
+    }
+  ],
+  "appearanceLimitations": [
+    "Simple flat-roofed forms use official ground outlines and wall heights; this view deliberately simplifies roof shapes.",
+    "Mapped floor counts are used where available; other counts are estimated from height.",
+    "KW and school colours and main window patterns are reference-informed; neighbouring facades and street props are illustrative.",
+    "No reference photographs are redistributed or used as facade textures."
+  ],
+  "osmStreetExtract": {
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "timestamp": "2026-10-23T15:52:06Z",
+    "sha256": "cc415015bd808b8c981f88b124809ad9914493f79578d0d648b713816d644802",
+    "license": "ODbL-1.0"
+  },
+  "geometrySha256": "a8fc28ab0cf13f0d92682589035078348d87759731f06f0828b0b2d8d5caba79",
+  "geometryBytes": 85896,
+  "triangles": 2386,
+  "validation": {
+    "polygonCount": 907,
+    "maxProjectedAreaErrorM2": 2.2737367544323206e-13,
+    "courtyardHolesPreserved": true
+  },
+  "groundConnection": "Additional foundation skirts join source ground outlines to interpolated terrain. Surveyed vertices remain unchanged; skirts are a rendering adaptation."
+}

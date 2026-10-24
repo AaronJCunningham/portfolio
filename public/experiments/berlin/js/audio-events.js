@@ -65,14 +65,14 @@ function footstep(ctx, seed) {
   }, 0.55);
 }
 
-function speechFragment(ctx, speaker, seed) {
+function speechFragment(ctx, speaker, seed, startled = false) {
   const random = randomSource(seed);
   const vowels = [[600, 1170, 2380], [470, 1740, 2460], [340, 2010, 2650], [470, 890, 2300], [420, 1450, 2350]];
-  const duration = 0.57 + random() * 0.28;
-  const count = 2 + Math.floor(random() * 3);
+  const duration = startled ? 0.42 + random() * 0.14 : 0.57 + random() * 0.28;
+  const count = startled ? 1 : 2 + Math.floor(random() * 3);
   const segments = Array.from({ length: count }, () => ({
-    vowel: vowels[Math.floor(random() * vowels.length)], weight: 0.65 + random() * 0.7,
-    consonant: Math.floor(random() * 5), transition: 0.028 + random() * 0.038,
+    vowel: startled ? vowels[0] : vowels[Math.floor(random() * vowels.length)], weight: 0.65 + random() * 0.7,
+    consonant: startled ? 1 : Math.floor(random() * 5), transition: 0.028 + random() * 0.038,
     stress: 0.62 + random() * 0.38, pitch: 0.96 + random() * 0.1
   }));
   const weight = segments.reduce((sum, segment) => sum + segment.weight, 0);
@@ -117,7 +117,8 @@ function speechFragment(ctx, speaker, seed) {
     const noise = random() * 2 - 1;
     breath += (noise - breath) * breathCoefficient;
     low += (noise - low) * 0.025;
-    pitch += (speaker.pitch * segment.pitch * (1.06 - pitchFall * t / duration) - pitch) * prosodySmoothing;
+    const cry = startled ? 1 + 0.28 * Math.sin(Math.PI * Math.min(1, t / 0.16)) - 0.2 * t / duration : 1;
+    pitch += (speaker.pitch * segment.pitch * (1.06 - pitchFall * t / duration) * cry - pitch) * prosodySmoothing;
     stress += (segment.stress - stress) * prosodySmoothing;
     const fundamental = pitch * jitter * (1 + 0.014 * Math.sin(t * 21) + 0.008 * Math.sin(t * 37));
     phase += fundamental / ctx.sampleRate;
@@ -295,6 +296,8 @@ export function createEventResources(ctx, resources) {
     ...resources,
     footsteps: Array.from({ length: 8 }, (_, i) => footstep(ctx, i + 1)),
     syllables: speakers.map((speaker, voice) => Array.from({ length: 4 }, (_, i) => speechFragment(ctx, speaker, i + voice * 4 + 20))),
+    screams: speakers.map((speaker, voice) => speechFragment(ctx,
+      { ...speaker, pitch: speaker.pitch * 1.8, breath: speaker.breath + 0.05 }, voice + 701, true)),
     horns: [0.22, 0.37, 0.55].map((duration, i) => horn(ctx, duration, 17 + i)),
     crashes: {
       body: Array.from({ length: 3 }, (_, i) => crashBody(ctx, i + 301)),
@@ -311,7 +314,7 @@ export function playEvent(ctx, resources, kind, output, options = {}) {
   const random = randomSource(options.seed);
   const start = Math.max(ctx.currentTime, finite(options.when, ctx.currentTime));
   const intensity = clamp(finite(options.intensity, 1));
-  const levels = { footstep: 0.22, talk: 0.065, horn: 0.23, signal: 0.13, crash: 0.35 };
+  const levels = { footstep: 0.22, talk: 0.065, scream: 0.22, horn: 0.23, signal: 0.13, crash: 0.35 };
   if (!Object.hasOwn(levels, kind) || intensity === 0) return { endTime: start, dispose() {} };
   const gain = ctx.createGain();
   gain.gain.value = intensity * levels[kind];
@@ -377,6 +380,8 @@ export function playEvent(ctx, resources, kind, output, options = {}) {
       when = end + 0.065 + random() * 0.13;
       variant = (variant + 1 + Math.floor(random() * (voice.length - 1))) % voice.length;
     }
+  } else if (kind === 'scream') {
+    play(resources.screams[Math.floor(random() * resources.screams.length)], start, 0.94 + random() * 0.12);
   } else if (kind === 'horn') {
     play(resources.horns[Math.floor(random() * resources.horns.length)], start, 0.94 + random() * 0.12);
   } else if (kind === 'crash') {

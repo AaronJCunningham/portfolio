@@ -19,6 +19,7 @@ import {
   createLoftedBusMaterial
 } from './actor-models.js';
 import { PersonCrowd, PersonRig } from './pedestrians.js';
+import { resetPedestrianReaction, updatePedestrianReaction } from './pedestrian-reactions.js';
 
 // js/traffic.js
 // Manhattan traffic and pedestrians on the road graph road-network.js derives from the city as built:
@@ -76,6 +77,10 @@ function createTrafficSystem(scene, sidewalks, obstacles) {
   const group = new THREE.Group();
   group.name = 'ManhattanTrafficAndPedestrians';
   let collisionListener = null;
+  let pedestrianStartleListener = null;
+  function setPedestrianStartleListener(listener) {
+    pedestrianStartleListener = typeof listener === 'function' ? listener : null;
+  }
   const collisionEvent = { a: null, b: null, kind: 'vehicle', x: 0, y: 0, z: 0, nx: 0, ny: 0, nz: 0, speed: 0 };
 
   function setCollisionListener(listener) {
@@ -1453,6 +1458,7 @@ function createTrafficSystem(scene, sidewalks, obstacles) {
       p.z = z;
       p.v = crosswalk ? 0 : p.speed;
       p.pause = 0;
+      resetPedestrianReaction(p);
       p.rig.placed = false; // stands afresh where it now is
       p.placed = true;
       if (crosswalk) atCurb(p);
@@ -1790,7 +1796,8 @@ function createTrafficSystem(scene, sidewalks, obstacles) {
   // bone transforms and are drawn, the far ones with the light LOD.
   function renderPed(p, dt) {
     const draw = !hasView || visible(p.x, p.z, 7);
-    p.rig.update(dt, p.x, p.z, Math.atan2(p.ux * p.dir, p.uz * p.dir), pedGround, p, 0, draw);
+    const heading = p.reaction ? p.reactionHeading : Math.atan2(p.ux * p.dir, p.uz * p.dir);
+    p.rig.update(dt, p.x, p.z, heading, pedGround, p, p.reactionAir || 0, draw);
     if (!draw) return;
     pedCrowd.add(p.rig, Math.hypot(p.x - focusX, p.z - focusZ));
   }
@@ -1956,7 +1963,10 @@ function createTrafficSystem(scene, sidewalks, obstacles) {
         pedBudget--;
       }
       if (!p.placed) continue;
-      walk(p, dt);
+      walk(p, p.reaction ? 0 : dt);
+      if (updatePedestrianReaction(p, activeMode === 'car' ? player : null, dt, elapsed, walkable2D)) {
+        pedestrianStartleListener?.(p);
+      }
       renderPed(p, dt);
     }
     pedCrowd.end();
@@ -1974,6 +1984,7 @@ function createTrafficSystem(scene, sidewalks, obstacles) {
     group,
     update,
     setCollisionListener,
+    setPedestrianStartleListener,
     cars,
     buses,
     peds,

@@ -1,0 +1,680 @@
+{
+  "scope": "Remaining interior of the existing S41/S42 Ringbahn boundary; approved Mitte buildings preserved verbatim",
+  "sourceUrl": "https://gdi.berlin.de/data/a_lod2/",
+  "license": "dl-de/zero-2-0",
+  "sources": [
+    {
+      "file": "LoD2_383_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_383_5817.zip",
+      "sha256": "a59a8b0f2b356ef01b35448b8812235e52dcf5b1be08eb25524e7e3a9680197f"
+    },
+    {
+      "file": "LoD2_383_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_383_5818.zip",
+      "sha256": "21dfc308b0a57641e3a26ae1c39d32252273cc842070d283ce758d27181c7334"
+    },
+    {
+      "file": "LoD2_383_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_383_5819.zip",
+      "sha256": "8600b7a0fffcdd22f7c4fee9c7ddb58ec20c4bc74d58cf2a6d26eaefe90754bc"
+    },
+    {
+      "file": "LoD2_383_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_383_5820.zip",
+      "sha256": "77229a8fd6c0fa8d2f5243d70fae7694e3500cf5b9dd4bb6b94c15b8f7261575"
+    },
+    {
+      "file": "LoD2_383_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_383_5821.zip",
+      "sha256": "7d97db078b324d87944bfdf5740f7f178f4137d319e007f54e53b7175e1abacf"
+    },
+    {
+      "file": "LoD2_384_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_384_5816.zip",
+      "sha256": "0900adb132fd1212d9e89a8b7fac7ae5d638290c24c7e2c70a0c774a79a05e66"
+    },
+    {
+      "file": "LoD2_384_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_384_5817.zip",
+      "sha256": "dbe2fa1326c50f0bc3af271531e9c1f3e6efb0fa7822adb5914bd3cf82aafd22"
+    },
+    {
+      "file": "LoD2_384_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_384_5818.zip",
+      "sha256": "8ede00eebb0fb5ddee9c4fe87c6459e1f8a11922623770490b46fd278a49f00a"
+    },
+    {
+      "file": "LoD2_384_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_384_5819.zip",
+      "sha256": "0efac927aacc4373eaa675479251372edd089730d2bad6371999241bb3837f30"
+    },
+    {
+      "file": "LoD2_384_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_384_5820.zip",
+      "sha256": "761834669b384212b5c8e51ac963bc845671cae7d646fa35052027d4fd517a0f"
+    },
+    {
+      "file": "LoD2_384_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_384_5821.zip",
+      "sha256": "611d184eb68833d2b7319e8f8910004345bb64309863225342297b33a898450a"
+    },
+    {
+      "file": "LoD2_385_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_385_5815.zip",
+      "sha256": "0c37a4b508c7820849c4d133457672bf212e348b0f45df3d485c1dc2796e6ca0"
+    },
+    {
+      "file": "LoD2_385_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_385_5816.zip",
+      "sha256": "ac59b521b55c424f822ae28f78e301274a8371cd8e0317ed1442aca6cd6d96f5"
+    },
+    {
+      "file": "LoD2_385_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_385_5817.zip",
+      "sha256": "e5e5683e5ae316e720f8e615da0feb9b0021933cdca47ac255cb3eec8704410d"
+    },
+    {
+      "file": "LoD2_385_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_385_5818.zip",
+      "sha256": "15285c4b2a11be009c6c598425e6c3cef517da2fef9439f3125ab0bbd8c33c33"
+    },
+    {
+      "file": "LoD2_385_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_385_5819.zip",
+      "sha256": "0ae1bf4888fc97038c2593ef293640e6a535256030b42830ba3e21a43f1e49b8"
+    },
+    {
+      "file": "LoD2_385_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_385_5820.zip",
+      "sha256": "99bb9137b70537ecf1cdc30dfb3eea5f668f837c083880e51525656f802513e8"
+    },
+    {
+      "file": "LoD2_385_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_385_5821.zip",
+      "sha256": "cc467fc537541a351b0934ce9dd78d7dc3b9c718f215b01aa6cd80076ed7081b"
+    },
+    {
+      "file": "LoD2_386_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_386_5815.zip",
+      "sha256": "0e7596502aae300fb75d5d42d227124382a64fc77441d5cb3d21fff968601116"
+    },
+    {
+      "file": "LoD2_386_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_386_5816.zip",
+      "sha256": "48ee921f0dfb9263aa4c68b045d1f623d61659d444a84f8909f48202d4367373"
+    },
+    {
+      "file": "LoD2_386_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_386_5817.zip",
+      "sha256": "8e18eb8e490fc9fbb8b21500355ae98a5fdc63ab13af77810e358fbbb7f38432"
+    },
+    {
+      "file": "LoD2_386_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_386_5818.zip",
+      "sha256": "b0de4a0d8aadd844fc85263b6ede0b4f3391c042bed5ebfeb204d735737ccbe1"
+    },
+    {
+      "file": "LoD2_386_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_386_5819.zip",
+      "sha256": "00c08a76b636345cdf43a64a52b6a19abfb95a7e42cc356decbc8e35a9c2ccf6"
+    },
+    {
+      "file": "LoD2_386_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_386_5820.zip",
+      "sha256": "695beb328951d10524d996322984f97ac0c7de6ecad22c2d488657cc4046e54c"
+    },
+    {
+      "file": "LoD2_386_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_386_5821.zip",
+      "sha256": "da36ddcdc24842e1a8732ca13c5f63a452b87b511ceaf8df5c7a4e8550bfb798"
+    },
+    {
+      "file": "LoD2_387_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_387_5815.zip",
+      "sha256": "d11005a5e043f0e394ce657c2bdd2eb926fc687d4c9e9ddbd4348a03ce686bd1"
+    },
+    {
+      "file": "LoD2_387_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_387_5816.zip",
+      "sha256": "b7671a3affe65708c1f6f63f94f557be4d907f47c4d053fa1718052e36c3a29e"
+    },
+    {
+      "file": "LoD2_387_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_387_5817.zip",
+      "sha256": "690d38ff1d7217311504336e86b4e20f03cfc116311ebec4445b191e1c77efe7"
+    },
+    {
+      "file": "LoD2_387_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_387_5818.zip",
+      "sha256": "19a992d0f53e02545a002b7332338874b26cdc9f8a732623474fa99285a35463"
+    },
+    {
+      "file": "LoD2_387_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_387_5819.zip",
+      "sha256": "65378dd37ec6ff88340f4fc1536bc0037fcf93a6dd9f3bce40bea5a5cb5f01aa"
+    },
+    {
+      "file": "LoD2_387_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_387_5820.zip",
+      "sha256": "5ac7bcdc0d4fb3ccad64a59daefc118cfe2ff884ab4035426c76b0da7a851e41"
+    },
+    {
+      "file": "LoD2_387_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_387_5821.zip",
+      "sha256": "fe26767aa5c20ce8a2bcb1c941608ddfdf73a638f7a1e8cdba1d6117cfda595f"
+    },
+    {
+      "file": "LoD2_387_5822.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_387_5822.zip",
+      "sha256": "594fbd56def72c205352e17d1d7b2278c35239b14dac236da07007a2a13773de"
+    },
+    {
+      "file": "LoD2_388_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_388_5815.zip",
+      "sha256": "49693445e4bd7070b6b13517f853cd2cb6cd770978b53e8c0a852f5b347531e0"
+    },
+    {
+      "file": "LoD2_388_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_388_5816.zip",
+      "sha256": "de31791072e3985cfc52923388434d5c3dd858838c086fca72d9868711638299"
+    },
+    {
+      "file": "LoD2_388_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_388_5817.zip",
+      "sha256": "e277909e0cbb336ddfa4a13e888cf9e1391326bf7c8d4976f9b797b5e305564d"
+    },
+    {
+      "file": "LoD2_388_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_388_5818.zip",
+      "sha256": "23a76b19d72534627490144f382cdfc893b10ee1736139d34dc9810b686207a3"
+    },
+    {
+      "file": "LoD2_388_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_388_5819.zip",
+      "sha256": "b47e056da0a6211110188c5589f3d60cf2cb2ec0a0fd4b5ebd22b786a3b97dfa"
+    },
+    {
+      "file": "LoD2_388_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_388_5820.zip",
+      "sha256": "ca6a5af8d0537ac1dc1df307c5debc56794eb2ff9f69d7c9aaa6fc45a0f31157"
+    },
+    {
+      "file": "LoD2_388_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_388_5821.zip",
+      "sha256": "44676967f904025d91adc5b013e21bf68cd2260da88983d6c7c02a2c1b41e723"
+    },
+    {
+      "file": "LoD2_388_5822.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_388_5822.zip",
+      "sha256": "c3b48dc611b827160a70138d8aaaff493e9cf00103006471e29dd57440ae0107"
+    },
+    {
+      "file": "LoD2_389_5814.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5814.zip",
+      "sha256": "6ee5673015f07f678eadd2466f1d6caea3ab6392e9ecf08c8324961bb8fa0a76"
+    },
+    {
+      "file": "LoD2_389_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5815.zip",
+      "sha256": "9040a6ac21798b8492cfe20c754216744c32c5e48c6f6e640b153866fa596a24"
+    },
+    {
+      "file": "LoD2_389_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5816.zip",
+      "sha256": "98d67ecdbe157a791ca91a7f93b247b947a676e59a12b6464a46ad9e8c5c23f8"
+    },
+    {
+      "file": "LoD2_389_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5817.zip",
+      "sha256": "bc3c1fc35209e2cb332f20b61cbb81a4d4c90431b8a792a7d50d0275e3246b1b"
+    },
+    {
+      "file": "LoD2_389_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5818.zip",
+      "sha256": "827a94eda224f55ec638b1b4de8c440c80405ea6797068efe7558c83a4fd30c1"
+    },
+    {
+      "file": "LoD2_389_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5819.zip",
+      "sha256": "86084bf012830c373bbcb4ac1ca2814153430bb9a1eb6d8271b1f7fc8ccecd17"
+    },
+    {
+      "file": "LoD2_389_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5820.zip",
+      "sha256": "dcbbcf6837ec0b767bdabba8ad03e4d1384de3b506982b1d97c23405f0022068"
+    },
+    {
+      "file": "LoD2_389_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5821.zip",
+      "sha256": "56b37377ff2052977e044582c04492689b13055050d65f7cf8d5913fb02e92c3"
+    },
+    {
+      "file": "LoD2_389_5822.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5822.zip",
+      "sha256": "fd3d00f7bc9c4b42ec6207bad354e31ffb8462cb67b4cff83cb10759b4b7a68f"
+    },
+    {
+      "file": "LoD2_389_5823.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_389_5823.zip",
+      "sha256": "3d181853fc865b7aa37936430400c6555676bbe62a7fb9ffd827280a7ceb8131"
+    },
+    {
+      "file": "LoD2_390_5814.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5814.zip",
+      "sha256": "fc3f3ba4ee310829256825ec5ffa80e8a262d4e94ee37d4341bf9e9f3060ebb4"
+    },
+    {
+      "file": "LoD2_390_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5815.zip",
+      "sha256": "c042353e0951e22576f04673e38e283c52dd487b2690d70d1df7e07b056f2f93"
+    },
+    {
+      "file": "LoD2_390_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5816.zip",
+      "sha256": "4a45a64ebdb63d8ae0b7863b96dbea2c72fd00e58e6309eaa75cb95759bebf26"
+    },
+    {
+      "file": "LoD2_390_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5817.zip",
+      "sha256": "c1eccda24a5c100c88bf29d056f1bc0050708307ae67d5c99a3eb1c2b834c087"
+    },
+    {
+      "file": "LoD2_390_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5818.zip",
+      "sha256": "42af73193652b7506736cf1f833db00ebbc0a882d285fae264b7881d04a208b3"
+    },
+    {
+      "file": "LoD2_390_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5821.zip",
+      "sha256": "dcc6852d4747e59b6f0dd7578aa67cbc5bc12b4585dcfd671adb61da2598c528"
+    },
+    {
+      "file": "LoD2_390_5822.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5822.zip",
+      "sha256": "bfb6da81a1e4ad94f81967e1bbc16841d142b1108f3a51314412765fbbc8a819"
+    },
+    {
+      "file": "LoD2_390_5823.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_390_5823.zip",
+      "sha256": "2fb7486fd5fb19de758ba23b02a6c456ae88169c68abff5250f5edb724e9fd82"
+    },
+    {
+      "file": "LoD2_391_5813.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5813.zip",
+      "sha256": "e63d44315ca4d198a344f41b52e3b896549d3c4d06ab1858fedde67adf977aef"
+    },
+    {
+      "file": "LoD2_391_5814.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5814.zip",
+      "sha256": "bcdfb3ef5fb93864296b56cfca32c92075c17063ab2a7f8c1d939e8781d05f47"
+    },
+    {
+      "file": "LoD2_391_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5815.zip",
+      "sha256": "71fdb44b67b8344b921bb300b8f6cd857eb2cefaf8a9a5b3626053b7b6d0a14a"
+    },
+    {
+      "file": "LoD2_391_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5816.zip",
+      "sha256": "3f14be4cf9bd1b0a0ea4a064cba0bec9cec8a21434eec52f65ab20eee9bba384"
+    },
+    {
+      "file": "LoD2_391_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5817.zip",
+      "sha256": "a9121756449248cb8e57326d760fec9d4b342dd42ef1f69561478ca46c8d4604"
+    },
+    {
+      "file": "LoD2_391_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5818.zip",
+      "sha256": "836c9e2e187ef0e4eaa2aa93fd3820e95f2ca3e1b9ea031a00812c161a4e1e9d"
+    },
+    {
+      "file": "LoD2_391_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5821.zip",
+      "sha256": "88eec8854862954faacbd6847a89eb73c517dc43be0633f5a7632d6d9e0bb2e7"
+    },
+    {
+      "file": "LoD2_391_5822.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5822.zip",
+      "sha256": "75e5df3abc5851a5e5afa672fbb184808c4bdfaba04250c6e517d592af28959b"
+    },
+    {
+      "file": "LoD2_391_5823.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_391_5823.zip",
+      "sha256": "e25eace743bef1adf4708716fed0491a3973259d632d2e61b04006736a468140"
+    },
+    {
+      "file": "LoD2_392_5813.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5813.zip",
+      "sha256": "46600e1d3b7de1acf16af7cd4baca7b1d7b2048874d1adaad6ce7eb39d8b9d20"
+    },
+    {
+      "file": "LoD2_392_5814.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5814.zip",
+      "sha256": "3798e5fa317705d4c09876d12a62b7c9f69f4891a94e154328cf03442c6bb97f"
+    },
+    {
+      "file": "LoD2_392_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5815.zip",
+      "sha256": "198f9afc249b60bfdac72da06ca95cf0a81003a03543093102452434d7b904fa"
+    },
+    {
+      "file": "LoD2_392_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5816.zip",
+      "sha256": "a4e2bb509e159ab642c1d2d37bd2070d7aa2da5de851ba87d49f0f9d5ca3500a"
+    },
+    {
+      "file": "LoD2_392_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5817.zip",
+      "sha256": "8cc141d722dbc0e1088529b3aa5064bc789bcd021deb9e2a8f53e766e775bcdc"
+    },
+    {
+      "file": "LoD2_392_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5818.zip",
+      "sha256": "8aeaeb559a1d32e8972402b226fe74dcfcb01728b0e4be791ba5ea2e2be0c7ec"
+    },
+    {
+      "file": "LoD2_392_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5819.zip",
+      "sha256": "2ee22ab8f9780e47100d332771d11ad72f8eaaa4b06168ad398819f5092282fc"
+    },
+    {
+      "file": "LoD2_392_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5820.zip",
+      "sha256": "46782da57be6dc321226307b1292ee334f6c30770f7930f61831b0931a2c4c8b"
+    },
+    {
+      "file": "LoD2_392_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5821.zip",
+      "sha256": "97c10fece5fd6eb6659b4a85dec78c967c71ac0a1c0a1ed0347fd9485e494d9f"
+    },
+    {
+      "file": "LoD2_392_5822.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5822.zip",
+      "sha256": "6e1f3fb8f39874b146d63af739d25017ca3f23a05cf48198b8ddd39aeeaca515"
+    },
+    {
+      "file": "LoD2_392_5823.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_392_5823.zip",
+      "sha256": "76a2df06317d4dfde62bbf780c2f0636c140d62a0ca001a4c789d96b361fe884"
+    },
+    {
+      "file": "LoD2_393_5814.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5814.zip",
+      "sha256": "cc84e620257039d0e82142766e84a4a8d6c296b441ab7eea0cc47f17bacc0345"
+    },
+    {
+      "file": "LoD2_393_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5815.zip",
+      "sha256": "d4f5a769feadc2668f7ad8a60155c4087d2cd1acbc379f463bb24e70220e1b49"
+    },
+    {
+      "file": "LoD2_393_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5816.zip",
+      "sha256": "29d9a181317449da249a6e4469bbcff89e1f10d1c6f016cad32bb65310691846"
+    },
+    {
+      "file": "LoD2_393_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5817.zip",
+      "sha256": "14205b886c73071c5b4f7c61b2ad0d019d3a9a1b4ecf464ee66ea8894e11df45"
+    },
+    {
+      "file": "LoD2_393_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5818.zip",
+      "sha256": "a8f74cc87f3f3797119cf980872790b2d661abbee52ef8d24f570c4aecb3a2f3"
+    },
+    {
+      "file": "LoD2_393_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5819.zip",
+      "sha256": "83652af4133e2b49281f5032ead9c416d60be260907250003dc708e7add5217b"
+    },
+    {
+      "file": "LoD2_393_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5820.zip",
+      "sha256": "e986f18b742c09dc51c376033c4fd4c8f0c6fb68ba364b179bb6555f95b6dda3"
+    },
+    {
+      "file": "LoD2_393_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5821.zip",
+      "sha256": "10decf33a6baaf0579b0bc00da05290958a2d58f938a94fcec7515a8a218283e"
+    },
+    {
+      "file": "LoD2_393_5822.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5822.zip",
+      "sha256": "33c7f01578406663628e2a10caaf2f7c8d61868d8dcd769a925ee1003de90268"
+    },
+    {
+      "file": "LoD2_393_5823.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_393_5823.zip",
+      "sha256": "68c24ea39c0be06acd589e4a86c92f4291999fb672899791a26534733da612c2"
+    },
+    {
+      "file": "LoD2_394_5814.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_394_5814.zip",
+      "sha256": "34dcc7c102dd00962a84792490364583dd8384c59d04b670d3288586db37c0a2"
+    },
+    {
+      "file": "LoD2_394_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_394_5815.zip",
+      "sha256": "ac09dfd066b791196b3ecb0d164d7ac21073df3b2b80adfe3453170f746cfcbd"
+    },
+    {
+      "file": "LoD2_394_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_394_5816.zip",
+      "sha256": "2b5c05bc2fcf2e5589df4a4dbd9648c077cfded94ff5f10a02e0cd1554a9e2de"
+    },
+    {
+      "file": "LoD2_394_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_394_5817.zip",
+      "sha256": "4e985e2d0182d3ac89192ffd61f1724e81eb1522a040d71c5de6b689d3f74a4e"
+    },
+    {
+      "file": "LoD2_394_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_394_5818.zip",
+      "sha256": "3ac41d033edd8d896f7b36064c2afc21bfd1482354155de371dcb87a1b8edc96"
+    },
+    {
+      "file": "LoD2_394_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_394_5819.zip",
+      "sha256": "1470ac4f240eb204f687cdf5d346ebfc25f14379ec5d2fc6fc1dad0c7f7652ed"
+    },
+    {
+      "file": "LoD2_394_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_394_5820.zip",
+      "sha256": "dbddc1ac80f51650146daf0ffe1c2e123b5e9dc53033560d225a18c7466cfc96"
+    },
+    {
+      "file": "LoD2_394_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_394_5821.zip",
+      "sha256": "e91bc38ee31236241ce3ed5762629648f0f9e3efb09bf6b8e7e498a5f96a9a77"
+    },
+    {
+      "file": "LoD2_394_5822.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_394_5822.zip",
+      "sha256": "4d5cc9d462d77299de4f9e67b2b6f813b9d4afc5134724923fb3e6e523c4247a"
+    },
+    {
+      "file": "LoD2_395_5814.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_395_5814.zip",
+      "sha256": "9bef5c9e746b2ad06158646d8d070310a31601821420b5fdea72c601ffbeed3e"
+    },
+    {
+      "file": "LoD2_395_5815.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_395_5815.zip",
+      "sha256": "72feda70d3bc0f21f546e0727dd57429d4d8b1b9e5b31f218add8ccc6b1dcfba"
+    },
+    {
+      "file": "LoD2_395_5816.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_395_5816.zip",
+      "sha256": "6cc71e5df8c0c734f90d67417da36a23c8f7f2cba01c69fd670b38e7e320b97f"
+    },
+    {
+      "file": "LoD2_395_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_395_5817.zip",
+      "sha256": "fa5ff559ddc9b15bdbd169f8524cdb3c9119cad96d9a366a51e7f0d859eed2e3"
+    },
+    {
+      "file": "LoD2_395_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_395_5818.zip",
+      "sha256": "452a7a8cfef5948e25df2db04a0e1c73355e7bb66829f156c07470da2eef97fb"
+    },
+    {
+      "file": "LoD2_395_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_395_5819.zip",
+      "sha256": "409f692782bb42852520f15d588e8f6e6e9e561731a24df21d8d2c470eb5221f"
+    },
+    {
+      "file": "LoD2_395_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_395_5820.zip",
+      "sha256": "ec87105c9c58633a5d9077fbdaecacc5a3640589fedae78989db603f106b19fc"
+    },
+    {
+      "file": "LoD2_395_5821.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_395_5821.zip",
+      "sha256": "c5a6e5ec574746145b85c51e5013ed015a57a50816b1f8f76228820312d0350c"
+    },
+    {
+      "file": "LoD2_396_5817.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_396_5817.zip",
+      "sha256": "3b772b853cc282a09234e3be069fbd27fb7063ed57e36f9b1d4896bfdb01cb64"
+    },
+    {
+      "file": "LoD2_396_5818.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_396_5818.zip",
+      "sha256": "f8ac16f2839e258302ad8f14a4bd9f20d482b1a7c597f3572a12e7661128a295"
+    },
+    {
+      "file": "LoD2_396_5819.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_396_5819.zip",
+      "sha256": "4c34e355292f3697d10831aebe867ce9b31e3259adc84bceb9b1598486774d13"
+    },
+    {
+      "file": "LoD2_396_5820.zip",
+      "url": "https://gdi.berlin.de/data/a_lod2/atom/LoD2_396_5820.zip",
+      "sha256": "8024a70670eef10f676d6e0c68030272d49c2e11da65f061a62f1104a5d81e2f"
+    }
+  ],
+  "stats": {
+    "officialVolumes": 99476,
+    "precisionRepairs": 101,
+    "colours": 2721,
+    "landmarkVolumesSkipped": 4,
+    "processedExisting": 57058,
+    "replacedExisting": 52607,
+    "retainedUnmatched": 4451,
+    "oldFacadeEdges": 595999,
+    "newFacadeEdges": 690797
+  },
+  "method": "Simple extrusions of official ground outlines and wall heights. Adjacent pieces within the same rounded one-metre height band are merged. Existing shared facade shaders, instancing and streaming are reused. Unmatched OSM buildings retain their existing geometry.",
+  "simplificationMetres": 0.6,
+  "appearance": "Mapped OSM building colours where available. Other colours retain the existing procedural palette.",
+  "preservedMitteSha256": "d0ae4c027c869964399d735807cba105892863e4ebd112c6aaf68f20649a4359",
+  "preservedOtherBuildingsSha256": "6fc6e7f3f173982f7403d2a6c6e3b610b58b8ee90bdc6308d0a927a22ea3bf93",
+  "preservedMapLayersSha256": {
+    "roads": "cfcfa564e85b7551d1c364de85a4e8e5bdaa7462ae3ba126bf536602fcb2e4e0",
+    "water": "d0d92e4ca751f6899c25e9937cc95a9088a99e58da9cad57a886ba4f4e35e57a",
+    "parks": "64eccea3a606398c7b6f238ce107afdc529c5ec119dd0defcfb467c649db1bae",
+    "railways": "77db4d23c3e3dadd25a3b58c0a98887d95d686571e8ef42e11389e3de9c709a7",
+    "trees": "24cb5070dd2352016898a97b6a4ff7610605690d6c8bbe8bad4ebb5146ac74a8",
+    "signals": "ad8be486069f982ab2909f92b69ee6829f6113fe4b6b0a0c5e4a141e2d69a41a",
+    "aeroways": "11fd1feb5e861b1ee064687d030c266ab77244084089f7a8acfc468087cf0478"
+  },
+  "preservedLandmarkIds": [
+    "w1483384695",
+    "w1483384696",
+    "w1499858555",
+    "w25649554"
+  ],
+  "localities": {
+    "charlottenburg_nord": {
+      "officialVolumes": 7,
+      "retainedUnmatched": 2,
+      "colours": 0
+    },
+    "hansaviertel": {
+      "officialVolumes": 605,
+      "retainedUnmatched": 10,
+      "colours": 72
+    },
+    "wedding": {
+      "officialVolumes": 294,
+      "retainedUnmatched": 21,
+      "colours": 20
+    },
+    "moabit": {
+      "officialVolumes": 7987,
+      "retainedUnmatched": 247,
+      "colours": 298
+    },
+    "gesundbrunnen": {
+      "officialVolumes": 2627,
+      "retainedUnmatched": 71,
+      "colours": 148
+    },
+    "wilmersdorf": {
+      "officialVolumes": 8372,
+      "retainedUnmatched": 386,
+      "colours": 102
+    },
+    "halensee": {
+      "officialVolumes": 1581,
+      "retainedUnmatched": 148,
+      "colours": 0
+    },
+    "tiergarten": {
+      "officialVolumes": 3695,
+      "retainedUnmatched": 212,
+      "colours": 366
+    },
+    "schoeneberg": {
+      "officialVolumes": 9134,
+      "retainedUnmatched": 223,
+      "colours": 260
+    },
+    "friedenau": {
+      "officialVolumes": 4,
+      "retainedUnmatched": 3,
+      "colours": 0
+    },
+    "plaenterwald": {
+      "officialVolumes": 3,
+      "retainedUnmatched": 3,
+      "colours": 0
+    },
+    "alt_treptow": {
+      "officialVolumes": 1264,
+      "retainedUnmatched": 53,
+      "colours": 33
+    },
+    "friedrichshain": {
+      "officialVolumes": 9570,
+      "retainedUnmatched": 349,
+      "colours": 185
+    },
+    "kreuzberg": {
+      "officialVolumes": 16003,
+      "retainedUnmatched": 492,
+      "colours": 266
+    },
+    "charlottenburg": {
+      "officialVolumes": 14759,
+      "retainedUnmatched": 593,
+      "colours": 91
+    },
+    "tempelhof": {
+      "officialVolumes": 3169,
+      "retainedUnmatched": 632,
+      "colours": 59
+    },
+    "prenzlauer_berg": {
+      "officialVolumes": 9974,
+      "retainedUnmatched": 291,
+      "colours": 736
+    },
+    "neukoelln": {
+      "officialVolumes": 10428,
+      "retainedUnmatched": 715,
+      "colours": 204
+    }
+  }
+}

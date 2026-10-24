@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Mitte · Building accuracy trial</title>
+  <base href="/experiments/berlin/mitte/">
+  <link rel="stylesheet" href="./style.css?v=simple-3">
+  <script type="importmap">{"imports":{"three":"../vendor/three/build/three.webgpu.js","three/webgpu":"../vendor/three/build/three.webgpu.js","three/tsl":"../vendor/three/build/three.tsl.js"}}</script>
+</head>
+<body>
+  <canvas id="view" aria-label="Interactive 3D comparison of buildings in Mitte"></canvas>
+  <header class="panel">
+    <a class="back" href="/play/berlin">← Berlin Driving Simulator</a>
+    <div class="eyebrow">A CLOSER LOOK · 4 KM² TRIAL</div>
+    <h1>Mitte, from the data.</h1>
+    <p class="intro">Compare Berlin’s official building models with the building data behind the simulator.</p>
+    <div class="switch" role="group" aria-label="Building data layer">
+      <button id="official" aria-pressed="true">Official models</button>
+      <button id="previous" aria-pressed="false">Previous data</button>
+    </div>
+    <p id="layer-note">Survey-derived walls and generalized roofs. Colours are illustrative.</p>
+    <label for="place">Explore a street</label>
+    <select id="place" disabled><option>Loading Mitte…</option></select>
+    <div class="actions"><button id="overview">Above the city</button><button id="street">Street level</button></div>
+    <a class="detail-link" href="/play/berlin/auguststrasse">Try the simple Auguststraße section →</a>
+    <details>
+      <summary>What’s real here?</summary>
+      <p>The official layer preserves CityGML wall, roof and courtyard surfaces. LoD2 roofs are generalized. This data has no photographic façades, windows or business signs.</p>
+      <p>Road positions come from OpenStreetMap. Ground between buildings is interpolated from their bases. The previous layer shows plain extrusions of the simulator’s existing footprints and heights.</p>
+      <p>Berlin’s textured aerial mesh would be the next appearance test. Its download portal was under maintenance when this trial was prepared.</p>
+      <p><a href="https://daten.berlin.de/datensaetze/3d-gebaudemodelle-im-level-of-detail-2-lod-2-3c7c49af" target="_blank" rel="noreferrer">Official Berlin building data ↗</a> · <a href="./data/manifest.json" target="_blank">Download provenance ↗</a></p>
+      <p id="counts"></p>
+    </details>
+  </header>
+  <aside id="selection" class="panel" hidden><button id="close-selection" aria-label="Close building details">×</button><div class="eyebrow">OFFICIAL BUILDING RECORD</div><h2 id="building-name"></h2><dl id="building-details"></dl></aside>
+  <div id="loading" role="status"><span class="loader-dot"></span><span id="load-text">Finding the shape of Mitte…</span></div>
+  <footer><span id="help">Drag to orbit · Scroll to zoom · Click a building to inspect</span><span>Berlin LoD2 · <a href="https://www.govdata.de/dl-de/zero-2-0">dl-de/zero-2-0</a> · <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a></span></footer>
+  <script type="module" src="./viewer.js?v=simple-3"></script>
+</body>
+</html>

@@ -11,7 +11,35 @@
     "threeRevision": "187dev",
     "adaptation": "Berlin Mitte geographic data and city-specific content; original WebGPU/TSL engine and application systems"
   },
-  "dataSha256": "3fb0060758085b8a46bd2270c63dde2261b66a6b7d06460fefbb6a58a92c1d47",
+  "dataSha256": "253954f6efc64eb9d15c93c4c53a473f187d8b3a20e850fe1a6546a65331866b",
   "dataLicense": "ODbL-1.0",
-  "license": "MIT"
+  "license": "MIT",
+  "mitteBuildings": {
+    "source": "https://gdi.berlin.de/data/a_lod2/",
+    "license": "dl-de/zero-2-0",
+    "stats": {
+      "officialVolumes": 16277,
+      "colours": 826,
+      "processedExisting": 10259,
+      "replacedExisting": 9817,
+      "retainedUnmatched": 442,
+      "oldFacadeEdges": 577168,
+      "newFacadeEdges": 595999
+    }
+  },
+  "ringbahnBuildings": {
+    "source": "https://gdi.berlin.de/data/a_lod2/",
+    "license": "dl-de/zero-2-0",
+    "stats": {
+      "officialVolumes": 99476,
+      "precisionRepairs": 101,
+      "colours": 2721,
+      "landmarkVolumesSkipped": 4,
+      "processedExisting": 57058,
+      "replacedExisting": 52607,
+      "retainedUnmatched": 4451,
+      "oldFacadeEdges": 595999,
+      "newFacadeEdges": 690797
+    }
+  }
 }

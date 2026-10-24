@@ -16,15 +16,24 @@
         "three": "./vendor/three/build/three.webgpu.js",
         "three/webgpu": "./vendor/three/build/three.webgpu.js",
         "three/tsl": "./vendor/three/build/three.tsl.js",
-        "three/addons/": "./vendor/three/examples/jsm/"
+        "three/addons/": "./vendor/three/examples/jsm/",
+        "./js/berlin-geodata.js": "./js/berlin-geodata.js?v=20261024-ringbahn-buildings",
+        "./js/nyc-geodata.js": "./js/nyc-geodata.js?v=20261024-ringbahn-buildings",
+        "./js/buildings.js": "./js/buildings.js?v=20261024-ringbahn-buildings",
+        "./js/tsl-materials.js": "./js/tsl-materials.js?v=20261023-reactions2",
+        "./js/traffic.js": "./js/traffic.js?v=20261023-reactions",
+        "./js/audio-events.js": "./js/audio-events.js?v=20261023-reactions",
+        "./js/audio-system.js": "./js/audio-system.js?v=20261023-reactions",
+        "./js/audio-sources.js": "./js/audio-sources.js?v=20261023-reactions"
       }
     }
   </script>
   <!-- Fetch the city modules in parallel before stylesheets; the module graph controls evaluation order. -->
-  <link rel="modulepreload" href="./js/nyc-geodata.js" />
+  <link rel="modulepreload" href="./js/berlin-geodata.js?v=20261024-ringbahn-buildings" />
+  <link rel="modulepreload" href="./js/nyc-geodata.js?v=20261024-ringbahn-buildings" />
   <link rel="modulepreload" href="./js/berlin-geometry.js" />
   <link rel="modulepreload" href="./js/city-config.js" />
-  <link rel="modulepreload" href="./js/tsl-materials.js" />
+  <link rel="modulepreload" href="./js/tsl-materials.js?v=20261023-reactions2" />
   <link rel="modulepreload" href="./js/trees.js" />
   <link rel="modulepreload" href="./js/actor-models.js" />
   <link rel="modulepreload" href="./js/vehicle-lights.js" />
@@ -32,12 +41,12 @@
   <link rel="modulepreload" href="./js/lighting.js" />
   <link rel="modulepreload" href="./js/city-grid.js" />
   <link rel="modulepreload" href="./js/boroughs.js" />
-  <link rel="modulepreload" href="./js/buildings.js" />
+  <link rel="modulepreload" href="./js/buildings.js?v=20261024-ringbahn-buildings" />
   <link rel="modulepreload" href="./js/landmarks.js" />
   <link rel="modulepreload" href="./js/street-details.js" />
   <link rel="modulepreload" href="./js/road-network.js" />
   <link rel="modulepreload" href="./js/road-paint.js" />
-  <link rel="modulepreload" href="./js/traffic.js" />
+  <link rel="modulepreload" href="./js/traffic.js?v=20261023-reactions" />
   <link rel="modulepreload" href="./js/controllers.js" />
   <link rel="modulepreload" href="./js/touch-controls.js" />
   <link rel="modulepreload" href="./js/gamepad-controls.js" />
@@ -46,10 +55,10 @@
   <link rel="modulepreload" href="./js/scene-culling.js" />
   <link rel="modulepreload" href="./js/post-processing.js" />
   <link rel="modulepreload" href="./js/audio-synthesis.js" />
-  <link rel="modulepreload" href="./js/audio-events.js" />
-  <link rel="modulepreload" href="./js/audio-sources.js" />
+  <link rel="modulepreload" href="./js/audio-events.js?v=20261023-reactions" />
+  <link rel="modulepreload" href="./js/audio-sources.js?v=20261023-reactions" />
   <link rel="modulepreload" href="./js/audio-acoustics.js" />
-  <link rel="modulepreload" href="./js/audio-system.js" />
+  <link rel="modulepreload" href="./js/audio-system.js?v=20261023-reactions" />
   <link rel="modulepreload" href="./js/main.js?v=20261023-berlin-arrival" />
   <script type="module" src="./js/main.js?v=20261023-berlin-arrival"></script>
   <!-- Inter (UI) & Overpass (street-name signs: modelled on Highway Gothic, the US road sign typeface) -->

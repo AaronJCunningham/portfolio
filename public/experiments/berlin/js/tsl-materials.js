@@ -445,7 +445,11 @@ function facadeCell(windowWidth, floorHeight, boxLocal, cornerPier = 0) {
   }
 
   const vCoord = positionWorld.y;
-  const gridV = vCoord.div(floorHeight);
+  // Mapped floor height is computed once per instance, instead of dividing
+  // building height by the storey count for every facade pixel.
+  const mappedFloorHeight = boxLocal ? attribute('facadeAppearance', 'vec4').w : float(0.0);
+  const effectiveFloorHeight = boxLocal ? mix(float(floorHeight), mappedFloorHeight, step(0.00001, mappedFloorHeight)) : float(floorHeight);
+  const gridV = vCoord.div(effectiveFloorHeight);
   const cellId = vec2(floor(gridU), floor(gridV));
   const cellUV = vec2(fract(gridU), fract(gridV));
   const fw = vec2(fwidth(gridU), fwidth(gridV));
@@ -465,8 +469,8 @@ function facadeCell(windowWidth, floorHeight, boxLocal, cornerPier = 0) {
   let coping = float(0.0);
   if (boxLocal) {
     const top = vCoord.add(fromTop);
-    const floorBase = floor(gridV).mul(floorHeight);
-    const whole = step(top.sub(wallH).sub(0.05), floorBase).mul(step(floorBase.add(floorHeight), top.add(0.05)));
+    const floorBase = floor(gridV).mul(effectiveFloorHeight);
+    const whole = step(top.sub(wallH).sub(0.05), floorBase).mul(step(floorBase.add(effectiveFloorHeight), top.add(0.05)));
     partial = float(1.0).sub(whole).mul(wall);
     coping = float(1.0).sub(step(0.32, fromTop)).mul(wall);
   }
@@ -709,7 +713,9 @@ function createPreWarBuildingMaterial(opts = {}) {
   });
 
   // The style's parameters are uniforms (not baked-in constants), so every masonry style compiles to one shader
-  const cStone = uniform(new THREE.Color(stoneColor));
+  const defaultStone = uniform(new THREE.Color(stoneColor));
+  const facadeAppearance = boxLocal ? attribute('facadeAppearance', 'vec4') : null;
+  const cStone = boxLocal ? mix(defaultStone, facadeAppearance.xyz, step(0.0, facadeAppearance.x)) : defaultStone;
   const cTrim = uniform(new THREE.Color(trimColor));
   const cGlass = uniform(new THREE.Color(windowGlassColor));
   const cCrown = uniform(new THREE.Color(crownGlowColor));
@@ -1074,6 +1080,8 @@ function createFacadeBoxes(material, boxes) {
   const faces = new THREE.InstancedBufferAttribute(new Float32Array(boxes.length * 4), 4);
   geometry.setAttribute('box', box);
   geometry.setAttribute('faces', faces);
+  const appearance = new THREE.InstancedBufferAttribute(new Float32Array(boxes.length * 4), 4);
+  geometry.setAttribute('facadeAppearance', appearance);
 
   const mesh = new THREE.InstancedMesh(geometry, material, boxes.length);
   const matrix = new THREE.Matrix4();
@@ -1086,6 +1094,8 @@ function createFacadeBoxes(material, boxes) {
     else mesh.setMatrixAt(i, matrix.makeScale(b.w, b.h, b.d).setPosition(b.x, b.y, b.z));
     box.setXYZW(i, b.w, b.h, b.d, ((i * 29) % 1000) + 0.1 + 0.8 * (b.tone ?? 0.5));
     if (b.faces) faces.setXYZW(i, b.faces[0], b.faces[1], b.faces[2], b.faces[3]);
+    const c = b.facadeColour;
+    appearance.setXYZW(i, c?.r ?? -1, c?.g ?? -1, c?.b ?? -1, b.facadeLevels > 0 ? b.h / b.facadeLevels : 0);
   });
   return mesh;
 }

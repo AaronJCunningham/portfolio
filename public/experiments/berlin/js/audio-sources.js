@@ -244,7 +244,7 @@ class CityAudioSources {
       if (!ped.placed) continue;
       const t = (ped.x - ped.ax) * ped.ux + (ped.z - ped.az) * ped.uz;
       const y = ped.node && t > 2 && t < ped.len - 2 ? 0.012 : 0.22;
-      this.person(ped, ped.x, y, ped.z, ped.v, true, ped.rig);
+      this.person(ped, ped.x, y + (ped.reactionAir || 0), ped.z, ped.rig.speed, !(ped.reactionAir > 0.03), ped.rig);
     }
     for (let i = 0; i < this.signalSites.length; i++) {
       const site = this.signalSites[i];

@@ -105,6 +105,9 @@ class CityAudioSystem {
     this.haveListener = false;
     this.accumulator = 0;
     this.lastHorn = -Infinity;
+    this.lastScream = -Infinity;
+    this.trafficSystem = simulation.trafficSystem;
+    this.trafficSystem.setPedestrianStartleListener?.(ped => this.scream(ped));
     this.collisionPairs = new WeakMap();
     this.collisionSequence = 0;
     this.collisionSystems = [simulation.controllerManager, simulation.trafficSystem];
@@ -281,8 +284,8 @@ class CityAudioSystem {
     const now = this.context.currentTime;
     const crash = kind === 'crash';
     const severity = clamp(options.severity ?? options.intensity ?? 1, 0, 1);
-    const ref = crash ? 4 + severity * 8 : kind === 'horn' ? 8 : kind === 'talk' ? 2 : 1.8;
-    const range = crash ? 50 + severity * 110 : kind === 'horn' ? 140 : kind === 'talk' ? 30 : kind === 'footstep' ? 22 : 35;
+    const ref = crash ? 4 + severity * 8 : kind === 'horn' ? 8 : kind === 'scream' ? 5 : kind === 'talk' ? 2 : 1.8;
+    const range = crash ? 50 + severity * 110 : kind === 'horn' ? 140 : kind === 'scream' ? 45 : kind === 'talk' ? 30 : kind === 'footstep' ? 22 : 35;
     if (Math.hypot(source.x - this.listener.x, source.y - this.listener.y, source.z - this.listener.z) > range) return false;
     if (crash) {
       // Impacts are immediate, between the 10 Hz ambience updates. Reclaim finished events first, then let
@@ -307,11 +310,15 @@ class CityAudioSystem {
         this.removeEvent(background);
       }
     }
+    if (kind === 'scream' && this.events.length >= this.limits.events) {
+      const background = this.events.findIndex(event => event.kind === 'talk' || event.kind === 'footstep');
+      if (background >= 0) this.removeEvent(background);
+    }
     if (this.events.length >= this.limits.events) return false;
     const emitter = new SpatialEmitter(this.context, this.mix, this.reflections, this.acoustics,
       ref, kind === 'talk' ? 1.5 : 0, kind === 'horn');
     // Do not fade away the first few milliseconds of a crash: its spatial gain and filtering are ready at onset.
-    emitter.update(source, this.listener, now, range, true, crash);
+    emitter.update(source, this.listener, now, range, true, crash || kind === 'scream');
     const voice = playEvent(this.context, this.resources, kind, emitter.input, { seed: source.seed, ...options });
     this.events.push({ kind, voice, emitter, id: source.id, range, severity, position: { ...source }, follow: kind === 'talk' || kind === 'horn' });
     return true;
@@ -354,6 +361,16 @@ class CityAudioSystem {
     const now = this.context.currentTime;
     if (now - this.lastHorn < 0.8) return;
     if (this.emit('horn', { id: entity, ...entity.position, heading: entity.heading, seed: 4 }, { intensity: 0.7 })) this.lastHorn = now;
+  }
+
+  scream(ped) {
+    if (!this.ready || !this.enabled || !this.haveListener || this.context?.state !== 'running' || document.hidden) return false;
+    const now = this.context.currentTime;
+    // One short cry at most every 0.8 s across the crowd; never a continuous chorus.
+    if (now - this.lastScream < 0.8) return false;
+    const played = this.emit('scream', { id: ped, x: ped.x, y: 1.6, z: ped.z, seed: ped.rig.seed }, { intensity: 0.75 });
+    if (played) this.lastScream = now;
+    return played;
   }
 
   update(dt, elapsed, camera, night = false) {
@@ -461,6 +478,7 @@ class CityAudioSystem {
 
   dispose() {
     this.disposed = true;
+    this.trafficSystem.setPedestrianStartleListener?.(null);
     for (const system of this.collisionSystems) system.setCollisionListener?.(null);
     document.removeEventListener('pointerdown', this.onGesture);
     document.removeEventListener('keydown', this.onGesture);

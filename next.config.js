@@ -2,7 +2,11 @@
 const nextConfig = {
   distDir: process.env.NEXT_BUILD_DIR || '.next',
   async rewrites() {
-    return [{source: '/play/berlin', destination: '/experiments/berlin/index.html'}]
+    return [
+      {source: '/play/berlin', destination: '/experiments/berlin/index.html'},
+      {source: '/play/berlin/mitte', destination: '/experiments/berlin/mitte/index.html'},
+      {source: '/play/berlin/auguststrasse', destination: '/experiments/berlin/mitte/index.html'},
+    ]
   },
   async headers() {
     return [{
