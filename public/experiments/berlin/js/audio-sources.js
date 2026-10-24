@@ -123,7 +123,8 @@ class CityAudioSources {
     if (d2 > reach * reach) return;
     const item = this.motors.take(player ? -1 : d2);
     if (!item) return;
-    writeMotor(item, id, kind, x, y, z, speed, load, heading, police, player, seed, blocked, gain, range, verticalSpeed);
+    const motorGain = kind === 'sedan' || kind === 'suv' ? gain * 0.5 : gain;
+    writeMotor(item, id, kind, x, y, z, speed, load, heading, police, player, seed, blocked, motorGain, range, verticalSpeed);
   }
 
   person(id, x, y, z, speed, grounded, rig, player = false, priority = player) {

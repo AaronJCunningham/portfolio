@@ -328,7 +328,7 @@ export function playEvent(ctx, resources, kind, output, options = {}) {
   const random = randomSource(options.seed);
   const start = Math.max(ctx.currentTime, finite(options.when, ctx.currentTime));
   const intensity = clamp(finite(options.intensity, 1));
-  const levels = { footstep: 0.22, talk: 0.065, scream: 0.22, horn: 0.23, signal: 0.13, crash: 0.35 };
+  const levels = { footstep: 0.22, talk: 0.065, scream: 0.44, horn: 0.23, signal: 0.13, crash: 0.35 };
   if (!Object.hasOwn(levels, kind) || intensity === 0) return { endTime: start, dispose() {} };
   if (kind === 'scream' && !resources.screams?.length) return { endTime: start, dispose() {} };
   const gain = ctx.createGain();
