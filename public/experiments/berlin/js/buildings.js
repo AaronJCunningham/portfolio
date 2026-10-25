@@ -48,6 +48,8 @@ import { GEO } from './nyc-geodata.js';
 import { fdrViaduct, pavedPlazaRects, parkTreeSites, sidewalkBlocks } from './city-grid.js';
 import { berlinPoints, berlinBounds, berlinPolygonGeometry, nearestBerlinRoad, berlinSpatialGroups, berlinGeometryGroups } from './berlin-geometry.js';
 import { LANDMARK_EXCLUSIONS, LANDMARK_SOURCE_EXCLUSIONS } from './landmarks.js';
+import { HOCHBAHN } from './hochbahn-data.js';
+import { buildingsWithPassages } from './building-passages.js';
 
 // js/buildings.js
 // Generates dense, architecturally varied Manhattan city blocks across the entire island
@@ -2013,7 +2015,9 @@ function buildCityBlocks(scene) {
       const b = pts[(i + 1) % pts.length]; return sum + a.x * b.z - b.x * a.z;
     }, 0) / 2;
     let built = 0;
-    for (const source of BERLIN_DATA.buildings || []) {
+    const hochbahnReplacements = new Set(HOCHBAHN.replacedBuildingIds);
+    for (const source of buildingsWithPassages(BERLIN_DATA.buildings || [])) {
+      if (hochbahnReplacements.has(source.id) || hochbahnReplacements.has(source.osmId)) continue;
       if ((LANDMARK_SOURCE_EXCLUSIONS.has(source.id) || LANDMARK_SOURCE_EXCLUSIONS.has(source.osmId))) continue;
       if (!source.ring || source.ring.length < 6) continue;
       const poly = berlinPoints(source.ring), holes = (source.holes || []).map(berlinPoints);
@@ -2065,7 +2069,7 @@ function buildCityBlocks(scene) {
           }
           if (!modern && height > 7 && length > 1.5) {
             detail.cornices.push({ x, z, y: eave, w: length + 0.2, h: 0.44, d: 0.85, ry });
-            if (height > 13) detail.cornices.push({ x, z, y: 4.4, w: length + 0.12, h: 0.22, d: 0.62, ry });
+            if (height > 13 && base < 4) detail.cornices.push({ x, z, y: 4.4, w: length + 0.12, h: 0.22, d: 0.62, ry });
           }
           if (shop && length > 9 && rand() < 0.48) {
             const count = Math.min(3, Math.floor(length / 8));
@@ -2099,6 +2103,17 @@ function buildCityBlocks(scene) {
         roof.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2)); roof.computeVertexNormals();
       }
       roofBuckets[Math.floor(tone * 3)].push(roof);
+      if (source.buildingPassage && base > 0) {
+        const soffit = berlinPolygonGeometry(poly, holes, base);
+        // Reverse triangle winding as well as normals so the ceiling faces down.
+        const indices = soffit.index;
+        for (let i = 0; i < indices.count; i += 3) {
+          const b = indices.getX(i + 1);
+          indices.setX(i + 1, indices.getX(i + 2)); indices.setX(i + 2, b);
+        }
+        soffit.computeVertexNormals();
+        roofBuckets[Math.floor(tone * 3)].push(soffit);
+      }
       if (!pitched && !holes.length && !source.part && height > 12 && rand() < 0.34) {
         detail.hvacUnits.push({ x: cx, z: cz, y: height, w: 2.2, h: 0.85, d: 3.0, ry: 0 });
       }

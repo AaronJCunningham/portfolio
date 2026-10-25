@@ -11,6 +11,7 @@ import {
   sidewalkAt
 } from './city-config.js';
 import { GEO } from './nyc-geodata.js';
+import { BERLIN_ROAD_GRAPH } from './city-config.js';
 
 // js/road-network.js
 // Drivable road graph derived from the ground layout that city-grid.js actually builds: avenue corridors
@@ -276,7 +277,7 @@ function buildRoadNetwork(sidewalks, obstacles) {
   //     cross street); a street's bends get shape nodes, so every edge stays straight.
   const genRuns = centrelineStreets();
   function centrelineStreets() {
-    const RG = GEO.roadGraph;
+    const RG = BERLIN_ROAD_GRAPH || GEO.roadGraph;
     const runs = [];
     if (!RG) return runs;
     const pos = [];

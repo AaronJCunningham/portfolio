@@ -1,6 +1,7 @@
 import { GEO } from './nyc-geodata.js';
 import {
   ROADS,
+  BERLIN_ROAD_GRAPH,
   BLOCKS,
   NYC_LANDMARKS,
   LANDMARK_SITES,
@@ -438,7 +439,7 @@ function drawPlayerArrow(ctx, tipY, halfWidth, tailY) {
 let ROUTING=null;
 let ROUTE_CACHE=null;
 function getBerlinMapRoute(x0,z0,x1,z1){
-  const graph=GEO.roadGraph;
+  const graph=BERLIN_ROAD_GRAPH || GEO.roadGraph;
   if(GEO.city!=='Berlin'||!graph)return null;
   if(!ROUTING){
     const points=[];for(let i=0;i<graph.nodes.length;i+=2)points.push({x:graph.nodes[i],z:graph.nodes[i+1]});

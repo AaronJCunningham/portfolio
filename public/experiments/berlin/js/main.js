@@ -19,6 +19,7 @@ import { NYCMapSystem } from './nyc-map.js';
 import { setupSceneCulling, updateSceneCulling } from './scene-culling.js';
 import { CityAudioSystem } from './audio-system.js';
 import { RenderBudget } from './render-budget.js';
+import { buildHochbahn } from './hochbahn.js';
 
 // js/main.js
 // Main entry point for Berlin Mitte in Three.js WebGPURenderer & TSL (three.js dev, see index.html)
@@ -103,8 +104,10 @@ export async function initApp(launch) {
   markInit('landmarks');
   const cityBlocks = buildCityBlocks(scene);
   markInit('blocks');
+  const hochbahn = buildHochbahn(scene);
+  markInit('hochbahn');
   await yieldStartup();
-  const allColliders = [...landmarkColliders, ...cityBlocks.colliders, ...boroughs.colliders, ...(cityGrid.colliders || [])];
+  const allColliders = [...landmarkColliders, ...cityBlocks.colliders, ...boroughs.colliders, ...hochbahn.colliders, ...(cityGrid.colliders || [])];
 
   const streetDetails = buildStreetDetails(scene);
   markInit('streetDetails');
@@ -172,7 +175,7 @@ export async function initApp(launch) {
 
   // Island-wide static geometry: chunk & distance-cull the small props, shadow stand-ins for the big casters
   // (scene-culling.js)
-  const cullingRoots = ['BerlinMitteCityGrid', 'BerlinMitteCityBlocks', 'BerlinStreetDetails', 'ManhattanLandmarks', 'BerlinBoundaryContext']
+  const cullingRoots = ['BerlinMitteCityGrid', 'BerlinMitteCityBlocks', 'BerlinStreetDetails', 'ManhattanLandmarks', 'BerlinBoundaryContext', 'BerlinHochbahn']
     .map((name) => scene.getObjectByName(name))
     .filter(Boolean);
   setupSceneCulling(scene, cullingRoots, lightingSystem.sunLight.shadow);

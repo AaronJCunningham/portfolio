@@ -1,9 +1,11 @@
 import { GEO } from './nyc-geodata.js';
+import { isSurfaceRoad, connectBuildingPassage } from './building-passages.js';
 
 // Berlin spatial adapter for mrdoob/slop-newyork's original engine.
 // Legacy export names are retained as API aliases; all visible geography is Berlin.
 // 1 unit = 1 metre, x east, z south, origin 13.405° E / 52.52° N.
 const BERLIN_DATA = GEO.berlin;
+export const BERLIN_ROAD_GRAPH = connectBuildingPassage(GEO.roadGraph, BERLIN_DATA.roads);
 const toPts = (flat) => { const out=[]; for(let i=0;i<flat.length;i+=2)out.push({x:flat[i],z:flat[i+1]});return out; };
 const projectLonLat = (lon,lat) => ({x:(lon-13.405)*111319.49*Math.cos(52.52*Math.PI/180),z:(52.52-lat)*111319.49});
 const [minX,minZ,maxX,maxZ] = BERLIN_DATA.meta.bounds;
@@ -21,7 +23,7 @@ const ROOSEVELT_ISLAND_POLYGON=[],GOVERNORS_ISLAND_POLYGON=[],NJ_SHORELINE_POLYG
 const LIBERTY_STATUE_POS={x:0,z:0};
 // The legacy park bounds now describe the mapped eastern Tiergarten, never Central Park.
 const CENTRAL_PARK_BOUNDS={minX:-2709.4,maxX:-1870,minZ:160,maxZ:1210};
-const ROADS=BERLIN_DATA.roads.filter(r=>!r.tunnel).map(r=>({...r,raw:r.name,name:r.name||`Unnamed ${r.kind}`,w:r.width,dir:r.oneway?(r.reverse?-1:1):0,highway:/motorway|trunk/.test(r.kind),pts:toPts(r.pts)}));
+const ROADS=BERLIN_DATA.roads.filter(isSurfaceRoad).map(r=>({...r,raw:r.name,name:r.name||`Unnamed ${r.kind}`,w:r.width,dir:r.oneway?(r.reverse?-1:1):0,highway:/motorway|trunk/.test(r.kind),pts:toPts(r.pts)}));
 const DRIVABLE=new Set(['motorway','motorway_link','trunk','trunk_link','primary','primary_link','secondary','secondary_link','tertiary','tertiary_link','residential','unclassified','living_street']);
 const ROAD_DRIVING=ROADS.filter(r=>DRIVABLE.has(r.kind));
 const BERLIN_AREAS=(BERLIN_DATA.meta.areas||[]).map(a=>({...a,polygons:(a.polygons||[]).map(p=>({

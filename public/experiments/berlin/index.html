@@ -19,13 +19,22 @@
         "three/addons/": "./vendor/three/examples/jsm/",
         "./js/berlin-geodata.js": "./js/berlin-geodata.js?v=20261024-ringbahn-buildings",
         "./js/nyc-geodata.js": "./js/nyc-geodata.js?v=20261024-ringbahn-buildings",
-        "./js/city-grid.js": "./js/city-grid.js?v=20261025-nearby3",
-        "./js/buildings.js": "./js/buildings.js?v=20261025-nearby3",
+        "./js/city-grid.js": "./js/city-grid.js?v=20261025-hochbahn2",
+        "./js/buildings.js": "./js/buildings.js?v=20261025-adalbert3",
+        "./js/hochbahn.js": "./js/hochbahn.js?v=20261025-hochbahn2",
+        "./js/hochbahn-layout.js": "./js/hochbahn-layout.js?v=20261025-hochbahn2",
+        "./js/hochbahn-data.js": "./js/hochbahn-data.js?v=20261025-hochbahn2",
+        "./js/city-config.js": "./js/city-config.js?v=20261025-adalbert2",
+        "./js/berlin-geometry.js": "./js/berlin-geometry.js?v=20261025-adalbert2",
+        "./js/building-passages.js": "./js/building-passages.js?v=20261025-adalbert2",
+        "./js/building-passage-data.js": "./js/building-passage-data.js?v=20261025-adalbert2",
+        "./js/road-network.js": "./js/road-network.js?v=20261025-adalbert2",
+        "./js/nyc-map.js": "./js/nyc-map.js?v=20261025-adalbert2",
         "./js/tsl-materials.js": "./js/tsl-materials.js?v=20261024-water-level",
-        "./js/scene-culling.js": "./js/scene-culling.js?v=20261025-nearby3",
-        "./js/post-processing.js": "./js/post-processing.js?v=20261025-nearby3",
-        "./js/render-budget.js": "./js/render-budget.js?v=20261025-nearby3",
-        "./js/trees.js": "./js/trees.js?v=20261025-nearby3",
+        "./js/scene-culling.js": "./js/scene-culling.js?v=20261025-hochbahn2",
+        "./js/post-processing.js": "./js/post-processing.js?v=20261025-hochbahn2",
+        "./js/render-budget.js": "./js/render-budget.js?v=20261025-hochbahn2",
+        "./js/trees.js": "./js/trees.js?v=20261025-hochbahn2",
         "./js/lighting.js": "./js/lighting.js?v=20261025-performance",
         "./js/traffic.js": "./js/traffic.js?v=20261023-reactions",
         "./js/audio-events.js": "./js/audio-events.js?v=20261024-audio-balance",
@@ -36,7 +45,7 @@
   </script>
   <!-- Check the device before importing any renderer or city data. -->
   <script type="module">
-    import('./js/launch.js?v=20261025-nearby3')
+    import('./js/launch.js?v=20261025-hochbahn2')
       .then(({ startBerlin }) => startBerlin())
       .catch(() => { document.body.dataset.launchState = 'failed'; });
   </script>

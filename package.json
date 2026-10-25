@@ -8,7 +8,7 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "test:berlin": "node --test tests/berlin-portfolio.test.cjs tests/mitte-live.test.cjs tests/ringbahn-live.test.cjs tests/berlin-reactions.test.cjs tests/berlin-launch.test.cjs",
+    "test:berlin": "node --test tests/berlin-portfolio.test.cjs tests/mitte-live.test.cjs tests/ringbahn-live.test.cjs tests/berlin-reactions.test.cjs tests/berlin-launch.test.cjs tests/berlin-hochbahn.test.cjs tests/berlin-passages.test.cjs",
     "test:mitte": "node --test tests/mitte-data.test.cjs",
     "test:shop": "node --test tests/shop.test.cjs tests/shop-setup.test.cjs",
     "test:glitch": "node --test tests/glitch-browser.test.mjs && npm --prefix services/glitch-studio test",

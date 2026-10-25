@@ -1,5 +1,6 @@
 import * as THREE from 'three/webgpu';
 import { BERLIN_DATA } from './city-config.js';
+import { isSurfaceRoad } from './building-passages.js';
 
 // Geometry adapters only: rendering stays in the upstream WebGPU/TSL systems.
 export const BERLIN_RENDER_CELL = 750;
@@ -67,7 +68,7 @@ export function berlinRoadSegments() {
   segments = [];
   roadIndex = new Map();
   for (const road of BERLIN_DATA.roads || []) {
-    if (road.tunnel || !road.pts) continue;
+    if (!isSurfaceRoad(road) || !road.pts) continue;
     const points = berlinPoints(road.pts);
     for (let i = 1; i < points.length; i++) {
       const a = points[i - 1], b = points[i], len = Math.hypot(b.x - a.x, b.z - a.z);
