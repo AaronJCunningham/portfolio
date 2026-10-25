@@ -203,10 +203,10 @@ class LightingSystem {
     this.sunLight = new SunLight(0xffca92, 5.8);
     this.sunLight.position.copy(TIME_PRESETS.golden.sunDir);
     this.sunLight.castShadow = true;
-    // 3072x3072 per cascade = 6144x3072 2-cascade shadow atlas (an 8192x4096 one cost ~20% fps and caused hitches),
-    // 2048 where the device allows less. The near cascade spans ~0.35-80 m of the view at street level (see update)
+    // 2048 per cascade: 56% fewer shadow texels than the old 3072 setting.
+    // Keep both cascades and their coverage; only soften the shadow-map resolution.
     const maxTex = (renderer && renderer.backend && renderer.backend.device && renderer.backend.device.limits.maxTextureDimension2D) || 4096;
-    const tile = maxTex >= 6144 ? 3072 : 2048;
+    const tile = Math.min(2048, Math.floor(maxTex / 2));
     this.sunLight.shadow.mapSize.set(tile, tile);
     this.sunLight.shadow.camera.near = 0.5;
     this.sunLight.shadow.camera.far = 300;

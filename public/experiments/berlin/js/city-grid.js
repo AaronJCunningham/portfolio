@@ -362,12 +362,14 @@ function buildBerlinCityGrid(scene) {
       }
     }
   }
-  // Merge in spatially modest batches, retaining the original TSL node materials
+  // One draw per material and spatial cell; 300-piece batches added substantial
+  // draw-call overhead inside an already small culling region.
+  // Retain the original TSL node materials
   // including wet asphalt, animated water and anti-aliased dash paint.
   for (const [material, geometries] of collections) {
     let firstMesh;
-    for (const cell of berlinGeometryGroups(geometries)) for (let i = 0; i < cell.length; i += 300) {
-      const chunk = cell.slice(i, i + 300).map(g => {
+    for (const cell of berlinGeometryGroups(geometries)) {
+      const chunk = cell.map(g => {
         if (!g.index) return g;
         const expanded = g.toNonIndexed(); g.dispose(); return expanded;
       });

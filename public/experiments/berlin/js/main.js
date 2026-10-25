@@ -19,11 +19,17 @@ import { LightingSystem } from './lighting.js';
 import { NYCMapSystem } from './nyc-map.js';
 import { setupSceneCulling, updateSceneCulling } from './scene-culling.js';
 import { CityAudioSystem } from './audio-system.js';
+import { RenderBudget } from './render-budget.js';
 
 // js/main.js
 // Main entry point for Berlin Mitte in Three.js WebGPURenderer & TSL (three.js dev, see index.html)
 
-async function initApp() {
+export async function initApp(launch) {
+  launch.check();
+  const yieldStartup = async () => {
+    await new Promise(resolve => setTimeout(resolve, 0));
+    launch.check();
+  };
   const container = document.getElementById('canvas-container');
   const loadingOverlay = document.getElementById('loading-overlay');
   const loadingStatus = document.getElementById('loading-status');
@@ -46,11 +52,13 @@ async function initApp() {
     powerPreference: 'high-performance',
     reversedDepthBuffer: true
   });
-  renderer.setPixelRatio(1.0);
+  const renderBudget = new RenderBudget();
+  renderer.setPixelRatio(renderBudget.pixelRatio(window.innerWidth, window.innerHeight));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMap.enabled = true;
   renderer.lighting = new ClusteredLighting(256, 32, 28, 48);
   container.appendChild(renderer.domElement);
+  launch.onStop(() => renderer.domElement.remove());
 
   // Start-up phase timings (logged once as "[init] ...") to keep load-time regressions traceable
   let initTimings = [];
@@ -62,12 +70,22 @@ async function initApp() {
   };
 
   await renderer.init();
+  launch.onStop(() => {
+    renderer.setAnimationLoop(null).catch(() => {});
+    renderer.dispose().catch(() => {});
+  });
+  launch.check();
+  if (!renderer.backend.isWebGPUBackend) throw new Error('WebGPU is unavailable');
+  renderer.backend.device.lost.then(info => launch.fail('device', new Error(info.message)));
+  renderer.backend.device.addEventListener('uncapturederror', event => {
+    if (event.error?.name === 'GPUOutOfMemoryError') launch.fail('device', event.error);
+  });
   markInit('renderer');
   console.info(`[renderer] Three.js r${THREE.REVISION}; ${renderer.backend.isWebGPUBackend ? 'WebGPU' : 'WebGL fallback'}`);
   container.dataset.renderer = renderer.backend.isWebGPUBackend ? 'WebGPU' : 'WebGL fallback';
   container.dataset.threeRevision = THREE.REVISION;
 
-  // 2. Build Scene & Physical Atmospheric Sky / PMREM IBL / 4096x4096 Shadow Lighting
+  // 2. Build Scene & Physical Atmospheric Sky / PMREM IBL / Cascaded Shadow Lighting
   const scene = new THREE.Scene();
   const lightingSystem = new LightingSystem(scene, renderer);
   markInit('lighting');
@@ -79,12 +97,14 @@ async function initApp() {
   // 3. Build Manhattan Geography, Iconic Landmarks, Blocks, Street Details & Traffic
   const cityGrid = buildCityGrid(scene);
   markInit('cityGrid');
+  await yieldStartup();
   const boroughs = buildBoroughs(scene, { sidewalks: cityGrid.sidewalks });
   markInit('boroughs');
   const { colliders: landmarkColliders } = buildLandmarks(scene);
   markInit('landmarks');
   const cityBlocks = buildCityBlocks(scene);
   markInit('blocks');
+  await yieldStartup();
   const allColliders = [...landmarkColliders, ...cityBlocks.colliders, ...boroughs.colliders, ...(cityGrid.colliders || [])];
 
   const streetDetails = buildStreetDetails(scene);
@@ -96,6 +116,7 @@ async function initApp() {
     ...allColliders
   ]);
   markInit('traffic');
+  await yieldStartup();
   const highwayTraffic = createHighwayTraffic(scene, cityGrid.highwayLanes);
   buildRoadPaint(scene, trafficSystem.network);
   markInit('roadPaint');
@@ -131,6 +152,7 @@ async function initApp() {
   const audioSystem = new CityAudioSystem({ controllerManager, trafficSystem, highwayTraffic, streetDetails }, {
     onStateChange: updateSoundButton
   });
+  launch.onStop(() => audioSystem.dispose());
   function updateSoundButton() {
     if (!soundButton) return;
     soundButton.disabled = !audioSystem.supported;
@@ -166,7 +188,7 @@ async function initApp() {
     }
   });
 
-  // 5. TSL RenderPipeline with Half-Res Screen Space Reflections (SSRNode), Bloom & Filmic Toning
+  // 5. TSL RenderPipeline with Reduced-Res Screen Space Reflections (SSRNode), Bloom & Filmic Toning
   //    SSR skips pixels with zero metalness, so fading it out with distance spares the far facades
   const scenePass = pass(scene, cameraSystem.camera);
   // The multisampled colour attachments (output, normal, metalRough) only need resolving, never storing: discarding
@@ -193,7 +215,7 @@ async function initApp() {
     roughnessNode: scenePassMetalRough.g,
     camera: cameraSystem.camera
   });
-  ssrPass.resolutionScale = 0.5;
+  ssrPass.resolutionScale = 0.35;
   ssrPass.blurQuality = 1;
   ssrPass.maxDistance.value = 42;
   ssrPass.thickness.value = 0.85;
@@ -532,7 +554,9 @@ async function initApp() {
 
   window.addEventListener('resize', () => {
     cameraSystem.onResize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(renderBudget.pixelRatio(window.innerWidth, window.innerHeight));
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderBudget.reset();
     placeModeIndicator();
     if (mapSystem.isFullMapOpen) {
       mapSystem.resizeFullCanvas();
@@ -603,6 +627,7 @@ async function initApp() {
       // Each compile starts in a task of its own: compileAsync() keeps one precompilation state on the renderer,
       // which must not be mid-step for two of them in the same microtask checkpoint
       await nextTask();
+      launch.check();
       try {
         await renderer.compileAsync(object, cameraSystem.camera, scene);
       } catch (e) {
@@ -630,6 +655,7 @@ async function initApp() {
   }
 
   await precompileShaders();
+  launch.check();
   markInit('compile');
 
   // 6. Animation Loop
@@ -638,113 +664,99 @@ async function initApp() {
   let frameCount = 0;
   let fpsTimer = 0;
   let nextPlayerSave = 0;
+  let nextMapUpdate = 0;
   let warmedUp = false; // see the first frame below
 
   if (elFps) elFps.textContent = '60';
 
   renderer.setAnimationLoop((now) => {
-    const rawDt = (now - lastTime) * 0.001;
-    lastTime = now;
-    const dt = Math.min(Math.max(rawDt, 0.001), 0.05);
-    elapsed += dt;
+    if (launch.stopped) return;
+    if (document.hidden) { lastTime = now; renderBudget.reset(); return; }
+    try {
+      const rawDt = (now - lastTime) * 0.001;
+      lastTime = now;
+      const dt = Math.min(Math.max(rawDt, 0.001), 0.05);
+      elapsed += dt;
 
-    // Update 3rd-person controllers, camera, signals, traffic & vehicle collisions, building LODs, and dynamic shadow focus
-    gamepadControls.update(dt);
-    controllerManager.update(dt, elapsed);
-    cameraSystem.update(dt, elapsed);
-    streetDetails.signalClock.value = elapsed;
-    trafficSystem.update(
-      dt,
-      elapsed,
-      cameraSystem.currentPos,
-      controllerManager.getActiveEntity(),
-      controllerManager.activeMode,
-      cameraSystem.camera
-    );
-    highwayTraffic.update(dt, cameraSystem.camera, controllerManager.getActiveEntity(), controllerManager.activeMode);
-    if (!document.hidden && now >= nextPlayerSave) {
-      savePlayerState();
-      nextPlayerSave = now + 5000;
-    }
-    if (boroughs.update) boroughs.update(elapsed); // Roosevelt Island Tramway cabins
-    cityBlocks.update(cameraSystem.currentPos.x, cameraSystem.currentPos.z);
-    if (cityBlocks.updateLights) cityBlocks.updateLights(cameraSystem.camera);
-    if (streetDetails.update) streetDetails.update(cameraSystem.camera);
-    lightingSystem.update(cameraSystem.currentPos);
-    mapSystem.update();
-    audioSystem.update(dt, elapsed, cameraSystem.camera, lightingSystem.activePresetId === 'midnight');
-    if (warmedUp) updateSceneCulling(cameraSystem.camera.position); // the warm-up frame draws every chunk
-
-    // Render frame via TSL RenderPipeline (SSR + Bloom)
-    if (!warmedUp) {
-      // First frame = pipeline warm-up behind the loading screen, for what precompileShaders() can't reach (the shadow
-      // map passes): with frustum culling off, every visible material's pipelines compile now instead of stalling the
-      // first time the camera turns towards it (one chunk / shadow stand-in per shared pipeline is enough)
-      const culled = [];
-      scene.traverse((o) => {
-        if (o.frustumCulled && !o.userData.sharesPipelineWith) {
-          culled.push(o);
-          o.frustumCulled = false;
-        }
-      });
-      renderPipeline.render();
-      for (const o of culled) o.frustumCulled = true;
-      markInit('warmup');
-    }
-    renderPipeline.render();
-    if (!warmedUp) {
-      warmedUp = true;
-      markInit('firstFrame');
-      // The loading screen stays up until the GPU has got through the first frame (and the pipelines its warm-up
-      // compiled), i.e. until the city is actually on screen
-      const device = renderer.backend.device;
-      Promise.resolve(device && device.queue.onSubmittedWorkDone()).catch(() => {}).then(() => {
-        markInit('gpu');
-        console.log(`[init] ${initTimings.join(', ')}`);
-        initTimings = null;
-        if (loadingOverlay) loadingOverlay.classList.add('hidden');
-        audioSystem.ready = true;
-        setLoadingProgress(1);
-      });
-    }
-
-    // Telemetry uses wall time, not the clamped simulation step, so slow frames and high-refresh displays report
-    // their actual frame rate (updates DOM every 250ms).
-    frameCount++;
-    fpsTimer += Math.max(0, rawDt);
-    if (fpsTimer >= 0.25) {
-      const currentFps = Math.round(frameCount / fpsTimer);
-      frameCount = 0;
-      fpsTimer = 0;
-
-      const activeEnt = controllerManager.getActiveEntity();
-      const mode = controllerManager.activeMode;
-      const kmh = Math.round(Math.abs(activeEnt.speed) * 3.6);
-      const altitudeM = Math.max(0, Math.round(activeEnt.position.y));
-
-      if (elFps) {
-        elFps.textContent = String(currentFps);
-        elFps.className = currentFps >= 50 ? 'fps-ok' : currentFps >= 30 ? 'fps-warn' : 'fps-bad';
+      // Update 3rd-person controllers, camera, signals, traffic & vehicle collisions, building LODs, and dynamic shadow focus
+      gamepadControls.update(dt);
+      controllerManager.update(dt, elapsed);
+      cameraSystem.update(dt, elapsed);
+      streetDetails.signalClock.value = elapsed;
+      trafficSystem.update(
+        dt,
+        elapsed,
+        cameraSystem.currentPos,
+        controllerManager.getActiveEntity(),
+        controllerManager.activeMode,
+        cameraSystem.camera
+      );
+      highwayTraffic.update(dt, cameraSystem.camera, controllerManager.getActiveEntity(), controllerManager.activeMode);
+      if (!document.hidden && now >= nextPlayerSave) {
+        savePlayerState();
+        nextPlayerSave = now + 5000;
       }
-      if (elSpeed) elSpeed.textContent = String(kmh);
-      if (elSpeedMeter) elSpeedMeter.style.transform = `scaleX(${Math.min(1, kmh / (topSpeedKmh[mode] || 80))})`;
-      document.body.classList.toggle('is-boosting', controllerManager.keys.boost && kmh > 0);
-      if (elAltitude) elAltitude.textContent = altitudeM.toLocaleString('de-DE');
-      // The street corner of the player on the follow cameras, of the camera itself on the scenic ones
-      const where = cameraSystem.getActivePreset().category === 'follow' ? activeEnt.position : cameraSystem.currentPos;
-      renderLocation(getLocationLabel(where.x, where.z));
-    }
+      if (boroughs.update) boroughs.update(elapsed); // Roosevelt Island Tramway cabins
+      cityBlocks.update(cameraSystem.currentPos.x, cameraSystem.currentPos.z);
+      if (cityBlocks.updateLights) cityBlocks.updateLights(cameraSystem.camera);
+      if (streetDetails.update) streetDetails.update(cameraSystem.camera);
+      lightingSystem.update(cameraSystem.currentPos);
+      // The 2D radar needn't redraw on every 3D frame. Keep the open map responsive.
+      if (mapSystem.isFullMapOpen || now >= nextMapUpdate) {
+        mapSystem.update();
+        nextMapUpdate = now + 50;
+      }
+      audioSystem.update(dt, elapsed, cameraSystem.camera, lightingSystem.activePresetId === 'midnight');
+      updateSceneCulling(cameraSystem.camera.position);
+
+      // Render frame via TSL RenderPipeline (SSR + Bloom)
+      // Compile the visible shadow passes on the first frame, without drawing the
+      // entire Ringbahn off-screen just to warm pipelines already precompiled above.
+      renderPipeline.render();
+      if (!warmedUp) {
+        warmedUp = true;
+        markInit('firstFrame');
+        // The loading screen stays up until the GPU has got through the first frame (and the pipelines its warm-up
+        // compiled), i.e. until the city is actually on screen
+        const device = renderer.backend.device;
+        device.queue.onSubmittedWorkDone().then(() => {
+          if (!launch.ready()) return;
+          markInit('gpu');
+          console.log(`[init] ${initTimings.join(', ')}`);
+          initTimings = null;
+          audioSystem.ready = true;
+          setLoadingProgress(1);
+        }).catch(error => launch.fail('device', error));
+      } else if (renderBudget.sample(rawDt)) {
+        renderer.setPixelRatio(renderBudget.pixelRatio(window.innerWidth, window.innerHeight));
+      }
+
+      // Telemetry uses wall time, not the clamped simulation step, so slow frames and high-refresh displays report
+      // their actual frame rate (updates DOM every 250ms).
+      frameCount++;
+      fpsTimer += Math.max(0, rawDt);
+      if (fpsTimer >= 0.25) {
+        const currentFps = Math.round(frameCount / fpsTimer);
+        frameCount = 0;
+        fpsTimer = 0;
+
+        const activeEnt = controllerManager.getActiveEntity();
+        const mode = controllerManager.activeMode;
+        const kmh = Math.round(Math.abs(activeEnt.speed) * 3.6);
+        const altitudeM = Math.max(0, Math.round(activeEnt.position.y));
+
+        if (elFps) {
+          elFps.textContent = String(currentFps);
+          elFps.className = currentFps >= 50 ? 'fps-ok' : currentFps >= 30 ? 'fps-warn' : 'fps-bad';
+        }
+        if (elSpeed) elSpeed.textContent = String(kmh);
+        if (elSpeedMeter) elSpeedMeter.style.transform = `scaleX(${Math.min(1, kmh / (topSpeedKmh[mode] || 80))})`;
+        document.body.classList.toggle('is-boosting', controllerManager.keys.boost && kmh > 0);
+        if (elAltitude) elAltitude.textContent = altitudeM.toLocaleString('de-DE');
+        // The street corner of the player on the follow cameras, of the camera itself on the scenic ones
+        const where = cameraSystem.getActivePreset().category === 'follow' ? activeEnt.position : cameraSystem.currentPos;
+        renderLocation(getLocationLabel(where.x, where.z));
+      }
+    } catch (error) { launch.fail('load', error); }
   });
 }
-
-initApp().catch((error) => {
-  console.error(error);
-  const status = document.getElementById('loading-status');
-  if (status) status.textContent = 'Berlin couldn’t open this time. Please try again.';
-  document.getElementById('loading-overlay')?.classList.add('has-error');
-  const retry = document.getElementById('loading-retry');
-  if (retry) {
-    retry.hidden = false;
-    retry.addEventListener('click', () => window.location.reload());
-  }
-});

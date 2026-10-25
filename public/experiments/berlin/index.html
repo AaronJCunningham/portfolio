@@ -19,9 +19,10 @@
         "three/addons/": "./vendor/three/examples/jsm/",
         "./js/berlin-geodata.js": "./js/berlin-geodata.js?v=20261024-ringbahn-buildings",
         "./js/nyc-geodata.js": "./js/nyc-geodata.js?v=20261024-ringbahn-buildings",
-        "./js/city-grid.js": "./js/city-grid.js?v=20261024-water-level",
-        "./js/buildings.js": "./js/buildings.js?v=20261024-ringbahn-buildings",
+        "./js/city-grid.js": "./js/city-grid.js?v=20261025-batching",
+        "./js/buildings.js": "./js/buildings.js?v=20261025-batching",
         "./js/tsl-materials.js": "./js/tsl-materials.js?v=20261024-water-level",
+        "./js/lighting.js": "./js/lighting.js?v=20261025-performance",
         "./js/traffic.js": "./js/traffic.js?v=20261023-reactions",
         "./js/audio-events.js": "./js/audio-events.js?v=20261024-audio-balance",
         "./js/audio-system.js": "./js/audio-system.js?v=20261024-recorded-scream",
@@ -29,46 +30,19 @@
       }
     }
   </script>
-  <!-- Fetch the city modules in parallel before stylesheets; the module graph controls evaluation order. -->
-  <link rel="modulepreload" href="./js/berlin-geodata.js?v=20261024-ringbahn-buildings" />
-  <link rel="modulepreload" href="./js/nyc-geodata.js?v=20261024-ringbahn-buildings" />
-  <link rel="modulepreload" href="./js/berlin-geometry.js" />
-  <link rel="modulepreload" href="./js/city-config.js" />
-  <link rel="modulepreload" href="./js/tsl-materials.js?v=20261024-water-level" />
-  <link rel="modulepreload" href="./js/trees.js" />
-  <link rel="modulepreload" href="./js/actor-models.js" />
-  <link rel="modulepreload" href="./js/vehicle-lights.js" />
-  <link rel="modulepreload" href="./js/pedestrians.js" />
-  <link rel="modulepreload" href="./js/lighting.js" />
-  <link rel="modulepreload" href="./js/city-grid.js?v=20261024-water-level" />
-  <link rel="modulepreload" href="./js/boroughs.js" />
-  <link rel="modulepreload" href="./js/buildings.js?v=20261024-ringbahn-buildings" />
-  <link rel="modulepreload" href="./js/landmarks.js" />
-  <link rel="modulepreload" href="./js/street-details.js" />
-  <link rel="modulepreload" href="./js/road-network.js" />
-  <link rel="modulepreload" href="./js/road-paint.js" />
-  <link rel="modulepreload" href="./js/traffic.js?v=20261023-reactions" />
-  <link rel="modulepreload" href="./js/controllers.js" />
-  <link rel="modulepreload" href="./js/touch-controls.js" />
-  <link rel="modulepreload" href="./js/gamepad-controls.js" />
-  <link rel="modulepreload" href="./js/cameras.js" />
-  <link rel="modulepreload" href="./js/nyc-map.js" />
-  <link rel="modulepreload" href="./js/scene-culling.js" />
-  <link rel="modulepreload" href="./js/post-processing.js" />
-  <link rel="modulepreload" href="./js/audio-synthesis.js" />
-  <link rel="modulepreload" href="./js/audio-events.js?v=20261024-audio-balance" />
-  <link rel="modulepreload" href="./js/audio-sources.js?v=20261024-audio-balance" />
-  <link rel="modulepreload" href="./js/audio-acoustics.js" />
-  <link rel="modulepreload" href="./js/audio-system.js?v=20261024-recorded-scream" />
-  <link rel="modulepreload" href="./js/main.js?v=20261023-berlin-arrival" />
-  <script type="module" src="./js/main.js?v=20261023-berlin-arrival"></script>
+  <!-- Check the device before importing any renderer or city data. -->
+  <script type="module">
+    import('./js/launch.js?v=20261025-performance-final')
+      .then(({ startBerlin }) => startBerlin())
+      .catch(() => { document.body.dataset.launchState = 'failed'; });
+  </script>
   <!-- Inter (UI) & Overpass (street-name signs: modelled on Highway Gothic, the US road sign typeface) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&amp;family=Overpass:wght@600;700&amp;display=swap" />
-  <link rel="stylesheet" href="./css/style.css?v=20261023-berlin-arrival" />
+  <link rel="stylesheet" href="./css/style.css?v=20261025-performance" />
 </head>
-<body>
+<body data-launch-state="loading">
   <!-- Icon sprite (24 × 24 stroke icons, drawn in currentColor) -->
   <svg class="icon-sprite" width="0" height="0" aria-hidden="true" focusable="false">
     <defs>
@@ -103,16 +77,25 @@
   <div id="loading-overlay" aria-label="Welcome to Berlin">
     <div class="loader-masthead"><span>Berlin Driving Simulator</span><span>Take the scenic route.</span></div>
     <div class="loader">
-      <div class="loader-copy">
+      <div class="loader-copy" id="loading-copy">
         <p class="loader-kicker">Next stop,</p>
         <div class="loader-title">BERLIN<span aria-hidden="true">.</span></div>
         <p class="loader-invitation">The city is yours to explore.</p>
         <div class="loader-progress">
           <div class="loader-track is-indeterminate" aria-hidden="true"><span id="loading-progress" class="loader-fill"></span></div>
           <div id="loading-status" role="status" aria-live="polite">Getting the city ready…</div>
-          <button id="loading-retry" class="loader-retry" type="button" hidden>Try again <span aria-hidden="true">↗</span></button>
         </div>
       </div>
+      <section id="launch-fallback" aria-labelledby="fallback-title" aria-live="polite">
+        <p class="loader-kicker">Berlin Driving Simulator</p>
+        <h1 id="fallback-title" tabindex="-1">A little more horsepower?</h1>
+        <p id="fallback-message">Berlin has a lot going on. Your browser or computer couldn’t get the city moving this time.</p>
+        <p id="fallback-tip">Try closing a few tabs, or open this on a more powerful desktop or laptop.</p>
+        <div class="fallback-actions">
+          <a id="fallback-retry" href="/play/berlin">Give it another spin <span aria-hidden="true">↗</span></a>
+          <a class="fallback-back" href="/berlin-driving-simulator">Back to the project</a>
+        </div>
+      </section>
       <div class="loader-map" aria-hidden="true">
         <svg viewBox="0 0 460 380" fill="none">
           <defs><path id="loader-ring" d="M114 70H275Q298 70 313 88L363 147Q379 166 372 190L345 270Q339 290 316 290H142Q120 290 107 272L63 211Q51 193 59 172L88 91Q95 70 114 70Z"/></defs>
@@ -130,6 +113,7 @@
     <div class="loader-footer" aria-hidden="true"><span><svg class="icon"><use href="#i-walk"/></svg>Walk</span><span><svg class="icon"><use href="#i-car"/></svg>Drive</span><span><svg class="icon"><use href="#i-bike"/></svg>Cycle</span><span><svg class="icon"><use href="#i-heli"/></svg>Fly</span></div>
   </div>
 
+  <noscript><style>#loading-copy,.loader-footer{display:none}#launch-fallback{display:block}</style><p class="no-script">Enable JavaScript, then reload to start your trip.</p></noscript>
   <!-- 3D WebGPU Viewport Container -->
   <main id="canvas-container" aria-label="3D Interactive Berlin Driving Simulator Viewport"></main>
 

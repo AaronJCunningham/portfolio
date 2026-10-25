@@ -96,3 +96,12 @@ NEXT_BUILD_DIR=.next-berlin-build npm run build
 - Browser responsive emulation is not a physical mobile-device performance certification.
 
 Screenshots: [Work card](qa/berlin/work-card.jpg), [project desktop](qa/berlin/project-desktop.jpg), [project mobile](qa/berlin/project-mobile.jpg), [simulator credit](qa/berlin/simulator-credit.jpg), [simulator mobile](qa/berlin/simulator-mobile.jpg).
+
+
+## Loading safeguards and performance — 25 October 2026
+
+`js/launch.js` runs before the simulator imports. Phones and tablets see “Big city. Bigger screen.” and a return link; no renderer or map modules are fetched. Desktop visitors need a WebGPU adapter. Missing support, rejected imports, initialization errors, GPU loss/out-of-memory, and a two-minute foreground loading deadline lead to “A little more horsepower?” with a retry and project link. Network/timeouts are described separately from unsupported graphics. A background tab pauses the deadline. A late successful import cannot start the scene after a failure.
+
+Road surfaces and roofs now merge once per existing spatial cell/material instead of splitting the same cells into 250–300-piece batches. Geometry, building data, materials, and the approved trial are unchanged. Both shadow cascades remain, at 2048 pixels each; reflections use 35% resolution. Render resolution starts at up to 1080p pixel count and adapts in 10% steps only after sustained low frame rates, with a 70% floor and slow recovery. The DOM HUD stays sharp. The radar updates at most 20 times a second, hidden tabs skip simulation/render work, and startup no longer draws the whole city off-screen to warm shadow shaders.
+
+Validation: all 28 `npm run test:berlin` tests pass, including mobile/iPad/touch-laptop detection, no heavy imports on blocked devices, timeout races, failure cleanup, device-loss lifecycle, and resolution hysteresis. The actual launch UI was checked with injected unsupported/mobile environments, including a 390×844 mobile layout with no WebGPU canvas; temporary fixtures and timing instrumentation were removed. In the Reichstag/Paul-Löbe-Allee test view, batching reduced the measured CPU render-call average from 25.62 ms to 18.95 ms. The warmed scene then showed 46–49 fps at 1920×873, full render scale. This is a local spot check, not a guaranteed frame rate across devices or neighbourhoods.

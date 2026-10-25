@@ -2106,8 +2106,8 @@ function buildCityBlocks(scene) {
     }
     for (let materialIndex = 0; materialIndex < roofBuckets.length; materialIndex++) {
       let firstMesh;
-      for (const cell of berlinGeometryGroups(roofBuckets[materialIndex])) for (let i = 0; i < cell.length; i += 250) {
-        const pieces = cell.slice(i, i + 250).map(g => {
+      for (const cell of berlinGeometryGroups(roofBuckets[materialIndex])) {
+        const pieces = cell.map(g => {
           if (!g.index) return g;
           const expanded = g.toNonIndexed(); g.dispose(); return expanded;
         });
