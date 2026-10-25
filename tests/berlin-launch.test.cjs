@@ -12,6 +12,7 @@ function load(name) {
 }
 const { isMobileDevice, createLaunchSession, launchBerlin } = load('launch.js');
 const { RenderBudget } = load('render-budget.js');
+const { cityDrawDistance, cityCellVisible } = load('city-range.js');
 function fixture() {
   let timeout;
   const failures = [], stopped = [], ready = [];
@@ -101,6 +102,23 @@ test('render budget lowers resolution for sustained slow rendering, with a reada
   frames(budget, 25, 60);
   assert.equal(budget.scale, 0.7);
   assert.ok(budget.pixelRatio(3840, 2160) ** 2 * 3840 * 2160 <= 1920 * 1080);
+});
+test('render budget targets near 60fps instead of accepting a sustained 45–50fps', () => {
+  const budget = new RenderBudget();
+  frames(budget, 50, 4);
+  assert.equal(budget.scale, 0.9);
+  budget.reset();
+  frames(budget, 57, 9);
+  assert.equal(budget.scale, 0.9);
+});
+test('city cells disappear at distance, return after teleporting, and expand for aerial views', () => {
+  const cell = { x: 3500, z: 0, r: 400, kind: 'buildings' };
+  assert.equal(cityCellVisible(cell, { x: 0, y: 5, z: 0 }), false);
+  assert.equal(cityCellVisible(cell, { x: 3000, y: 5, z: 0 }), true);
+  assert.equal(cityCellVisible(cell, { x: 0, y: 400, z: 0 }), true);
+  assert.equal(cityCellVisible({ ...cell, x: 2150 }, { x: 0, y: 5, z: 0 }), true, 'keep cells whose edges are close');
+  assert.equal(cityDrawDistance(10000, 'buildings'), 18000);
+  assert.ok(cityDrawDistance(5, 'ground') < cityDrawDistance(5, 'buildings'));
 });
 test('resolution recovery is conservative and background gaps do not reduce quality', () => {
   const budget = new RenderBudget();

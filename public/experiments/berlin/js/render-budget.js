@@ -13,10 +13,10 @@ export class RenderBudget {
     const fps = this.frames / this.seconds;
     this.seconds = 0; this.frames = 0;
     const previous = this.scale;
-    if (fps < 42) {
+    if (fps < 55) {
       this.scale = Math.max(0.7, Math.round((this.scale - 0.1) * 10) / 10);
       this.fastWindows = 0;
-    } else if (fps > 58) {
+    } else if (fps > 59) {
       if (++this.fastWindows >= 4) {
         this.scale = Math.min(1, Math.round((this.scale + 0.1) * 10) / 10);
         this.fastWindows = 0;

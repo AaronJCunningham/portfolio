@@ -902,7 +902,9 @@ function createTreeField(scene, sites) {
     mesh.count = 0;
     mesh.visible = false;
     mesh.frustumCulled = false; // instances surround the camera: the per-tree levels do the culling
-    mesh.castShadow = true;
+    // Whole-crown cards start beyond 420 m. Avoid submitting those distant
+    // trees to both shadow cascades; nearby branches keep their normal shadows.
+    mesh.castShadow = m.geo.userData.lod < 2;
     mesh.receiveShadow = true;
     group.add(mesh);
     counts.push(0);

@@ -1,4 +1,5 @@
 import * as THREE from 'three/webgpu';
+import { cityCellVisible } from './city-range.js';
 
 // js/scene-culling.js
 // Spatial culling for the island-wide static geometry. Most of Manhattan's street furniture and building massing is
@@ -298,13 +299,32 @@ function setupSceneCulling(scene, roots, shadow = null) {
     for (const cam of cams) cam.layers.enable(SHADOW_PROXY_LAYER);
   }
 
+  // The mapped Berlin surfaces already live in spatial cells. Hide distant
+  // cells before Three.js walks their render/shadow lists; landmarks and the
+  // continuous ground/water remain available at every distance.
+  const cityCells = [];
+  const propMeshes = new Set(culled.map(c => c.mesh));
+  for (const root of roots) root.traverse(o => {
+    if (!o.userData.cityRange || propMeshes.has(o) || !isStaticMesh(o)) return;
+    if (o.isInstancedMesh && !o.boundingSphere) o.computeBoundingSphere();
+    if (!o.geometry.boundingSphere) o.geometry.computeBoundingSphere();
+    const sphere = (o.isInstancedMesh ? o.boundingSphere : o.geometry.boundingSphere).clone().applyMatrix4(o.matrixWorld);
+    if (sphere.radius > 1600) return; // unbroken land, long waterways and large parks
+    cityCells.push({ mesh: o, x: sphere.center.x, z: sphere.center.z, r: sphere.radius, kind: o.userData.cityRange });
+    // Only these immobile surface meshes are frozen; traffic, streamed detail
+    // pools and animated landmarks still update their transforms normally.
+    o.matrixAutoUpdate = false;
+    o.matrixWorldAutoUpdate = false;
+  });
+  state.cityCells = cityCells;
   state.culled = culled;
 }
 
-const state = { culled: [] };
+const state = { culled: [], cityCells: [] };
 
-// Per frame (after the warm-up frame, which must see everything): hide the chunks beyond their cull distance
+// Per frame, including the first visible frame: hide chunks beyond their draw distance.
 function updateSceneCulling(cameraPosition) {
+  for (const cell of state.cityCells) cell.mesh.visible = cityCellVisible(cell, cameraPosition);
   const { x, y, z } = cameraPosition;
   for (const c of state.culled) {
     const dx = c.x - x;

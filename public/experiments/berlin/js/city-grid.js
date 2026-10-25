@@ -377,6 +377,7 @@ function buildBerlinCityGrid(scene) {
       chunk.forEach(g => g.dispose());
       if (!merged) continue;
       const mesh = new THREE.Mesh(merged, material);
+      if (material !== waterMat) mesh.userData.cityRange = 'ground';
       mesh.receiveShadow = material !== waterMat; mesh.castShadow = material === curbMat;
       if (material === paintMat) mesh.renderOrder = 1;
       if (firstMesh) mesh.userData.sharesPipelineWith = firstMesh;

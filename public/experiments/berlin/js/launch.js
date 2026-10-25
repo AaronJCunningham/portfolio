@@ -40,7 +40,7 @@ export function createLaunchSession({ onFailure, onReady, setTimer = setTimeout,
 }
 
 export async function launchBerlin({ nav = navigator, coarsePointer = matchMedia('(pointer: coarse)').matches,
-  session, loadApp = () => import('./main.js?v=20261025-performance-final') }) {
+  session, loadApp = () => import('./main.js?v=20261025-nearby3') }) {
   if (isMobileDevice(nav, coarsePointer)) { session.fail('mobile'); return; }
   if (!nav.gpu) { session.fail('unsupported'); return; }
   try {

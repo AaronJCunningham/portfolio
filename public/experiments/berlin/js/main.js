@@ -1,6 +1,5 @@
 import * as THREE from 'three/webgpu';
-import { pass, mrt, output, normalView, positionView, metalness, roughness, vec2, smoothstep } from 'three/tsl';
-import { ssr } from 'three/addons/tsl/display/SSRNode.js';
+import { pass, mrt, output } from 'three/tsl';
 import { createPostProcessing } from './post-processing.js';
 import { ClusteredLighting } from 'three/addons/lighting/ClusteredLighting.js';
 import { getLocationLabel, isTypingInField, ROADS, NYC_LANDMARKS, TELEPORT_LOCATIONS } from './city-config.js';
@@ -183,47 +182,24 @@ export async function initApp(launch) {
   // re-uploads on every draw of every pass (~2.5 MB/frame with the shadow cascades, stalling the GPU queue).
   // Storage attributes are only uploaded when instanceMatrix.needsUpdate is set.
   scene.traverse((object) => {
+    // Decals previously wrote normal/roughness overrides for SSR. Those
+    // attachments no longer exist; retain their ordinary colour/opacity only.
+    for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+      if (material?.mrtNode) material.mrtNode = null;
+    }
     if (object.isInstancedMesh && object.instanceMatrix.array.length > 0) {
       object.instanceMatrix = new THREE.StorageInstancedBufferAttribute(object.instanceMatrix.array, 16);
     }
   });
 
-  // 5. TSL RenderPipeline with Reduced-Res Screen Space Reflections (SSRNode), Bloom & Filmic Toning
-  //    SSR skips pixels with zero metalness, so fading it out with distance spares the far facades
+  // Lighting already supplies environment reflections. Keep a single colour
+  // attachment instead of the extra normal/metal/roughness targets and SSR passes.
   const scenePass = pass(scene, cameraSystem.camera);
-  // The multisampled colour attachments (output, normal, metalRough) only need resolving, never storing: discarding
-  // them spares the GPU writing 3 x 4 samples per pixel to memory every frame (transient, memoryless attachments where
-  // the browser supports them). The multisampled depth stays stored: SSR reads it.
   scenePass.renderTarget.storeMultisampledColorBuffer = false;
-  const ssrFade = smoothstep(360.0, 180.0, positionView.z.negate());
-  const sceneMRT = mrt({
-    output: output,
-    normal: normalView,
-    metalRough: vec2(metalness.mul(ssrFade), roughness)
-  });
-  sceneMRT.setBlendMode('normal', new THREE.BlendMode(THREE.MaterialBlending));
-  sceneMRT.setBlendMode('metalRough', new THREE.BlendMode(THREE.MaterialBlending));
+  const sceneMRT = mrt({ output });
   scenePass.setMRT(sceneMRT);
-
   const scenePassColor = scenePass.getTextureNode('output');
-  const scenePassDepth = scenePass.getTextureNode('depth');
-  const scenePassNormal = scenePass.getTextureNode('normal');
-  const scenePassMetalRough = scenePass.getTextureNode('metalRough');
-
-  const ssrPass = ssr(scenePassColor, scenePassDepth, scenePassNormal, {
-    metalnessNode: scenePassMetalRough.r,
-    roughnessNode: scenePassMetalRough.g,
-    camera: cameraSystem.camera
-  });
-  ssrPass.resolutionScale = 0.35;
-  ssrPass.blurQuality = 1;
-  ssrPass.maxDistance.value = 42;
-  ssrPass.thickness.value = 0.85;
-  ssrPass.quality.value = 0.35;
-  ssrPass.intensity.value = 0.50;
-  ssrPass.screenEdgeFadeBlack = true;
-
-  const colorGrade = createPostProcessing(renderer, scenePassColor, ssrPass);
+  const colorGrade = createPostProcessing(renderer, scenePassColor);
   const renderPipeline = new THREE.RenderPipeline(renderer, colorGrade.outputNode);
 
   // 6. Wire UI Controls (Strictly using safe DOM APIs: textContent, classList, addEventListener)
@@ -709,7 +685,7 @@ export async function initApp(launch) {
       audioSystem.update(dt, elapsed, cameraSystem.camera, lightingSystem.activePresetId === 'midnight');
       updateSceneCulling(cameraSystem.camera.position);
 
-      // Render frame via TSL RenderPipeline (SSR + Bloom)
+      // Render frame via TSL RenderPipeline (colour grade + bloom)
       // Compile the visible shadow passes on the first frame, without drawing the
       // entire Ringbahn off-screen just to warm pipelines already precompiled above.
       renderPipeline.render();
