@@ -30,6 +30,7 @@ export default function Home({projects}: HomeProps) {
   return (
     <>
       <MetaDataHeader
+        canonical="https://www.aaronjcunningham.com/"
         exactTitle
         title="Aaron J. Cunningham"
         content="Aaron J. Cunningham's interactive WebGPU portfolio: one persistent field of matter transforms into networks, machines, signals, portals and constellations."

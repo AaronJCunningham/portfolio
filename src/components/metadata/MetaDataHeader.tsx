@@ -14,8 +14,8 @@ type MetaDataHeaderProps = {
 
 const DEFAULT_DESCRIPTION = 'Aaron J. Cunningham is a lead full-stack developer and creative technologist turning ambitious ideas into shipped products.'
 // Versioned filenames let crawlers fetch the current build instead of the old artwork.
-const DEFAULT_IMAGE = 'https://aaronjcunningham.com/images/social/matter-reel-og-v1.jpg'
-const DEFAULT_TWITTER_IMAGE = 'https://aaronjcunningham.com/images/social/matter-reel-twitter-v1.jpg'
+const DEFAULT_IMAGE = 'https://www.aaronjcunningham.com/images/social/matter-reel-og-v1.jpg'
+const DEFAULT_TWITTER_IMAGE = 'https://www.aaronjcunningham.com/images/social/matter-reel-twitter-v1.jpg'
 const DEFAULT_IMAGE_ALT = 'Aaron J. Cunningham’s portfolio, with his name beside a glowing purple particle field.'
 
 const MetaDataHeader = ({
