@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#e9eeed">
   <title>Six seas — An impossible ocean</title>
   <link rel="icon" href="data:,">
@@ -11,16 +11,16 @@
 </head>
 <body>
   <main>
-    <div id="scene" aria-label="Rotating ocean cube, balanced on one corner. Drag to orbit and scroll to zoom."></div>
+    <div id="scene" aria-label="Rotating ocean cube, balanced on one corner. Drag to orbit; scroll or pinch to zoom."></div>
     <header><a class="wordmark" href="/six-seas" target="_top" aria-label="Back to Six seas project">AC<span> / </span>EXPERIMENTS</a><span class="edition">WATER STUDY — 001</span></header>
     <section class="caption"><p class="eyebrow"><span></span> AN IMPOSSIBLE OCEAN</p><h1>Six seas.</h1><p class="description">Every face a surface.<br>Every direction, down.</p></section>
     <div id="loading" role="status">Gathering the water…</div>
     <aside class="controls" aria-label="Scene controls">
       <button id="rotate" aria-pressed="true" title="Toggle cube rotation"><span id="rotate-icon">Ⅱ</span><span id="rotate-label">Pause rotation</span></button>
       <label for="swell">Swell <input id="swell" type="range" min="0.35" max="2" value="1" step="0.05"><output id="swell-value" for="swell">1.0</output></label>
-      <button id="reset" title="Reset camera and wave strength">↺ <span>Reset view</span></button>
+      <button id="reset" aria-label="Reset view and wave strength" title="Reset camera and wave strength">↺ <span>Reset view</span></button>
     </aside>
-    <footer><span class="hint">DRAG TO ORBIT <i>·</i> SCROLL TO EXPLORE</span><a href="https://github.com/Humpalumps/Ultra-Water" target="_blank" rel="noreferrer">Waves by Ultra-Water <span>↗</span></a></footer>
+    <footer><span class="hint">DRAG TO ORBIT <i>·</i> <span class="desktop-hint">SCROLL TO EXPLORE</span><span class="touch-hint">PINCH TO ZOOM</span></span><a href="https://github.com/Humpalumps/Ultra-Water" target="_blank" rel="noreferrer">Waves by Ultra-Water <span>↗</span></a></footer>
   </main>
   <script type="module" src="./main.js"></script>
 </body>

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/three/OrbitControls.js';
 import { OceanSim, defaultOceanParams } from './vendor/ultra-water/water/OceanSim.js';
+import { getFittedDistance } from './framing.js';
 
 // The FFT simulation is upstream Ultra-Water. This finite, six-face surface and
 // its shading are custom: each face has its own tangent space and local gravity.
@@ -112,6 +113,7 @@ function start() {
   scene.background = new THREE.Color(0xe9eeed);
   const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 80);
   const controls = new OrbitControls(camera, renderer.domElement);
+  const compactLayout = matchMedia('(max-width: 1100px)');
   controls.enableDamping = true;
   controls.enablePan = false;
   controls.minDistance = 7.5;
@@ -171,7 +173,8 @@ function start() {
   const updateButton=()=>{
     rotationButton.setAttribute('aria-pressed',String(rotating));
     document.getElementById('rotate-icon').textContent=rotating?'Ⅱ':'▷';
-    document.getElementById('rotate-label').textContent=rotating?'Pause rotation':'Resume rotation';
+    rotationButton.setAttribute('aria-label',rotating?'Pause rotation':'Resume rotation');
+    document.getElementById('rotate-label').textContent=compactLayout.matches?(rotating?'Pause':'Resume'):(rotating?'Pause rotation':'Resume rotation');
   };
   updateButton();
   rotationButton.addEventListener('click',()=>{rotating=!rotating;updateButton();});
@@ -179,9 +182,11 @@ function start() {
     swell=Number(slider.value);
     document.getElementById('swell-value').value=swell.toFixed(1);
   });
+  let fittedDistance=14.5;
+  let previousCompact=compactLayout.matches;
+  let framed=false;
   const setCamera=()=>{
-    const mobile=innerWidth<760;
-    camera.position.set(0,1.0,mobile?16.8:14.5);
+    camera.position.set(0,1.0,14.5).normalize().multiplyScalar(fittedDistance);
     controls.target.set(0,0,0);
     controls.update();
   };
@@ -192,17 +197,33 @@ function start() {
   controls.addEventListener('start',()=>{dragging=true;});
   controls.addEventListener('end',()=>{dragging=false;});
   const resize=()=>{
-    const width=mount.clientWidth,height=mount.clientHeight;
+    const width=Math.max(1,mount.clientWidth),height=Math.max(1,mount.clientHeight);
+    const compact=compactLayout.matches;
+    const zoomRatio=framed?camera.position.distanceTo(controls.target)/fittedDistance:1;
+    fittedDistance=compact?getFittedDistance(width,height,camera.fov):14.5;
+    controls.minDistance=compact?fittedDistance*0.9:7.5;
+    controls.maxDistance=Math.max(22,fittedDistance*1.65);
     renderer.setSize(width,height);
     camera.aspect=width/height;
     camera.clearViewOffset();
-    // Keep the sculpture on the right on desktop, centered on smaller screens.
-    if(width>=760) camera.setViewOffset(width,height,-width*0.12,0,width,height);
-    else camera.setViewOffset(width,height,0,-height*0.045,width,height);
+    // Mobile has its own scene row: center the sculpture inside that space.
+    if(!compact) camera.setViewOffset(width,height,-width*0.12,0,width,height);
     camera.updateProjectionMatrix();
+    if(!framed||compact!==previousCompact){
+      setCamera();
+    }else if(compact){
+      const distance=THREE.MathUtils.clamp(fittedDistance*zoomRatio,controls.minDistance,controls.maxDistance);
+      camera.position.sub(controls.target).normalize().multiplyScalar(distance).add(controls.target);
+      controls.update();
+    }
+    previousCompact=compact;
+    framed=true;
+    updateButton();
   };
-  setCamera();resize();
+  resize();
   window.addEventListener('resize',resize);
+  const resizeObserver=new ResizeObserver(resize);
+  resizeObserver.observe(mount);
   renderer.domElement.addEventListener('webglcontextlost',event=>{
     event.preventDefault();renderer.setAnimationLoop(null);loading.hidden=false;loading.classList.add('error');
     loading.textContent='The graphics context was interrupted. Reload to return to the ocean.';
@@ -231,6 +252,10 @@ function start() {
     renderer.render(scene,camera);
     if(!shaderFailed)loading.hidden=true;
   });
-  // Read-only diagnostics for the local preview and performance checks.
-  window.oceanCube={renderer,scene,camera,ocean,spin,materials};
+  // The local video exporter can take ownership of the camera and resolution.
+  const suspendResponsiveLayout=()=>{
+    resizeObserver.disconnect();
+    window.removeEventListener('resize',resize);
+  };
+  window.oceanCube={renderer,scene,camera,ocean,spin,materials,suspendResponsiveLayout};
 }

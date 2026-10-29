@@ -17,15 +17,21 @@ class Handler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(SOURCE), **kwargs)
 
     def do_GET(self):
-        if self.path in ('/', '/index.html'):
-            data = (SOURCE / 'index.html').read_text().replace('</body>', '<script src="/__capture.js"></script></body>').encode()
+        if self.path in ('/', '/index.html', '/?portrait'):
+            script = '<script type="module" src="/__portrait.js"></script>' if self.path == '/?portrait' else '<script src="/__capture.js"></script>'
+            data = (SOURCE / 'index.html').read_text().replace('</body>', script + '</body>').encode()
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')
             self.send_header('Content-Length', str(len(data)))
             self.end_headers()
             self.wfile.write(data)
-        elif self.path == '/__capture.js':
-            data = (ROOT / 'scripts/ocean-cube-capture.js').read_bytes()
+        elif self.path in ('/__capture.js', '/__portrait.js', '/__mediabunny.mjs'):
+            scripts = {
+                '/__capture.js': ROOT / 'scripts/ocean-cube-capture.js',
+                '/__portrait.js': ROOT / 'scripts/ocean-cube-portrait.js',
+                '/__mediabunny.mjs': ROOT / 'node_modules/mediabunny/dist/bundles/mediabunny.mjs',
+            }
+            data = scripts[self.path].read_bytes()
             self.send_response(200)
             self.send_header('Content-Type', 'application/javascript')
             self.send_header('Content-Length', str(len(data)))
@@ -35,7 +41,7 @@ class Handler(SimpleHTTPRequestHandler):
             super().do_GET()
 
     def do_POST(self):
-        files = {'/__capture.mp4': 'page-capture.mp4', '/__capture.webm': 'page-capture.webm', '/__poster.jpg': 'page-capture.jpg'}
+        files = {'/__capture.mp4': 'page-capture.mp4', '/__capture.webm': 'page-capture.webm', '/__poster.jpg': 'page-capture.jpg', '/__portrait.mp4': 'six-seas-portrait-1080p.mp4', '/__portrait.jpg': 'portrait-preview.jpg'}
         if self.path not in files or self.headers.get('Origin') != 'http://127.0.0.1:4174':
             self.send_error(403)
             return
