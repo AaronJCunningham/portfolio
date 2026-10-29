@@ -18,15 +18,18 @@ function load(file, imports = {}) {
 }
 
 const berlin = load('src/content/berlin-driving-simulator.ts')
+const sixSeas = load('src/content/six-seas.ts')
 const queries = load('src/sanity/lib/queries.ts', {'next-sanity': {defineQuery: q => q}})
-function repository({ownsBerlin = false, visibleBerlin = null} = {}) {
+function repository({ownsBerlin = false, visibleBerlin = null, ownsSixSeas = false, visibleSixSeas = null} = {}) {
   return load('src/sanity/lib/projects.ts', {
     '@/content/berlin-driving-simulator': berlin,
+    '@/content/six-seas': sixSeas,
     './queries': queries,
     './client': {client: {fetch: async (query, params) => {
       if (query === queries.berlinDrivingPresenceQuery) return ownsBerlin
-      if (query === queries.projectBySlugQuery) return params.slug === berlin.berlinDrivingProject.slug ? visibleBerlin : null
-      return visibleBerlin ? [visibleBerlin] : []
+      if (query === queries.sixSeasPresenceQuery) return ownsSixSeas
+      if (query === queries.projectBySlugQuery) return params.slug === berlin.berlinDrivingProject.slug ? visibleBerlin : params.slug === sixSeas.sixSeasProject.slug ? visibleSixSeas : null
+      return [visibleBerlin, visibleSixSeas].filter(Boolean)
     }}},
   })
 }
@@ -39,6 +42,23 @@ test('local Berlin project appears consistently in Work, project navigation, and
   }
   assert.equal(await repo.getProjectBySlug('berlin-driving-simulator'), berlin.berlinDrivingProject)
   assert.equal(await repo.getProjectBySlug('unknown-project'), null)
+})
+
+test('Six seas is linked consistently and respects published or hidden CMS ownership', async () => {
+  const repo = repository()
+  for (const list of await Promise.all([repo.getProjects(), repo.getProjectNavigation(), repo.getProjectSlugs()])) {
+    assert.equal(list.filter(item => item.slug === 'six-seas').length, 1)
+  }
+  assert.equal(await repo.getProjectBySlug('six-seas'), sixSeas.sixSeasProject)
+  const hidden = repository({ownsSixSeas: true})
+  assert.equal(await hidden.getProjectBySlug('six-seas'), null)
+  for (const list of await Promise.all([hidden.getProjects(), hidden.getProjectNavigation(), hidden.getProjectSlugs()])) {
+    assert.ok(!list.some(item => item.slug === 'six-seas'))
+  }
+  const cms = {...sixSeas.sixSeasProject, _id: 'cms-six-seas', title: 'CMS ocean'}
+  const visible = repository({ownsSixSeas: true, visibleSixSeas: cms})
+  assert.equal((await visible.getProjects()).filter(item => item.slug === 'six-seas').length, 1)
+  assert.equal(await visible.getProjectBySlug('six-seas'), cms)
 })
 
 test('published or hidden CMS ownership takes precedence without duplicate Berlin cards', async () => {

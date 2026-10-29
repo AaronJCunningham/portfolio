@@ -22,6 +22,7 @@ const nextConfig = {
     ]
   },
   images: {
+    qualities: [75, 85],
     remotePatterns: [
       {protocol: 'https', hostname: 'xeleven.space'},
       {protocol: 'https', hostname: 'cdn.sanity.io'},

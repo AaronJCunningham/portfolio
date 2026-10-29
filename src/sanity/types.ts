@@ -23,6 +23,7 @@ export type ProjectLink = {
   _key?: string
   label: string
   url: string
+  download?: boolean
 }
 
 export type ProjectSeo = {
@@ -53,7 +54,8 @@ export type Project = ProjectListItem & {
   experienceLabel?: string
   standaloneExperience?: boolean
   roleLabel?: string
-  attribution?: {label: string; url: string; sourceTitle: string; creator: string}
+  attribution?: {label: string; url: string; sourceTitle: string; creator: string; roleLabel?: string}
+  video?: {src: string; poster: string; width: number; height: number; caption: string}
   gallery?: Array<{src: string; alt: string; caption: string}>
 }
 

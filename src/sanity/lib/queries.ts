@@ -104,6 +104,10 @@ export const berlinDrivingPresenceQuery = defineQuery(/* groq */ `
   count(*[_type == "project" && slug.current == "berlin-driving-simulator" && !(_id in path("drafts.**"))]) > 0
 `)
 
+export const sixSeasPresenceQuery = defineQuery(/* groq */ `
+  count(*[_type == "project" && slug.current == "six-seas" && !(_id in path("drafts.**"))]) > 0
+`)
+
 export const resourcesQuery = defineQuery(/* groq */ `
   *[${resourcesFilter}]
   | order(coalesce(sortOrder, 999999) asc, publishedAt desc, title asc) {

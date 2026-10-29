@@ -124,7 +124,25 @@ export default function DynamicProject({project, previousProject, nextProject}: 
             </div>
           </section>
 
-          {leadImageUrl && (
+          {project.video ? (
+            <figure className="project-lead-media">
+              <video
+                controls
+                playsInline
+                muted
+                loop
+                preload="none"
+                poster={project.video.poster}
+                width={project.video.width}
+                height={project.video.height}
+                aria-label={`${project.title} — full page recording`}
+              >
+                <source src={project.video.src} type="video/mp4" />
+                <a href={project.video.src}>Download the video</a>
+              </video>
+              <figcaption><span>{'//00'}</span><span>{project.video.caption}</span></figcaption>
+            </figure>
+          ) : leadImageUrl && (
             <figure className="project-lead-media">
               <Image
                 src={leadImageUrl}
@@ -161,7 +179,7 @@ export default function DynamicProject({project, previousProject, nextProject}: 
               </div>
               <dl>
                 <div>
-                  <dt>{project.attribution ? 'BERLIN ADAPTATION' : 'AUTHOR'}</dt>
+                  <dt>{project.attribution ? project.attribution.roleLabel || 'BERLIN ADAPTATION' : 'AUTHOR'}</dt>
                   <dd>AARON J. CUNNINGHAM</dd>
                 </div>
                 {publishedDate && (
@@ -177,6 +195,7 @@ export default function DynamicProject({project, previousProject, nextProject}: 
                     <a
                       key={link._key || link.url}
                       href={link.url}
+                      download={link.download || undefined}
                       target={link.url.startsWith('/') && !link.url.startsWith('//') ? undefined : '_blank'}
                       rel={link.url.startsWith('/') && !link.url.startsWith('//') ? undefined : 'noopener noreferrer'}
                     >
