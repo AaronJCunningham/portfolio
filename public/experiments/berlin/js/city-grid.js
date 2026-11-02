@@ -369,12 +369,10 @@ function buildBerlinCityGrid(scene) {
   for (const [material, geometries] of collections) {
     let firstMesh;
     for (const cell of berlinGeometryGroups(geometries)) {
-      const chunk = cell.map(g => {
-        if (!g.index) return g;
-        const expanded = g.toNonIndexed(); g.dispose(); return expanded;
-      });
-      const merged = mergeGeometries(chunk, false);
-      chunk.forEach(g => g.dispose());
+      // All ground primitives are indexed. Keep shared vertices instead of
+      // allocating an expanded copy of every road, pavement and curb at startup.
+      const merged = mergeGeometries(cell, false);
+      cell.forEach(g => g.dispose());
       if (!merged) continue;
       const mesh = new THREE.Mesh(merged, material);
       if (material !== waterMat) mesh.userData.cityRange = 'ground';
