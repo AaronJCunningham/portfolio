@@ -9,7 +9,23 @@
     "threeRepository": "https://github.com/mrdoob/three.js",
     "threeCommit": "ee6a50ecf766fd9010951ab384120db9dd13b902",
     "threeRevision": "187dev",
-    "adaptation": "Berlin Mitte geographic data and city-specific content; original WebGPU/TSL engine and application systems"
+    "adaptation": "Berlin Mitte geographic data and city-specific content; original WebGPU/TSL engine and application systems",
+    "selectivePorts": {
+      "reviewedThrough": "343a0f91471dfd23ee24acabab22303420a733b7",
+      "date": "2026-11-02",
+      "areas": [
+        "reduced tree geometry and canopy improvements; retained compact Berlin batching, explicit updates and squared LOD checks",
+        "road marking chunks, distance culling and shader cost",
+        "building and lamp shadow proxies",
+        "pedestrian shader, gait, crowd and inactive character work",
+        "car grip, steering, momentum, braking and direction-change fix",
+        "trigger-only vehicle gamepad throttle",
+        "distant window light clusters",
+        "daytime water reflection gating",
+        "lossless compressed runtime geography (Berlin adaptation)"
+      ],
+      "retained": "Berlin data, geometry, landmarks, Hochbahn, passages, reactions, audio, liveries, boost, adaptive resolution, city ranges and pinned renderer; no full upstream merge"
+    }
   },
   "dataSha256": "253954f6efc64eb9d15c93c4c53a473f187d8b3a20e850fe1a6546a65331866b",
   "dataLicense": "ODbL-1.0",
@@ -41,5 +57,12 @@
       "oldFacadeEdges": 595999,
       "newFacadeEdges": 690797
     }
+  },
+  "runtimeData": {
+    "format": "gzip JSON, lossless; existing GEO interface",
+    "gridFile": "data/berlin-grid.json.gz",
+    "gridSha256": "af5a33d1483afd7b54ce5f220679a3ed1c641ecd62284f1eb4d9605bffcc11f6",
+    "cityFile": "data/berlin.json.gz",
+    "previousModuleBytes": 108114023
   }
 }

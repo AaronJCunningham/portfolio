@@ -1,17 +1,9 @@
 import * as THREE from 'three/webgpu';
 import { createTreeMaterial } from './tsl-materials.js';
 
-// js/trees.js
-// Procedural NYC street & park trees, planted by street-details.js (section 7):
-// - London plane, honey locust & American elm grown from seeded per-species rules: a flared trunk / leader carrying
-//   scaffold limbs, branches and twigs as tapered, curving bark tubes (uv in metres for the bark shader)
-// - Leaf sprays on alpha-tested cards hung from the twigs, cut from a generated leaf atlas (palmate plane leaves,
-//   feathery locust fronds, toothed elm leaves and a dense far-canopy clump) whose mipmaps keep their coverage, so
-//   distant crowns don't thin out
-// - Crown-shell normals, interior occlusion & sway weights baked per vertex (attributes: createTreeMaterial in
-//   tsl-materials.js)
-// - Three levels of detail (two variants per species up close), picked per tree from the camera distance and
-//   regrouped into one instanced mesh per species / variant / level whenever the camera has moved a few metres
+// Seeded street and park trees with three geometry levels, regrouped by spatial cell as the camera moves.
+// Bark tubes and leaf cards share a material; atlas mipmaps preserve leaf coverage at a distance.
+// Crown normals, occlusion and wind weights are baked into the geometry (see createTreeMaterial).
 
 const V3 = THREE.Vector3;
 
@@ -47,7 +39,6 @@ const tileOrigin = (k) => [(k % 2) * TILE, (k >> 1) * TILE];
 // Spray primitives in metres (x right, y up from the card's attachment point): twigs (polylines) & leaves
 function buildSprays(rng) {
   const R = (a, b) => a + (b - a) * rng();
-  const dirOf = (a) => [Math.sin(a), Math.cos(a)]; // a = angle from straight up
 
   // Curving twig from (x, y) at angle a off vertical, len m long, curling by `curl` rad over its length
   const twig = (x, y, a, len, curl, segs = 12) => {
@@ -692,8 +683,7 @@ function swayWeight(b, t) {
   }
 }
 
-// Leaf cards of one tree: lod 0 on every twig, lod 1 fewer & larger along the branches, lod 2 a shell of whole-crown
-// cards (far-canopy tile) round the crown ellipsoid
+// Fine twig cards (lod 0), larger branch cards (lod 1), and a canopy shell shared by all levels (lod 2).
 function placeCards(sp, branches, lod, tileMeters, rng, crown) {
   const R = (a, b) => a + (b - a) * rng();
   const cards = [];
@@ -760,7 +750,7 @@ function placeCards(sp, branches, lod, tileMeters, rng, crown) {
   return cards;
 }
 
-// One species / variant: [lod0, lod1, lod2] geometries (lod 2 only for variant 0)
+// One species / variant: [lod0, lod1, lod2] geometries.
 function buildTreeGeometries(speciesIndex, variant, tileMeters) {
   const sp = SPECIES[speciesIndex];
   const seed = 7919 * (speciesIndex + 1) + 104729 * (variant + 1);
@@ -779,35 +769,43 @@ function buildTreeGeometries(speciesIndex, variant, tileMeters) {
   }
   const crown = makeCrown(pts);
 
+  // Keep the canopy's shape, texture orientation and wind phase identical across levels.
+  const canopyRng = mulberry32(seed + 2 * 31337);
+  const canopyCards = placeCards(sp, branches, 2, tileMeters, canopyRng, crown)
+    .map((c) => ({ ...c, mirror: canopyRng() < 0.5, random: canopyRng() }));
+
   const geos = [];
-  const levels = variant === 0 ? [0, 1, 2] : [0, 1];
-  for (const lod of levels) {
+  for (let lod = 0; lod < 3; lod++) {
     const gb = new TreeGeometryBuilder();
     const rng = mulberry32(seed + lod * 31337);
     const aoAt = (p) => crown.barkAO(p);
-    // Bark: lod 0 everything, lod 1 trunk + limbs + branches (coarser), lod 2 trunk + limbs as thin prisms
+    // Small twigs are drawn in the leaf cards; simplify the remaining bark with distance.
     for (const b of branches) {
-      if (lod === 0) {
-        const radial = [9, 6, 4, 3][b.level];
-        addTube(gb, b, radial, 1, aoAt, swayWeight);
-      } else if (lod === 1 && b.level <= 2) {
-        addTube(gb, b, [6, 5, 3][b.level], 2, aoAt, swayWeight);
+      if (lod === 0 && b.level <= 2) {
+        addTube(gb, b, [5, 3, 3][b.level], [2, 3, 4][b.level], aoAt, swayWeight);
+      } else if (lod === 1 && b.level <= 1) {
+        addTube(gb, b, 3, b.level === 0 ? 4 : 8, aoAt, swayWeight);
       } else if (lod === 2 && b.level <= 1) {
-        addTube(gb, b, b.level === 0 ? 5 : 3, b.level === 0 ? 4 : 6, aoAt, swayWeight);
+        addTube(gb, b, 3, b.pts.length - 1, aoAt, swayWeight);
       }
     }
-    const cards = lod === 0 ? cards0 : placeCards(sp, branches, lod, tileMeters, rng, crown);
-    for (const c of cards) addCard(gb, c.at, c.up, c.face, c.size, c.tile, rng() < 0.5, rng(), crown);
+    const cards = (lod === 0 ? cards0 : lod === 1 ? placeCards(sp, branches, lod, tileMeters, rng, crown) : [])
+      .map((c) => ({ ...c, mirror: rng() < 0.5, random: rng() }))
+      .filter((_, i) => i % 2 === 0);
+    for (const c of cards) addCard(gb, c.at, c.up, c.face, c.size, c.tile, c.mirror, c.random, crown);
+    for (const c of canopyCards) addCard(gb, c.at, c.up, c.face, c.size, c.tile, c.mirror, c.random, crown);
     const g = gb.build();
-    g.userData = { species: sp.name, variant, lod, cards: cards.length, triangles: gb.idx.length / 3 };
+    g.userData = { species: sp.name, variant, lod, cards: cards.length + canopyCards.length, triangles: gb.idx.length / 3 };
     geos[lod] = g;
   }
   return geos;
 }
 
 // =====================================================================================================================
-// 5. TREE FIELD: per-tree level of detail, regrouped into one instanced mesh per species / variant / level
+// 5. TREE FIELD: per-tree level of detail in compact species / variant / level batches
 // =====================================================================================================================
+// Retain Berlin’s compact batches: Manhattan’s cell layout added excessive
+// draw and scene traversal overhead across the larger Berlin tree field.
 const LOD_NEAR = 105; // full detail within (m)
 const LOD_MID = 420; // coarse cards & branches within; whole-crown cards beyond
 const LOD_HYSTERESIS = 6;
@@ -823,10 +821,10 @@ function hashPos(x, y, z) {
 
 /**
  * Builds the instanced tree field for `sites` ({ x, y, z, scale, species, yaw?, sx?, sz?, tier? }) and keeps each
- * tree's level of detail up to date from the camera of every view pass (scene.onBeforeRender). Returns
+ * tree's level of detail up to date from the explicit frame update. Returns
  * { group, material, atlas, update(cameraPosition) }.
  */
-function createTreeField(scene, sites) {
+function createTreeField(_scene, sites) {
   const group = new THREE.Group();
   group.name = 'Trees';
   const atlas = createLeafAtlas();
@@ -920,8 +918,9 @@ function createTreeField(scene, sites) {
       const mi = meshOf[i * 3 + l];
       const mesh = instanced[mi];
       const c = counts[mi]++;
-      mesh.instanceMatrix.array.set(mats.subarray(i * 16, i * 16 + 16), c * 16);
-      mesh.geometry.attributes.aTreeData.array.set(data.subarray(i * 4, i * 4 + 4), c * 4);
+      const dstM = mesh.instanceMatrix.array, dstD = mesh.geometry.attributes.aTreeData.array;
+      for (let j = 0; j < 16; j++) dstM[c * 16 + j] = mats[i * 16 + j];
+      for (let j = 0; j < 4; j++) dstD[c * 4 + j] = data[i * 4 + j];
     }
     instanced.forEach((mesh, mi) => {
       const n = counts[mi];
@@ -951,14 +950,14 @@ function createTreeField(scene, sites) {
       const dx = px[i] - cam.x;
       const dy = py[i] - cam.y;
       const dz = pz[i] - cam.z;
-      const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+      const d2 = dx * dx + dy * dy + dz * dz;
       const maxD = low ? Math.min(MAX_DIST[tier[i]], LOW_CUTOFF) : MAX_DIST[tier[i]];
       // levels 0-2, 3 = hidden; next to a boundary a tree keeps the level it has
       const curL = lod[i] === 255 ? 3 : lod[i];
-      let nextL = d < LOD_NEAR ? 0 : d < LOD_MID ? 1 : d < maxD ? 2 : 3;
+      let nextL = d2 < LOD_NEAR * LOD_NEAR ? 0 : d2 < LOD_MID * LOD_MID ? 1 : d2 < maxD * maxD ? 2 : 3;
       if (Math.abs(nextL - curL) === 1) {
         const edge = [LOD_NEAR, LOD_MID, maxD][Math.min(nextL, curL)];
-        if (Math.abs(d - edge) < LOD_HYSTERESIS) nextL = curL;
+        if (d2 > (edge - LOD_HYSTERESIS) ** 2 && d2 < (edge + LOD_HYSTERESIS) ** 2) nextL = curL;
       }
       const next = nextL === 3 ? 255 : nextL;
       if (next !== lod[i]) {
@@ -969,15 +968,6 @@ function createTreeField(scene, sites) {
     if (changed) rebuild();
     return changed;
   }
-
-  // Follow the view camera of every scene render (shadow cascades are orthographic and keep the view's levels)
-  const viewPos = new V3();
-  const prevBeforeRender = scene.onBeforeRender;
-  scene.onBeforeRender = function (renderer, scn, camera, target) {
-    prevBeforeRender.call(this, renderer, scn, camera, target);
-    if (camera.isOrthographicCamera === true || camera.isArrayCamera === true) return;
-    update(viewPos.setFromMatrixPosition(camera.matrixWorld));
-  };
 
   // Levels for the start-up view (Midtown, 5th Ave), so the precompile pass sees the tree meshes
   update(new V3(0, 10, 140));

@@ -2257,7 +2257,10 @@ function buildCityBlocks(scene) {
     let firstMesh;
     for (const cell of BERLIN_DATA ? berlinSpatialGroups(items) : [items]) {
       const inst = createFacadeBoxes(materials[matIdx], cell);
-      if (BERLIN_DATA) inst.userData.cityRange = 'buildings';
+      if (BERLIN_DATA) {
+        inst.userData.cityRange = 'buildings';
+        inst.userData.shadowStandIn = true;
+      }
       inst.castShadow = true;
       inst.receiveShadow = true;
       if (firstMesh) inst.userData.sharesPipelineWith = firstMesh;

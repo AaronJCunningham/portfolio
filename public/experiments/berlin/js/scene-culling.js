@@ -139,9 +139,21 @@ function setupSceneCulling(scene, roots, shadow = null) {
 
   // 1. Small props: chunked & distance culled
   const chunkable = [];
+  const pushCulled = (mesh, sphere, distance) => {
+    culled.push({ mesh, x: sphere.center.x, y: sphere.center.y, z: sphere.center.z,
+      r: sphere.radius, d: distance, maxDistSq: (distance + sphere.radius) ** 2 });
+  };
   for (const root of roots) {
     root.traverse((o) => {
-      if (!o.isInstancedMesh || !isStaticMesh(o) || o.count < 64 || o.count !== o.instanceMatrix.count) return;
+      if (!isStaticMesh(o)) return;
+      if (!o.isInstancedMesh) {
+        if (o.userData.cullDistance > 0) {
+          if (!o.geometry.boundingSphere) o.geometry.computeBoundingSphere();
+          pushCulled(o, o.geometry.boundingSphere.clone().applyMatrix4(o.matrixWorld), o.userData.cullDistance);
+        }
+        return;
+      }
+      if (o.count < 64 || o.count !== o.instanceMatrix.count) return;
       if (o.count * triangleCount(o.geometry) < 40000) return;
       if (!o.boundingSphere) o.computeBoundingSphere();
       if (o.boundingSphere.radius < 1500) return;
@@ -164,7 +176,7 @@ function setupSceneCulling(scene, roots, shadow = null) {
       if (k > 0) chunk.userData.sharesPipelineWith = chunks[0];
       chunk.updateMatrixWorld(true);
       const sphere = chunk.boundingSphere.clone().applyMatrix4(chunk.matrixWorld);
-      culled.push({ mesh: chunk, x: sphere.center.x, y: sphere.center.y, z: sphere.center.z, r: sphere.radius, d: cullDist });
+      pushCulled(chunk, sphere, cullDist);
     });
   }
 
@@ -205,6 +217,7 @@ function setupSceneCulling(scene, roots, shadow = null) {
       root.traverse((o) => {
         if (!o.castShadow || !isStaticMesh(o) || !proxyableMaterial(o.material)) return;
         if (o.isInstancedMesh && o.count !== o.instanceMatrix.count) return;
+        if (o.userData.shadowStandIn) { sources.push(o); return; }
         const tris = triangleCount(o.geometry) * (o.isInstancedMesh ? o.count : 1);
         if (tris < 20000) return;
         let radius;
@@ -221,7 +234,7 @@ function setupSceneCulling(scene, roots, shadow = null) {
 
     for (const o of sources) {
       const side = sideOf(o.material);
-      const geo = o.geometry;
+      const geo = o.userData.shadowStandIn?.isBufferGeometry ? o.userData.shadowStandIn : o.geometry;
       if (o.isInstancedMesh) {
         const pos = geo.attributes.position;
         if (!geo.boundingBox) geo.computeBoundingBox();
@@ -330,7 +343,7 @@ function updateSceneCulling(cameraPosition) {
     const dx = c.x - x;
     const dy = c.y - y;
     const dz = c.z - z;
-    c.mesh.visible = Math.sqrt(dx * dx + dy * dy + dz * dz) - c.r < c.d;
+    c.mesh.visible = dx * dx + dy * dy + dz * dz < c.maxDistSq;
   }
 }
 

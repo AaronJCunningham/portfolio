@@ -45,6 +45,8 @@ import {
   normalize,
   reflect,
   pow,
+  log2,
+  exp2,
   sign,
   fwidth,
   texture,
@@ -158,6 +160,27 @@ const filteredPulse = Fn(([x, a, b, w]) => {
   return integral(p.add(hw)).sub(integral(p.sub(hw))).div(hw.mul(2.0));
 });
 
+// Keep distant lit windows in 1–2 pixel clusters. Adjacent world-anchored scales cross-fade, and
+// the half-width inset leaves room for filtering at cell edges while preserving mean brightness.
+const distantWindowLight = Fn(([grid, fw, probability, seed, lod]) => {
+  const light = float(probability).toVar();
+  If(cityUniforms.uInteriorGlow.greaterThan(0.5).and(lod.greaterThan(0.0)), () => {
+    const level = log2(max(max(fw.x, fw.y).mul(4.0), 2.0)).toVar();
+    const scale = exp2(floor(level)).toVar();
+    const cluster = (size) => {
+      const p = grid.div(size).toVar();
+      const width = fw.div(size).toVar();
+      const lit = step(float(1.0).sub(probability), hash2D(floor(p).add(vec2(seed, 73.1))));
+      const coverage = filteredPulse(fract(p.x), 0.25, 0.75, width.x)
+        .mul(filteredPulse(fract(p.y), 0.25, 0.75, width.y));
+      return lit.mul(coverage).mul(4.0);
+    };
+    const clustered = mix(cluster(scale), cluster(scale.mul(2.0)), smoothstep(0.0, 1.0, fract(level)));
+    light.assign(mix(probability, clustered, smoothstep(0.5, 1.2, cityUniforms.uInteriorGlow)));
+  });
+  return light;
+});
+
 /**
  * Occlusion-Aware Urban Canyon Sky Visibility (aoNode)
  * Models how Manhattan street canyons occlude overhead sky irradiance near the street floor (y = 0..65m),
@@ -199,8 +222,8 @@ const facadeAlongZ = varying(
  *   set back behind the facade so neighbouring windows look into the same full-sized room.
  * - Includes left & right fabric drapes hung just inside the window frame (`winUV`) from a 6-swatch
  *   domestic palette that block interior glow (`emit = 0.20`) so drapes silhouette against lit rooms.
- * - Once windows shrink to a pixel or two (`fwNode`: pixel footprint in cells) rooms glow at the mean lit level (with
- *   a lit room's tint), drapes at their mean coverage & lamps fade out, so distant towers don't twinkle in motion.
+ * - Once windows shrink to a pixel or two (`fwNode`: pixel footprint in cells), lit rooms merge into filtered
+ *   clusters, drapes settle to their mean coverage & lamps fade out, so distant towers don't twinkle in motion.
  * - Returns `vec4(roomColor, litEmit)`.
  */
 const evaluateApartmentInterior = Fn(([uCoord, vCoord, winUV, cellId, winWNode, floorHNode, seedNode, warmthNode, litProbNode, fwNode]) => {
@@ -356,7 +379,8 @@ const evaluateApartmentInterior = Fn(([uCoord, vCoord, winUV, cellId, winWNode, 
   const roomWarmth = mix(vec3(1.0), lightCol, lit.mul(0.85));
   const finalRoomCol = bestCol.mul(roomWarmth).mul(mix(float(0.85), float(1.35), lit));
 
-  return vec4(finalRoomCol, mix(litRoom, litProbNode, lod).mul(bestEmit));
+  const distantLit = distantWindowLight(vec2(gridU, v.div(fH)), fwNode, litProbNode, seedNode, lod);
+  return vec4(finalRoomCol, mix(litRoom, distantLit, lod).mul(bestEmit));
 });
 
 /**
@@ -1767,7 +1791,10 @@ function createRoadSurfaceMaterial() {
  * Strips thinner than ~1.5 px are widened on screen and faded to match (phone-wire AA) and dashes are box-filtered,
  * so distant markings fade out smoothly instead of breaking up and flickering. Worn, and dark & glossy in puddles.
  */
+let _roadPaintMaterial = null;
+
 function createRoadPaintMaterial() {
+  if (_roadPaintMaterial) return _roadPaintMaterial;
   const mat = new THREE.MeshStandardNodeMaterial({
     vertexColors: true,
     transparent: true,
@@ -1782,9 +1809,9 @@ function createRoadPaintMaterial() {
 
   // How much to widen the strip so it is at least 1.5 px wide on screen (1 when it already is)
   const widen = Fn(() => {
-    const viewProjection = cameraProjectionMatrix.mul(cameraViewMatrix);
-    const edge = viewProjection.mul(vec4(positionGeometry, 1.0));
-    const centre = viewProjection.mul(vec4(positionGeometry.sub(sideOffset), 1.0));
+    const toClip = (p) => cameraProjectionMatrix.mul(cameraViewMatrix.mul(vec4(p, 1.0)));
+    const edge = toClip(positionGeometry).toVar();
+    const centre = toClip(positionGeometry.sub(sideOffset)).toVar();
     const halfWidthPx = length(edge.xy.div(edge.w).sub(centre.xy.div(centre.w)).mul(screenSize).mul(0.5));
     const inFront = step(0.05, min(edge.w, centre.w));
     return clamp(float(0.75).div(max(halfWidthPx, 0.001)), 1.0, 16.0).mul(inFront).max(1.0);
@@ -1799,15 +1826,32 @@ function createRoadPaintMaterial() {
   const dashes = onSoFar(t.add(footprint.mul(0.5))).sub(onSoFar(t.sub(footprint.mul(0.5)))).div(footprint);
 
   const xz = positionWorld.xz;
-  const detail = smoothstep(70.0, 15.0, length(positionWorld.sub(cameraPosition)));
-  const wear = mix(float(0.5), noise2D(xz.mul(0.8)).mul(0.6).add(noise2D(xz.mul(2.3)).mul(0.4)), detail);
-  mat.opacityNode = dashes.mul(varying(float(1.0).div(widen))).mul(smoothstep(0.1, 0.6, wear).mul(0.4).add(0.55));
+  const camDist = length(positionWorld.sub(cameraPosition));
+  const detail = smoothstep(70.0, 15.0, camDist);
+  const distFade = smoothstep(1650.0, 1300.0, camDist);
+  const wear = Fn(() => {
+    const w = float(0.5).toVar();
+    If(detail.greaterThan(0.001), () => {
+      w.assign(mix(float(0.5), noise2D(xz.mul(0.8)).mul(0.6).add(noise2D(xz.mul(2.3)).mul(0.4)), detail));
+    });
+    return w;
+  })();
+  mat.opacityNode = dashes.mul(varying(float(1.0).div(widen))).mul(smoothstep(0.1, 0.6, wear).mul(0.4).add(0.55)).mul(distFade);
 
-  const wet = roadWetMasks(roadPuddleField(positionWorld.x, positionWorld.z)); // same pools & film as the asphalt
-  mat.colorNode = vec3(mix(float(1.0), float(0.72), wet.y).mul(mix(float(1.0), float(0.86), wet.z)));
-  mat.roughnessNode = mix(mix(float(0.62), float(0.42), wet.z), float(0.2), wet.y);
+  // Standing-water puddle mask is zero when uRoadWetness <= 0.1 (e.g. midday); evaluate once and share across channels
+  const puddle = Fn(() => {
+    const p = float(0.0).toVar();
+    If(cityUniforms.uRoadWetness.greaterThan(0.1), () => {
+      p.assign(roadWetMasks(roadPuddleField(positionWorld.x, positionWorld.z)).y);
+    });
+    return p;
+  })();
+  const film = smoothstep(0.2, 0.8, cityUniforms.uRoadWetness);
+  mat.colorNode = vec3(mix(float(1.0), float(0.72), puddle).mul(mix(float(1.0), float(0.86), film)));
+  mat.roughnessNode = mix(mix(float(0.62), float(0.42), film), float(0.2), puddle);
   mat.aoNode = canyonSkyAONode();
 
+  _roadPaintMaterial = mat;
   return mat;
 }
 
@@ -2598,75 +2642,79 @@ function createWaterMaterial() {
   mat.userData.berlinReflectionBankCount = reflectionBanks.length;
   mat.emissiveNode = Fn(() => {
     const night = smoothstep(0.55, 1.35, cityUniforms.uInteriorGlow);
-    const P = positionWorld.xz;
-    const R = reflect(viewDir.negate(), waterNormal);
-    const horiz = max(length(R.xz), 0.001);
-    const dir = R.xz.div(horiz);
-    const tanEl = R.y.div(horiz);
+    const emit = vec3(0.0).toVar();
+    If(night.greaterThan(0.0001), () => {
+      const P = positionWorld.xz;
+      const R = reflect(viewDir.negate(), waterNormal);
+      const horiz = max(length(R.xz), 0.001);
+      const dir = R.xz.div(horiz);
+      const tanEl = R.y.div(horiz);
 
-    // Intersect the reflected horizontal ray with the true, simplified banks.
-    // A signed epsilon keeps parallel rays finite without moving any boundary.
-    const tHit = float(1e5).toVar();
-    const S = float(35.0).toVar();
-    for (const [ax, az, bx, bz, skyline] of reflectionBanks) {
-      const ex = bx - ax, ez = bz - az;
-      const denominator = dir.x.mul(ez).sub(dir.y.mul(ex)).toVar();
-      const denominatorSign = mix(float(-1.0), float(1.0), step(0.0, denominator));
-      const safeDenominator = max(abs(denominator), 0.001).mul(denominatorSign);
-      const delta = vec2(ax, az).sub(P);
-      const rayDistance = delta.x.mul(ez).sub(delta.y.mul(ex)).div(safeDenominator);
-      const alongBank = delta.x.mul(dir.y).sub(delta.y.mul(dir.x)).div(safeDenominator);
-      const valid = step(0.0, rayDistance).mul(step(0.0, alongBank)).mul(step(alongBank, 1.0)).mul(step(0.001, abs(denominator)));
-      const candidate = mix(float(1e5), max(rayDistance, 8.0), valid).toVar();
-      const nearer = step(candidate, tHit);
-      S.assign(mix(S, float(skyline), nearer));
-      tHit.assign(min(tHit, candidate));
-    }
-    const bankVisible = step(tHit, 20000.0);
-    tHit.assign(clamp(tHit, 8.0, 3500.0));
-    const hit = P.add(dir.mul(tHit)).toVar();
-    const hRefl = tHit.mul(tanEl); // height up the facades that this reflection sees
-    const u = hit.x.add(hit.y); // runs along whichever bank was hit
-    const lake = step(0.5, pond);
-    const brightness = mix(float(0.85), float(0.65), lake).mul(bankVisible);
+      // Intersect the reflected horizontal ray with the true, simplified banks.
+      // A signed epsilon keeps parallel rays finite without moving any boundary.
+      const tHit = float(1e5).toVar();
+      const S = float(35.0).toVar();
+      for (const [ax, az, bx, bz, skyline] of reflectionBanks) {
+        const ex = bx - ax, ez = bz - az;
+        const denominator = dir.x.mul(ez).sub(dir.y.mul(ex)).toVar();
+        const denominatorSign = mix(float(-1.0), float(1.0), step(0.0, denominator));
+        const safeDenominator = max(abs(denominator), 0.001).mul(denominatorSign);
+        const delta = vec2(ax, az).sub(P);
+        const rayDistance = delta.x.mul(ez).sub(delta.y.mul(ex)).div(safeDenominator);
+        const alongBank = delta.x.mul(dir.y).sub(delta.y.mul(dir.x)).div(safeDenominator);
+        const valid = step(0.0, rayDistance).mul(step(0.0, alongBank)).mul(step(alongBank, 1.0)).mul(step(0.001, abs(denominator)));
+        const candidate = mix(float(1e5), max(rayDistance, 8.0), valid).toVar();
+        const nearer = step(candidate, tHit);
+        S.assign(mix(S, float(skyline), nearer));
+        tHit.assign(min(tHit, candidate));
+      }
+      const bankVisible = step(tHit, 20000.0);
+      tHit.assign(clamp(tHit, 8.0, 3500.0));
+      const hit = P.add(dir.mul(tHit)).toVar();
+      const hRefl = tHit.mul(tanEl); // height up the facades that this reflection sees
+      const u = hit.x.add(hit.y); // runs along whichever bank was hit
+      const lake = step(0.5, pond);
+      const brightness = mix(float(0.85), float(0.65), lake).mul(bankVisible);
 
-    // Footprint on the facades (m): unresolved slopes tilt the reflection ±2σ, laterally foreshortened at grazing views
-    const sigma2 = sqrt(variance).mul(2.0);
-    const sV = tHit.mul(sigma2).add(fwidth(hRefl)).add(0.5);
-    const sU = tHit.mul(sigma2).mul(max(viewDir.y, 0.05)).add(fwidth(u)).add(0.3);
+      // Footprint on the facades (m): unresolved slopes tilt the reflection ±2σ, laterally foreshortened at grazing views
+      const sigma2 = sqrt(variance).mul(2.0);
+      const sV = tHit.mul(sigma2).add(fwidth(hRefl)).add(0.5);
+      const sU = tHit.mul(sigma2).mul(max(viewDir.y, 0.05)).add(fwidth(u)).add(0.3);
 
-    // Lots 24 m wide with heights 0.3–1.3× the district skyline (averaged once a footprint spans several lots)
-    const lot = floor(u.div(24.0));
-    const r1 = hash2D(vec2(lot, 5.1));
-    const r2 = hash2D(vec2(lot, 9.7));
-    const r3 = hash2D(vec2(lot, 13.3));
-    const lotMix = smoothstep(5.0, 20.0, sU);
-    const upper = mix(waterBoxCover(hRefl, 4.5, S.mul(r1.mul(r1).add(0.3)), sV), waterBoxCover(hRefl, 4.5, S.mul(0.63), sV), lotMix);
-    const ground = waterBoxCover(hRefl, 0.0, 4.5, sV);
+      // Lots 24 m wide with heights 0.3–1.3× the district skyline (averaged once a footprint spans several lots)
+      const lot = floor(u.div(24.0));
+      const r1 = hash2D(vec2(lot, 5.1));
+      const r2 = hash2D(vec2(lot, 9.7));
+      const r3 = hash2D(vec2(lot, 13.3));
+      const lotMix = smoothstep(5.0, 20.0, sU);
+      const upper = mix(waterBoxCover(hRefl, 4.5, S.mul(r1.mul(r1).add(0.3)), sV), waterBoxCover(hRefl, 4.5, S.mul(0.63), sV), lotMix);
+      const ground = waterBoxCover(hRefl, 0.0, 4.5, sV);
 
-    // Lit windows (3.2 m bays × 3.6 m floors), resolving to each lot's mean occupancy, then the street's
-    const dens = mix(float(0.2), float(0.6), r2);
-    const bayF = u.div(3.2);
-    const floorF = hRefl.div(3.6);
-    const litWin = step(hash2D(floor(vec2(bayF, floorF)).add(lot.mul(0.731))), dens);
-    const pane = filteredPulse(fract(bayF), 0.16, 0.84, sU.div(3.2)).mul(filteredPulse(fract(floorF), 0.3, 0.88, sV.div(3.6)));
-    const winDetail = float(1.0).sub(smoothstep(0.7, 1.8, max(sU.div(3.2), sV.div(3.6))));
-    const windows = mix(mix(dens.mul(0.394), litWin.mul(pane), winDetail), float(0.4 * 0.394), lotMix);
-    const tint = mix(mix(color(0xffc58a), color(0xdde6ff), step(0.62, r3)), color(0xf6d3aa), lotMix);
-    const shopLit = mix(mix(float(0.1), float(1.0), step(0.35, r3)), float(0.7), lotMix);
+      // Lit windows (3.2 m bays × 3.6 m floors), resolving to each lot's mean occupancy, then the street's
+      const dens = mix(float(0.2), float(0.6), r2);
+      const bayF = u.div(3.2);
+      const floorF = hRefl.div(3.6);
+      const litWin = step(hash2D(floor(vec2(bayF, floorF)).add(lot.mul(0.731))), dens);
+      const pane = filteredPulse(fract(bayF), 0.16, 0.84, sU.div(3.2)).mul(filteredPulse(fract(floorF), 0.3, 0.88, sV.div(3.6)));
+      const winDetail = float(1.0).sub(smoothstep(0.7, 1.8, max(sU.div(3.2), sV.div(3.6))));
+      const windows = mix(mix(dens.mul(0.394), litWin.mul(pane), winDetail), float(0.4 * 0.394), lotMix);
+      const tint = mix(mix(color(0xffc58a), color(0xdde6ff), step(0.62, r3)), color(0xf6d3aa), lotMix);
+      const shopLit = mix(mix(float(0.1), float(1.0), step(0.35, r3)), float(0.7), lotMix);
 
-    // Riverside promenade / highway lamps every 30 m, heads at ~8.5 m
-    const lampDist = abs(fract(u.div(30.0)).sub(0.5)).mul(30.0);
-    const lampU = mix(waterBoxCover(lampDist, -0.45, 0.45, sU), float(0.9 / 30.0), smoothstep(5.0, 14.0, sU));
-    const lamps = lampU.mul(waterBoxCover(hRefl, 8.2, 8.8, sV)).mul(70.0);
+      // Riverside promenade / highway lamps every 30 m, heads at ~8.5 m
+      const lampDist = abs(fract(u.div(30.0)).sub(0.5)).mul(30.0);
+      const lampU = mix(waterBoxCover(lampDist, -0.45, 0.45, sU), float(0.9 / 30.0), smoothstep(5.0, 14.0, sU));
+      const lamps = lampU.mul(waterBoxCover(hRefl, 8.2, 8.8, sV)).mul(70.0);
 
-    const city = tint.mul(windows.mul(upper).mul(0.95))
-      .add(color(0xffcf9a).mul(ground.mul(shopLit).mul(0.4)))
-      .add(color(0xffd9b0).mul(lamps));
-    const treeline = mix(float(1.0), smoothstep(0.2, 0.42, tanEl), lake); // lake shores: only towers above the trees
-    // Fade the analytic proxy outside the detailed Mitte data boundary.
-    const region = smoothstep(IB.minZ - 400.0, IB.minZ - 100.0, P.y).mul(float(1.0).sub(smoothstep(IB.maxZ + 200.0, IB.maxZ + 600.0, P.y)));
-    return city.mul(brightness).mul(treeline).mul(fresnel).mul(night).mul(region);
+      const city = tint.mul(windows.mul(upper).mul(0.95))
+        .add(color(0xffcf9a).mul(ground.mul(shopLit).mul(0.4)))
+        .add(color(0xffd9b0).mul(lamps));
+      const treeline = mix(float(1.0), smoothstep(0.2, 0.42, tanEl), lake); // lake shores: only towers above the trees
+      // Fade the analytic proxy outside the detailed Mitte data boundary.
+      const region = smoothstep(IB.minZ - 400.0, IB.minZ - 100.0, P.y).mul(float(1.0).sub(smoothstep(IB.maxZ + 200.0, IB.maxZ + 600.0, P.y)));
+      emit.assign(city.mul(brightness).mul(treeline).mul(fresnel).mul(night).mul(region));
+    });
+    return emit;
   })();
 
   return mat;

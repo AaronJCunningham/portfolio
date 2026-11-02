@@ -44,6 +44,33 @@ function spawnPosition(lateral, forward, y) {
 }
 const groundCollider = { type: 'ground' };
 
+const CAR_DRIVE = {
+  speed: 36, reverseSpeed: 10.5, acceleration: 4.5,
+  powerSpeed: 14.5, // Above 52 km/h, engine power limits acceleration.
+  rolling: 0.18, drag: 0.0012, coast: 0.6, brake: 9,
+  wheelbase: 2.76, grip: 9.5, cornering: 10.5 // Wheelbase (m), tire and steering acceleration limits (m/s²).
+};
+const CITY_CAR_DRIVE = { ...CAR_DRIVE, speed: 23.5 };
+
+function driveSpeed(speed, throttle, dt, drive) {
+  // Turning can project tiny sideways motion back into speed after braking to zero.
+  // Treat a crawl as stopped when changing direction, so this cannot hold the brakes forever.
+  if (speed * throttle < 0 && Math.abs(speed) < 0.05) speed = 0;
+  const braking = speed * throttle < 0;
+  const magnitude = Math.abs(speed);
+  // Extra resistance on release gives a stronger slowdown while coasting.
+  const deceleration = drive.rolling + (!throttle ? drive.coast : braking ? Math.abs(throttle) * drive.brake : 0);
+  // Constant rolling resistance and quadratic air drag, without crossing zero or large-dt instability.
+  const coasting = Math.max(0, magnitude - deceleration * dt) / (1 + drive.drag * magnitude * dt);
+  if (!throttle || braking) return Math.sign(speed) * coasting;
+
+  const limit = throttle < 0 ? drive.reverseSpeed : drive.speed;
+  let acceleration = drive.acceleration;
+  if (drive.powerSpeed) acceleration *= drive.powerSpeed / Math.max(drive.powerSpeed, magnitude);
+  // Collision momentum above the powered limit decays naturally instead of being clamped.
+  return Math.sign(throttle) * Math.min(Math.max(limit, coasting), coasting + Math.abs(throttle) * acceleration * dt);
+}
+
 // Walking surface for the player's pedestrian (its rig samples it around its feet)
 const personGround = (controllers, x, z) => controllers.getGroundHeight(x, z, 'person');
 
@@ -239,6 +266,12 @@ class ThirdPersonControllerManager {
   setMode(mode) {
     if (!this.entities[mode]) return;
     this.activeMode = mode;
+    if (mode !== 'car' && this.entities.car?.carState) this.entities.car.carState.value.x = 0;
+    const active = this.entities[mode];
+    if (active.mesh) active.mesh.visible = true;
+    if (active.helmet) active.helmet.visible = true;
+    if (mode === 'person') active._charHidden = false;
+    else if (mode === 'cyclist') { active._riderHidden = false; active._posedX = NaN; }
   }
 
   getActiveEntity() {
@@ -982,24 +1015,76 @@ class ThirdPersonControllerManager {
   // Pose the skinned characters once every entity has moved: the pedestrian's rig walks (or runs, turns, jumps) it to
   // where it now is, planting its feet on the ground; the cyclist sits on the bike, hands on the grips, feet on the
   // pedals, helmet on its head
-  poseCharacters(dt) {
+  poseCharacters(dt, focusPos = null) {
+    const focus = focusPos || this.getActiveEntity()?.position;
+    const maxDistSq = 320 * 320;
+
     const p = this.entities.person;
-    const air = p.position.y - this.getGroundHeight(p.position.x, p.position.z, 'person');
-    p.rig.update(dt, p.position.x, p.position.z, p.heading, personGround, this, air > 0.02 ? air : 0);
-    p.crowd.begin();
-    p.crowd.add(p.rig, 0);
-    p.crowd.end();
+    if (p) {
+      const dx = focus ? p.position.x - focus.x : 0;
+      const dz = focus ? p.position.z - focus.z : 0;
+      if (this.activeMode === 'person' || dx * dx + dz * dz <= maxDistSq) {
+        p._charHidden = false;
+        if (p.mesh) p.mesh.visible = true;
+        const air = p.position.y - this.getGroundHeight(p.position.x, p.position.z, 'person');
+        p.rig.update(dt, p.position.x, p.position.z, p.heading, personGround, this, air > 0.02 ? air : 0);
+        p.crowd.begin();
+        p.crowd.add(p.rig, 0);
+        p.crowd.end();
+      } else if (!p._charHidden) {
+        p.rig.placed = false;
+        p.crowd.begin();
+        p.crowd.end();
+        if (p.crowd.updates > 2) {
+          if (p.mesh) p.mesh.visible = false;
+          p._charHidden = true;
+        }
+      }
+    }
 
     const b = this.entities.cyclist;
-    b.riderRig.ride(b.leanPivot, b.pedalPhase, b.bikeFrame);
-    b.riderCrowd.begin();
-    b.riderCrowd.add(b.riderRig, 0);
-    b.riderCrowd.end();
-    b.helmet.quaternion.copy(b.riderRig.headQuaternion);
-    b.helmet.position.set(0, 0.175, -0.012).applyQuaternion(b.helmet.quaternion).add(b.riderRig.headPosition);
+    if (b) {
+      const dx = focus ? b.position.x - focus.x : 0;
+      const dz = focus ? b.position.z - focus.z : 0;
+      if (this.activeMode === 'cyclist' || dx * dx + dz * dz <= maxDistSq) {
+        if (b.helmet) b.helmet.visible = true;
+        const moved =
+          this.activeMode === 'cyclist' ||
+          b._riderHidden ||
+          b._posedX !== b.position.x ||
+          b._posedY !== b.position.y ||
+          b._posedZ !== b.position.z ||
+          b._posedH !== b.heading ||
+          b._posedLean !== b.leanAngle ||
+          b._posedPedal !== b.pedalPhase;
+        b._riderHidden = false;
+        if (moved) {
+          b.riderRig.ride(b.leanPivot, b.pedalPhase, b.bikeFrame);
+          b.riderCrowd.begin();
+          b.riderCrowd.add(b.riderRig, 0);
+          b.riderCrowd.end();
+          b.helmet.quaternion.copy(b.riderRig.headQuaternion);
+          b.helmet.position.set(0, 0.175, -0.012).applyQuaternion(b.helmet.quaternion).add(b.riderRig.headPosition);
+          b._posedX = b.position.x;
+          b._posedY = b.position.y;
+          b._posedZ = b.position.z;
+          b._posedH = b.heading;
+          b._posedLean = b.leanAngle;
+          b._posedPedal = b.pedalPhase;
+        }
+      } else if (!b._riderHidden) {
+        b.riderCrowd.begin();
+        b.riderCrowd.end();
+        if (b.riderCrowd.updates > 2) {
+          if (b.helmet) b.helmet.visible = false;
+          b._riderHidden = true;
+          b._posedX = NaN;
+        }
+      }
+    }
   }
 
-  update(dt, elapsed) {
+  update(dt, elapsed, focusPos = null) {
     const heli = this.entities.helicopter;
     heli.mainRotorPivot.rotation.y += dt * 24.0;
     heli.tailRotorPivot.rotation.x += dt * 32.0;
@@ -1047,7 +1132,7 @@ class ThirdPersonControllerManager {
       bike.headLight.intensity = bikeActive ? 115 * beamScale : 0;
     }
 
-    this.poseCharacters(dt);
+    this.poseCharacters(dt, focusPos);
   }
 
   updatePerson(dt) {
@@ -1081,65 +1166,85 @@ class ThirdPersonControllerManager {
   }
 
   updateCar(dt) {
+    if (dt <= 0) return;
     const c = this.entities.car;
-    const maxSpeed = this.keys.boost ? 36.0 : 23.5;
-    const accel = this.keys.boost ? 21.0 : 14.0;
+    const drive = this.keys.boost ? CAR_DRIVE : CITY_CAR_DRIVE;
 
     let throttle = 0;
     if (this.keys.forward) throttle = this.keys.forward;
     else if (this.keys.backward) throttle = -this.keys.backward;
 
-    if (throttle !== 0) {
-      c.speed += throttle * accel * dt;
-      c.speed = Math.max(-maxSpeed * 0.45, Math.min(maxSpeed, c.speed));
-    } else {
-      c.speed *= Math.max(0, 1 - dt * 2.8);
-      if (Math.abs(c.speed) < 0.08) c.speed = 0;
-    }
+    const braking = c.speed * throttle < 0;
 
     let steerInput = 0;
     if (this.keys.left) steerInput = this.keys.left;
     if (this.keys.right) steerInput = -this.keys.right;
 
-    c.steerAngle += (steerInput * 0.52 - c.steerAngle) * Math.min(1, dt * 10);
-
-    if (Math.abs(c.speed) > 0.2) {
-      const dirSign = c.speed >= 0 ? 1 : -1;
-      const speedFactor = Math.min(1.0, Math.abs(c.speed) / 8.0);
-      c.heading += c.steerAngle * 2.4 * speedFactor * dirSign * dt;
-    }
-
-    // Integrate collision yaw spin & lateral tire slip velocity with asphalt grip damping
-    const tireGripDamp = Math.exp(-dt * 6.8);
-    c.heading += c.angularVel * dt;
-    c.angularVel *= Math.exp(-dt * 7.8);
-
     const prevX = c.position.x;
     const prevZ = c.position.z;
-    c.position.x += (Math.sin(c.heading) * c.speed + c.vx) * dt;
-    c.position.z += (Math.cos(c.heading) * c.speed + c.vz) * dt;
-    c.vx *= tireGripDamp;
-    c.vz *= tireGripDamp;
+    c.prevX = prevX;
+    c.prevZ = prevZ;
+    // Short steps keep grip, impacts and suspension consistent at different display rates.
+    const steps = Math.ceil(dt * 120);
+    const step = dt / steps;
+    const steerResponse = 1 - Math.exp(-10 * step);
+    const yawResponse = 1 - Math.exp(-5 * step);
+    const tireResponse = 1 - Math.exp(-4 * step);
+    for (let i = 0; i < steps; i++) {
+      const sin = Math.sin(c.heading), cos = Math.cos(c.heading);
+      const vx = sin * c.speed + c.vx, vz = cos * c.speed + c.vz;
+      const forward = vx * sin + vz * cos;
+      const sideways = vx * cos - vz * sin;
+      const speed = driveSpeed(forward, throttle, step, drive);
+      const acceleration = (speed - forward) / step;
+      // Braking and cornering share tire grip; air resistance does not use it.
+      const tireAcceleration = acceleration + CAR_DRIVE.drag * forward * Math.abs(forward);
+      const grip = Math.sqrt(Math.max(0, CAR_DRIVE.grip ** 2 - tireAcceleration ** 2));
+      // A handbrake slide preserves steering while reducing lateral grip; fade it out at low speed.
+      const handbrake = forward * throttle < 0 ? Math.abs(throttle) * Math.min(1, Math.abs(forward) / 5) : 0;
+      const lateralGrip = grip * (1 - 0.7 * handbrake);
+      const steeringGrip = grip + (CAR_DRIVE.grip - grip) * handbrake;
 
-    this.resolveHorizontalCollision(c.position, 1.35, 1.0, c);
+      // Full lock at parking speeds, progressively less steering at road speeds.
+      const turn = CAR_DRIVE.wheelbase * CAR_DRIVE.cornering;
+      const maxSteer = Math.atan(turn / Math.max(speed * speed, turn / Math.tan(0.60)));
+      c.steerAngle += (steerInput * maxSteer - c.steerAngle) * steerResponse;
+      const yawLimit = steeringGrip / Math.max(2, Math.abs(speed));
+      const targetYaw = Math.max(-yawLimit, Math.min(yawLimit, speed * Math.tan(c.steerAngle) / CAR_DRIVE.wheelbase));
+      // Collision spin remains part of the yaw velocity; the tires gradually regain control.
+      const yawStep = steeringGrip * 0.65 * step;
+      c.angularVel += Math.max(-yawStep, Math.min(yawStep, (targetYaw - c.angularVel) * yawResponse));
+      c.heading += c.angularVel * step;
+
+      // Turning the chassis must not instantly rotate its momentum. Tires remove sideways slip
+      // with a bounded force; longitudinal momentum, including impacts, stays in speed.
+      const nextSin = Math.sin(c.heading), nextCos = Math.cos(c.heading);
+      const worldX = sin * speed + cos * sideways;
+      const worldZ = cos * speed - sin * sideways;
+      c.speed = worldX * nextSin + worldZ * nextCos;
+      const slip = worldX * nextCos - worldZ * nextSin;
+      const correction = Math.max(-lateralGrip * step, Math.min(lateralGrip * step, -slip * tireResponse));
+      c.vx = nextCos * (slip + correction);
+      c.vz = -nextSin * (slip + correction);
+      c.position.x += (nextSin * c.speed + c.vx) * step;
+      c.position.z += (nextCos * c.speed + c.vz) * step;
+      this.resolveHorizontalCollision(c.position, 1.35, 1.0, c);
+
+      const targetPitch = -Math.max(-1, Math.min(1, acceleration / CAR_DRIVE.acceleration)) * 0.026;
+      const targetRoll = Math.max(-0.09, Math.min(0.09, correction / step * 0.012));
+      c.pitchVel += ((targetPitch - c.chassisPivot.rotation.x) * 68 - c.pitchVel * 11.2) * step;
+      c.rollVel += ((targetRoll - c.chassisPivot.rotation.z) * 68 - c.rollVel * 11.2) * step;
+      c.chassisPivot.rotation.x = Math.max(-0.22, Math.min(0.22, c.chassisPivot.rotation.x + c.pitchVel * step));
+      c.chassisPivot.rotation.z = Math.max(-0.26, Math.min(0.26, c.chassisPivot.rotation.z + c.rollVel * step));
+      c.heaveVel += (-c.heaveY * 85 - c.heaveVel * 12) * step;
+      c.heaveY = Math.max(-0.08, Math.min(0.14, c.heaveY + c.heaveVel * step));
+    }
     c.position.y = this.getGroundHeight(c.position.x, c.position.z, 'car');
-
-    // 3-DOF Spring-Damper Chassis Suspension (Pitch, Roll & Vertical Heave)
-    const targetPitch = -throttle * 0.026;
-    const targetRoll = -c.steerAngle * (c.speed / maxSpeed) * 0.092;
-    const springK = 68.0;
-    const dampC = 11.2;
-    c.pitchVel += ((targetPitch - c.chassisPivot.rotation.x) * springK - c.pitchVel * dampC) * dt;
-    c.rollVel += ((targetRoll - c.chassisPivot.rotation.z) * springK - c.rollVel * dampC) * dt;
-    c.chassisPivot.rotation.x = Math.max(-0.22, Math.min(0.22, c.chassisPivot.rotation.x + c.pitchVel * dt));
-    c.chassisPivot.rotation.z = Math.max(-0.26, Math.min(0.26, c.chassisPivot.rotation.z + c.rollVel * dt));
-
-    c.heaveVel += (-c.heaveY * 85.0 - c.heaveVel * 12.0) * dt;
-    c.heaveY = Math.max(-0.08, Math.min(0.14, c.heaveY + c.heaveVel * dt));
     c.chassisPivot.position.y = c.heaveY;
 
     if (c.carState) {
-      c.carState.value.x = throttle < 0 || Math.abs(c.speed) < 0.6 ? 1 : 0;
+      c.carState.value.x = braking ? 1 : 0;
+      // In Berlin’s retained vehicle shader, w selects the police livery, not reverse lamps.
     }
 
     const forwardDist = (c.position.x - prevX) * Math.sin(c.heading) + (c.position.z - prevZ) * Math.cos(c.heading);

@@ -175,7 +175,7 @@ export async function initApp(launch) {
 
   // Island-wide static geometry: chunk & distance-cull the small props, shadow stand-ins for the big casters
   // (scene-culling.js)
-  const cullingRoots = ['BerlinMitteCityGrid', 'BerlinMitteCityBlocks', 'BerlinStreetDetails', 'ManhattanLandmarks', 'BerlinBoundaryContext', 'BerlinHochbahn']
+  const cullingRoots = ['BerlinMitteCityGrid', 'BerlinMitteCityBlocks', 'BerlinStreetDetails', 'ManhattanLandmarks', 'BerlinBoundaryContext', 'BerlinHochbahn', 'RoadMarkings']
     .map((name) => scene.getObjectByName(name))
     .filter(Boolean);
   setupSceneCulling(scene, cullingRoots, lightingSystem.sunLight.shadow);
@@ -659,7 +659,7 @@ export async function initApp(launch) {
 
       // Update 3rd-person controllers, camera, signals, traffic & vehicle collisions, building LODs, and dynamic shadow focus
       gamepadControls.update(dt);
-      controllerManager.update(dt, elapsed);
+      controllerManager.update(dt, elapsed, cameraSystem.currentPos);
       cameraSystem.update(dt, elapsed);
       streetDetails.signalClock.value = elapsed;
       trafficSystem.update(

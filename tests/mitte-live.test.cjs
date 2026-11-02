@@ -10,14 +10,13 @@ const update=data.meta.mitteBuildingUpdate;
 const official=data.buildings.filter(b=>b.geometrySource==='Berlin LoD2'&&b.accuracyArea==='mitte');
 const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
-test('the live module and downloadable dataset contain the same updated city',()=>{
- const source=fs.readFileSync(path.join(root,'js/nyc-geodata.js'),'utf8');
- const geo=JSON.parse(source.split('export const GEO = ')[1].split(';\n')[0]);
- if(geo.berlin===null){
-  assert.match(source,/import \{ BERLIN_DATA \} from '\.\/berlin-geodata\.js'/);
-  assert.match(source,/GEO\.berlin = BERLIN_DATA;/);
-  geo.berlin=JSON.parse(fs.readFileSync(path.join(root,'js/berlin-geodata.js'),'utf8').split('export const BERLIN_DATA = ')[1].trim().replace(/;$/,''));
- }
+test('the live module and downloadable dataset contain the same updated city',async()=>{
+ const originalFetch=global.fetch;
+ let geo;
+ try {
+  global.fetch=async url=>new Response(fs.readFileSync(url));
+  ({GEO:geo}=await import(require('node:url').pathToFileURL(path.join(root,'js/nyc-geodata.js')).href));
+ } finally { global.fetch=originalFetch; }
  assert.equal(hash(geo.berlin),hash(data));
  assert.equal(data.buildings.length,data.meta.counts.buildings);
  assert.equal(new Set(data.buildings.map(b=>b.id)).size,data.buildings.length);

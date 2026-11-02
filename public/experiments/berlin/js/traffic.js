@@ -1796,6 +1796,12 @@ function createTrafficSystem(scene, sidewalks, obstacles) {
   // bone transforms and are drawn, the far ones with the light LOD.
   function renderPed(p, dt) {
     const draw = !hasView || visible(p.x, p.z, 7);
+    const dx = p.x - focusX, dz = p.z - focusZ;
+    // Keep nearby footstep audio and Berlin's active reactions, but skip hidden distant IK.
+    if (!draw && dx * dx + dz * dz > 50 * 50 && !p.reaction) {
+      p.rig.placed = false;
+      return;
+    }
     const heading = p.reaction ? p.reactionHeading : Math.atan2(p.ux * p.dir, p.uz * p.dir);
     p.rig.update(dt, p.x, p.z, heading, pedGround, p, p.reactionAir || 0, draw);
     if (!draw) return;

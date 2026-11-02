@@ -235,14 +235,7 @@ raw=json.dumps(data,separators=(',',':'),ensure_ascii=False).encode()
 print(json.dumps(dict(stats)),flush=True)
 if '--apply' in __import__('sys').argv:
  (PUBLIC/'data/berlin.json.gz').write_bytes(gzip.compress(raw,mtime=0))
- module=PUBLIC/'js/nyc-geodata.js';text=module.read_text();prefix,payload=text.split('export const GEO = ',1)
- geo=json.loads(payload.split(';\n',1)[0]);geo['berlin']=None
- # Keep each static source file below GitHub's 100 MiB limit. Imports resolve
- # before consumers run; the public GEO object remains exactly the same shape.
- import_line="import { BERLIN_DATA } from './berlin-geodata.js';\n"
- prefix=prefix.replace(import_line,'')
- (PUBLIC/'js/berlin-geodata.js').write_text('export const BERLIN_DATA = '+raw.decode()+';\n')
- module.write_text(prefix+import_line+'export const GEO = '+json.dumps(geo,separators=(',',':'),ensure_ascii=False)+';\nGEO.berlin = BERLIN_DATA;\n')
+ # The runtime reads this same lossless database; the road/grid archive is unchanged.
  manifest_path=PUBLIC/'export-manifest.json';manifest=json.loads(manifest_path.read_text());manifest['dataSha256']=sha256(raw).hexdigest();manifest[scope+'Buildings']={'source':provenance['sourceUrl'],'license':provenance['license'],'stats':dict(stats)};manifest_path.write_text(json.dumps(manifest,indent=2)+'\n')
  (PUBLIC/('data/'+scope+'-buildings.json')).write_text(json.dumps(provenance,indent=2)+'\n')
  print('Applied to the existing portfolio simulator.',flush=True)

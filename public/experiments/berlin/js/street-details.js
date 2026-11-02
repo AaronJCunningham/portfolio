@@ -532,6 +532,7 @@ function buildStreetDetails(scene) {
     }
     inst.instanceMatrix.needsUpdate = true;
     group.add(inst);
+    return inst;
   }
 
   addMatrixArrayInstanced(unitCyl, poleMetalMat, poleMatrices);
@@ -544,7 +545,14 @@ function buildStreetDetails(scene) {
   addMatrixArrayInstanced(walkPanelGeo, walkSignalGlow, walkBoxMatrices, false);
   addMatrixArrayInstanced(lampHousingGeo, poleMetalMat, lampHeadMatrices);
   addMatrixArrayInstanced(lampLensGeo, lampBulbGlow, lampHeadMatrices, false);
-  addMatrixArrayInstanced(pedLampPostGeo, poleMetalMat, pedPostMatrices);
+  const pedPosts = addMatrixArrayInstanced(pedLampPostGeo, poleMetalMat, pedPostMatrices);
+  if (pedPosts) {
+    // Match the visible post silhouette with 16 shadow triangles instead of 120.
+    pedPosts.userData.shadowStandIn = mergeGeometries([
+      new THREE.CylinderGeometry(0.12, 0.18, 0.85, 4, 1, true).translate(0, 0.425, 0),
+      new THREE.CylinderGeometry(0.072, 0.094, 2.85, 4, 1, true).translate(0, 2.275, 0)
+    ]);
+  }
   addMatrixArrayInstanced(pedGlobeGeo, pedGlobeGlow, pedPostMatrices, false);
   for (const [name, matrices] of berlinSignMatrices) {
     const mat = new THREE.MeshStandardNodeMaterial({ map: createStreetSignBladeTexture(name), roughness: 0.6 });
@@ -1188,6 +1196,7 @@ function buildStreetDetails(scene) {
 
   function update(camera) {
     if (!camera) return;
+    treeField.update(camera.position);
     const glow = cityUniforms && cityUniforms.uInteriorGlow ? cityUniforms.uInteriorGlow.value : 0.48;
     // Streetlights fade in smoothly as dusk approaches (matching lampBulbGlow smoothstep(0.4, 1.1, uInteriorGlow))
     const lampScale = Math.min(1.25, Math.max(0.0, (glow - 0.36) * 1.15));
