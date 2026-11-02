@@ -55,7 +55,7 @@ export type Project = ProjectListItem & {
   standaloneExperience?: boolean
   roleLabel?: string
   attribution?: {label: string; url: string; sourceTitle: string; creator: string; roleLabel?: string}
-  video?: {src: string; poster: string; width: number; height: number; caption: string}
+  video?: {src: string; poster: string; width: number; height: number; caption: string; muted?: boolean}
   gallery?: Array<{src: string; alt: string; caption: string}>
 }
 

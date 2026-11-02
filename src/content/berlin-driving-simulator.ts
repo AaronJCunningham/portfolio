@@ -24,6 +24,14 @@ export const berlinDrivingProject: Project = {
     creator: 'Mr. Doob',
   },
   imageUrl: '/images/berlin-driving-simulator/preview.jpg',
+  video: {
+    src: '/videos/berlin-driving-simulator/preview.mp4',
+    poster: '/images/berlin-driving-simulator/video-poster.jpg',
+    width: 1920,
+    height: 1102,
+    muted: false,
+    caption: 'BERLIN / 20 SECONDS BEHIND THE WHEEL / IN-GAME AUDIO',
+  },
   seoImageUrl: 'https://aaronjcunningham.com/images/berlin-driving-simulator/preview.jpg',
   mainImage: {
     alt: 'Berlin Driving Simulator running in the browser, with mapped Berlin streets and procedural architecture',

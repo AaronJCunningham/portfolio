@@ -129,13 +129,13 @@ export default function DynamicProject({project, previousProject, nextProject}: 
               <video
                 controls
                 playsInline
-                muted
+                muted={project.video.muted ?? true}
                 loop
                 preload="none"
                 poster={project.video.poster}
                 width={project.video.width}
                 height={project.video.height}
-                aria-label={`${project.title} — full page recording`}
+                aria-label={`${project.title} — video preview`}
               >
                 <source src={project.video.src} type="video/mp4" />
                 <a href={project.video.src}>Download the video</a>
